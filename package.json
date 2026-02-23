@@ -1,0 +1,12 @@
+{
+  "name": "ai_meal_planning",
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "cargo leptos watch",
+    "build": "cargo leptos build --release",
+    "build:css": "tailwindcss -i ./style/main.css -o ./style/output.css --watch"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.4.0"
+  }
+}

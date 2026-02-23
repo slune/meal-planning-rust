@@ -1,0 +1,38 @@
+{
+  "db_name": "SQLite",
+  "query": "SELECT i.category_id, c.name_en, c.name_cz, c.sort_order\n             FROM ingredients i\n             JOIN categories c ON i.category_id = c.id\n             WHERE i.id = ?",
+  "describe": {
+    "columns": [
+      {
+        "name": "category_id",
+        "ordinal": 0,
+        "type_info": "Int64"
+      },
+      {
+        "name": "name_en",
+        "ordinal": 1,
+        "type_info": "Text"
+      },
+      {
+        "name": "name_cz",
+        "ordinal": 2,
+        "type_info": "Text"
+      },
+      {
+        "name": "sort_order",
+        "ordinal": 3,
+        "type_info": "Int64"
+      }
+    ],
+    "parameters": {
+      "Right": 1
+    },
+    "nullable": [
+      false,
+      false,
+      false,
+      false
+    ]
+  },
+  "hash": "8ecc3ba0b0b988e44d1075364ee64d5bc1c1d23a896fbd54e08e729880ff7497"
+}

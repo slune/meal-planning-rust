@@ -1,0 +1,104 @@
+[package]
+name = "ai_meal_planning"
+version = "0.1.0"
+edition = "2024"
+
+[lib]
+crate-type = ["cdylib", "rlib"]
+
+[[bin]]
+name = "ai_meal_planning"
+path = "src/main.rs"
+required-features = ["ssr"]
+
+[[bin]]
+name = "import_data"
+path = "src/bin/import.rs"
+required-features = ["ssr"]
+
+[dependencies]
+# Leptos framework
+leptos = { version = "0.8" }
+leptos_meta = { version = "0.8" }
+leptos_router = { version = "0.8" }
+leptos_axum = { version = "0.8", optional = true }
+
+# Axum web server
+axum = { version = "0.8", optional = true, features = ["macros"] }
+tower = { version = "0.5", optional = true }
+tower-http = { version = "0.6", optional = true, features = ["fs", "cors"] }
+
+# Database
+sqlx = { version = "0.7", features = ["runtime-tokio-native-tls", "sqlite", "migrate", "macros", "chrono"], optional = true }
+
+# Async runtime
+tokio = { version = "1", features = ["full"], optional = true }
+
+# Serialization
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+serde_yaml = "0.9"
+
+# Date/Time
+chrono = { version = "0.4", features = ["serde"] }
+
+# PDF Generation
+printpdf = { version = "0.7", optional = true }
+
+# Utilities
+thiserror = "1"
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter"] }
+bcrypt = { version = "0.15", optional = true }
+
+# WASM dependencies
+console_error_panic_hook = { version = "0.1", optional = true }
+console_log = { version = "1", optional = true }
+wasm-bindgen = { version = "0.2", optional = true }
+
+[features]
+hydrate = [
+    "leptos/hydrate",
+    "dep:console_error_panic_hook",
+    "dep:console_log",
+    "dep:wasm-bindgen",
+]
+ssr = [
+    "leptos/ssr",
+    "leptos_meta/ssr",
+    "leptos_router/ssr",
+    "dep:leptos_axum",
+    "dep:axum",
+    "dep:tower",
+    "dep:tower-http",
+    "dep:tokio",
+    "dep:sqlx",
+    "dep:printpdf",
+    "dep:bcrypt",
+]
+
+[profile.release]
+opt-level = "z"
+lto = true
+codegen-units = 1
+
+[profile.wasm-release]
+inherits = "release"
+opt-level = "z"
+lto = true
+codegen-units = 1
+
+[profile.wasm-release.package.wasm-bindgen]
+opt-level = "z"
+
+[package.metadata.leptos]
+bin-target = "ai_meal_planning"
+output-name = "ai_meal_planning"
+site-root = "target/site"
+site-addr = "127.0.0.1:3000"
+env = "DEV"
+bin-target-triple = "x86_64-unknown-linux-gnu"
+lib-profile-release = "wasm-release"
+lib-features = ["hydrate"]
+bin-features = ["ssr"]
+style-file = "style/main.css"

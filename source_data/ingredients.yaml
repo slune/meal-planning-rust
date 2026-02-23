@@ -1,0 +1,1475 @@
+banán:
+  name: banán
+  type: ovoce zelenina
+  price: 0
+  unit: g
+brambory:
+  name: brambory
+  type: ovoce zelenina
+  price: 0
+  unit: g
+cibule:
+  name: Cibule
+  type: ovoce zelenina
+  price: 0
+  unit: g
+celer:
+  name: celer
+  type: ovoce zelenina
+  price: 0
+  unit: g
+citron:
+  name: Citron
+  type: ovoce zelenina
+  price: 0
+  unit: g
+citrony:
+  name: citrony
+  type: ovoce zelenina
+  price: 0
+  unit: g
+citróny:
+  name: Citróny
+  type: ovoce zelenina
+  price: 0
+  unit: g
+cesnek:
+  name: Cesnek
+  type: ovoce zelenina
+  price: 0
+  unit: g
+jablka:
+  name: jablka
+  type: ovoce zelenina
+  price: 0
+  unit: g
+jablko:
+  name: jablko
+  type: ovoce zelenina
+  price: 0
+  unit: g
+kapusta:
+  name: Kapusta
+  type: ovoce zelenina
+  price: 0
+  unit: g
+květák:
+  name: Květák
+  type: ovoce zelenina
+  price: 0
+  unit: g
+korenova zelenina:
+  name: korenova zelenina
+  type: ovoce zelenina
+  price: 0
+  unit: g
+mrkev:
+  name: mrkev
+  type: ovoce zelenina
+  price: 0
+  unit: g
+mrkev syrová:
+  name: mrkev syrová
+  type: ovoce zelenina
+  price: 0
+  unit: g
+nektarinka:
+  name: Nektarinka
+  type: ovoce zelenina
+  price: 0
+  unit: g
+okurky salatove:
+  name: okurky salatove
+  type: ovoce zelenina
+  price: 0
+  unit: g
+okurky salátové:
+  name: okurky salátové
+  type: ovoce zelenina
+  price: 0
+  unit: g
+okurka salátová:
+  name: okurka salátová
+  type: ovoce zelenina
+  price: 0
+  unit: g
+paprikové lusky:
+  name: paprikové lusky
+  type: ovoce zelenina
+  price: 0
+  unit: g
+paprika velká červená:
+  name: paprika velká červená
+  type: ovoce zelenina
+  price: 0
+  unit: g
+paprika zeleninová:
+  name: paprika zeleninová
+  type: ovoce zelenina
+  price: 0
+  unit: g
+petrzelova nat zelena:
+  name: petrzelova nat zelena
+  type: ovoce zelenina
+  price: 0
+  unit: g
+petržel:
+  name: petržel
+  type: ovoce zelenina
+  price: 0
+  unit: g
+rajčata:
+  name: rajčata
+  type: ovoce zelenina
+  price: 0
+  unit: g
+rajčata na kusy:
+  name: rajčata na kusy
+  type: ovoce zelenina
+  price: 0
+  unit: g
+rajče:
+  name: Rajče
+  type: ovoce zelenina
+  price: 0
+  unit: g
+zelí bílé hlávkové:
+  name: zelí bílé hlávkové
+  type: ovoce zelenina
+  price: 0
+  unit: g
+zelí čínské:
+  name: zelí čínské
+  type: ovoce zelenina
+  price: 0
+  unit: g
+česnek:
+  name: Česnek
+  type: ovoce zelenina
+  price: 0
+  unit: g
+pomeranč:
+  name: Pomeranč
+  type: ovoce zelenina
+  price: 0
+  unit: g
+pomeranč na kila:
+  name: Pomeranč na kila
+  type: ovoce zelenina
+  price: 0
+  unit: g
+pomeranče:
+  name: Pomeranče
+  type: ovoce zelenina
+  price: 0
+  unit: g
+rajcata:
+  name: Rajcata
+  type: ovoce zelenina
+  price: 0
+  unit: g
+pórek:
+  name: Pórek
+  type: ovoce zelenina
+  price: 0
+  unit: g
+cuketa:
+  name: Cuketa
+  type: ovoce zelenina
+  price: 0
+  unit: g
+kedlubna:
+  name: Kedlubna
+  type: ovoce zelenina
+  price: 0
+  unit: g
+cibule červená:
+  name: cibule červená
+  type: ovoce zelenina
+  price: 0
+  unit: g
+jarní cibulka:
+  name: jarní cibulka
+  type: ovoce zelenina
+  price: 0
+  unit: g
+mrkev syrová na kusy:
+  name: mrkev syrová na kusy
+  type: ovoce zelenina
+  price: 0
+  unit: g
+okurka salátová na kusy:
+  name: okurka salátová na kusy
+  type: ovoce zelenina
+  price: 0
+  unit: g
+meloun:
+  name: Meloun
+  type: ovoce zelenina
+  price: 0
+  unit: g
+rajčata krájená:
+  name: rajčata krájená
+  type: ovoce zelenina
+  price: 0
+  unit: g
+ředkev bílá:
+  name: ředkev bílá
+  type: ovoce zelenina
+  price: 0
+  unit: g
+paprika červená:
+  name: paprika červená
+  type: ovoce zelenina
+  price: 0
+  unit: g
+houska:
+  name: houska
+  type: pekarna
+  price: 0
+  unit: g
+houska na bagetu:
+  name: houska na bagetu
+  type: pekarna
+  price: 0
+  unit: g
+houska ražená 2279:
+  name: houska ražená 2279
+  type: pekarna
+  price: 0
+  unit: g
+chleba:
+  name: chleba
+  type: pekarna
+  price: 0
+  unit: g
+chléb:
+  name: Chléb
+  type: pekarna
+  price: 0
+  unit: g
+buchta:
+  name: buchta
+  type: pekarna
+  price: 0
+  unit: g
+bulka hamburger 90g - 2270:
+  name: bulka hamburger 90g - 2270
+  type: pekarna
+  price: 0
+  unit: g
+kobliha:
+  name: kobliha
+  type: pekarna
+  price: 0
+  unit: g
+koláč cukrářský spec. 6728:
+  name: koláč cukrářský spec. 6728
+  type: pekarna
+  price: 0
+  unit: g
+tmavý rohlík 2053:
+  name: tmavý rohlík 2053
+  type: pekarna
+  price: 0
+  unit: g
+veka bílá 360g 2101:
+  name: veka bílá 360g 2101
+  type: pekarna
+  price: 0
+  unit: g
+závin:
+  name: Závin
+  type: pekarna
+  price: 0
+  unit: g
+šodó buchtičky 180g 3238:
+  name: šodó buchtičky 180g 3238
+  type: pekarna
+  price: 0
+  unit: g
+šáteček tvarohový 4154:
+  name: šáteček tvarohový 4154
+  type: pekarna
+  price: 0
+  unit: g
+žemle se sýrem:
+  name: žemle se sýrem
+  type: pekarna
+  price: 0
+  unit: g
+vánočka:
+  name: vánočka
+  type: pekarna
+  price: 0
+  unit: g
+vícezrnný uzel plus:
+  name: vícezrnný uzel plus
+  type: pekarna
+  price: 0
+  unit: g
+makovka:
+  name: Makovka
+  type: pekarna
+  price: 0
+  unit: g
+pizza žemle:
+  name: pizza žemle
+  type: pekarna
+  price: 0
+  unit: g
+sladký rohlík 3119:
+  name: sladký rohlík 3119
+  type: pekarna
+  price: 0
+  unit: g
+rohlík:
+  name: rohlík
+  type: pekarna
+  price: 0
+  unit: g
+rohlík selský:
+  name: rohlík selský
+  type: pekarna
+  price: 0
+  unit: g
+strouhanka:
+  name: Strouhanka
+  type: pekarna
+  price: 0
+  unit: g
+celozrnný rohlík-lněné zlato:
+  name: celozrnný rohlík-lněné zlato
+  type: pekarna
+  price: 0
+  unit: g
+graham rohlík 2045:
+  name: graham rohlík 2045
+  type: pekarna
+  price: 0
+  unit: g
+rohlík selský 2047:
+  name: rohlík selský 2047
+  type: pekarna
+  price: 0
+  unit: g
+gothaj:
+  name: Gothaj
+  type: maso
+  price: 0
+  unit: g
+hovezi maso zadni:
+  name: hovezi maso zadni
+  type: maso
+  price: 0
+  unit: g
+veprová plec k. u.:
+  name: veprová plec k. u.
+  type: maso
+  price: 0
+  unit: g
+vepřová krkovice bez kosti:
+  name: vepřová krkovice bez kosti
+  type: maso
+  price: 0
+  unit: g
+vepřová plec:
+  name: vepřová plec
+  type: maso
+  price: 0
+  unit: g
+vepřové maso mleté:
+  name: vepřové maso mleté
+  type: maso
+  price: 0
+  unit: g
+špekáčky:
+  name: Špekáčky
+  type: maso
+  price: 0
+  unit: g
+šunka:
+  name: Šunka
+  type: maso
+  price: 0
+  unit: g
+kuřecí prsa vykostěná:
+  name: kuřecí prsa vykostěná
+  type: maso
+  price: 0
+  unit: g
+maso uzené:
+  name: maso uzené
+  type: maso
+  price: 0
+  unit: g
+papriková klobása:
+  name: papriková klobása
+  type: maso
+  price: 0
+  unit: g
+parky:
+  name: parky
+  type: maso
+  price: 0
+  unit: g
+párek jemný:
+  name: párek jemný
+  type: maso
+  price: 0
+  unit: g
+párky:
+  name: párky
+  type: maso
+  price: 0
+  unit: g
+párky jemné:
+  name: párky jemné
+  type: maso
+  price: 0
+  unit: g
+salám gothaj:
+  name: salám gothaj
+  type: maso
+  price: 0
+  unit: g
+salám točený kabanos:
+  name: salám točený kabanos
+  type: maso
+  price: 0
+  unit: g
+salám turista:
+  name: salám turista
+  type: maso
+  price: 0
+  unit: g
+salám vysočina:
+  name: salám vysočina
+  type: maso
+  price: 0
+  unit: g
+salám výrobní:
+  name: salám výrobní
+  type: maso
+  price: 0
+  unit: g
+salám šunkový:
+  name: salám šunkový
+  type: maso
+  price: 0
+  unit: g
+sekaná kupovaná:
+  name: sekaná kupovaná
+  type: maso
+  price: 0
+  unit: g
+slanina:
+  name: Slanina
+  type: maso
+  price: 0
+  unit: g
+uzená krkovice:
+  name: uzená krkovice
+  type: maso
+  price: 0
+  unit: g
+slanina plátky:
+  name: slanina plátky
+  type: maso
+  price: 0
+  unit: g
+uzená kýta:
+  name: uzená kýta
+  type: maso
+  price: 0
+  unit: g
+špek:
+  name: Špek
+  type: maso
+  price: 0
+  unit: g
+kuře očištěné:
+  name: kuře očištěné
+  type: maso
+  price: 0
+  unit: g
+kuřecí stehenní steak 51014:
+  name: kuřecí stehenní steak 51014
+  type: maso
+  price: 0
+  unit: g
+mleté maso hovězí vakuované - 21528:
+  name: mleté maso hovězí vakuované - 21528
+  type: maso
+  price: 0
+  unit: g
+špekáčky vázané:
+  name: špekáčky vázané
+  type: maso
+  price: 0
+  unit: g
+tzatziki koření:
+  name: tzatziki koření
+  type: zbytek
+  price: 0
+  unit: g
+hrášek sterilovaný:
+  name: hrášek sterilovaný
+  type: zbytek
+  price: 0
+  unit: g
+mrkev sterilovaná:
+  name: mrkev sterilovaná
+  type: zbytek
+  price: 0
+  unit: g
+hořčice kremžská:
+  name: hořčice kremžská
+  type: zbytek
+  price: 0
+  unit: g
+těstoviny hvězdičky:
+  name: těstoviny hvězdičky
+  type: zbytek
+  price: 0
+  unit: g
+nudličky - těstoviny:
+  name: nudličky - těstoviny
+  type: zbytek
+  price: 0
+  unit: g
+bazalka:
+  name: bazalka
+  type: zbytek
+  price: 0
+  unit: g
+bobkový list:
+  name: bobkový list
+  type: zbytek
+  price: 0
+  unit: g
+bramborová kaše instantní:
+  name: bramborová kaše instantní
+  type: zbytek
+  price: 0
+  unit: g
+bramborové těsto vitana:
+  name: bramborové těsto vitana
+  type: zbytek
+  price: 0
+  unit: g
+brusinkový kompot:
+  name: brusinkový kompot
+  type: zbytek
+  price: 0
+  unit: g
+brusinky:
+  name: brusinky
+  type: zbytek
+  price: 0
+  unit: g
+bílý jogurt:
+  name: bílý jogurt
+  type: zbytek
+  price: 0
+  unit: g
+celer mražený:
+  name: celer mražený
+  type: zbytek
+  price: 0
+  unit: g
+celer sterilovaný:
+  name: celer sterilovaný
+  type: zbytek
+  price: 0
+  unit: g
+citronka:
+  name: citronka
+  type: zbytek
+  price: 0
+  unit: g
+cola:
+  name: cola
+  type: zbytek
+  price: 0
+  unit: g
+corn flakes:
+  name: corn flakes
+  type: zbytek
+  price: 0
+  unit: g
+cukr:
+  name: cukr
+  type: zbytek
+  price: 0
+  unit: g
+cukr krupice:
+  name: cukr krupice
+  type: zbytek
+  price: 0
+  unit: g
+cukr krystal:
+  name: cukr krystal
+  type: zbytek
+  price: 0
+  unit: g
+cukr moučka:
+  name: cukr moučka
+  type: zbytek
+  price: 0
+  unit: g
+droždí instantní:
+  name: droždí instantní
+  type: zbytek
+  price: 0
+  unit: g
+dětská přesnídávka:
+  name: dětská přesnídávka
+  type: zbytek
+  price: 0
+  unit: g
+džem jahodový:
+  name: džem jahodový
+  type: zbytek
+  price: 0
+  unit: g
+džem meruňkový:
+  name: džem meruňkový
+  type: zbytek
+  price: 0
+  unit: g
+džemy. povidla:
+  name: džemy. povidla
+  type: zbytek
+  price: 0
+  unit: g
+džus pomeranč:
+  name: džus pomeranč
+  type: zbytek
+  price: 0
+  unit: g
+fazole červené steril.:
+  name: fazole červené steril.
+  type: zbytek
+  price: 0
+  unit: g
+halali do svíčkové:
+  name: halali do svíčkové
+  type: zbytek
+  price: 0
+  unit: g
+hořčice:
+  name: hořčice
+  type: zbytek
+  price: 0
+  unit: g
+hrách mražený:
+  name: hrách mražený
+  type: zbytek
+  price: 0
+  unit: g
+hrášek mražený:
+  name: hrášek mražený
+  type: zbytek
+  price: 0
+  unit: g
+hřebíček:
+  name: hřebíček
+  type: zbytek
+  price: 0
+  unit: g
+jahody mražené:
+  name: jahody mražené
+  type: zbytek
+  price: 0
+  unit: g
+jam jahodový:
+  name: jam jahodový
+  type: zbytek
+  price: 0
+  unit: g
+jogurt:
+  name: jogurt
+  type: zbytek
+  price: 0
+  unit: g
+jogurt bílý:
+  name: jogurt bílý
+  type: zbytek
+  price: 0
+  unit: g
+jogurt bílý na kila:
+  name: jogurt bílý na kila
+  type: zbytek
+  price: 0
+  unit: g
+jogurt ovocný:
+  name: jogurt ovocný
+  type: zbytek
+  price: 0
+  unit: g
+jíška hotová světlá:
+  name: jíška hotová světlá
+  type: zbytek
+  price: 0
+  unit: g
+kakao:
+  name: Kakao
+  type: zbytek
+  price: 0
+  unit: g
+kari:
+  name: kari
+  type: zbytek
+  price: 0
+  unit: g
+kečup rajský:
+  name: kečup rajský
+  type: zbytek
+  price: 0
+  unit: g
+kmin:
+  name: kmin
+  type: zbytek
+  price: 0
+  unit: g
+kmín:
+  name: kmín
+  type: zbytek
+  price: 0
+  unit: g
+kmín drcený:
+  name: kmín drcený
+  type: zbytek
+  price: 0
+  unit: g
+knedlík kupovaný:
+  name: knedlík kupovaný
+  type: zbytek
+  price: 0
+  unit: g
+kolínka:
+  name: kolínka
+  type: zbytek
+  price: 0
+  unit: g
+konzerva hov. ve vl.:
+  name: konzerva hov. ve vl.
+  type: zbytek
+  price: 0
+  unit: g
+kroupy:
+  name: kroupy
+  type: zbytek
+  price: 0
+  unit: g
+krupice dětská:
+  name: krupice dětská
+  type: zbytek
+  price: 0
+  unit: g
+kukuřice sterilovaná:
+  name: kukuřice sterilovaná
+  type: zbytek
+  price: 0
+  unit: g
+maggi:
+  name: maggi
+  type: zbytek
+  price: 0
+  unit: g
+majonéza:
+  name: majonéza
+  type: zbytek
+  price: 0
+  unit: g
+majonéza bezvaječná:
+  name: majonéza bezvaječná
+  type: zbytek
+  price: 0
+  unit: g
+majoránka:
+  name: majoránka
+  type: zbytek
+  price: 0
+  unit: g
+margarín lepší:
+  name: margarín lepší
+  type: zbytek
+  price: 0
+  unit: g
+margarín:
+  name: margarín
+  type: zbytek
+  price: 0
+  unit: g
+marmeláda:
+  name: marmeláda
+  type: zbytek
+  price: 0
+  unit: g
+maslo:
+  name: maslo
+  type: zbytek
+  price: 0
+  unit: g
+masox:
+  name: masox
+  type: zbytek
+  price: 0
+  unit: g
+mašličky (těstoviny):
+  name: mašličky (těstoviny)
+  type: zbytek
+  price: 0
+  unit: g
+med:
+  name: med
+  type: zbytek
+  price: 0
+  unit: g
+melta:
+  name: melta
+  type: zbytek
+  price: 0
+  unit: g
+mleko:
+  name: mleko
+  type: zbytek
+  price: 0
+  unit: g
+mléko:
+  name: mléko
+  type: zbytek
+  price: 0
+  unit: g
+mouka hladka:
+  name: mouka hladka
+  type: zbytek
+  price: 0
+  unit: g
+mouka hladká:
+  name: mouka hladká
+  type: zbytek
+  price: 0
+  unit: g
+mouka hrubá:
+  name: mouka hrubá
+  type: zbytek
+  price: 0
+  unit: g
+musli tyčinka:
+  name: musli tyčinka
+  type: zbytek
+  price: 0
+  unit: g
+musli čokoládové:
+  name: musli čokoládové
+  type: zbytek
+  price: 0
+  unit: g
+muškátový květ:
+  name: muškátový květ
+  type: zbytek
+  price: 0
+  unit: g
+muškátový květ mlety:
+  name: muškátový květ mlety
+  type: zbytek
+  price: 0
+  unit: g
+muškátový oříšek:
+  name: muškátový oříšek
+  type: zbytek
+  price: 0
+  unit: g
+máslo:
+  name: máslo
+  type: zbytek
+  price: 0
+  unit: g
+nové koření:
+  name: nové koření
+  type: zbytek
+  price: 0
+  unit: g
+nové koření celé:
+  name: nové koření celé
+  type: zbytek
+  price: 0
+  unit: g
+nudle polosiroke nebo ryze:
+  name: nudle polosiroke nebo ryze
+  type: zbytek
+  price: 0
+  unit: g
+ocet:
+  name: ocet
+  type: zbytek
+  price: 0
+  unit: g
+okurka sterilovaná:
+  name: okurka sterilovaná
+  type: zbytek
+  price: 0
+  unit: g
+okurky ster. kostky:
+  name: okurky ster. kostky
+  type: zbytek
+  price: 0
+  unit: g
+okurky sterilované:
+  name: okurky sterilované
+  type: zbytek
+  price: 0
+  unit: g
+olej stolni:
+  name: olej stolni
+  type: zbytek
+  price: 0
+  unit: g
+olej stolní:
+  name: olej stolní
+  type: zbytek
+  price: 0
+  unit: g
+olivy černé:
+  name: olivy černé
+  type: zbytek
+  price: 0
+  unit: g
+oplatka:
+  name: oplatka
+  type: zbytek
+  price: 0
+  unit: g
+oranž:
+  name: oranž
+  type: zbytek
+  price: 0
+  unit: g
+oregano:
+  name: oregano
+  type: zbytek
+  price: 0
+  unit: g
+paprika mletá:
+  name: paprika mletá
+  type: zbytek
+  price: 0
+  unit: g
+paprika sladká:
+  name: paprika sladká
+  type: zbytek
+  price: 0
+  unit: g
+pepr cely:
+  name: pepr cely
+  type: zbytek
+  price: 0
+  unit: g
+pepr mlety:
+  name: pepr mlety
+  type: zbytek
+  price: 0
+  unit: g
+pepř mletý celý:
+  name: pepř mletý celý
+  type: zbytek
+  price: 0
+  unit: g
+povidla:
+  name: povidla
+  type: zbytek
+  price: 0
+  unit: g
+šlehačka na vaření:
+  name: šlehačka na vaření
+  type: zbytek
+  price: 0
+  unit: g
+pepř:
+  name: pepř
+  type: zbytek
+  price: 0
+  unit: g
+pepř celý:
+  name: pepř celý
+  type: zbytek
+  price: 0
+  unit: g
+pepř mletý:
+  name: pepř mletý
+  type: zbytek
+  price: 0
+  unit: g
+perník:
+  name: perník
+  type: zbytek
+  price: 0
+  unit: g
+pitná voda:
+  name: pitná voda
+  type: zbytek
+  price: 0
+  unit: g
+polevkove koreni:
+  name: polevkove koreni
+  type: zbytek
+  price: 0
+  unit: g
+polevkove koreni zrnite:
+  name: polevkove koreni zrnite
+  type: zbytek
+  price: 0
+  unit: g
+polévkové koření:
+  name: polévkové koření
+  type: zbytek
+  price: 0
+  unit: g
+pomazánkové máslo:
+  name: pomazánkové máslo
+  type: zbytek
+  price: 0
+  unit: g
+prášek do pečiva:
+  name: prášek do pečiva
+  type: zbytek
+  price: 0
+  unit: g
+puding vanilkový:
+  name: puding vanilkový
+  type: zbytek
+  price: 0
+  unit: g
+písmenka - těstoviny:
+  name: písmenka - těstoviny
+  type: zbytek
+  price: 0
+  unit: g
+přesnídávka:
+  name: Přesnídávka
+  type: zbytek
+  price: 0
+  unit: g
+rajčatový protlak:
+  name: rajčatový protlak
+  type: zbytek
+  price: 0
+  unit: g
+rajský protlak:
+  name: rajský protlak
+  type: zbytek
+  price: 0
+  unit: g
+rostlinné máslo:
+  name: rostlinné máslo
+  type: zbytek
+  price: 0
+  unit: g
+rostlinné máslo levné:
+  name: rostlinné máslo levné
+  type: zbytek
+  price: 0
+  unit: g
+rybí konzervy:
+  name: rybí konzervy
+  type: zbytek
+  price: 0
+  unit: g
+rybí prsty:
+  name: rybí prsty
+  type: zbytek
+  price: 0
+  unit: g
+ryze:
+  name: Ryze
+  type: zbytek
+  price: 0
+  unit: g
+termix:
+  name: termix
+  type: zbytek
+  price: 0
+  unit: g
+rýže:
+  name: rýže
+  type: zbytek
+  price: 0
+  unit: g
+rýže parboiled:
+  name: rýže parboiled
+  type: zbytek
+  price: 0
+  unit: g
+sadlo skvarene:
+  name: sadlo skvarene
+  type: zbytek
+  price: 0
+  unit: g
+sirup:
+  name: sirup
+  type: zbytek
+  price: 0
+  unit: g
+skořice mletá:
+  name: skořice mletá
+  type: zbytek
+  price: 0
+  unit: g
+směs pod svíčkovou mražená:
+  name: směs pod svíčkovou mražená
+  type: zbytek
+  price: 0
+  unit: g
+sojová omáčka:
+  name: sojová omáčka
+  type: zbytek
+  price: 0
+  unit: g
+solamyl:
+  name: solamyl
+  type: zbytek
+  price: 0
+  unit: g
+sul:
+  name: sul
+  type: zbytek
+  price: 0
+  unit: g
+sádlo vepř.:
+  name: sádlo vepř.
+  type: zbytek
+  price: 0
+  unit: g
+sýr balkánský:
+  name: sýr balkánský
+  type: zbytek
+  price: 0
+  unit: g
+sýr cihla:
+  name: sýr cihla
+  type: zbytek
+  price: 0
+  unit: g
+sýr niva:
+  name: sýr niva
+  type: zbytek
+  price: 0
+  unit: g
+sýr trojúhelníček 1/6:
+  name: sýr trojúhelníček 1/6
+  type: zbytek
+  price: 0
+  unit: g
+sůl:
+  name: sůl
+  type: zbytek
+  price: 0
+  unit: g
+testoviny:
+  name: testoviny
+  type: zbytek
+  price: 0
+  unit: g
+tortilla 5803:
+  name: tortilla 5803
+  type: zbytek
+  price: 0
+  unit: g
+tuk:
+  name: tuk
+  type: zbytek
+  price: 0
+  unit: g
+tuk na smažení:
+  name: tuk na smažení
+  type: zbytek
+  price: 0
+  unit: g
+tvaroh měkký:
+  name: tvaroh měkký
+  type: zbytek
+  price: 0
+  unit: g
+tzatziki:
+  name: tzatziki
+  type: zbytek
+  price: 0
+  unit: g
+vanilkový cukr:
+  name: vanilkový cukr
+  type: zbytek
+  price: 0
+  unit: g
+vega - polévková směs:
+  name: vega - polévková směs
+  type: zbytek
+  price: 0
+  unit: g
+vejce:
+  name: vejce
+  type: zbytek
+  price: 0
+  unit: g
+voda:
+  name: voda
+  type: zbytek
+  price: 0
+  unit: g
+vrtulky:
+  name: vrtulky
+  type: zbytek
+  price: 0
+  unit: g
+vyvar pro hovezi polevky:
+  name: vyvar pro hovezi polevky
+  type: zbytek
+  price: 0
+  unit: g
+vyvar z uzeneho masa:
+  name: vyvar z uzeneho masa
+  type: zbytek
+  price: 0
+  unit: g
+zelenina mražená (m+k+h):
+  name: zelenina mražená (m+k+h)
+  type: zbytek
+  price: 0
+  unit: g
+zelenina polévk. mražená:
+  name: zelenina polévk. mražená
+  type: zbytek
+  price: 0
+  unit: g
+zelenina polévková mražená:
+  name: zelenina polévková mražená
+  type: zbytek
+  price: 0
+  unit: g
+zelí kysané:
+  name: zelí kysané
+  type: zbytek
+  price: 0
+  unit: g
+zelí kyselé:
+  name: zelí kyselé
+  type: zbytek
+  price: 0
+  unit: g
+zázvor koření:
+  name: zázvor koření
+  type: zbytek
+  price: 0
+  unit: g
+čaj:
+  name: čaj
+  type: zbytek
+  price: 0
+  unit: g
+čokoláda hořká:
+  name: čokoláda hořká
+  type: zbytek
+  price: 0
+  unit: g
+čokoládová pomazánka (nutella):
+  name: čokoládová pomazánka (nutella)
+  type: zbytek
+  price: 0
+  unit: g
+čočka:
+  name: čočka
+  type: zbytek
+  price: 0
+  unit: g
+šlehačka:
+  name: šlehačka
+  type: zbytek
+  price: 0
+  unit: g
+šlehačka rostl.sprej:
+  name: šlehačka rostl.sprej
+  type: zbytek
+  price: 0
+  unit: g
+šlehačka rostlinná spray:
+  name: šlehačka rostlinná spray
+  type: zbytek
+  price: 0
+  unit: g
+špagety:
+  name: špagety
+  type: zbytek
+  price: 0
+  unit: g
+špenát mražený:
+  name: špenát mražený
+  type: zbytek
+  price: 0
+  unit: g
+špenátový protlak zmrazený:
+  name: špenátový protlak zmrazený
+  type: zbytek
+  price: 0
+  unit: g
+žampiony:
+  name: Žampiony
+  type: zbytek
+  price: 0
+  unit: g
+těstoviny písmenka:
+  name: těstoviny písmenka
+  type: zbytek
+  price: 0
+  unit: g
+zakysaná smetana:
+  name: zakysaná smetana
+  type: zbytek
+  price: 0
+  unit: g
+sýr tavený:
+  name: sýr tavený
+  type: zbytek
+  price: 0
+  unit: g
+houbové koření:
+  name: houbové koření
+  type: zbytek
+  price: 0
+  unit: g
+cizrna sterilovaná:
+  name: cizrna sterilovaná
+  type: zbytek
+  price: 0
+  unit: g
+smetana na vaření:
+  name: smetana na vaření
+  type: zbytek
+  price: 0
+  unit: g
+konzerva tuňák ve vlastní šťávě:
+  name: konzerva tuňák ve vlastní šťávě
+  type: zbytek
+  price: 0
+  unit: g
+zeleninový bujon:
+  name: zeleninový bujon
+  type: zbytek
+  price: 0
+  unit: g
+rýžové nudle kaufland:
+  name: rýžové nudle kaufland
+  type: zbytek
+  price: 0
+  unit: g
+tymián:
+  name: Tymián
+  type: zbytek
+  price: 0
+  unit: g
+zázvor:
+  name: zázvor
+  type: zbytek
+  price: 0
+  unit: g
+sladká sojová omáčka:
+  name: sladká sojová omáčka
+  type: zbytek
+  price: 0
+  unit: g
+hladká mouka:
+  name: hladká mouka
+  type: zbytek
+  price: 0
+  unit: g
+kokosové mléko:
+  name: kokosové mléko
+  type: zbytek
+  price: 0
+  unit: g
+špenátový prach:
+  name: špenátový prach
+  type: zbytek
+  price: 0
+  unit: g
+olej:
+  name: Olej
+  type: zbytek
+  price: 0
+  unit: g
+hořčice dijonská:
+  name: hořčice dijonská
+  type: zbytek
+  price: 0
+  unit: g
+worcestrová omáčka:
+  name: worcestrová omáčka
+  type: zbytek
+  price: 0
+  unit: g
+rum:
+  name: Rum
+  type: zbytek
+  price: 0
+  unit: g
+nudle - polévkové:
+  name: nudle - polévkové
+  type: zbytek
+  price: 0
+  unit: g
+bramborové noky:
+  name: bramborové noky
+  type: zbytek
+  price: 0
+  unit: g
+chili:
+  name: Chili
+  type: zbytek
+  price: 0
+  unit: g
+smetanový sýr:
+  name: smetanový sýr
+  type: zbytek
+  price: 0
+  unit: g
+těstoviny:
+  name: těstoviny
+  type: zbytek
+  price: 0
+  unit: g
+caro:
+  name: caro
+  type: zbytek
+  price: 0
+  unit: g
+pizza rohlík 3792:
+  name: pizza rohlík 3792
+  type: zbytek
+  price: 0
+  unit: g
+smetana ke šlehání:
+  name: smetana ke šlehání
+  type: zbytek
+  price: 0
+  unit: g
+zázvor mletý:
+  name: zázvor mletý
+  type: zbytek
+  price: 0
+  unit: g
+nanukový dort:
+  name: nanukový dort
+  type: zbytek
+  price: 0
+  unit: g
+rybí filet mražený:
+  name: rybí filet mražený
+  type: zbytek
+  price: 0
+  unit: g
+sýr blaťácké zlato:
+  name: sýr blaťácké zlato
+  type: zbytek
+  price: 0
+  unit: g

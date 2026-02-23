@@ -1,0 +1,13 @@
+target/
+pkg/
+dist/
+*.db
+*.db-shm
+*.db-wal
+.git/
+.gitignore
+README.md
+.env
+.env.local
+Dockerfile
+docker-compose.yml

@@ -1,0 +1,5275 @@
+1/2 pomeranč:
+  ingredients:
+    _general: []
+    decko:
+    - 0.5 ks  pomeranč
+    pubos:
+    - 0.5 ks  pomeranč
+    dospelak:
+    - 0.5 ks  pomeranč
+  porci: '1'
+  tags: []
+1/2 pomeranč, celozrnný rohlík-lněné zlato:
+  ingredients:
+    _general: []
+    decko:
+    - 0.5 ks  pomeranč
+    - 1 ks  celozrnný rohlík-lněné zlato
+    pubos:
+    - 0.5 ks  pomeranč
+    - 1 ks  celozrnný rohlík-lněné zlato
+    dospelak:
+    - 0.5 ks  pomeranč
+    - 1 ks  celozrnný rohlík-lněné zlato
+  porci: '1'
+  tags: []
+bageta výpravová:
+  ingredients:
+    _general: []
+    decko:
+    - 62.0 ks  houska na bagetu
+    - 0.62 kg  kečup rajský
+    - 0.62 kg  majonéza bezvaječná
+    - 0.62 kg  okurka sterilovaná
+    - 2.00 kg  okurka salátová
+    - 2.00 kg  rajčata
+    - 0.62 kg  margarín
+    - 2.05 kg  salám vysočina
+    - 2.50 kg  sýr cihla
+    - 2.05 kg  šunka
+    - 30 ks  vejce
+    - 1.04 kg  zelí čínské
+    pubos:
+    - 62.0 ks  houska na bagetu
+    - 0.62 kg  kečup rajský
+    - 0.62 kg  majonéza bezvaječná
+    - 0.62 kg  okurka sterilovaná
+    - 2.00 kg  okurka salátová
+    - 2.00 kg  rajčata
+    - 0.62 kg  margarín
+    - 2.05 kg  salám vysočina
+    - 2.50 kg  sýr cihla
+    - 2.05 kg  šunka
+    - 30 ks  vejce
+    - 1.04 kg  zelí čínské
+    dospelak:
+    - 62.0 ks  houska na bagetu
+    - 0.62 kg  kečup rajský
+    - 0.62 kg  majonéza bezvaječná
+    - 0.62 kg  okurka sterilovaná
+    - 2.00 kg  okurka salátová
+    - 2.00 kg  rajčata
+    - 0.62 kg  margarín
+    - 2.05 kg  salám vysočina
+    - 2.50 kg  sýr cihla
+    - 2.05 kg  šunka
+    - 30 ks  vejce
+    - 1.04 kg  zelí čínské
+  porci: '62'
+  tags: []
+balíček na cestu:
+  ingredients:
+    _general: []
+    decko:
+    - 1 ks  oplatka
+    - 1 ks  jablko
+    pubos:
+    - 1 ks  oplatka
+    - 1 ks  jablko
+    dospelak:
+    - 1 ks  oplatka
+    - 1 ks  jablko
+  porci: '1'
+  tags: []
+banán:
+  ingredients:
+    _general: []
+    decko:
+    - 1.0 ks  banán
+    pubos:
+    - 1.0 ks  banán
+    dospelak:
+    - 1.0 ks  banán
+  porci: '1'
+  tags: []
+bramborová kaše:
+  ingredients:
+    _general: []
+    decko:
+    - 0.28 kg  brambory
+    - 0.012 kg  máslo
+    - 0.07 l  mléko
+    - 0.003 kg  sůl
+    pubos:
+    - 0.28 kg  brambory
+    - 0.012 kg  máslo
+    - 0.07 l  mléko
+    - 0.003 kg  sůl
+    dospelak:
+    - 0.28 kg  brambory
+    - 0.012 kg  máslo
+    - 0.07 l  mléko
+    - 0.003 kg  sůl
+  porci: '1'
+  tags: []
+bramborová polévka:
+  ingredients:
+    _general: []
+    decko:
+    - 5.47 kg  brambory
+    - 0.18 kg  sůl
+    - 0.46 kg  celer mražený
+    - 0.46 kg  mrkev syrová
+    - 0.40 kg  tuk na smažení
+    - 0.18 kg  cibule
+    - 0.61 kg  mouka hladká
+    - 3.0 g  pepř mletý
+    - 5.0 g  kmín drcený
+    - 0.06 kg  česnek
+    - 2.0 g  majoránka
+    - 0.2 kg  polévkové koření
+    - 1.0 g  houbové koření
+    pubos:
+    - 5.47 kg  brambory
+    - 0.18 kg  sůl
+    - 0.46 kg  celer mražený
+    - 0.46 kg  mrkev syrová
+    - 0.40 kg  tuk na smažení
+    - 0.18 kg  cibule
+    - 0.61 kg  mouka hladká
+    - 3.0 g  pepř mletý
+    - 5.0 g  kmín drcený
+    - 0.06 kg  česnek
+    - 2.0 g  majoránka
+    - 0.2 kg  polévkové koření
+    - 1.0 g  houbové koření
+    dospelak:
+    - 5.47 kg  brambory
+    - 0.18 kg  sůl
+    - 0.46 kg  celer mražený
+    - 0.46 kg  mrkev syrová
+    - 0.40 kg  tuk na smažení
+    - 0.18 kg  cibule
+    - 0.61 kg  mouka hladká
+    - 3.0 g  pepř mletý
+    - 5.0 g  kmín drcený
+    - 0.06 kg  česnek
+    - 2.0 g  majoránka
+    - 0.2 kg  polévkové koření
+    - 1.0 g  houbové koření
+  porci: '61'
+  tags: []
+bramborový knedlík:
+  ingredients:
+    _general: []
+    decko:
+    - 4.47 kg  bramborové těsto vitana
+    - 0.92 l  olej stolní
+    - 0.13 kg  sůl
+    pubos:
+    - 4.47 kg  bramborové těsto vitana
+    - 0.92 l  olej stolní
+    - 0.13 kg  sůl
+    dospelak:
+    - 4.47 kg  bramborové těsto vitana
+    - 0.92 l  olej stolní
+    - 0.13 kg  sůl
+  porci: '61'
+  tags: []
+bramborový salát:
+  ingredients:
+    _general: []
+    decko:
+    - 1.6 kg  brambory
+    - 0.20 kg  majonéza bezvaječná
+    - 6 ks  vejce
+    - 0.40 kg  okurka sterilovaná
+    - 0.40 kg  hrášek sterilovaný
+    - 0.40 kg  mrkev sterilovaná
+    - 0.1 kg  hořčice
+    - 0.1 kg  hořčice kremžská
+    - 0.30 kg  salám gothaj
+    - 0.10 kg  cibule
+    - 0.06 kg  sůl
+    pubos:
+    - 1.6 kg  brambory
+    - 0.20 kg  majonéza bezvaječná
+    - 6 ks  vejce
+    - 0.40 kg  okurka sterilovaná
+    - 0.40 kg  hrášek sterilovaný
+    - 0.40 kg  mrkev sterilovaná
+    - 0.1 kg  hořčice
+    - 0.1 kg  hořčice kremžská
+    - 0.30 kg  salám gothaj
+    - 0.10 kg  cibule
+    - 0.06 kg  sůl
+    dospelak:
+    - 1.6 kg  brambory
+    - 0.20 kg  majonéza bezvaječná
+    - 6 ks  vejce
+    - 0.40 kg  okurka sterilovaná
+    - 0.40 kg  hrášek sterilovaný
+    - 0.40 kg  mrkev sterilovaná
+    - 0.1 kg  hořčice
+    - 0.1 kg  hořčice kremžská
+    - 0.30 kg  salám gothaj
+    - 0.10 kg  cibule
+    - 0.06 kg  sůl
+  porci: '13'
+  tags: []
+brambory:
+  ingredients:
+    _general: []
+    decko:
+    - 16.0 kg  brambory
+    - 5.47 g  kmín drcený
+    - 0.2 kg  sůl
+    pubos:
+    - 16.0 kg  brambory
+    - 5.47 g  kmín drcený
+    - 0.2 kg  sůl
+    dospelak:
+    - 16.0 kg  brambory
+    - 5.47 g  kmín drcený
+    - 0.2 kg  sůl
+  porci: '61'
+  tags: []
+brapačky se zelím:
+  ingredients:
+    _general: []
+    decko:
+    - 5.75 kg  bramborové těsto vitana
+    - 0.89 kg  cibule
+    - 6.5 g  pepř mletý
+    - 2.43 kg  slanina
+    - 0.29 kg  sůl
+    - 0.59 kg  tuk na smažení
+    - 6.55 kg  zelí kysané
+    pubos:
+    - 5.75 kg  bramborové těsto vitana
+    - 0.89 kg  cibule
+    - 6.5 g  pepř mletý
+    - 2.43 kg  slanina
+    - 0.29 kg  sůl
+    - 0.59 kg  tuk na smažení
+    - 6.55 kg  zelí kysané
+    dospelak:
+    - 5.75 kg  bramborové těsto vitana
+    - 0.89 kg  cibule
+    - 6.5 g  pepř mletý
+    - 2.43 kg  slanina
+    - 0.29 kg  sůl
+    - 0.59 kg  tuk na smažení
+    - 6.55 kg  zelí kysané
+  porci: '65'
+  tags: []
+bretaňské fazole:
+  ingredients:
+    _general: []
+    decko:
+    - 1.14 kg  cibule
+    - 0.07 kg  česnek
+    - 4.99 ks  chleba
+    - 10.9 kg  fazole červené steril.
+    - 1.00 kg  kukuřice sterilovaná
+    - 0.15 kg  mouka hladká
+    - 0.15 l  ocet
+    - 0.8 kg  rajčata
+    - 3.9 g  pepř mletý
+    - 1.95 kg  rajčatový protlak
+    - 1.63 kg  salám točený kabanos
+    - 0.21 kg  sůl
+    - 0.72 l  olej stolní
+    pubos:
+    - 1.14 kg  cibule
+    - 0.07 kg  česnek
+    - 4.99 ks  chleba
+    - 10.9 kg  fazole červené steril.
+    - 1.00 kg  kukuřice sterilovaná
+    - 0.15 kg  mouka hladká
+    - 0.15 l  ocet
+    - 0.8 kg  rajčata
+    - 3.9 g  pepř mletý
+    - 1.95 kg  rajčatový protlak
+    - 1.63 kg  salám točený kabanos
+    - 0.21 kg  sůl
+    - 0.72 l  olej stolní
+    dospelak:
+    - 1.14 kg  cibule
+    - 0.07 kg  česnek
+    - 4.99 ks  chleba
+    - 10.9 kg  fazole červené steril.
+    - 1.00 kg  kukuřice sterilovaná
+    - 0.15 kg  mouka hladká
+    - 0.15 l  ocet
+    - 0.8 kg  rajčata
+    - 3.9 g  pepř mletý
+    - 1.95 kg  rajčatový protlak
+    - 1.63 kg  salám točený kabanos
+    - 0.21 kg  sůl
+    - 0.72 l  olej stolní
+  porci: '65'
+  tags: []
+buchtičky se šodo:
+  ingredients:
+    _general: []
+    decko:
+    - 1.26 kg  cukr krystal
+    - 8.81 l  mléko
+    - 0.55 kg  puding vanilkový
+    - 26.22 ks  šodó buchtičky 180g 3238
+    - 1.58 ks  vanilkový cukr
+    - 0.10 l  rum
+    pubos:
+    - 1.26 kg  cukr krystal
+    - 8.81 l  mléko
+    - 0.55 kg  puding vanilkový
+    - 26.22 ks  šodó buchtičky 180g 3238
+    - 1.58 ks  vanilkový cukr
+    - 0.10 l  rum
+    dospelak:
+    - 1.26 kg  cukr krystal
+    - 8.81 l  mléko
+    - 0.55 kg  puding vanilkový
+    - 26.22 ks  šodó buchtičky 180g 3238
+    - 1.58 ks  vanilkový cukr
+    - 0.10 l  rum
+  porci: '66'
+  tags: []
+buchty:
+  ingredients:
+    _general: []
+    decko:
+    - 22.56 bal  buchta
+    pubos:
+    - 22.56 bal  buchta
+    dospelak:
+    - 22.56 bal  buchta
+  porci: '67'
+  tags: []
+cornflejky s mlékem:
+  ingredients:
+    _general: []
+    decko:
+    - 2.42 kg  corn flakes
+    - 7.35 l  mléko
+    - 0.5 kg  bílý jogurt
+    pubos:
+    - 2.42 kg  corn flakes
+    - 7.35 l  mléko
+    - 0.5 kg  bílý jogurt
+    dospelak:
+    - 2.42 kg  corn flakes
+    - 7.35 l  mléko
+    - 0.5 kg  bílý jogurt
+  porci: '61'
+  tags: []
+čaj:
+  ingredients:
+    _general: []
+    decko:
+    - 0.74 kg  cukr krystal
+    - 43.4 g  čaj
+    - 50 g  citronka
+    pubos:
+    - 0.74 kg  cukr krystal
+    - 43.4 g  čaj
+    - 50 g  citronka
+    dospelak:
+    - 0.74 kg  cukr krystal
+    - 43.4 g  čaj
+    - 50 g  citronka
+  porci: '65'
+  tags: []
+česneková polévka:
+  ingredients:
+    _general: []
+    decko:
+    - 4.25 kg  brambory
+    - 0.23 kg  česnek
+    - 0.12 l  maggi
+    - 39.65 g  masox
+    - 0.28 l  olej stolní
+    - 1.83 g  pepř mletý
+    - 0.03 kg  sůl
+    - 0.12 kg  polévkové koření
+    pubos:
+    - 4.25 kg  brambory
+    - 0.23 kg  česnek
+    - 0.12 l  maggi
+    - 39.65 g  masox
+    - 0.28 l  olej stolní
+    - 1.83 g  pepř mletý
+    - 0.03 kg  sůl
+    - 0.12 kg  polévkové koření
+    dospelak:
+    - 4.25 kg  brambory
+    - 0.23 kg  česnek
+    - 0.12 l  maggi
+    - 39.65 g  masox
+    - 0.28 l  olej stolní
+    - 1.83 g  pepř mletý
+    - 0.03 kg  sůl
+    - 0.12 kg  polévkové koření
+  porci: '61'
+  tags: []
+česneková pomazánka:
+  ingredients:
+    _general: []
+    decko:
+    - 0.16 kg  česnek
+    - 104.5 ks  houska ražená 2279
+    - 0.98 kg  majonéza bezvaječná
+    - 0.56 kg  okurka salátová
+    - 1.00 kg  pomazánkové máslo
+    - 0.30 kg  sýr tavený
+    - 1.05 kg  sýr cihla
+    pubos:
+    - 0.16 kg  česnek
+    - 104.5 ks  houska ražená 2279
+    - 0.98 kg  majonéza bezvaječná
+    - 0.56 kg  okurka salátová
+    - 1.00 kg  pomazánkové máslo
+    - 0.30 kg  sýr tavený
+    - 1.05 kg  sýr cihla
+    dospelak:
+    - 0.16 kg  česnek
+    - 104.5 ks  houska ražená 2279
+    - 0.98 kg  majonéza bezvaječná
+    - 0.56 kg  okurka salátová
+    - 1.00 kg  pomazánkové máslo
+    - 0.30 kg  sýr tavený
+    - 1.05 kg  sýr cihla
+  porci: '66'
+  tags: []
+čočková polévka:
+  ingredients:
+    _general: []
+    decko:
+    - 0.91 kg  čočka
+    - 0.40 kg  tuk
+    - 0.31 kg  cibule
+    - 0.61 kg  mouka hladká
+    - 1.36 kg  zelenina polévková mražená
+    - 0.60 kg  párek jemný
+    - 3.0 g  pepř mletý
+    - 0.06 kg  česnek
+    - 2.0 g  majoránka
+    pubos:
+    - 0.91 kg  čočka
+    - 0.40 kg  tuk
+    - 0.31 kg  cibule
+    - 0.61 kg  mouka hladká
+    - 1.36 kg  zelenina polévková mražená
+    - 0.60 kg  párek jemný
+    - 3.0 g  pepř mletý
+    - 0.06 kg  česnek
+    - 2.0 g  majoránka
+    dospelak:
+    - 0.91 kg  čočka
+    - 0.40 kg  tuk
+    - 0.31 kg  cibule
+    - 0.61 kg  mouka hladká
+    - 1.36 kg  zelenina polévková mražená
+    - 0.60 kg  párek jemný
+    - 3.0 g  pepř mletý
+    - 0.06 kg  česnek
+    - 2.0 g  majoránka
+  porci: '61'
+  tags: []
+dadar gulung:
+  ingredients:
+    _general: []
+    decko:
+    - 0.3 kg  hladká mouka
+    - 2 ks  vejce
+    - 0.2 l  voda
+    - 0.4 l  kokosové mléko
+    - 5.0 g  sůl
+    - 1 ks  vanilkový cukr
+    - 0.01 kg  špenátový prach
+    - 0.20 l  olej
+    - 0.10 kg  džem jahodový
+    - 0.05 kg  šlehačka rostlinná spray
+    - 0.15 kg  tvaroh měkký
+    - 10 g  cukr moučka
+    pubos:
+    - 0.3 kg  hladká mouka
+    - 2 ks  vejce
+    - 0.2 l  voda
+    - 0.4 l  kokosové mléko
+    - 5.0 g  sůl
+    - 1 ks  vanilkový cukr
+    - 0.01 kg  špenátový prach
+    - 0.20 l  olej
+    - 0.10 kg  džem jahodový
+    - 0.05 kg  šlehačka rostlinná spray
+    - 0.15 kg  tvaroh měkký
+    - 10 g  cukr moučka
+    dospelak:
+    - 0.3 kg  hladká mouka
+    - 2 ks  vejce
+    - 0.2 l  voda
+    - 0.4 l  kokosové mléko
+    - 5.0 g  sůl
+    - 1 ks  vanilkový cukr
+    - 0.01 kg  špenátový prach
+    - 0.20 l  olej
+    - 0.10 kg  džem jahodový
+    - 0.05 kg  šlehačka rostlinná spray
+    - 0.15 kg  tvaroh měkký
+    - 10 g  cukr moučka
+  porci: '10'
+  tags: []
+frankfurtská polévka:
+  ingredients:
+    _general: []
+    decko:
+    - 0.5 kg  tuk
+    - 1.95 kg  brambory
+    - 0.33 kg  cibule
+    - 0.78 kg  mouka hladká
+    - 3.0 g  pepř mletý
+    - 1.41 l  mléko
+    - 0.2 kg  polévkové koření
+    - 1.5 kg  párek jemný
+    - 0.1 kg  paprika mletá
+    - 1.08 kg  zelenina polévková mražená
+    pubos:
+    - 0.5 kg  tuk
+    - 1.95 kg  brambory
+    - 0.33 kg  cibule
+    - 0.78 kg  mouka hladká
+    - 3.0 g  pepř mletý
+    - 1.41 l  mléko
+    - 0.2 kg  polévkové koření
+    - 1.5 kg  párek jemný
+    - 0.1 kg  paprika mletá
+    - 1.08 kg  zelenina polévková mražená
+    dospelak:
+    - 0.5 kg  tuk
+    - 1.95 kg  brambory
+    - 0.33 kg  cibule
+    - 0.78 kg  mouka hladká
+    - 3.0 g  pepř mletý
+    - 1.41 l  mléko
+    - 0.2 kg  polévkové koření
+    - 1.5 kg  párek jemný
+    - 0.1 kg  paprika mletá
+    - 1.08 kg  zelenina polévková mražená
+  porci: '65'
+  tags: []
+gothaj s kaší:
+  ingredients:
+    _general: []
+    decko:
+    - 0.7 kg  hořčice
+    - 0.7 kg  kečup rajský
+    - 2.09 kg  okurka sterilovaná
+    - 0.94 l  olej stolní
+    - 11.20 kg  salám gothaj
+    - 0.56 kg  rajčata
+    - 3.39 kg  bramborová kaše instantní
+    - 0.32 kg  máslo
+    pubos:
+    - 0.7 kg  hořčice
+    - 0.7 kg  kečup rajský
+    - 2.09 kg  okurka sterilovaná
+    - 0.94 l  olej stolní
+    - 11.20 kg  salám gothaj
+    - 0.56 kg  rajčata
+    - 3.39 kg  bramborová kaše instantní
+    - 0.32 kg  máslo
+    dospelak:
+    - 0.7 kg  hořčice
+    - 0.7 kg  kečup rajský
+    - 2.09 kg  okurka sterilovaná
+    - 0.94 l  olej stolní
+    - 11.20 kg  salám gothaj
+    - 0.56 kg  rajčata
+    - 3.39 kg  bramborová kaše instantní
+    - 0.32 kg  máslo
+  porci: '66'
+  tags: []
+grónská pomazánka:
+  ingredients:
+    _general: []
+    decko:
+    - 1.69 kg  celer sterilovaný
+    - 0.48 kg  citróny
+    - 0.09 kg  cukr krupice
+    - 105.5 ks  houska ražená 2279
+    - 0.13 kg  kečup rajský
+    - 2.07 kg  majonéza bezvaječná
+    - 0.06 l  ocet
+    - 0.66 kg  okurka salátová
+    - 4.84 g  pepř mletý
+    - 0.66 kg  rajčata
+    - 1.30 kg  salám výrobní
+    - 0.02 kg  sůl
+    pubos:
+    - 1.69 kg  celer sterilovaný
+    - 0.48 kg  citróny
+    - 0.09 kg  cukr krupice
+    - 105.5 ks  houska ražená 2279
+    - 0.13 kg  kečup rajský
+    - 2.07 kg  majonéza bezvaječná
+    - 0.06 l  ocet
+    - 0.66 kg  okurka salátová
+    - 4.84 g  pepř mletý
+    - 0.66 kg  rajčata
+    - 1.30 kg  salám výrobní
+    - 0.02 kg  sůl
+    dospelak:
+    - 1.69 kg  celer sterilovaný
+    - 0.48 kg  citróny
+    - 0.09 kg  cukr krupice
+    - 105.5 ks  houska ražená 2279
+    - 0.13 kg  kečup rajský
+    - 2.07 kg  majonéza bezvaječná
+    - 0.06 l  ocet
+    - 0.66 kg  okurka salátová
+    - 4.84 g  pepř mletý
+    - 0.66 kg  rajčata
+    - 1.30 kg  salám výrobní
+    - 0.02 kg  sůl
+  porci: '66'
+  tags: []
+gulášová polévka:
+  ingredients:
+    _general: []
+    decko:
+    - 3.13 kg  brambory
+    - 1.22 kg  cibule
+    - 0.12 kg  česnek
+    - 1.22 g  kmín drcený
+    - 6.1 g  majoránka
+    - 1.64 kg  párek jemný
+    - 0.50 kg  mouka hladká
+    - 83.0 g  paprika mletá
+    - 0.24 kg  sůl
+    - 0.32 kg  tuk na smažení
+    - 0.56 kg  zelenina polévková mražená
+    pubos:
+    - 3.13 kg  brambory
+    - 1.22 kg  cibule
+    - 0.12 kg  česnek
+    - 1.22 g  kmín drcený
+    - 6.1 g  majoránka
+    - 1.64 kg  párek jemný
+    - 0.50 kg  mouka hladká
+    - 83.0 g  paprika mletá
+    - 0.24 kg  sůl
+    - 0.32 kg  tuk na smažení
+    - 0.56 kg  zelenina polévková mražená
+    dospelak:
+    - 3.13 kg  brambory
+    - 1.22 kg  cibule
+    - 0.12 kg  česnek
+    - 1.22 g  kmín drcený
+    - 6.1 g  majoránka
+    - 1.64 kg  párek jemný
+    - 0.50 kg  mouka hladká
+    - 83.0 g  paprika mletá
+    - 0.24 kg  sůl
+    - 0.32 kg  tuk na smažení
+    - 0.56 kg  zelenina polévková mražená
+  porci: '61'
+  tags: []
+gulášová polévka s mletým masem:
+  ingredients:
+    _general: []
+    decko:
+    - 3.13 kg  brambory
+    - 1.22 kg  cibule
+    - 0.12 kg  česnek
+    - 1.22 g  kmín drcený
+    - 6.1 g  majoránka
+    - 1.23 kg  vepřové maso mleté
+    - 1.22 kg  mouka hladká
+    - 83.0 g  paprika mletá
+    - 0.24 kg  sůl
+    - 0.32 kg  tuk na smažení
+    - 0.56 kg  zelenina polévková mražená
+    pubos:
+    - 3.13 kg  brambory
+    - 1.22 kg  cibule
+    - 0.12 kg  česnek
+    - 1.22 g  kmín drcený
+    - 6.1 g  majoránka
+    - 1.23 kg  vepřové maso mleté
+    - 1.22 kg  mouka hladká
+    - 83.0 g  paprika mletá
+    - 0.24 kg  sůl
+    - 0.32 kg  tuk na smažení
+    - 0.56 kg  zelenina polévková mražená
+    dospelak:
+    - 3.13 kg  brambory
+    - 1.22 kg  cibule
+    - 0.12 kg  česnek
+    - 1.22 g  kmín drcený
+    - 6.1 g  majoránka
+    - 1.23 kg  vepřové maso mleté
+    - 1.22 kg  mouka hladká
+    - 83.0 g  paprika mletá
+    - 0.24 kg  sůl
+    - 0.32 kg  tuk na smažení
+    - 0.56 kg  zelenina polévková mražená
+  porci: '61'
+  tags: []
+hamburger s mletým:
+  ingredients:
+    _general: []
+    decko:
+    - 97.5 ks  bulka hamburger 90g - 2270
+    - 0.41 kg  cibule
+    - 1.3 kg  hořčice
+    - 2 kg  kečup rajský
+    - 2 kg  majonéza bezvaječná
+    - 2.00 kg  okurka salátová
+    - 0.30 kg  okurka sterilovaná
+    - 2.00 kg  rajčata
+    - 0.42 kg  zelí bílé hlávkové
+    - 4.34 kg  vepřové maso mleté
+    - 0.79 kg  cibule
+    - 1.3 l  olej stolní
+    - 5.18 g  pepř mletý
+    - 0.24 kg  sůl
+    - 0.07 kg  česnek
+    - 20 g  hořčice dijonská
+    - 0.2 l  worcestrová omáčka
+    - 5.83 ks  vejce
+    pubos:
+    - 97.5 ks  bulka hamburger 90g - 2270
+    - 0.41 kg  cibule
+    - 1.3 kg  hořčice
+    - 2 kg  kečup rajský
+    - 2 kg  majonéza bezvaječná
+    - 2.00 kg  okurka salátová
+    - 0.30 kg  okurka sterilovaná
+    - 2.00 kg  rajčata
+    - 0.42 kg  zelí bílé hlávkové
+    - 4.34 kg  vepřové maso mleté
+    - 0.79 kg  cibule
+    - 1.3 l  olej stolní
+    - 5.18 g  pepř mletý
+    - 0.24 kg  sůl
+    - 0.07 kg  česnek
+    - 20 g  hořčice dijonská
+    - 0.2 l  worcestrová omáčka
+    - 5.83 ks  vejce
+    dospelak:
+    - 97.5 ks  bulka hamburger 90g - 2270
+    - 0.41 kg  cibule
+    - 1.3 kg  hořčice
+    - 2 kg  kečup rajský
+    - 2 kg  majonéza bezvaječná
+    - 2.00 kg  okurka salátová
+    - 0.30 kg  okurka sterilovaná
+    - 2.00 kg  rajčata
+    - 0.42 kg  zelí bílé hlávkové
+    - 4.34 kg  vepřové maso mleté
+    - 0.79 kg  cibule
+    - 1.3 l  olej stolní
+    - 5.18 g  pepř mletý
+    - 0.24 kg  sůl
+    - 0.07 kg  česnek
+    - 20 g  hořčice dijonská
+    - 0.2 l  worcestrová omáčka
+    - 5.83 ks  vejce
+  porci: '65'
+  tags: []
+hamburger:
+  ingredients:
+    _general: []
+    decko:
+    - 97.5 ks  bulka hamburger 90g - 2270
+    - 0.41 kg  cibule
+    - 1.3 kg  hořčice
+    - 2 kg  kečup rajský
+    - 2 kg  majonéza bezvaječná
+    - 2.00 kg  okurka salátová
+    - 0.30 kg  okurka sterilovaná
+    - 2.00 kg  rajčata
+    - 4.34 kg  sekaná kupovaná
+    - 0.42 kg  zelí bílé hlávkové
+    pubos:
+    - 97.5 ks  bulka hamburger 90g - 2270
+    - 0.41 kg  cibule
+    - 1.3 kg  hořčice
+    - 2 kg  kečup rajský
+    - 2 kg  majonéza bezvaječná
+    - 2.00 kg  okurka salátová
+    - 0.30 kg  okurka sterilovaná
+    - 2.00 kg  rajčata
+    - 4.34 kg  sekaná kupovaná
+    - 0.42 kg  zelí bílé hlávkové
+    dospelak:
+    - 97.5 ks  bulka hamburger 90g - 2270
+    - 0.41 kg  cibule
+    - 1.3 kg  hořčice
+    - 2 kg  kečup rajský
+    - 2 kg  majonéza bezvaječná
+    - 2.00 kg  okurka salátová
+    - 0.30 kg  okurka sterilovaná
+    - 2.00 kg  rajčata
+    - 4.34 kg  sekaná kupovaná
+    - 0.42 kg  zelí bílé hlávkové
+  porci: '65'
+  tags: []
+hemenex:
+  ingredients:
+    _general: []
+    decko:
+    - 195 ks  vejce
+    - 0.40 kg  cibule
+    - 0.40 kg  slanina plátky
+    - 4.99 kg  chléb
+    - 32.0 ks  rajčata na kusy
+    - 5 g  sůl
+    - 0.94 l  olej
+    pubos:
+    - 195 ks  vejce
+    - 0.40 kg  cibule
+    - 0.40 kg  slanina plátky
+    - 4.99 kg  chléb
+    - 32.0 ks  rajčata na kusy
+    - 5 g  sůl
+    - 0.94 l  olej
+    dospelak:
+    - 195 ks  vejce
+    - 0.40 kg  cibule
+    - 0.40 kg  slanina plátky
+    - 4.99 kg  chléb
+    - 32.0 ks  rajčata na kusy
+    - 5 g  sůl
+    - 0.94 l  olej
+  porci: '65'
+  tags: []
+houska:
+  ingredients:
+    _general: []
+    decko:
+    - 1.0 ks  houska ražená 2279
+    pubos:
+    - 1.0 ks  houska ražená 2279
+    dospelak:
+    - 1.0 ks  houska ražená 2279
+  porci: '1'
+  tags: []
+houska se šunkou:
+  ingredients:
+    _general: []
+    decko:
+    - 119.5 ks  houska ražená 2279
+    - 0.86 kg  margarín
+    - 1.00 kg  rajčata
+    - 1.00 kg  salám šunkový
+    - 1.00 kg  salám gothaj
+    pubos:
+    - 119.5 ks  houska ražená 2279
+    - 0.86 kg  margarín
+    - 1.00 kg  rajčata
+    - 1.00 kg  salám šunkový
+    - 1.00 kg  salám gothaj
+    dospelak:
+    - 119.5 ks  houska ražená 2279
+    - 0.86 kg  margarín
+    - 1.00 kg  rajčata
+    - 1.00 kg  salám šunkový
+    - 1.00 kg  salám gothaj
+  porci: '65'
+  tags: []
+houska s džemem a nutelou:
+  ingredients:
+    _general: []
+    decko:
+    - 0.79 kg  čokoládová pomazánka (nutella)
+    - 0.79 kg  džem jahodový
+    - 90.5 ks  houska ražená 2279
+    - 0.79 kg  margarín
+    pubos:
+    - 0.79 kg  čokoládová pomazánka (nutella)
+    - 0.79 kg  džem jahodový
+    - 90.5 ks  houska ražená 2279
+    - 0.79 kg  margarín
+    dospelak:
+    - 0.79 kg  čokoládová pomazánka (nutella)
+    - 0.79 kg  džem jahodový
+    - 90.5 ks  houska ražená 2279
+    - 0.79 kg  margarín
+  porci: '61'
+  tags: []
+houskový knedlík:
+  ingredients:
+    _general: []
+    decko:
+    - 6.66 ks  droždí instantní
+    - 2.97 l  mléko
+    - 4.48 kg  mouka hrubá
+    - 2.44 ks  prášek do pečiva
+    - 0.17 kg  sůl
+    - 4.22 ks  vejce
+    - 3.98 ks  veka bílá 360g 2101
+    pubos:
+    - 6.66 ks  droždí instantní
+    - 2.97 l  mléko
+    - 4.48 kg  mouka hrubá
+    - 2.44 ks  prášek do pečiva
+    - 0.17 kg  sůl
+    - 4.22 ks  vejce
+    - 3.98 ks  veka bílá 360g 2101
+    dospelak:
+    - 6.66 ks  droždí instantní
+    - 2.97 l  mléko
+    - 4.48 kg  mouka hrubá
+    - 2.44 ks  prášek do pečiva
+    - 0.17 kg  sůl
+    - 4.22 ks  vejce
+    - 3.98 ks  veka bílá 360g 2101
+  porci: '65'
+  tags: []
+houska, máslo, jam:
+  ingredients:
+    _general: []
+    decko:
+    - 0.79 kg  čokoládová pomazánka (nutella)
+    - 0.40 kg  džem jahodový
+    - 0.40 kg  džem meruňkový
+    - 90.5 ks  houska ražená 2279
+    - 0.79 kg  margarín
+    pubos:
+    - 0.79 kg  čokoládová pomazánka (nutella)
+    - 0.40 kg  džem jahodový
+    - 0.40 kg  džem meruňkový
+    - 90.5 ks  houska ražená 2279
+    - 0.79 kg  margarín
+    dospelak:
+    - 0.79 kg  čokoládová pomazánka (nutella)
+    - 0.40 kg  džem jahodový
+    - 0.40 kg  džem meruňkový
+    - 90.5 ks  houska ražená 2279
+    - 0.79 kg  margarín
+  porci: '61'
+  tags: []
+houska, pomazánkové máslo, sýr:
+  ingredients:
+    _general: []
+    decko:
+    - 98 ks  houska ražená 2279
+    - 0.8 kg  okurka salátová
+    - 0.86 kg  pomazánkové máslo
+    - 2.0 kg  sýr cihla
+    pubos:
+    - 98 ks  houska ražená 2279
+    - 0.8 kg  okurka salátová
+    - 0.86 kg  pomazánkové máslo
+    - 2.0 kg  sýr cihla
+    dospelak:
+    - 98 ks  houska ražená 2279
+    - 0.8 kg  okurka salátová
+    - 0.86 kg  pomazánkové máslo
+    - 2.0 kg  sýr cihla
+  porci: '65'
+  tags: []
+hovězí vývar s písmenky:
+  ingredients:
+    _general: []
+    decko:
+    - 0.39 kg  celer mražený
+    - 0.13 l  maggi
+    - 1.11 kg  mrkev syrová
+    - 0.39 kg  petržel
+    - 0.86 kg  písmenka - těstoviny
+    - 0.03 kg  sůl
+    - 0.13 kg  polévkové koření
+    pubos:
+    - 0.39 kg  celer mražený
+    - 0.13 l  maggi
+    - 1.11 kg  mrkev syrová
+    - 0.39 kg  petržel
+    - 0.86 kg  písmenka - těstoviny
+    - 0.03 kg  sůl
+    - 0.13 kg  polévkové koření
+    dospelak:
+    - 0.39 kg  celer mražený
+    - 0.13 l  maggi
+    - 1.11 kg  mrkev syrová
+    - 0.39 kg  petržel
+    - 0.86 kg  písmenka - těstoviny
+    - 0.03 kg  sůl
+    - 0.13 kg  polévkové koření
+  porci: '66'
+  tags: []
+hovězí vývar s nudličkami:
+  ingredients:
+    _general: []
+    decko:
+    - 0.39 kg  celer mražený
+    - 0.13 l  maggi
+    - 1.11 kg  mrkev syrová
+    - 0.39 kg  petržel
+    - 0.86 kg  nudličky - těstoviny
+    - 0.03 kg  sůl
+    - 0.13 kg  polévkové koření
+    pubos:
+    - 0.39 kg  celer mražený
+    - 0.13 l  maggi
+    - 1.11 kg  mrkev syrová
+    - 0.39 kg  petržel
+    - 0.86 kg  nudličky - těstoviny
+    - 0.03 kg  sůl
+    - 0.13 kg  polévkové koření
+    dospelak:
+    - 0.39 kg  celer mražený
+    - 0.13 l  maggi
+    - 1.11 kg  mrkev syrová
+    - 0.39 kg  petržel
+    - 0.86 kg  nudličky - těstoviny
+    - 0.03 kg  sůl
+    - 0.13 kg  polévkové koření
+  porci: '66'
+  tags: []
+hrachová polévka:
+  ingredients:
+    _general: []
+    decko:
+    - 0.31 kg  cibule
+    - 0.06 kg  česnek
+    - 3.23 kg  hrášek mražený
+    - 1.22 g  majoránka
+    - 0.79 l  mléko
+    - 0.61 kg  mouka hladká
+    - 0.61 kg  párek jemný
+    - 1.83 g  pepř mletý
+    - 0.4 kg  tuk na smažení
+    - 0.48 kg  zelenina polévková mražená
+    pubos:
+    - 0.31 kg  cibule
+    - 0.06 kg  česnek
+    - 3.23 kg  hrášek mražený
+    - 1.22 g  majoránka
+    - 0.79 l  mléko
+    - 0.61 kg  mouka hladká
+    - 0.61 kg  párek jemný
+    - 1.83 g  pepř mletý
+    - 0.4 kg  tuk na smažení
+    - 0.48 kg  zelenina polévková mražená
+    dospelak:
+    - 0.31 kg  cibule
+    - 0.06 kg  česnek
+    - 3.23 kg  hrášek mražený
+    - 1.22 g  majoránka
+    - 0.79 l  mléko
+    - 0.61 kg  mouka hladká
+    - 0.61 kg  párek jemný
+    - 1.83 g  pepř mletý
+    - 0.4 kg  tuk na smažení
+    - 0.48 kg  zelenina polévková mražená
+  porci: '61'
+  tags: []
+chilli con carne:
+  ingredients:
+    _general: []
+    decko:
+    - 1.83 kg  cibule
+    - 0.16 kg  česnek
+    - 4.18 kg  fazole červené steril.
+    - 0.4 kg  jogurt bílý na kila
+    - 84.0 g  kmín drcený
+    - 1.23 kg  kukuřice sterilovaná
+    - 0.33 l  olej stolní
+    - 93.33 g  oregano
+    - 1.93 kg  rajčatový protlak
+    - 1.05 kg  slanina
+    - 3.52 kg  vepřové maso mleté
+    - 10 g  čokoláda hořká
+    - 4.64 kg  tortilla 5803
+    pubos:
+    - 1.83 kg  cibule
+    - 0.16 kg  česnek
+    - 4.18 kg  fazole červené steril.
+    - 0.4 kg  jogurt bílý na kila
+    - 84.0 g  kmín drcený
+    - 1.23 kg  kukuřice sterilovaná
+    - 0.33 l  olej stolní
+    - 93.33 g  oregano
+    - 1.93 kg  rajčatový protlak
+    - 1.05 kg  slanina
+    - 3.52 kg  vepřové maso mleté
+    - 10 g  čokoláda hořká
+    - 4.64 kg  tortilla 5803
+    dospelak:
+    - 1.83 kg  cibule
+    - 0.16 kg  česnek
+    - 4.18 kg  fazole červené steril.
+    - 0.4 kg  jogurt bílý na kila
+    - 84.0 g  kmín drcený
+    - 1.23 kg  kukuřice sterilovaná
+    - 0.33 l  olej stolní
+    - 93.33 g  oregano
+    - 1.93 kg  rajčatový protlak
+    - 1.05 kg  slanina
+    - 3.52 kg  vepřové maso mleté
+    - 10 g  čokoláda hořká
+    - 4.64 kg  tortilla 5803
+  porci: '61'
+  tags: []
+chilli con carne s chlebem:
+  ingredients:
+    _general: []
+    decko:
+    - 1.83 kg  cibule
+    - 0.16 kg  česnek
+    - 4.18 kg  fazole červené steril.
+    - 0.4 kg  jogurt bílý na kila
+    - 84.0 g  kmín drcený
+    - 1.23 kg  kukuřice sterilovaná
+    - 0.33 l  olej stolní
+    - 93.33 g  oregano
+    - 1.93 kg  rajčatový protlak
+    - 1.05 kg  slanina
+    - 3.52 kg  vepřové maso mleté
+    - 5 g  čokoláda hořká
+    - 4.99 ks  chleba
+    pubos:
+    - 1.83 kg  cibule
+    - 0.16 kg  česnek
+    - 4.18 kg  fazole červené steril.
+    - 0.4 kg  jogurt bílý na kila
+    - 84.0 g  kmín drcený
+    - 1.23 kg  kukuřice sterilovaná
+    - 0.33 l  olej stolní
+    - 93.33 g  oregano
+    - 1.93 kg  rajčatový protlak
+    - 1.05 kg  slanina
+    - 3.52 kg  vepřové maso mleté
+    - 5 g  čokoláda hořká
+    - 4.99 ks  chleba
+    dospelak:
+    - 1.83 kg  cibule
+    - 0.16 kg  česnek
+    - 4.18 kg  fazole červené steril.
+    - 0.4 kg  jogurt bílý na kila
+    - 84.0 g  kmín drcený
+    - 1.23 kg  kukuřice sterilovaná
+    - 0.33 l  olej stolní
+    - 93.33 g  oregano
+    - 1.93 kg  rajčatový protlak
+    - 1.05 kg  slanina
+    - 3.52 kg  vepřové maso mleté
+    - 5 g  čokoláda hořká
+    - 4.99 ks  chleba
+  porci: '61'
+  tags: []
+chleba jako příloha vlastní:
+  ingredients:
+    _general: []
+    decko:
+    - 4.99 ks  chleba
+    pubos:
+    - 4.99 ks  chleba
+    dospelak:
+    - 4.99 ks  chleba
+  porci: '65'
+  tags: []
+chleba s medem:
+  ingredients:
+    _general: []
+    decko:
+    - 4.76 ks  chleba
+    - 0.65 kg  med
+    - 1.3 kg  margarín
+    pubos:
+    - 4.76 ks  chleba
+    - 0.65 kg  med
+    - 1.3 kg  margarín
+    dospelak:
+    - 4.76 ks  chleba
+    - 0.65 kg  med
+    - 1.3 kg  margarín
+  porci: '65'
+  tags: []
+chléb se strouhaným sýrem:
+  ingredients:
+    _general: []
+    decko:
+    - 4.99 ks  chleba
+    - 1.3 kg  okurka salátová
+    - 0.86 kg  margarín
+    - 2.9 kg  sýr cihla
+    pubos:
+    - 4.99 ks  chleba
+    - 1.3 kg  okurka salátová
+    - 0.86 kg  margarín
+    - 2.9 kg  sýr cihla
+    dospelak:
+    - 4.99 ks  chleba
+    - 1.3 kg  okurka salátová
+    - 0.86 kg  margarín
+    - 2.9 kg  sýr cihla
+  porci: '65'
+  tags: []
+chléb, šunka, sýr:
+  ingredients:
+    _general: []
+    decko:
+    - 4.99 ks  chleba
+    - 1.3 kg  okurka salátová
+    - 0.86 kg  máslo
+    - 1.50 kg  sýr cihla
+    - 1.25 kg  šunka
+    pubos:
+    - 4.99 ks  chleba
+    - 1.3 kg  okurka salátová
+    - 0.86 kg  máslo
+    - 1.50 kg  sýr cihla
+    - 1.25 kg  šunka
+    dospelak:
+    - 4.99 ks  chleba
+    - 1.3 kg  okurka salátová
+    - 0.86 kg  máslo
+    - 1.50 kg  sýr cihla
+    - 1.25 kg  šunka
+  porci: '65'
+  tags: []
+chléb s tvrdým salámem:
+  ingredients:
+    _general: []
+    decko:
+    - 4.64 ks  chleba
+    - 0.2 kg  okurka sterilovaná
+    - 0.2 kg  rajčata
+    - 0.61 kg  margarín
+    - 1.52 kg  salám vysočina
+    pubos:
+    - 4.64 ks  chleba
+    - 0.2 kg  okurka sterilovaná
+    - 0.2 kg  rajčata
+    - 0.61 kg  margarín
+    - 1.52 kg  salám vysočina
+    dospelak:
+    - 4.64 ks  chleba
+    - 0.2 kg  okurka sterilovaná
+    - 0.2 kg  rajčata
+    - 0.61 kg  margarín
+    - 1.52 kg  salám vysočina
+  porci: '61'
+  tags: []
+jablko:
+  ingredients:
+    _general: []
+    decko:
+    - 1.0 ks  jablko
+    pubos:
+    - 1.0 ks  jablko
+    dospelak:
+    - 1.0 ks  jablko
+  porci: '1'
+  tags: []
+jogurt:
+  ingredients:
+    _general: []
+    decko:
+    - 1.0 ks  jogurt ovocný
+    pubos:
+    - 1.0 ks  jogurt ovocný
+    dospelak:
+    - 1.0 ks  jogurt ovocný
+  porci: '1'
+  tags: []
+jogurt kombinace:
+  ingredients:
+    _general: []
+    decko:
+    - 2.0 ks  jogurt ovocný
+    - 1.0 ks  jogurt bílý
+    pubos:
+    - 2.0 ks  jogurt ovocný
+    - 1.0 ks  jogurt bílý
+    dospelak:
+    - 2.0 ks  jogurt ovocný
+    - 1.0 ks  jogurt bílý
+  porci: '3'
+  tags: []
+jídlo přes den:
+  ingredients:
+    _general: []
+    decko:
+    - 0.32 ks  chleba
+    - 0.08 kg  džem jahodový
+    - 0.24 kg  margarín
+    - 0.08 kg  sádlo vepř.
+    - 1.04 l  sirup
+    pubos:
+    - 0.32 ks  chleba
+    - 0.08 kg  džem jahodový
+    - 0.24 kg  margarín
+    - 0.08 kg  sádlo vepř.
+    - 1.04 l  sirup
+    dospelak:
+    - 0.32 ks  chleba
+    - 0.08 kg  džem jahodový
+    - 0.24 kg  margarín
+    - 0.08 kg  sádlo vepř.
+    - 1.04 l  sirup
+  porci: '65'
+  tags: []
+kakao:
+  ingredients:
+    _general: []
+    decko:
+    - 0.67 kg  cukr krystal
+    - 0.08 kg  kakao
+    - 13.4 l  mléko
+    pubos:
+    - 0.67 kg  cukr krystal
+    - 0.08 kg  kakao
+    - 13.4 l  mléko
+    dospelak:
+    - 0.67 kg  cukr krystal
+    - 0.08 kg  kakao
+    - 13.4 l  mléko
+  porci: '65'
+  tags: []
+kedlubna:
+  ingredients:
+    _general: []
+    decko:
+    - 33 ks  kedlubna
+    pubos:
+    - 33 ks  kedlubna
+    dospelak:
+    - 33 ks  kedlubna
+  porci: '66'
+  tags: []
+klopsy:
+  ingredients:
+    _general: []
+    decko:
+    - 0.79 kg  cibule
+    - 1.3 l  olej stolní
+    - 5.18 g  pepř mletý
+    - 1.46 kg  strouhanka
+    - 0.24 kg  sůl
+    - 5.83 ks  vejce
+    - 5.4 kg  vepřové maso mleté
+    pubos:
+    - 0.79 kg  cibule
+    - 1.3 l  olej stolní
+    - 5.18 g  pepř mletý
+    - 1.46 kg  strouhanka
+    - 0.24 kg  sůl
+    - 5.83 ks  vejce
+    - 5.4 kg  vepřové maso mleté
+    dospelak:
+    - 0.79 kg  cibule
+    - 1.3 l  olej stolní
+    - 5.18 g  pepř mletý
+    - 1.46 kg  strouhanka
+    - 0.24 kg  sůl
+    - 5.83 ks  vejce
+    - 5.4 kg  vepřové maso mleté
+  porci: '65'
+  tags: []
+karbanátek smažený:
+  ingredients:
+    _general: []
+    decko:
+    - 0.22 kg  cibule
+    - 0.05 kg  česnek
+    - 4.24 g  majoránka
+    - 1.49 l  olej stolní
+    - 4.24 g  pepř mletý
+    - 1.10 kg  strouhanka
+    - 0.13 kg  sůl
+    - 6.88 ks  vejce
+    - 4.24 kg  vepřové maso mleté
+    pubos:
+    - 0.22 kg  cibule
+    - 0.05 kg  česnek
+    - 4.24 g  majoránka
+    - 1.49 l  olej stolní
+    - 4.24 g  pepř mletý
+    - 1.10 kg  strouhanka
+    - 0.13 kg  sůl
+    - 6.88 ks  vejce
+    - 4.24 kg  vepřové maso mleté
+    dospelak:
+    - 0.22 kg  cibule
+    - 0.05 kg  česnek
+    - 4.24 g  majoránka
+    - 1.49 l  olej stolní
+    - 4.24 g  pepř mletý
+    - 1.10 kg  strouhanka
+    - 0.13 kg  sůl
+    - 6.88 ks  vejce
+    - 4.24 kg  vepřové maso mleté
+  porci: '60'
+  tags: []
+koláček speciál:
+  ingredients:
+    _general: []
+    decko:
+    - 1.0 ks  koláč cukrářský spec. 6728
+    pubos:
+    - 1.0 ks  koláč cukrářský spec. 6728
+    dospelak:
+    - 1.0 ks  koláč cukrářský spec. 6728
+  porci: '1'
+  tags: []
+koláček speciál, nektarinka:
+  ingredients:
+    _general: []
+    decko:
+    - 1.0 ks  koláč cukrářský spec. 6728
+    - 1 ks  nektarinka
+    pubos:
+    - 1.0 ks  koláč cukrářský spec. 6728
+    - 1 ks  nektarinka
+    dospelak:
+    - 1.0 ks  koláč cukrářský spec. 6728
+    - 1 ks  nektarinka
+  porci: '1'
+  tags: []
+kobliha:
+  ingredients:
+    _general: []
+    decko:
+    - 1.0 ks  kobliha
+    pubos:
+    - 1.0 ks  kobliha
+    dospelak:
+    - 1.0 ks  kobliha
+  porci: '1'
+  tags: []
+kobliha a banán:
+  ingredients:
+    _general: []
+    decko:
+    - 1.0 ks  kobliha
+    - 1.0 ks  banán
+    pubos:
+    - 1.0 ks  kobliha
+    - 1.0 ks  banán
+    dospelak:
+    - 1.0 ks  kobliha
+    - 1.0 ks  banán
+  porci: '1'
+  tags: []
+kolínka:
+  ingredients:
+    _general: []
+    decko:
+    - 0.16 l  olej stolní
+    - 0.28 kg  sůl
+    - 4.50 kg  kolínka
+    pubos:
+    - 0.16 l  olej stolní
+    - 0.28 kg  sůl
+    - 4.50 kg  kolínka
+    dospelak:
+    - 0.16 l  olej stolní
+    - 0.28 kg  sůl
+    - 4.50 kg  kolínka
+  porci: '65'
+  tags: []
+krupicová kaše:
+  ingredients:
+    _general: []
+    decko:
+    - 2.6 kg  cukr moučka
+    - 0.98 kg  kakao
+    - 1.70 kg  krupice dětská
+    - 0.50 kg  máslo
+    - 18 l  mléko
+    pubos:
+    - 2.6 kg  cukr moučka
+    - 0.98 kg  kakao
+    - 1.70 kg  krupice dětská
+    - 0.50 kg  máslo
+    - 18 l  mléko
+    dospelak:
+    - 2.6 kg  cukr moučka
+    - 0.98 kg  kakao
+    - 1.70 kg  krupice dětská
+    - 0.50 kg  máslo
+    - 18 l  mléko
+  porci: '65'
+  tags: []
+květáková polévka:
+  ingredients:
+    _general: []
+    decko:
+    - 1.95 kg  brambory
+    - 3.46 kg  květák
+    - 0.04 kg  máslo
+    - 0.78 kg  mouka hladká
+    - 1.3 g  muškátový květ
+    - 0.16 kg  sůl
+    - 0.39 kg  tuk na smažení
+    pubos:
+    - 1.95 kg  brambory
+    - 3.46 kg  květák
+    - 0.04 kg  máslo
+    - 0.78 kg  mouka hladká
+    - 1.3 g  muškátový květ
+    - 0.16 kg  sůl
+    - 0.39 kg  tuk na smažení
+    dospelak:
+    - 1.95 kg  brambory
+    - 3.46 kg  květák
+    - 0.04 kg  máslo
+    - 0.78 kg  mouka hladká
+    - 1.3 g  muškátový květ
+    - 0.16 kg  sůl
+    - 0.39 kg  tuk na smažení
+  porci: '65'
+  tags: []
+květákové placky:
+  ingredients:
+    _general: []
+    decko:
+    - 9.67 kg  květák
+    - 1.02 kg  majonéza bezvaječná
+    - 0.61 l  mléko
+    - 0.65 kg  mouka hladká
+    - 3.35 g  muškátový oříšek
+    - 1.69 l  olej stolní
+    - 6.7 g  pepř mletý
+    - 0.13 kg  sůl
+    - 30.25 ks  vejce
+    pubos:
+    - 9.67 kg  květák
+    - 1.02 kg  majonéza bezvaječná
+    - 0.61 l  mléko
+    - 0.65 kg  mouka hladká
+    - 3.35 g  muškátový oříšek
+    - 1.69 l  olej stolní
+    - 6.7 g  pepř mletý
+    - 0.13 kg  sůl
+    - 30.25 ks  vejce
+    dospelak:
+    - 9.67 kg  květák
+    - 1.02 kg  majonéza bezvaječná
+    - 0.61 l  mléko
+    - 0.65 kg  mouka hladká
+    - 3.35 g  muškátový oříšek
+    - 1.69 l  olej stolní
+    - 6.7 g  pepř mletý
+    - 0.13 kg  sůl
+    - 30.25 ks  vejce
+  porci: '67'
+  tags: []
+makovka:
+  ingredients:
+    _general: []
+    decko:
+    - 1.0 ks  makovka
+    pubos:
+    - 1.0 ks  makovka
+    dospelak:
+    - 1.0 ks  makovka
+  porci: '1'
+  tags: []
+masová pomazánka:
+  ingredients:
+    _general: []
+    decko:
+    - 0.1 kg  cibule
+    - 0.26 kg  hořčice
+    - 4.99 ks  chleba
+    - 2.22 kg  konzerva hov. ve vl.
+    - 0.56 kg  okurka salátová
+    - 0.33 kg  okurka sterilovaná
+    - 0.13 kg  pórek
+    - 0.56 kg  rajčata
+    - 0.33 kg  margarín
+    - 0.01 kg  sůl
+    pubos:
+    - 0.1 kg  cibule
+    - 0.26 kg  hořčice
+    - 4.99 ks  chleba
+    - 2.22 kg  konzerva hov. ve vl.
+    - 0.56 kg  okurka salátová
+    - 0.33 kg  okurka sterilovaná
+    - 0.13 kg  pórek
+    - 0.56 kg  rajčata
+    - 0.33 kg  margarín
+    - 0.01 kg  sůl
+    dospelak:
+    - 0.1 kg  cibule
+    - 0.26 kg  hořčice
+    - 4.99 ks  chleba
+    - 2.22 kg  konzerva hov. ve vl.
+    - 0.56 kg  okurka salátová
+    - 0.33 kg  okurka sterilovaná
+    - 0.13 kg  pórek
+    - 0.56 kg  rajčata
+    - 0.33 kg  margarín
+    - 0.01 kg  sůl
+  porci: '65'
+  tags: []
+melta:
+  ingredients:
+    _general: []
+    decko:
+    - 0.43 kg  cukr krystal
+    - 0.45 kg  melta
+    - 3.05 l  mléko
+    - 9.76 l  pitná voda
+    pubos:
+    - 0.43 kg  cukr krystal
+    - 0.45 kg  melta
+    - 3.05 l  mléko
+    - 9.76 l  pitná voda
+    dospelak:
+    - 0.43 kg  cukr krystal
+    - 0.45 kg  melta
+    - 3.05 l  mléko
+    - 9.76 l  pitná voda
+  porci: '65'
+  tags: []
+míchaná vejce s chlebem:
+  ingredients:
+    _general: []
+    decko:
+    - 40.0 ks  vejce
+    - 0.10 kg  cibule
+    - 0.10 kg  slanina
+    - 0.80 kg  chléb
+    - 0.30 kg  okurka salátová
+    - 5.0 ks  rajčata na kusy
+    - 0.1 g  sůl
+    pubos:
+    - 20.0 ks  vejce
+    - 0.10 kg  cibule
+    - 0.10 kg  slanina
+    - 0.80 kg  chléb
+    - 0.30 kg  okurka salátová
+    - 5.0 ks  rajčata na kusy
+    - 0.1 g  sůl
+    dospelak:
+    - 30.0 ks  vejce
+    - 0.10 kg  cibule
+    - 0.10 kg  slanina
+    - 0.80 kg  chléb
+    - 0.30 kg  okurka salátová
+    - 5.0 ks  rajčata na kusy
+    - 0.1 g  sůl
+  porci: '10'
+  tags: []
+mrkev:
+  ingredients:
+    _general: []
+    decko:
+    - 67 ks  mrkev syrová na kusy
+    pubos:
+    - 67 ks  mrkev syrová na kusy
+    dospelak:
+    - 67 ks  mrkev syrová na kusy
+  porci: '67'
+  tags: []
+mrkvový salát:
+  ingredients:
+    _general: []
+    decko:
+    - 5.0 kg  mrkev syrová
+    - 0.4 kg  cukr
+    - 0.4 kg  citronka
+    - 10.0 g  sůl
+    - 1.0 kg  pomeranč na kila
+    pubos:
+    - 5.0 kg  mrkev syrová
+    - 0.4 kg  cukr
+    - 0.4 kg  citronka
+    - 10.0 g  sůl
+    - 1.0 kg  pomeranč na kila
+    dospelak:
+    - 5.0 kg  mrkev syrová
+    - 0.4 kg  cukr
+    - 0.4 kg  citronka
+    - 10.0 g  sůl
+    - 1.0 kg  pomeranč na kila
+  porci: '61'
+  tags: []
+musli tyčinka:
+  ingredients:
+    _general: []
+    decko:
+    - 61.0 ks  musli tyčinka
+    pubos:
+    - 61.0 ks  musli tyčinka
+    dospelak:
+    - 61.0 ks  musli tyčinka
+  porci: '61'
+  tags: []
+musli s mlékem:
+  ingredients:
+    _general: []
+    decko:
+    - 8.22 l  mléko
+    - 4.40 kg  musli čokoládové
+    pubos:
+    - 8.22 l  mléko
+    - 4.40 kg  musli čokoládové
+    dospelak:
+    - 8.22 l  mléko
+    - 4.40 kg  musli čokoládové
+  porci: '65'
+  tags: []
+musli tyčinka. banán:
+  ingredients:
+    _general: []
+    decko:
+    - 65.0 ks  banán
+    - 65.0 ks  musli tyčinka
+    pubos:
+    - 65.0 ks  banán
+    - 65.0 ks  musli tyčinka
+    dospelak:
+    - 65.0 ks  banán
+    - 65.0 ks  musli tyčinka
+  porci: '10'
+  tags: []
+nasi goreng:
+  ingredients:
+    _general: []
+    decko:
+    - 3.35 kg  rýže parboiled
+    - 0.07 kg  česnek
+    - 10.0 g  zázvor
+    - 1.12 kg  cibule
+    - 0.20 l  sladká sojová omáčka
+    - 0.93 l  olej stolní
+    - 0.2 kg  sůl
+    - 21.0 g  paprika mletá
+    - 21.0 g  kari
+    - 2.51 kg  kuřecí prsa vykostěná
+    - 0.40 kg  jarní cibulka
+    pubos:
+    - 3.35 kg  rýže parboiled
+    - 0.07 kg  česnek
+    - 10.0 g  zázvor
+    - 1.12 kg  cibule
+    - 0.20 l  sladká sojová omáčka
+    - 0.93 l  olej stolní
+    - 0.2 kg  sůl
+    - 21.0 g  paprika mletá
+    - 21.0 g  kari
+    - 2.51 kg  kuřecí prsa vykostěná
+    - 0.40 kg  jarní cibulka
+    dospelak:
+    - 3.35 kg  rýže parboiled
+    - 0.07 kg  česnek
+    - 10.0 g  zázvor
+    - 1.12 kg  cibule
+    - 0.20 l  sladká sojová omáčka
+    - 0.93 l  olej stolní
+    - 0.2 kg  sůl
+    - 21.0 g  paprika mletá
+    - 21.0 g  kari
+    - 2.51 kg  kuřecí prsa vykostěná
+    - 0.40 kg  jarní cibulka
+  porci: '61'
+  tags: []
+nektarinka:
+  ingredients:
+    _general: []
+    decko:
+    - 1.0 ks  nektarinka
+    pubos:
+    - 1.0 ks  nektarinka
+    dospelak:
+    - 1.0 ks  nektarinka
+  porci: '1'
+  tags: []
+okurka:
+  ingredients:
+    _general: []
+    decko:
+    - 8.36 kg  okurka salátová
+    pubos:
+    - 8.36 kg  okurka salátová
+    dospelak:
+    - 8.36 kg  okurka salátová
+  porci: '10'
+  tags: []
+okurkový salat s rajcaty:
+  ingredients:
+    _general: []
+    decko:
+    - 6.0 kg  okurka salátová
+    - 6.0 kg  rajčata
+    - 0.5 l  voda
+    - 0.2 l  ocet
+    - 0.2 kg  sůl
+    - 0.3 kg  cukr
+    - 0.2 l  olej stolní
+    pubos:
+    - 9.0 kg  okurka salátová
+    - 9.0 kg  rajčata
+    - 0.7 l  voda
+    - 0.3 l  ocet
+    - 0.3 kg  sůl
+    - 0.45 kg  cukr
+    - 0.3 l  olej stolní
+    dospelak:
+    - 6.0 kg  okurka salátová
+    - 6.0 kg  rajčata
+    - 0.5 l  voda
+    - 0.2 l  ocet
+    - 0.2 kg  sůl
+    - 0.3 kg  cukr
+    - 0.2 l  olej stolní
+  porci: '10'
+  tags: []
+okurkový salát:
+  ingredients:
+    _general: []
+    decko:
+    - 0.21 kg  cukr krystal
+    - 0.14 l  ocet
+    - 4.84 kg  okurka salátová
+    - 3.64 g  pepř mletý
+    - 0.14 kg  sůl
+    pubos:
+    - 0.21 kg  cukr krystal
+    - 0.14 l  ocet
+    - 4.84 kg  okurka salátová
+    - 3.64 g  pepř mletý
+    - 0.14 kg  sůl
+    dospelak:
+    - 0.21 kg  cukr krystal
+    - 0.14 l  ocet
+    - 4.84 kg  okurka salátová
+    - 3.64 g  pepř mletý
+    - 0.14 kg  sůl
+  porci: '61'
+  tags: []
+opečený gothaj:
+  ingredients:
+    _general: []
+    decko:
+    - 0.7 kg  hořčice
+    - 0.7 kg  kečup rajský
+    - 2.09 kg  okurka sterilovaná
+    - 0.94 l  olej stolní
+    - 11.20 kg  salám gothaj
+    - 0.56 kg  rajčata
+    - 5.23 kg  chleba
+    pubos:
+    - 0.7 kg  hořčice
+    - 0.7 kg  kečup rajský
+    - 2.09 kg  okurka sterilovaná
+    - 0.94 l  olej stolní
+    - 11.20 kg  salám gothaj
+    - 0.56 kg  rajčata
+    - 5.23 kg  chleba
+    dospelak:
+    - 0.7 kg  hořčice
+    - 0.7 kg  kečup rajský
+    - 2.09 kg  okurka sterilovaná
+    - 0.94 l  olej stolní
+    - 11.20 kg  salám gothaj
+    - 0.56 kg  rajčata
+    - 5.23 kg  chleba
+  porci: '66'
+  tags: []
+oplatka:
+  ingredients:
+    _general: []
+    decko:
+    - 1.0 ks  oplatka
+    pubos:
+    - 1.0 ks  oplatka
+    dospelak:
+    - 1.0 ks  oplatka
+  porci: '1'
+  tags: []
+ovocné knedlíky:
+  ingredients:
+    _general: []
+    decko:
+    - 0.1 kg  cukr krystal
+    - 1.67 kg  cukr moučka
+    - 8.52 ks  droždí instantní
+    - 3.35 kg  jahody mražené
+    - 1.00 kg  máslo
+    - 3.03 l  mléko
+    - 6.69 kg  mouka hrubá
+    - 18.1 g  skořice mletá
+    - 0.1 kg  sůl
+    - 0.61 kg  šlehačka rostlinná spray
+    - 1.19 kg  tvaroh měkký
+    - 6.69 ks  vejce
+    pubos:
+    - 0.1 kg  cukr krystal
+    - 1.67 kg  cukr moučka
+    - 8.52 ks  droždí instantní
+    - 3.35 kg  jahody mražené
+    - 1.00 kg  máslo
+    - 3.03 l  mléko
+    - 6.69 kg  mouka hrubá
+    - 18.1 g  skořice mletá
+    - 0.1 kg  sůl
+    - 0.61 kg  šlehačka rostlinná spray
+    - 1.19 kg  tvaroh měkký
+    - 6.69 ks  vejce
+    dospelak:
+    - 0.1 kg  cukr krystal
+    - 1.67 kg  cukr moučka
+    - 8.52 ks  droždí instantní
+    - 3.35 kg  jahody mražené
+    - 1.00 kg  máslo
+    - 3.03 l  mléko
+    - 6.69 kg  mouka hrubá
+    - 18.1 g  skořice mletá
+    - 0.1 kg  sůl
+    - 0.61 kg  šlehačka rostlinná spray
+    - 1.19 kg  tvaroh měkký
+    - 6.69 ks  vejce
+  porci: '61'
+  tags: []
+perník, jablko:
+  ingredients:
+    _general: []
+    decko:
+    - 65.0 ks  jablko
+    - 65.0 ks  perník
+    pubos:
+    - 65.0 ks  jablko
+    - 65.0 ks  perník
+    dospelak:
+    - 65.0 ks  jablko
+    - 65.0 ks  perník
+  porci: '65'
+  tags: []
+pizza rohlík, rajče:
+  ingredients:
+    _general: []
+    decko:
+    - 1 ks  pizza žemle
+    - 0.5 ks  rajčata na kusy
+    pubos:
+    - 1 ks  pizza žemle
+    - 0.5 ks  rajčata na kusy
+    dospelak:
+    - 1 ks  pizza žemle
+    - 0.5 ks  rajčata na kusy
+  porci: '1'
+  tags: []
+polévka soto:
+  ingredients:
+    _general: []
+    decko:
+    - 0.67 kg  zelenina polévková mražená
+    - 0.75 kg  kukuřice sterilovaná
+    - 5 ks  zeleninový bujon
+    - 11 ks  rýžové nudle kaufland
+    - 0.03 kg  sůl
+    - 13 g  paprika mletá
+    - 20 g  kari
+    - 10 g  tymián
+    - 0.20 l  olej stolní
+    pubos:
+    - 0.67 kg  zelenina polévková mražená
+    - 0.75 kg  kukuřice sterilovaná
+    - 5 ks  zeleninový bujon
+    - 11 ks  rýžové nudle kaufland
+    - 0.03 kg  sůl
+    - 13 g  paprika mletá
+    - 20 g  kari
+    - 10 g  tymián
+    - 0.20 l  olej stolní
+    dospelak:
+    - 0.67 kg  zelenina polévková mražená
+    - 0.75 kg  kukuřice sterilovaná
+    - 5 ks  zeleninový bujon
+    - 11 ks  rýžové nudle kaufland
+    - 0.03 kg  sůl
+    - 13 g  paprika mletá
+    - 20 g  kari
+    - 10 g  tymián
+    - 0.20 l  olej stolní
+  porci: '66'
+  tags: []
+pomazánka z olejovek:
+  ingredients:
+    _general: []
+    decko:
+    - 0.18 kg  cibule
+    - 0.05 kg  citróny
+    - 5.1 ks  chleba
+    - 0.45 kg  okurka sterilovaná
+    - 13.4 g  paprika mletá
+    - 0.63 kg  rajčata
+    - 1.12 kg  margarín
+    - 2.60 kg  rybí konzervy
+    - 11.22 ks  vejce
+    pubos:
+    - 0.18 kg  cibule
+    - 0.05 kg  citróny
+    - 5.1 ks  chleba
+    - 0.45 kg  okurka sterilovaná
+    - 13.4 g  paprika mletá
+    - 0.63 kg  rajčata
+    - 1.12 kg  margarín
+    - 2.60 kg  rybí konzervy
+    - 11.22 ks  vejce
+    dospelak:
+    - 0.18 kg  cibule
+    - 0.05 kg  citróny
+    - 5.1 ks  chleba
+    - 0.45 kg  okurka sterilovaná
+    - 13.4 g  paprika mletá
+    - 0.63 kg  rajčata
+    - 1.12 kg  margarín
+    - 2.60 kg  rybí konzervy
+    - 11.22 ks  vejce
+  porci: '67'
+  tags: []
+pomeranč. tmavý rohlík:
+  ingredients:
+    _general: []
+    decko:
+    - 65.0 ks  pomeranč
+    - 65.0 ks  tmavý rohlík 2053
+    pubos:
+    - 65.0 ks  pomeranč
+    - 65.0 ks  tmavý rohlík 2053
+    dospelak:
+    - 65.0 ks  pomeranč
+    - 65.0 ks  tmavý rohlík 2053
+  porci: '10'
+  tags: []
+párek a chleba:
+  ingredients:
+    _general: []
+    decko:
+    - 1.10 kg  hořčice
+    - 1.10 kg  kečup rajský
+    - 4.67 kg  párek jemný
+    - 5.52 ks  chleba
+    pubos:
+    - 1.10 kg  hořčice
+    - 1.10 kg  kečup rajský
+    - 4.67 kg  párek jemný
+    - 5.52 ks  chleba
+    dospelak:
+    - 1.10 kg  hořčice
+    - 1.10 kg  kečup rajský
+    - 4.67 kg  párek jemný
+    - 5.52 ks  chleba
+  porci: '60'
+  tags: []
+párek v rohlíku:
+  ingredients:
+    _general: []
+    decko:
+    - 1.2 kg  hořčice
+    - 1.2 kg  kečup rajský
+    - 6.05 kg  párek jemný
+    - 90.0 ks  rohlík
+    pubos:
+    - 1.2 kg  hořčice
+    - 1.2 kg  kečup rajský
+    - 6.05 kg  párek jemný
+    - 90.0 ks  rohlík
+    dospelak:
+    - 1.2 kg  hořčice
+    - 1.2 kg  kečup rajský
+    - 6.05 kg  párek jemný
+    - 90.0 ks  rohlík
+  porci: '61'
+  tags: []
+přesnídávka:
+  ingredients:
+    _general: []
+    decko:
+    - 1.0 ks  přesnídávka
+    pubos:
+    - 1.0 ks  přesnídávka
+    dospelak:
+    - 1.0 ks  přesnídávka
+  porci: '1'
+  tags: []
+přesnídávka, rohlík:
+  ingredients:
+    _general: []
+    decko:
+    - 10.0 ks  dětská přesnídávka
+    - 10.0 ks  rohlík
+    pubos:
+    - 10.0 ks  dětská přesnídávka
+    - 10.0 ks  rohlík
+    dospelak:
+    - 10.0 ks  dětská přesnídávka
+    - 10.0 ks  rohlík
+  porci: '10'
+  tags: []
+rajčatová polévka:
+  ingredients:
+    _general: []
+    decko:
+    - 1.30 g  bobkový list
+    - 0.50 kg  cukr krystal
+    - 0.05 l  ocet
+    - 0.23 kg  tuk na smažení
+    - 2.14 kg  rajčatový protlak
+    - 0.67 kg  těstoviny hvězdičky
+    - 0.01 g  sůl
+    - 0.67 kg  zelenina polévková mražená
+    pubos:
+    - 1.30 g  bobkový list
+    - 0.50 kg  cukr krystal
+    - 0.05 l  ocet
+    - 0.23 kg  tuk na smažení
+    - 2.14 kg  rajčatový protlak
+    - 0.67 kg  těstoviny hvězdičky
+    - 0.01 g  sůl
+    - 0.67 kg  zelenina polévková mražená
+    dospelak:
+    - 1.30 g  bobkový list
+    - 0.50 kg  cukr krystal
+    - 0.05 l  ocet
+    - 0.23 kg  tuk na smažení
+    - 2.14 kg  rajčatový protlak
+    - 0.67 kg  těstoviny hvězdičky
+    - 0.01 g  sůl
+    - 0.67 kg  zelenina polévková mražená
+  porci: '60'
+  tags: []
+rajská omáčka s hovězím masem:
+  ingredients:
+    _general: []
+    decko:
+    - 4.91 kg  hovezi maso zadni
+    - 0.7 kg  cibule
+    - 0.54 kg  cukr krystal
+    - 2 ks  knedlík kupovaný
+    - 0.65 kg  mouka hladká
+    - 0.2 l  ocet
+    - 1.41 kg  rajčatový protlak
+    - 0.08 kg  sůl
+    - 0.35 l  olej stolní
+    - 1.21 kg  zelenina polévková mražená
+    - 0.98 g  bobkový list
+    - 2.6 g  hřebíček
+    - 64.35 g  masox
+    - 2.16 g  nové koření
+    - 2.81 g  pepř mletý celý
+    pubos:
+    - 4.91 kg  hovezi maso zadni
+    - 0.7 kg  cibule
+    - 0.54 kg  cukr krystal
+    - 2 ks  knedlík kupovaný
+    - 0.65 kg  mouka hladká
+    - 0.2 l  ocet
+    - 1.41 kg  rajčatový protlak
+    - 0.08 kg  sůl
+    - 0.35 l  olej stolní
+    - 1.21 kg  zelenina polévková mražená
+    - 0.98 g  bobkový list
+    - 2.6 g  hřebíček
+    - 64.35 g  masox
+    - 2.16 g  nové koření
+    - 2.81 g  pepř mletý celý
+    dospelak:
+    - 4.91 kg  hovezi maso zadni
+    - 0.7 kg  cibule
+    - 0.54 kg  cukr krystal
+    - 2 ks  knedlík kupovaný
+    - 0.65 kg  mouka hladká
+    - 0.2 l  ocet
+    - 1.41 kg  rajčatový protlak
+    - 0.08 kg  sůl
+    - 0.35 l  olej stolní
+    - 1.21 kg  zelenina polévková mražená
+    - 0.98 g  bobkový list
+    - 2.6 g  hřebíček
+    - 64.35 g  masox
+    - 2.16 g  nové koření
+    - 2.81 g  pepř mletý celý
+  porci: '65'
+  tags: []
+rajská omáčka:
+  ingredients:
+    _general: []
+    decko:
+    - 0.7 kg  cibule
+    - 0.54 kg  cukr krystal
+    - 2 ks  knedlík kupovaný
+    - 0.65 kg  mouka hladká
+    - 0.2 l  ocet
+    - 1.41 kg  rajčatový protlak
+    - 0.08 kg  sůl
+    - 0.35 l  olej stolní
+    - 1.21 kg  zelenina polévková mražená
+    - 0.98 g  bobkový list
+    - 2.6 g  hřebíček
+    - 64.35 g  masox
+    - 2.16 g  nové koření
+    - 2.81 g  pepř mletý celý
+    pubos:
+    - 0.7 kg  cibule
+    - 0.54 kg  cukr krystal
+    - 2 ks  knedlík kupovaný
+    - 0.65 kg  mouka hladká
+    - 0.2 l  ocet
+    - 1.41 kg  rajčatový protlak
+    - 0.08 kg  sůl
+    - 0.35 l  olej stolní
+    - 1.21 kg  zelenina polévková mražená
+    - 0.98 g  bobkový list
+    - 2.6 g  hřebíček
+    - 64.35 g  masox
+    - 2.16 g  nové koření
+    - 2.81 g  pepř mletý celý
+    dospelak:
+    - 0.7 kg  cibule
+    - 0.54 kg  cukr krystal
+    - 2 ks  knedlík kupovaný
+    - 0.65 kg  mouka hladká
+    - 0.2 l  ocet
+    - 1.41 kg  rajčatový protlak
+    - 0.08 kg  sůl
+    - 0.35 l  olej stolní
+    - 1.21 kg  zelenina polévková mražená
+    - 0.98 g  bobkový list
+    - 2.6 g  hřebíček
+    - 64.35 g  masox
+    - 2.16 g  nové koření
+    - 2.81 g  pepř mletý celý
+  porci: '65'
+  tags: []
+rajčatový salát:
+  ingredients:
+    _general: []
+    decko:
+    - 0.76 kg  cibule
+    - 0.08 kg  cukr krystal
+    - 0.57 l  ocet
+    - 0.15 l  olej stolní
+    - 3.67 g  pepř mletý
+    - 5.2 kg  rajčata
+    - 0.08 kg  sůl
+    pubos:
+    - 0.76 kg  cibule
+    - 0.08 kg  cukr krystal
+    - 0.57 l  ocet
+    - 0.15 l  olej stolní
+    - 3.67 g  pepř mletý
+    - 5.2 kg  rajčata
+    - 0.08 kg  sůl
+    dospelak:
+    - 0.76 kg  cibule
+    - 0.08 kg  cukr krystal
+    - 0.57 l  ocet
+    - 0.15 l  olej stolní
+    - 3.67 g  pepř mletý
+    - 5.2 kg  rajčata
+    - 0.08 kg  sůl
+  porci: '65'
+  tags: []
+risi bisi polévka:
+  ingredients:
+    _general: []
+    decko:
+    - 0.54 kg  cibule
+    - 0.16 kg  česnek
+    - 2.44 kg  hrášek mražený
+    - 0.81 kg  tuk na smažení
+    - 25 g  pepř mletý
+    - 0.13 kg  polévkové koření
+    - 0.81 kg  rýže parboiled
+    - 0.13 kg  sůl
+    pubos:
+    - 0.54 kg  cibule
+    - 0.16 kg  česnek
+    - 2.44 kg  hrášek mražený
+    - 0.81 kg  tuk na smažení
+    - 25 g  pepř mletý
+    - 0.13 kg  polévkové koření
+    - 0.81 kg  rýže parboiled
+    - 0.13 kg  sůl
+    dospelak:
+    - 0.54 kg  cibule
+    - 0.16 kg  česnek
+    - 2.44 kg  hrášek mražený
+    - 0.81 kg  tuk na smažení
+    - 25 g  pepř mletý
+    - 0.13 kg  polévkové koření
+    - 0.81 kg  rýže parboiled
+    - 0.13 kg  sůl
+  porci: '65'
+  tags: []
+rizoto s mletým masem:
+  ingredients:
+    _general: []
+    decko:
+    - 1.12 kg  cibule
+    - 0.7 kg  okurka sterilovaná
+    - 61.0 g  paprika mletá
+    - 3.35 kg  rýže parboiled
+    - 0.2 kg  sůl
+    - 0.75 kg  sýr cihla
+    - 0.93 l  olej stolní
+    - 2.51 kg  vepřové maso mleté
+    - 3.33 kg  zelenina mražená (m+k+h)
+    pubos:
+    - 1.12 kg  cibule
+    - 0.7 kg  okurka sterilovaná
+    - 61.0 g  paprika mletá
+    - 3.35 kg  rýže parboiled
+    - 0.2 kg  sůl
+    - 0.75 kg  sýr cihla
+    - 0.93 l  olej stolní
+    - 2.51 kg  vepřové maso mleté
+    - 3.33 kg  zelenina mražená (m+k+h)
+    dospelak:
+    - 1.12 kg  cibule
+    - 0.7 kg  okurka sterilovaná
+    - 61.0 g  paprika mletá
+    - 3.35 kg  rýže parboiled
+    - 0.2 kg  sůl
+    - 0.75 kg  sýr cihla
+    - 0.93 l  olej stolní
+    - 2.51 kg  vepřové maso mleté
+    - 3.33 kg  zelenina mražená (m+k+h)
+  porci: '61'
+  tags: []
+rizoto z kuřecího masa:
+  ingredients:
+    _general: []
+    decko:
+    - 1.12 kg  cibule
+    - 0.7 kg  okurka sterilovaná
+    - 61.0 g  paprika mletá
+    - 3.35 kg  rýže parboiled
+    - 0.2 kg  sůl
+    - 0.75 kg  sýr cihla
+    - 0.93 l  olej stolní
+    - 2.51 kg  kuřecí prsa vykostěná
+    - 3.33 kg  zelenina mražená (m+k+h)
+    pubos:
+    - 1.12 kg  cibule
+    - 0.7 kg  okurka sterilovaná
+    - 61.0 g  paprika mletá
+    - 3.35 kg  rýže parboiled
+    - 0.2 kg  sůl
+    - 0.75 kg  sýr cihla
+    - 0.93 l  olej stolní
+    - 2.51 kg  kuřecí prsa vykostěná
+    - 3.33 kg  zelenina mražená (m+k+h)
+    dospelak:
+    - 1.12 kg  cibule
+    - 0.7 kg  okurka sterilovaná
+    - 61.0 g  paprika mletá
+    - 3.35 kg  rýže parboiled
+    - 0.2 kg  sůl
+    - 0.75 kg  sýr cihla
+    - 0.93 l  olej stolní
+    - 2.51 kg  kuřecí prsa vykostěná
+    - 3.33 kg  zelenina mražená (m+k+h)
+  porci: '61'
+  tags: []
+rohlík:
+  ingredients:
+    _general: []
+    decko:
+    - 1.0 ks  rohlík
+    pubos:
+    - 1.0 ks  rohlík
+    dospelak:
+    - 1.0 ks  rohlík
+  porci: '1'
+  tags: []
+rohlík selský, rajče:
+  ingredients:
+    _general: []
+    decko:
+    - 1.0 ks  rohlík selský
+    - 1.0 ks  rajčata na kusy
+    pubos:
+    - 1.0 ks  rohlík selský
+    - 1.0 ks  rajčata na kusy
+    dospelak:
+    - 1.0 ks  rohlík selský
+    - 1.0 ks  rajčata na kusy
+  porci: '1'
+  tags: []
+rohlík, tvrdý salám:
+  ingredients:
+    _general: []
+    decko:
+    - 65.0 ks  rohlík
+    - 0.65 kg  margarín
+    - 1.95 kg  salám vysočina
+    pubos:
+    - 65.0 ks  rohlík
+    - 0.65 kg  margarín
+    - 1.95 kg  salám vysočina
+    dospelak:
+    - 65.0 ks  rohlík
+    - 0.65 kg  margarín
+    - 1.95 kg  salám vysočina
+  porci: '65'
+  tags: []
+rohlík, jogurt ds:
+  ingredients:
+    _general: []
+    decko:
+    - 65.0 ks  jogurt ovocný
+    - 65.0 ks  rohlík
+    pubos:
+    - 65.0 ks  jogurt ovocný
+    - 65.0 ks  rohlík
+    dospelak:
+    - 65.0 ks  jogurt ovocný
+    - 65.0 ks  rohlík
+  porci: '10'
+  tags: []
+rohlík, termix:
+  ingredients:
+    _general: []
+    decko:
+    - 65.0 ks  rohlík
+    - 65.0 ks  termix
+    pubos:
+    - 65.0 ks  rohlík
+    - 65.0 ks  termix
+    dospelak:
+    - 65.0 ks  rohlík
+    - 65.0 ks  termix
+  porci: '65'
+  tags: []
+termix:
+  ingredients:
+    _general: []
+    decko:
+    - 1.0 ks  termix
+    pubos:
+    - 1.0 ks  termix
+    dospelak:
+    - 1.0 ks  termix
+  porci: '1'
+  tags: []
+rohlík selský:
+  ingredients:
+    _general: []
+    decko:
+    - 1.0 ks  rohlík selský
+    pubos:
+    - 1.0 ks  rohlík selský
+    dospelak:
+    - 1.0 ks  rohlík selský
+  porci: '1'
+  tags: []
+rohlík, trojúhelníček:
+  ingredients:
+    _general: []
+    decko:
+    - 1.0 ks  rohlík
+    - 1.0 ks  sýr trojúhelníček 1/6
+    pubos:
+    - 1.0 ks  rohlík
+    - 1.0 ks  sýr trojúhelníček 1/6
+    dospelak:
+    - 1.0 ks  rohlík
+    - 1.0 ks  sýr trojúhelníček 1/6
+  porci: '1'
+  tags: []
+rohlík se sýrem, okurka:
+  ingredients:
+    _general: []
+    decko:
+    - 3.25 kg  okurka salátová
+    - 65.0 ks  žemle se sýrem
+    pubos:
+    - 3.25 kg  okurka salátová
+    - 65.0 ks  žemle se sýrem
+    dospelak:
+    - 3.25 kg  okurka salátová
+    - 65.0 ks  žemle se sýrem
+  porci: '65'
+  tags: []
+rybí prsty smažené:
+  ingredients:
+    _general: []
+    decko:
+    - 2.5 l  olej stolní
+    - 6.33 kg  rybí prsty
+    pubos:
+    - 2.5 l  olej stolní
+    - 6.33 kg  rybí prsty
+    dospelak:
+    - 2.5 l  olej stolní
+    - 6.33 kg  rybí prsty
+  porci: '65'
+  tags: []
+rýže:
+  ingredients:
+    _general: []
+    decko:
+    - 4.01 kg  rýže parboiled
+    - 0.11 kg  sůl
+    - 12.0 l  voda
+    pubos:
+    - 4.01 kg  rýže parboiled
+    - 0.11 kg  sůl
+    - 12.0 l  voda
+    dospelak:
+    - 4.01 kg  rýže parboiled
+    - 0.11 kg  sůl
+    - 12.0 l  voda
+  porci: '65'
+  tags: []
+selský guláš:
+  ingredients:
+    _general: []
+    decko:
+    - 13.0 kg  brambory
+    - 1.53 kg  cibule
+    - 0.15 kg  česnek
+    - 3.25 ks  chleba
+    - 11.49 g  kmín drcený
+    - 3.9 g  majoránka
+    - 0.52 kg  mouka hladká
+    - 64.35 g  paprika mletá
+    - 3.25 g  pepř mletý
+    - 2.16 kg  salám točený kabanos
+    - 0.21 kg  sůl
+    - 0.8 l  olej stolní
+    pubos:
+    - 13.0 kg  brambory
+    - 1.53 kg  cibule
+    - 0.15 kg  česnek
+    - 3.25 ks  chleba
+    - 11.49 g  kmín drcený
+    - 3.9 g  majoránka
+    - 0.52 kg  mouka hladká
+    - 64.35 g  paprika mletá
+    - 3.25 g  pepř mletý
+    - 2.16 kg  salám točený kabanos
+    - 0.21 kg  sůl
+    - 0.8 l  olej stolní
+    dospelak:
+    - 13.0 kg  brambory
+    - 1.53 kg  cibule
+    - 0.15 kg  česnek
+    - 3.25 ks  chleba
+    - 11.49 g  kmín drcený
+    - 3.9 g  majoránka
+    - 0.52 kg  mouka hladká
+    - 64.35 g  paprika mletá
+    - 3.25 g  pepř mletý
+    - 2.16 kg  salám točený kabanos
+    - 0.21 kg  sůl
+    - 0.8 l  olej stolní
+  porci: '67'
+  tags: []
+sladký rohlík jam:
+  ingredients:
+    _general: []
+    decko:
+    - 62.0 ks  sladký rohlík 3119
+    - 0.80 kg  džem jahodový
+    pubos:
+    - 62.0 ks  sladký rohlík 3119
+    - 0.80 kg  džem jahodový
+    dospelak:
+    - 62.0 ks  sladký rohlík 3119
+    - 0.80 kg  džem jahodový
+  porci: '62'
+  tags: []
+strapačky se zelím receptury teplých pokrmů:
+  ingredients:
+    _general: []
+    decko:
+    - 9.75 kg  bramborové těsto vitana
+    - 0.59 kg  cibule
+    - 6.5 g  pepř mletý
+    - 1.63 kg  slanina
+    - 0.26 kg  sůl
+    - 0.59 l  olej stolní
+    - 4.55 kg  zelí kysané
+    pubos:
+    - 9.75 kg  bramborové těsto vitana
+    - 0.59 kg  cibule
+    - 6.5 g  pepř mletý
+    - 1.63 kg  slanina
+    - 0.26 kg  sůl
+    - 0.59 l  olej stolní
+    - 4.55 kg  zelí kysané
+    dospelak:
+    - 9.75 kg  bramborové těsto vitana
+    - 0.59 kg  cibule
+    - 6.5 g  pepř mletý
+    - 1.63 kg  slanina
+    - 0.26 kg  sůl
+    - 0.59 l  olej stolní
+    - 4.55 kg  zelí kysané
+  porci: '10'
+  tags: []
+svíčková:
+  ingredients:
+    _general: []
+    decko:
+    - 4.91 kg  hovezi maso zadni
+    - 0.45 kg  špek
+    - 0.23 kg  sůl
+    - 0.55 kg  tuk
+    - 0.75 kg  mrkev
+    - 0.75 kg  petržel
+    - 0.92 kg  celer
+    - 0.86 kg  halali do svíčkové
+    - 0.38 kg  cibule
+    - 2.87 g  pepř mletý celý
+    - 2.87 g  nové koření
+    - 0.66 g  bobkový list
+    - 0.22 l  ocet
+    - 0.09 kg  cukr krystal
+    - 1.55 g  hřebíček
+    - 0.40 kg  jíška hotová světlá
+    - 0.53 kg  mouka hladká
+    - 0.25 kg  máslo
+    - 0.40 l  smetana na vaření
+    - 0.66 kg  brusinkový kompot
+    - 0.71 kg  citróny
+    - 0.60 kg  šlehačka rostlinná spray
+    - 0.09 kg  cukr krystal
+    - 51.48 g  masox
+    - 2.21 l  mléko
+    pubos:
+    - 4.91 kg  hovezi maso zadni
+    - 0.45 kg  špek
+    - 0.23 kg  sůl
+    - 0.55 kg  tuk
+    - 0.75 kg  mrkev
+    - 0.75 kg  petržel
+    - 0.92 kg  celer
+    - 0.86 kg  halali do svíčkové
+    - 0.38 kg  cibule
+    - 2.87 g  pepř mletý celý
+    - 2.87 g  nové koření
+    - 0.66 g  bobkový list
+    - 0.22 l  ocet
+    - 0.09 kg  cukr krystal
+    - 1.55 g  hřebíček
+    - 0.40 kg  jíška hotová světlá
+    - 0.53 kg  mouka hladká
+    - 0.25 kg  máslo
+    - 0.40 l  smetana na vaření
+    - 0.66 kg  brusinkový kompot
+    - 0.71 kg  citróny
+    - 0.60 kg  šlehačka rostlinná spray
+    - 0.09 kg  cukr krystal
+    - 51.48 g  masox
+    - 2.21 l  mléko
+    dospelak:
+    - 4.91 kg  hovezi maso zadni
+    - 0.45 kg  špek
+    - 0.23 kg  sůl
+    - 0.55 kg  tuk
+    - 0.75 kg  mrkev
+    - 0.75 kg  petržel
+    - 0.92 kg  celer
+    - 0.86 kg  halali do svíčkové
+    - 0.38 kg  cibule
+    - 2.87 g  pepř mletý celý
+    - 2.87 g  nové koření
+    - 0.66 g  bobkový list
+    - 0.22 l  ocet
+    - 0.09 kg  cukr krystal
+    - 1.55 g  hřebíček
+    - 0.40 kg  jíška hotová světlá
+    - 0.53 kg  mouka hladká
+    - 0.25 kg  máslo
+    - 0.40 l  smetana na vaření
+    - 0.66 kg  brusinkový kompot
+    - 0.71 kg  citróny
+    - 0.60 kg  šlehačka rostlinná spray
+    - 0.09 kg  cukr krystal
+    - 51.48 g  masox
+    - 2.21 l  mléko
+  porci: '66'
+  tags: []
+sýrová pochoutka z nivy:
+  ingredients:
+    _general: []
+    decko:
+    - 16.25 g  bazalka
+    - 0.16 kg  česnek
+    - 113.75 ks  houska ražená 2279
+    - 1. kg  máslo
+    - 1 l  mléko
+    - 0.75 kg  sýr cihla
+    - 1.10 kg  sýr niva
+    - 0.56 kg  okurka salátová
+    pubos:
+    - 16.25 g  bazalka
+    - 0.16 kg  česnek
+    - 113.75 ks  houska ražená 2279
+    - 1. kg  máslo
+    - 1 l  mléko
+    - 0.75 kg  sýr cihla
+    - 1.10 kg  sýr niva
+    - 0.56 kg  okurka salátová
+    dospelak:
+    - 16.25 g  bazalka
+    - 0.16 kg  česnek
+    - 113.75 ks  houska ražená 2279
+    - 1. kg  máslo
+    - 1 l  mléko
+    - 0.75 kg  sýr cihla
+    - 1.10 kg  sýr niva
+    - 0.56 kg  okurka salátová
+  porci: '65'
+  tags: []
+šopský salát:
+  ingredients:
+    _general: []
+    decko:
+    - 5.2 kg  okurka salátová
+    - 0.3 l  olej stolní
+    - 2.59 kg  paprika zeleninová
+    - 0.10 kg  cibule
+    - 5.0 g  pepř mletý
+    - 3.9 kg  rajčata
+    - 0.15 kg  sůl
+    - 1.0 kg  sýr balkánský
+    - 86 ks  rohlík
+    pubos:
+    - 5.2 kg  okurka salátová
+    - 0.3 l  olej stolní
+    - 2.59 kg  paprika zeleninová
+    - 0.10 kg  cibule
+    - 5.0 g  pepř mletý
+    - 3.9 kg  rajčata
+    - 0.15 kg  sůl
+    - 1.0 kg  sýr balkánský
+    - 86 ks  rohlík
+    dospelak:
+    - 5.2 kg  okurka salátová
+    - 0.3 l  olej stolní
+    - 2.59 kg  paprika zeleninová
+    - 0.10 kg  cibule
+    - 5.0 g  pepř mletý
+    - 3.9 kg  rajčata
+    - 0.15 kg  sůl
+    - 1.0 kg  sýr balkánský
+    - 86 ks  rohlík
+  porci: '65'
+  tags: []
+špagety se směsí:
+  ingredients:
+    _general: []
+    decko:
+    - 1.53 kg  cibule
+    - 0.12 kg  česnek
+    - 0.75 kg  kukuřice sterilovaná
+    - 0.22 l  olej stolní
+    - 20.00 g  oregano
+    - 0.60 kg  olivy černé
+    - 0.7 kg  rajčata
+    - 2.00 kg  rajčatový protlak
+    - 4.41 kg  salám točený kabanos
+    - 0.34 kg  sůl
+    - 5.6 kg  špagety
+    - 1.90 kg  sýr cihla
+    pubos:
+    - 1.53 kg  cibule
+    - 0.12 kg  česnek
+    - 0.75 kg  kukuřice sterilovaná
+    - 0.22 l  olej stolní
+    - 20.00 g  oregano
+    - 0.60 kg  olivy černé
+    - 0.7 kg  rajčata
+    - 2.00 kg  rajčatový protlak
+    - 4.41 kg  salám točený kabanos
+    - 0.34 kg  sůl
+    - 5.6 kg  špagety
+    - 1.90 kg  sýr cihla
+    dospelak:
+    - 1.53 kg  cibule
+    - 0.12 kg  česnek
+    - 0.75 kg  kukuřice sterilovaná
+    - 0.22 l  olej stolní
+    - 20.00 g  oregano
+    - 0.60 kg  olivy černé
+    - 0.7 kg  rajčata
+    - 2.00 kg  rajčatový protlak
+    - 4.41 kg  salám točený kabanos
+    - 0.34 kg  sůl
+    - 5.6 kg  špagety
+    - 1.90 kg  sýr cihla
+  porci: '61'
+  tags: []
+špagety boloňské:
+  ingredients:
+    _general: []
+    decko:
+    - 0.50 kg  cibule
+    - 0.02 kg  česnek
+    - 0.38 l  olej stolní
+    - 5.24 g  oregano
+    - 0.59 kg  rajčata
+    - 0.67 kg  rajčatový protlak
+    - 1.35 kg  vepřové maso mleté
+    - 0.11 kg  sůl
+    - 0.90 kg  sýr cihla
+    - 1.5 kg  špagety
+    pubos:
+    - 0.50 kg  cibule
+    - 0.02 kg  česnek
+    - 0.38 l  olej stolní
+    - 5.24 g  oregano
+    - 0.59 kg  rajčata
+    - 0.67 kg  rajčatový protlak
+    - 1.35 kg  vepřové maso mleté
+    - 0.11 kg  sůl
+    - 0.90 kg  sýr cihla
+    - 1.5 kg  špagety
+    dospelak:
+    - 0.50 kg  cibule
+    - 0.02 kg  česnek
+    - 0.38 l  olej stolní
+    - 5.24 g  oregano
+    - 0.59 kg  rajčata
+    - 0.67 kg  rajčatový protlak
+    - 1.35 kg  vepřové maso mleté
+    - 0.11 kg  sůl
+    - 0.90 kg  sýr cihla
+    - 1.5 kg  špagety
+  porci: '30'
+  tags: []
+špagety s cuketou:
+  ingredients:
+    _general: []
+    decko:
+    - 0.38 l  olej stolní
+    - 4.00 kg  cuketa
+    - 0.28 kg  česnek
+    - 1.5 kg  zakysaná smetana
+    - 0.11 kg  sůl
+    - 0.93 kg  sýr cihla
+    - 1.5 kg  špagety
+    pubos:
+    - 0.38 l  olej stolní
+    - 4.00 kg  cuketa
+    - 0.28 kg  česnek
+    - 1.5 kg  zakysaná smetana
+    - 0.11 kg  sůl
+    - 0.93 kg  sýr cihla
+    - 1.5 kg  špagety
+    dospelak:
+    - 0.38 l  olej stolní
+    - 4.00 kg  cuketa
+    - 0.28 kg  česnek
+    - 1.5 kg  zakysaná smetana
+    - 0.11 kg  sůl
+    - 0.93 kg  sýr cihla
+    - 1.5 kg  špagety
+  porci: '30'
+  tags: []
+špenát dušený:
+  ingredients:
+    _general: []
+    decko:
+    - 0.99 kg  cibule
+    - 0.06 kg  česnek
+    - 0.04 kg  máslo
+    - 0.55 kg  mouka hladká
+    - 0.61 g  muškátový květ
+    - 1.81 g  oregano
+    - 6.06 kg  špenátový protlak zmrazený
+    - 0.61 l  olej stolní
+    pubos:
+    - 0.99 kg  cibule
+    - 0.06 kg  česnek
+    - 0.04 kg  máslo
+    - 0.55 kg  mouka hladká
+    - 0.61 g  muškátový květ
+    - 1.81 g  oregano
+    - 6.06 kg  špenátový protlak zmrazený
+    - 0.61 l  olej stolní
+    dospelak:
+    - 0.99 kg  cibule
+    - 0.06 kg  česnek
+    - 0.04 kg  máslo
+    - 0.55 kg  mouka hladká
+    - 0.61 g  muškátový květ
+    - 1.81 g  oregano
+    - 6.06 kg  špenátový protlak zmrazený
+    - 0.61 l  olej stolní
+  porci: '61'
+  tags: []
+špenátová polévka:
+  ingredients:
+    _general: []
+    decko:
+    - 0.09 kg  česnek
+    - 0.13 kg  tuk na smažení
+    - 0.80 kg  mouka hladká
+    - 0.2 kg  sůl
+    - 2.0 kg  špenátový protlak zmrazený
+    - 2.0 g  pepř mletý
+    - 2.0 g  muškátový květ
+    - 1.57 l  mléko
+    - 0.2 kg  máslo
+    - 1.5 g  oregano
+    pubos:
+    - 0.09 kg  česnek
+    - 0.13 kg  tuk na smažení
+    - 0.80 kg  mouka hladká
+    - 0.2 kg  sůl
+    - 2.0 kg  špenátový protlak zmrazený
+    - 2.0 g  pepř mletý
+    - 2.0 g  muškátový květ
+    - 1.57 l  mléko
+    - 0.2 kg  máslo
+    - 1.5 g  oregano
+    dospelak:
+    - 0.09 kg  česnek
+    - 0.13 kg  tuk na smažení
+    - 0.80 kg  mouka hladká
+    - 0.2 kg  sůl
+    - 2.0 kg  špenátový protlak zmrazený
+    - 2.0 g  pepř mletý
+    - 2.0 g  muškátový květ
+    - 1.57 l  mléko
+    - 0.2 kg  máslo
+    - 1.5 g  oregano
+  porci: '67'
+  tags: []
+švédský stůl:
+  ingredients:
+    _general: []
+    decko:
+    - 1.0 kg  corn flakes
+    - 10.05 l  džus pomeranč
+    - 5.03 l  mléko
+    - 1.22 kg  okurka salátová
+    - 8.9 ks  pomeranč
+    - 1.34 kg  rajčata
+    - 1.35 kg  margarín
+    - 0.50 kg  salám šunkový
+    - 0.50 kg  salám turista
+    - 0.65 kg  sýr cihla
+    - 0.50 kg  salám gothaj
+    - 0.20 kg  džem jahodový
+    - 0.20 kg  povidla
+    - 0.5 kg  okurka sterilovaná
+    - 2.64 ks  oranž
+    - 2 ks  vánočka
+    - 30 ks  vejce
+    - 0.86 kg  cukr krystal
+    - 46.2 g  čaj
+    - 33.0 ks  houska ražená 2279
+    - 3.3 ks  chleba
+    - 6.6 l  mléko
+    - 66.0 ks  rohlík
+    pubos:
+    - 1.0 kg  corn flakes
+    - 10.05 l  džus pomeranč
+    - 5.03 l  mléko
+    - 1.22 kg  okurka salátová
+    - 8.9 ks  pomeranč
+    - 1.34 kg  rajčata
+    - 1.35 kg  margarín
+    - 0.50 kg  salám šunkový
+    - 0.50 kg  salám turista
+    - 0.65 kg  sýr cihla
+    - 0.50 kg  salám gothaj
+    - 0.20 kg  džem jahodový
+    - 0.20 kg  povidla
+    - 0.5 kg  okurka sterilovaná
+    - 2.64 ks  oranž
+    - 2 ks  vánočka
+    - 30 ks  vejce
+    - 0.86 kg  cukr krystal
+    - 46.2 g  čaj
+    - 33.0 ks  houska ražená 2279
+    - 3.3 ks  chleba
+    - 6.6 l  mléko
+    - 66.0 ks  rohlík
+    dospelak:
+    - 1.0 kg  corn flakes
+    - 10.05 l  džus pomeranč
+    - 5.03 l  mléko
+    - 1.22 kg  okurka salátová
+    - 8.9 ks  pomeranč
+    - 1.34 kg  rajčata
+    - 1.35 kg  margarín
+    - 0.50 kg  salám šunkový
+    - 0.50 kg  salám turista
+    - 0.65 kg  sýr cihla
+    - 0.50 kg  salám gothaj
+    - 0.20 kg  džem jahodový
+    - 0.20 kg  povidla
+    - 0.5 kg  okurka sterilovaná
+    - 2.64 ks  oranž
+    - 2 ks  vánočka
+    - 30 ks  vejce
+    - 0.86 kg  cukr krystal
+    - 46.2 g  čaj
+    - 33.0 ks  houska ražená 2279
+    - 3.3 ks  chleba
+    - 6.6 l  mléko
+    - 66.0 ks  rohlík
+  porci: '66'
+  tags: []
+šáteček:
+  ingredients:
+    _general: []
+    decko:
+    - 65.0 ks  šáteček tvarohový 4154
+    pubos:
+    - 65.0 ks  šáteček tvarohový 4154
+    dospelak:
+    - 65.0 ks  šáteček tvarohový 4154
+  porci: '65'
+  tags: []
+šáteček, jablko:
+  ingredients:
+    _general: []
+    decko:
+    - 65.0 ks  šáteček tvarohový 4154
+    - 65 ks  jablko
+    pubos:
+    - 65.0 ks  šáteček tvarohový 4154
+    - 65 ks  jablko
+    dospelak:
+    - 65.0 ks  šáteček tvarohový 4154
+    - 65 ks  jablko
+  porci: '65'
+  tags: []
+těstoviny:
+  ingredients:
+    _general: []
+    decko:
+    - 0.18 l  olej stolní
+    - 0.34 kg  sůl
+    - 4.5 kg  vrtulky
+    pubos:
+    - 0.18 l  olej stolní
+    - 0.34 kg  sůl
+    - 4.5 kg  vrtulky
+    dospelak:
+    - 0.18 l  olej stolní
+    - 0.34 kg  sůl
+    - 4.5 kg  vrtulky
+  porci: '10'
+  tags: []
+thajská směs:
+  ingredients:
+    _general: []
+    decko:
+    - 0.08 kg  česnek
+    - 0.40 kg  cibule
+    - 0.44 kg  cizrna sterilovaná
+    - 0.44 kg  kukuřice sterilovaná
+    - 0.65 kg  cukr krupice
+    - 65.0 g  kari
+    - 6.5 kg  kuřecí prsa vykostěná
+    - 1.3 kg  mrkev syrová
+    - 0.65 l  ocet
+    - 50 g  paprika mletá
+    - 0.65 kg  pórek
+    - 0.65 l  sojová omáčka
+    - 0.65 kg  solamyl
+    - 20 g  zázvor koření
+    - 1.95 kg  zelí čínské
+    - 0.65 kg  žampiony
+    pubos:
+    - 0.08 kg  česnek
+    - 0.40 kg  cibule
+    - 0.44 kg  cizrna sterilovaná
+    - 0.44 kg  kukuřice sterilovaná
+    - 0.65 kg  cukr krupice
+    - 65.0 g  kari
+    - 6.5 kg  kuřecí prsa vykostěná
+    - 1.3 kg  mrkev syrová
+    - 0.65 l  ocet
+    - 50 g  paprika mletá
+    - 0.65 kg  pórek
+    - 0.65 l  sojová omáčka
+    - 0.65 kg  solamyl
+    - 20 g  zázvor koření
+    - 1.95 kg  zelí čínské
+    - 0.65 kg  žampiony
+    dospelak:
+    - 0.08 kg  česnek
+    - 0.40 kg  cibule
+    - 0.44 kg  cizrna sterilovaná
+    - 0.44 kg  kukuřice sterilovaná
+    - 0.65 kg  cukr krupice
+    - 65.0 g  kari
+    - 6.5 kg  kuřecí prsa vykostěná
+    - 1.3 kg  mrkev syrová
+    - 0.65 l  ocet
+    - 50 g  paprika mletá
+    - 0.65 kg  pórek
+    - 0.65 l  sojová omáčka
+    - 0.65 kg  solamyl
+    - 20 g  zázvor koření
+    - 1.95 kg  zelí čínské
+    - 0.65 kg  žampiony
+  porci: '65'
+  tags: []
+těstovinový salát s kuřecím masem:
+  ingredients:
+    _general: []
+    decko:
+    - 12.2 g  bazalka
+    - 0.48 kg  kukuřice sterilovaná
+    - 2.96 kg  kuřecí prsa vykostěná
+    - 0.67 kg  majonéza bezvaječná
+    - 1 kg  jogurt bílý na kila
+    - 28.0 g  tzatziki koření
+    - 3.01 kg  okurka salátová
+    - 6.3 g  pepř mletý
+    - 28.1 ks  rajčata na kusy
+    - 0.12 kg  sůl
+    - 3.03 kg  vrtulky
+    pubos:
+    - 12.2 g  bazalka
+    - 0.48 kg  kukuřice sterilovaná
+    - 2.96 kg  kuřecí prsa vykostěná
+    - 0.67 kg  majonéza bezvaječná
+    - 1 kg  jogurt bílý na kila
+    - 28.0 g  tzatziki koření
+    - 3.01 kg  okurka salátová
+    - 6.3 g  pepř mletý
+    - 28.1 ks  rajčata na kusy
+    - 0.12 kg  sůl
+    - 3.03 kg  vrtulky
+    dospelak:
+    - 12.2 g  bazalka
+    - 0.48 kg  kukuřice sterilovaná
+    - 2.96 kg  kuřecí prsa vykostěná
+    - 0.67 kg  majonéza bezvaječná
+    - 1 kg  jogurt bílý na kila
+    - 28.0 g  tzatziki koření
+    - 3.01 kg  okurka salátová
+    - 6.3 g  pepř mletý
+    - 28.1 ks  rajčata na kusy
+    - 0.12 kg  sůl
+    - 3.03 kg  vrtulky
+  porci: '61'
+  tags: []
+těstoviny s kekelem:
+  ingredients:
+    _general: []
+    decko:
+    - 1.52 kg  cukr moučka
+    - 0.36 kg  kakao
+    - 1.11 kg  kečup rajský
+    - 0.50 kg  máslo
+    - 6.99 kg  mašličky (těstoviny)
+    - 0.06 kg  sůl
+    pubos:
+    - 1.52 kg  cukr moučka
+    - 0.36 kg  kakao
+    - 1.11 kg  kečup rajský
+    - 0.50 kg  máslo
+    - 6.99 kg  mašličky (těstoviny)
+    - 0.06 kg  sůl
+    dospelak:
+    - 1.52 kg  cukr moučka
+    - 0.36 kg  kakao
+    - 1.11 kg  kečup rajský
+    - 0.50 kg  máslo
+    - 6.99 kg  mašličky (těstoviny)
+    - 0.06 kg  sůl
+  porci: '61'
+  tags: []
+tuňáková pomazánka:
+  ingredients:
+    _general: []
+    decko:
+    - 2,60 kg  konzerva tuňák ve vlastní šťávě
+    - 0.80 kg  jogurt bílý
+    - 0.18 kg  cibule červená
+    - 12 ks  vejce
+    - 5 g  sůl
+    - 5 g  pepř
+    - 5 g  citronka
+    - 0.40 kg  majonéza
+    - 5.1 ks  chleba
+    pubos:
+    - 2,60 kg  konzerva tuňák ve vlastní šťávě
+    - 0.80 kg  jogurt bílý
+    - 0.18 kg  cibule červená
+    - 12 ks  vejce
+    - 5 g  sůl
+    - 5 g  pepř
+    - 5 g  citronka
+    - 0.40 kg  majonéza
+    - 5.1 ks  chleba
+    dospelak:
+    - 2,60 kg  konzerva tuňák ve vlastní šťávě
+    - 0.80 kg  jogurt bílý
+    - 0.18 kg  cibule červená
+    - 12 ks  vejce
+    - 5 g  sůl
+    - 5 g  pepř
+    - 5 g  citronka
+    - 0.40 kg  majonéza
+    - 5.1 ks  chleba
+  porci: '67'
+  tags: []
+tvarohová pomazánka s medem a jablkem:
+  ingredients:
+    _general: []
+    decko:
+    - 1.00 kg  tvaroh měkký
+    - 15.0 ks  jablko
+    - 0.50 kg  med
+    - 0.20 kg  jogurt bílý
+    - 4.76 ks  chleba
+    pubos:
+    - 1.00 kg  tvaroh měkký
+    - 15.0 ks  jablko
+    - 0.50 kg  med
+    - 0.20 kg  jogurt bílý
+    - 4.76 ks  chleba
+    dospelak:
+    - 1.00 kg  tvaroh měkký
+    - 15.0 ks  jablko
+    - 0.50 kg  med
+    - 0.20 kg  jogurt bílý
+    - 4.76 ks  chleba
+  porci: '61'
+  tags: []
+uzená polévka s kroupami:
+  ingredients:
+    _general: []
+    decko:
+    - 0.98 kg  kroupy
+    - 0.75 kg  maso uzené
+    - 1.3 g  pepř mletý
+    - 0.06 kg  sůl
+    - 0.13 kg  polévkové koření
+    - 1.94 kg  zelenina polévková mražená
+    pubos:
+    - 0.98 kg  kroupy
+    - 0.75 kg  maso uzené
+    - 1.3 g  pepř mletý
+    - 0.06 kg  sůl
+    - 0.13 kg  polévkové koření
+    - 1.94 kg  zelenina polévková mražená
+    dospelak:
+    - 0.98 kg  kroupy
+    - 0.75 kg  maso uzené
+    - 1.3 g  pepř mletý
+    - 0.06 kg  sůl
+    - 0.13 kg  polévkové koření
+    - 1.94 kg  zelenina polévková mražená
+  porci: '65'
+  tags: []
+uzená polévka s ryzi:
+  ingredients:
+    _general: []
+    decko:
+    - 33.0 l  vyvar z uzeneho masa
+    - 2.5 kg  korenova zelenina
+    - 0.4 kg  kapusta
+    - 0.3 kg  cibule
+    - 2.0 g  pepř mletý celý
+    - 0.1 kg  sůl
+    - 1.5 kg  rýže parboiled
+    - 0.1 kg  petrzelova nat zelena
+    - 0.2 kg  polévkové koření
+    pubos:
+    - 33.0 l  vyvar z uzeneho masa
+    - 3.5 kg  korenova zelenina
+    - 0.5 kg  kapusta
+    - 0.3 kg  cibule
+    - 2.0 g  pepř mletý celý
+    - 0.1 kg  sůl
+    - 1.5 kg  rýže parboiled
+    - 0.15 kg  petrzelova nat zelena
+    - 0.2 kg  polévkové koření
+    dospelak:
+    - 33.0 l  vyvar z uzeneho masa
+    - 2.5 kg  korenova zelenina
+    - 0.4 kg  kapusta
+    - 0.3 kg  cibule
+    - 2.0 g  pepř mletý celý
+    - 0.1 kg  sůl
+    - 1.5 kg  rýže parboiled
+    - 0.1 kg  petrzelova nat zelena
+    - 0.2 kg  polévkové koření
+  porci: '10'
+  tags: []
+uzené maso se špenátem:
+  ingredients:
+    _general: []
+    decko:
+    - 7.01 kg  uzená kýta
+    - 0.99 kg  cibule
+    - 0.06 kg  česnek
+    - 0.04 kg  máslo
+    - 0.55 kg  mouka hladká
+    - 0.61 g  muškátový květ
+    - 1.81 g  oregano
+    - 6.06 kg  špenátový protlak zmrazený
+    - 0.61 l  olej stolní
+    pubos:
+    - 7.01 kg  uzená kýta
+    - 0.99 kg  cibule
+    - 0.06 kg  česnek
+    - 0.04 kg  máslo
+    - 0.55 kg  mouka hladká
+    - 0.61 g  muškátový květ
+    - 1.81 g  oregano
+    - 6.06 kg  špenátový protlak zmrazený
+    - 0.61 l  olej stolní
+    dospelak:
+    - 7.01 kg  uzená kýta
+    - 0.99 kg  cibule
+    - 0.06 kg  česnek
+    - 0.04 kg  máslo
+    - 0.55 kg  mouka hladká
+    - 0.61 g  muškátový květ
+    - 1.81 g  oregano
+    - 6.06 kg  špenátový protlak zmrazený
+    - 0.61 l  olej stolní
+  porci: '61'
+  tags: []
+vaječná pomazánka:
+  ingredients:
+    _general: []
+    decko:
+    - 0.21 kg  hořčice
+    - 90.5 ks  houska ražená 2279
+    - 0.75 kg  majonéza bezvaječná
+    - 0.3 kg  okurka sterilovaná
+    - 0.61 g  pepř mletý
+    - 0.22 kg  pórek
+    - 0.46 kg  rajčata
+    - 0.3 kg  salám šunkový
+    - 0.02 kg  sůl
+    - 42.5 ks  vejce
+    pubos:
+    - 0.21 kg  hořčice
+    - 90.5 ks  houska ražená 2279
+    - 0.75 kg  majonéza bezvaječná
+    - 0.3 kg  okurka sterilovaná
+    - 0.61 g  pepř mletý
+    - 0.22 kg  pórek
+    - 0.46 kg  rajčata
+    - 0.3 kg  salám šunkový
+    - 0.02 kg  sůl
+    - 42.5 ks  vejce
+    dospelak:
+    - 0.21 kg  hořčice
+    - 90.5 ks  houska ražená 2279
+    - 0.75 kg  majonéza bezvaječná
+    - 0.3 kg  okurka sterilovaná
+    - 0.61 g  pepř mletý
+    - 0.22 kg  pórek
+    - 0.46 kg  rajčata
+    - 0.3 kg  salám šunkový
+    - 0.02 kg  sůl
+    - 42.5 ks  vejce
+  porci: '61'
+  tags: []
+vejce na chlebu:
+  ingredients:
+    _general: []
+    decko:
+    - 4.99 ks  chleba
+    - 0.86 kg  margarín
+    - 1.3 kg  rajčata
+    - 65.0 ks  vejce
+    pubos:
+    - 4.99 ks  chleba
+    - 0.86 kg  margarín
+    - 1.3 kg  rajčata
+    - 65.0 ks  vejce
+    dospelak:
+    - 4.99 ks  chleba
+    - 0.86 kg  margarín
+    - 1.3 kg  rajčata
+    - 65.0 ks  vejce
+  porci: '65'
+  tags: []
+veprovy vrabec:
+  ingredients:
+    _general: []
+    decko:
+    - 1000.0 g  vepřová plec
+    - 25.0 g  sůl
+    - 1.0 g  pepř mletý
+    - 100.0 g  sádlo vepř.
+    - 200.0 g  cibule
+    - 30.0 g  rajčatový protlak
+    - 2.0 g  kmín drcený
+    - 20.0 g  česnek
+    - 300.0 l  voda
+    - 20.0 g  mouka hladká
+    pubos:
+    - 1500.0 g  vepřová plec
+    - 30.0 g  sůl
+    - 1.5 g  pepř mletý
+    - 100.0 g  sádlo vepř.
+    - 200.0 g  cibule
+    - 30.0 g  rajčatový protlak
+    - 3.0 g  kmín drcený
+    - 30.0 g  česnek
+    - 300.0 l  voda
+    - 20.0 g  mouka hladká
+    dospelak:
+    - 1000.0 g  vepřová plec
+    - 25.0 g  sůl
+    - 1.0 g  pepř mletý
+    - 100.0 g  sádlo vepř.
+    - 200.0 g  cibule
+    - 30.0 g  rajčatový protlak
+    - 2.0 g  kmín drcený
+    - 20.0 g  česnek
+    - 300.0 l  voda
+    - 20.0 g  mouka hladká
+  porci: '10'
+  tags: []
+vepřový guláš:
+  ingredients:
+    _general: []
+    decko:
+    - 1.74 kg  cibule
+    - 0.09 kg  česnek
+    - 1.2 g  kmín drcený
+    - 3.25 g  majoránka
+    - 0.65 kg  mouka hladká
+    - 0.87 kg  okurka sterilovaná
+    - 97.5 g  paprika mletá
+    - 0.34 kg  rajčatový protlak
+    - 0.21 kg  sůl
+    - 0.87 l  olej stolní
+    - 5.51 kg  vepřová plec
+    pubos:
+    - 1.74 kg  cibule
+    - 0.09 kg  česnek
+    - 1.2 g  kmín drcený
+    - 3.25 g  majoránka
+    - 0.65 kg  mouka hladká
+    - 0.87 kg  okurka sterilovaná
+    - 97.5 g  paprika mletá
+    - 0.34 kg  rajčatový protlak
+    - 0.21 kg  sůl
+    - 0.87 l  olej stolní
+    - 5.51 kg  vepřová plec
+    dospelak:
+    - 1.74 kg  cibule
+    - 0.09 kg  česnek
+    - 1.2 g  kmín drcený
+    - 3.25 g  majoránka
+    - 0.65 kg  mouka hladká
+    - 0.87 kg  okurka sterilovaná
+    - 97.5 g  paprika mletá
+    - 0.34 kg  rajčatový protlak
+    - 0.21 kg  sůl
+    - 0.87 l  olej stolní
+    - 5.51 kg  vepřová plec
+  porci: '65'
+  tags: []
+vepřové v mrkvi:
+  ingredients:
+    _general: []
+    decko:
+    - 5.64 kg  vepřová plec
+    - 0.6 kg  cibule
+    - 6.80 kg  mrkev
+    - 0.25 kg  máslo
+    - 0.21 kg  sůl
+    - 6.0 g  pepř
+    - 50 g  citronka
+    - 0.21 kg  cukr
+    - 0.65 kg  mouka hladká
+    - 6.0 g  muškátový oříšek
+    pubos:
+    - 5.64 kg  vepřová plec
+    - 0.6 kg  cibule
+    - 6.80 kg  mrkev
+    - 0.25 kg  máslo
+    - 0.21 kg  sůl
+    - 6.0 g  pepř
+    - 50 g  citronka
+    - 0.21 kg  cukr
+    - 0.65 kg  mouka hladká
+    - 6.0 g  muškátový oříšek
+    dospelak:
+    - 5.64 kg  vepřová plec
+    - 0.6 kg  cibule
+    - 6.80 kg  mrkev
+    - 0.25 kg  máslo
+    - 0.21 kg  sůl
+    - 6.0 g  pepř
+    - 50 g  citronka
+    - 0.21 kg  cukr
+    - 0.65 kg  mouka hladká
+    - 6.0 g  muškátový oříšek
+  porci: '61'
+  tags: []
+vepřové výpečky:
+  ingredients:
+    _general: []
+    decko:
+    - 0.08 kg  česnek
+    - 12.0 g  kmín drcený
+    - 0.12 l  olej stolní
+    - 5.64 kg  vepřová plec
+    pubos:
+    - 0.08 kg  česnek
+    - 12.0 g  kmín drcený
+    - 0.12 l  olej stolní
+    - 5.64 kg  vepřová plec
+    dospelak:
+    - 0.08 kg  česnek
+    - 12.0 g  kmín drcený
+    - 0.12 l  olej stolní
+    - 5.64 kg  vepřová plec
+  porci: '61'
+  tags: []
+vepřový řízek:
+  ingredients:
+    _general: []
+    decko:
+    - 0.65 kg  mouka hladká
+    - 1.46 l  olej stolní
+    - 1.37 kg  strouhanka
+    - 0.14 kg  sůl
+    - 15.48 ks  vejce
+    - 6.99 kg  vepřová krkovice bez kosti
+    pubos:
+    - 0.65 kg  mouka hladká
+    - 1.46 l  olej stolní
+    - 1.37 kg  strouhanka
+    - 0.14 kg  sůl
+    - 15.48 ks  vejce
+    - 6.99 kg  vepřová krkovice bez kosti
+    dospelak:
+    - 0.65 kg  mouka hladká
+    - 1.46 l  olej stolní
+    - 1.37 kg  strouhanka
+    - 0.14 kg  sůl
+    - 15.48 ks  vejce
+    - 6.99 kg  vepřová krkovice bez kosti
+  porci: '61'
+  tags: []
+vrtulky:
+  ingredients:
+    _general: []
+    decko:
+    - 0.16 l  olej stolní
+    - 0.28 kg  sůl
+    - 2.81 kg  vrtulky
+    pubos:
+    - 0.16 l  olej stolní
+    - 0.28 kg  sůl
+    - 2.81 kg  vrtulky
+    dospelak:
+    - 0.16 l  olej stolní
+    - 0.28 kg  sůl
+    - 2.81 kg  vrtulky
+  porci: '10'
+  tags: []
+vrtulky se směsí:
+  ingredients:
+    _general: []
+    decko:
+    - 1.53 kg  cibule
+    - 0.12 kg  česnek
+    - 0.75 kg  kukuřice sterilovaná
+    - 0.22 l  olej stolní
+    - 20.00 g  oregano
+    - 0.60 kg  olivy černé
+    - 0.7 kg  rajčata
+    - 2.00 kg  rajčatový protlak
+    - 4.41 kg  salám točený kabanos
+    - 0.34 kg  sůl
+    - 5.6 kg  vrtulky
+    - 1.90 kg  sýr cihla
+    pubos:
+    - 1.53 kg  cibule
+    - 0.12 kg  česnek
+    - 0.75 kg  kukuřice sterilovaná
+    - 0.22 l  olej stolní
+    - 20.00 g  oregano
+    - 0.60 kg  olivy černé
+    - 0.7 kg  rajčata
+    - 2.00 kg  rajčatový protlak
+    - 4.41 kg  salám točený kabanos
+    - 0.34 kg  sůl
+    - 5.6 kg  vrtulky
+    - 1.90 kg  sýr cihla
+    dospelak:
+    - 1.53 kg  cibule
+    - 0.12 kg  česnek
+    - 0.75 kg  kukuřice sterilovaná
+    - 0.22 l  olej stolní
+    - 20.00 g  oregano
+    - 0.60 kg  olivy černé
+    - 0.7 kg  rajčata
+    - 2.00 kg  rajčatový protlak
+    - 4.41 kg  salám točený kabanos
+    - 0.34 kg  sůl
+    - 5.6 kg  vrtulky
+    - 1.90 kg  sýr cihla
+  porci: '61'
+  tags: []
+vánočka, máslo, džem, nutela:
+  ingredients:
+    _general: []
+    decko:
+    - 0.65 kg  čokoládová pomazánka (nutella)
+    - 0.65 kg  džem jahodový
+    - 0.65 kg  džem meruňkový
+    - 1.51 kg  margarín
+    - 13.63 ks  vánočka
+    pubos:
+    - 0.65 kg  čokoládová pomazánka (nutella)
+    - 0.65 kg  džem jahodový
+    - 0.65 kg  džem meruňkový
+    - 1.51 kg  margarín
+    - 13.63 ks  vánočka
+    dospelak:
+    - 0.65 kg  čokoládová pomazánka (nutella)
+    - 0.65 kg  džem jahodový
+    - 0.65 kg  džem meruňkový
+    - 1.51 kg  margarín
+    - 13.63 ks  vánočka
+  porci: '65'
+  tags: []
+vícezrnný uzel, okurka:
+  ingredients:
+    _general: []
+    decko:
+    - 61.0 ks  vícezrnný uzel plus
+    - 8.36 kg  okurka salátová
+    pubos:
+    - 61.0 ks  vícezrnný uzel plus
+    - 8.36 kg  okurka salátová
+    dospelak:
+    - 61.0 ks  vícezrnný uzel plus
+    - 8.36 kg  okurka salátová
+  porci: '61'
+  tags: []
+zelňačka:
+  ingredients:
+    _general: []
+    decko:
+    - 3.25 kg  brambory
+    - 0.05 kg  česnek
+    - 6.5 g  kmín drcený
+    - 1.95 g  majoránka
+    - 0.78 kg  mouka hladká
+    - 0.39 l  olej stolní
+    - 26.0 g  paprika mletá
+    - 1.95 g  pepř mletý
+    - 0.65 kg  papriková klobása
+    - 0.13 kg  polévkové koření
+    - 2.81 kg  zelí kysané
+    pubos:
+    - 3.25 kg  brambory
+    - 0.05 kg  česnek
+    - 6.5 g  kmín drcený
+    - 1.95 g  majoránka
+    - 0.78 kg  mouka hladká
+    - 0.39 l  olej stolní
+    - 26.0 g  paprika mletá
+    - 1.95 g  pepř mletý
+    - 0.65 kg  papriková klobása
+    - 0.13 kg  polévkové koření
+    - 2.81 kg  zelí kysané
+    dospelak:
+    - 3.25 kg  brambory
+    - 0.05 kg  česnek
+    - 6.5 g  kmín drcený
+    - 1.95 g  majoránka
+    - 0.78 kg  mouka hladká
+    - 0.39 l  olej stolní
+    - 26.0 g  paprika mletá
+    - 1.95 g  pepř mletý
+    - 0.65 kg  papriková klobása
+    - 0.13 kg  polévkové koření
+    - 2.81 kg  zelí kysané
+  porci: '65'
+  tags: []
+znojemský guláš vepřový receptury teplých pokrmů:
+  ingredients:
+    _general: []
+    decko:
+    - 1.74 kg  cibule
+    - 13.0 g  kmín drcený
+    - 32.5 g  masox
+    - 0.65 kg  mouka hladká
+    - 0.87 kg  okurka sterilovaná
+    - 140.5 g  paprika mletá
+    - 0.98 kg  paprika zeleninová
+    - 6.5 g  pepř mletý
+    - 0.2 kg  sůl
+    - 0.87 kg  tuk na smažení
+    - 5.51 kg  vepřová plec
+    pubos:
+    - 1.74 kg  cibule
+    - 13.0 g  kmín drcený
+    - 32.5 g  masox
+    - 0.65 kg  mouka hladká
+    - 0.87 kg  okurka sterilovaná
+    - 140.5 g  paprika mletá
+    - 0.98 kg  paprika zeleninová
+    - 6.5 g  pepř mletý
+    - 0.2 kg  sůl
+    - 0.87 kg  tuk na smažení
+    - 5.51 kg  vepřová plec
+    dospelak:
+    - 1.74 kg  cibule
+    - 13.0 g  kmín drcený
+    - 32.5 g  masox
+    - 0.65 kg  mouka hladká
+    - 0.87 kg  okurka sterilovaná
+    - 140.5 g  paprika mletá
+    - 0.98 kg  paprika zeleninová
+    - 6.5 g  pepř mletý
+    - 0.2 kg  sůl
+    - 0.87 kg  tuk na smažení
+    - 5.51 kg  vepřová plec
+  porci: '10'
+  tags: []
+závin:
+  ingredients:
+    _general: []
+    decko:
+    - 18.55 ks  závin
+    pubos:
+    - 18.55 ks  závin
+    dospelak:
+    - 18.55 ks  závin
+  porci: '62'
+  tags: []
+banán rar:
+  ingredients:
+    _general: []
+    decko:
+    - 1.0 ks  banán
+    pubos:
+    - 1.0 ks  banán
+    dospelak:
+    - 1.0 ks  banán
+  porci: '1'
+  tags: []
+bageta výpravová rar:
+  ingredients:
+    _general: []
+    decko:
+    - 62.0 ks  houska na bagetu
+    - 0.62 kg  kečup rajský
+    - 0.62 kg  majonéza bezvaječná
+    - 0.62 kg  okurka sterilovaná
+    - 2.00 kg  okurka salátová
+    - 2.00 kg  rajčata
+    - 0.62 kg  margarín
+    - 2.05 kg  salám vysočina
+    - 2.50 kg  sýr cihla
+    - 2.05 kg  šunka
+    - 30 ks  vejce
+    - 1.04 kg  zelí čínské
+    pubos:
+    - 62.0 ks  houska na bagetu
+    - 0.62 kg  kečup rajský
+    - 0.62 kg  majonéza bezvaječná
+    - 0.62 kg  okurka sterilovaná
+    - 2.00 kg  okurka salátová
+    - 2.00 kg  rajčata
+    - 0.62 kg  margarín
+    - 2.05 kg  salám vysočina
+    - 2.50 kg  sýr cihla
+    - 2.05 kg  šunka
+    - 30 ks  vejce
+    - 1.04 kg  zelí čínské
+    dospelak:
+    - 62.0 ks  houska na bagetu
+    - 0.62 kg  kečup rajský
+    - 0.62 kg  majonéza bezvaječná
+    - 0.62 kg  okurka sterilovaná
+    - 2.00 kg  okurka salátová
+    - 2.00 kg  rajčata
+    - 0.62 kg  margarín
+    - 2.05 kg  salám vysočina
+    - 2.50 kg  sýr cihla
+    - 2.05 kg  šunka
+    - 30 ks  vejce
+    - 1.04 kg  zelí čínské
+  porci: '62'
+  tags: []
+bramborová polévka rar:
+  ingredients:
+    _general: []
+    decko:
+    - 1 kg  brambory
+    - 0.03 kg  sůl
+    - 0.26 kg  zelenina polévková mražená
+    - 0.1 l  olej stolní
+    - 0.05 kg  cibule
+    - 0.3 g  pepř mletý
+    - 0.5 g  kmín drcený
+    - 0.006 kg  česnek
+    - 0.2 g  majoránka
+    - 0.2 kg  polévkové koření
+    pubos:
+    - 1 kg  brambory
+    - 0.03 kg  sůl
+    - 0.26 kg  zelenina polévková mražená
+    - 0.1 l  olej stolní
+    - 0.05 kg  cibule
+    - 0.3 g  pepř mletý
+    - 0.5 g  kmín drcený
+    - 0.006 kg  česnek
+    - 0.2 g  majoránka
+    - 0.2 kg  polévkové koření
+    dospelak:
+    - 1 kg  brambory
+    - 0.03 kg  sůl
+    - 0.26 kg  zelenina polévková mražená
+    - 0.1 l  olej stolní
+    - 0.05 kg  cibule
+    - 0.3 g  pepř mletý
+    - 0.5 g  kmín drcený
+    - 0.006 kg  česnek
+    - 0.2 g  majoránka
+    - 0.2 kg  polévkové koření
+  porci: '10'
+  tags: []
+bramborové knedlíky s uzeným rar:
+  ingredients:
+    _general: []
+    decko:
+    - 5.75 kg  bramborové těsto vitana
+    - 0.89 kg  cibule
+    - 6.5 g  pepř mletý
+    - 6.5 kg  uzená kýta
+    - 0.29 kg  sůl
+    - 0.59 kg  tuk na smažení
+    - 6.55 kg  zelí kysané
+    pubos:
+    - 5.75 kg  bramborové těsto vitana
+    - 0.89 kg  cibule
+    - 6.5 g  pepř mletý
+    - 6.5 kg  uzená kýta
+    - 0.29 kg  sůl
+    - 0.59 kg  tuk na smažení
+    - 6.55 kg  zelí kysané
+    dospelak:
+    - 5.75 kg  bramborové těsto vitana
+    - 0.89 kg  cibule
+    - 6.5 g  pepř mletý
+    - 6.5 kg  uzená kýta
+    - 0.29 kg  sůl
+    - 0.59 kg  tuk na smažení
+    - 6.55 kg  zelí kysané
+  porci: '65'
+  tags: []
+bramborový salát rar:
+  ingredients:
+    _general: []
+    decko:
+    - 1.25 kg  brambory
+    - 0.09 kg  cibule
+    - 0.1 kg  hořčice
+    - 0.40 kg  hrášek sterilovaný
+    - 0.375 kg  majonéza bezvaječná
+    - 0.6 kg  mrkev syrová
+    - 0.1 kg  okurka sterilovaná
+    - 0.5 kg  petržel
+    - 0.05 kg  sůl
+    - 2.5 ks  vejce
+    pubos:
+    - 1.25 kg  brambory
+    - 0.09 kg  cibule
+    - 0.1 kg  hořčice
+    - 0.40 kg  hrášek sterilovaný
+    - 0.375 kg  majonéza bezvaječná
+    - 0.6 kg  mrkev syrová
+    - 0.1 kg  okurka sterilovaná
+    - 0.5 kg  petržel
+    - 0.05 kg  sůl
+    - 2.5 ks  vejce
+    dospelak:
+    - 1.25 kg  brambory
+    - 0.09 kg  cibule
+    - 0.1 kg  hořčice
+    - 0.40 kg  hrášek sterilovaný
+    - 0.375 kg  majonéza bezvaječná
+    - 0.6 kg  mrkev syrová
+    - 0.1 kg  okurka sterilovaná
+    - 0.5 kg  petržel
+    - 0.05 kg  sůl
+    - 2.5 ks  vejce
+  porci: '10'
+  tags: []
+brambory rar:
+  ingredients:
+    _general: []
+    decko:
+    - 16.0 kg  brambory
+    - 5.47 g  kmín drcený
+    - 0.2 kg  sůl
+    pubos:
+    - 16.0 kg  brambory
+    - 5.47 g  kmín drcený
+    - 0.2 kg  sůl
+    dospelak:
+    - 16.0 kg  brambory
+    - 5.47 g  kmín drcený
+    - 0.2 kg  sůl
+  porci: '61'
+  tags: []
+buchty rar:
+  ingredients:
+    _general: []
+    decko:
+    - 22.56 bal  buchta
+    pubos:
+    - 22.56 bal  buchta
+    dospelak:
+    - 22.56 bal  buchta
+  porci: '67'
+  tags: []
+butter chicken rar:
+  ingredients:
+    _general: []
+    decko:
+    - 1.35 kg  kuřecí stehenní steak 51014
+    - 0.3 kg  cibule
+    - 0.06 kg  česnek
+    - 1 g  chili
+    - 1 g  kmín drcený
+    - 1 g  pepř mletý
+    - 1 g  skořice mletá
+    - 0.3 kg  máslo
+    - 1.35 kg  rajčata krájená
+    - 0.5 kg  smetana ke šlehání
+    - 0.01 kg  sůl
+    - 1 g  zázvor mletý
+    pubos:
+    - 1.35 kg  kuřecí stehenní steak 51014
+    - 0.3 kg  cibule
+    - 0.06 kg  česnek
+    - 1 g  chili
+    - 1 g  kmín drcený
+    - 1 g  pepř mletý
+    - 1 g  skořice mletá
+    - 0.3 kg  máslo
+    - 1.35 kg  rajčata krájená
+    - 0.5 kg  smetana ke šlehání
+    - 0.01 kg  sůl
+    - 1 g  zázvor mletý
+    dospelak:
+    - 1.35 kg  kuřecí stehenní steak 51014
+    - 0.3 kg  cibule
+    - 0.06 kg  česnek
+    - 1 g  chili
+    - 1 g  kmín drcený
+    - 1 g  pepř mletý
+    - 1 g  skořice mletá
+    - 0.3 kg  máslo
+    - 1.35 kg  rajčata krájená
+    - 0.5 kg  smetana ke šlehání
+    - 0.01 kg  sůl
+    - 1 g  zázvor mletý
+  porci: '10'
+  tags: []
+caro rar:
+  ingredients:
+    _general: []
+    decko:
+    - 0.1 kg  cukr krystal
+    - 130 g  caro
+    - 0.5 l  mléko
+    pubos:
+    - 0.1 kg  cukr krystal
+    - 130 g  caro
+    - 0.5 l  mléko
+    dospelak:
+    - 0.1 kg  cukr krystal
+    - 130 g  caro
+    - 0.5 l  mléko
+  porci: '10'
+  tags: []
+čaj rar:
+  ingredients:
+    _general: []
+    decko:
+    - 0.74 kg  cukr krystal
+    - 43.4 g  čaj
+    - 50 g  citronka
+    pubos:
+    - 0.74 kg  cukr krystal
+    - 43.4 g  čaj
+    - 50 g  citronka
+    dospelak:
+    - 0.74 kg  cukr krystal
+    - 43.4 g  čaj
+    - 50 g  citronka
+  porci: '65'
+  tags: []
+česneková polévka rar:
+  ingredients:
+    _general: []
+    decko:
+    - 0.8 kg  brambory
+    - 0.06 kg  česnek
+    - 0.03 l  maggi
+    - 7 g  masox
+    - 0.07 l  olej stolní
+    - 0.3 g  pepř mletý
+    - 0.007 kg  sůl
+    - 0.02 kg  polévkové koření
+    pubos:
+    - 0.8 kg  brambory
+    - 0.06 kg  česnek
+    - 0.03 l  maggi
+    - 7 g  masox
+    - 0.07 l  olej stolní
+    - 0.3 g  pepř mletý
+    - 0.007 kg  sůl
+    - 0.02 kg  polévkové koření
+    dospelak:
+    - 0.8 kg  brambory
+    - 0.06 kg  česnek
+    - 0.03 l  maggi
+    - 7 g  masox
+    - 0.07 l  olej stolní
+    - 0.3 g  pepř mletý
+    - 0.007 kg  sůl
+    - 0.02 kg  polévkové koření
+  porci: '10'
+  tags: []
+česneková pomazánka rar:
+  ingredients:
+    _general: []
+    decko:
+    - 0.02 kg  česnek
+    - 20 ks  houska ražená 2279
+    - 0.2 kg  majonéza bezvaječná
+    - 0.3 kg  okurka salátová
+    - 0.25 kg  pomazánkové máslo
+    - 0.2 kg  sýr cihla
+    pubos:
+    - 0.02 kg  česnek
+    - 20 ks  houska ražená 2279
+    - 0.2 kg  majonéza bezvaječná
+    - 0.3 kg  okurka salátová
+    - 0.25 kg  pomazánkové máslo
+    - 0.2 kg  sýr cihla
+    dospelak:
+    - 0.02 kg  česnek
+    - 20 ks  houska ražená 2279
+    - 0.2 kg  majonéza bezvaječná
+    - 0.3 kg  okurka salátová
+    - 0.25 kg  pomazánkové máslo
+    - 0.2 kg  sýr cihla
+  porci: '10'
+  tags: []
+čočková polévka rar:
+  ingredients:
+    _general: []
+    decko:
+    - 0.91 kg  čočka
+    - 0.40 kg  tuk
+    - 0.31 kg  cibule
+    - 0.61 kg  mouka hladká
+    - 1.36 kg  zelenina polévková mražená
+    - 0.60 kg  párek jemný
+    - 3.0 g  pepř mletý
+    - 0.06 kg  česnek
+    - 2.0 g  majoránka
+    pubos:
+    - 0.91 kg  čočka
+    - 0.40 kg  tuk
+    - 0.31 kg  cibule
+    - 0.61 kg  mouka hladká
+    - 1.36 kg  zelenina polévková mražená
+    - 0.60 kg  párek jemný
+    - 3.0 g  pepř mletý
+    - 0.06 kg  česnek
+    - 2.0 g  majoránka
+    dospelak:
+    - 0.91 kg  čočka
+    - 0.40 kg  tuk
+    - 0.31 kg  cibule
+    - 0.61 kg  mouka hladká
+    - 1.36 kg  zelenina polévková mražená
+    - 0.60 kg  párek jemný
+    - 3.0 g  pepř mletý
+    - 0.06 kg  česnek
+    - 2.0 g  majoránka
+  porci: '61'
+  tags: []
+frankfurtská polévka rar:
+  ingredients:
+    _general: []
+    decko:
+    - 0.5 kg  tuk
+    - 1.95 kg  brambory
+    - 0.33 kg  cibule
+    - 0.78 kg  mouka hladká
+    - 3.0 g  pepř mletý
+    - 1.41 l  mléko
+    - 0.2 kg  polévkové koření
+    - 1.5 kg  párek jemný
+    - 0.1 kg  paprika mletá
+    - 1.08 kg  zelenina polévková mražená
+    pubos:
+    - 0.5 kg  tuk
+    - 1.95 kg  brambory
+    - 0.33 kg  cibule
+    - 0.78 kg  mouka hladká
+    - 3.0 g  pepř mletý
+    - 1.41 l  mléko
+    - 0.2 kg  polévkové koření
+    - 1.5 kg  párek jemný
+    - 0.1 kg  paprika mletá
+    - 1.08 kg  zelenina polévková mražená
+    dospelak:
+    - 0.5 kg  tuk
+    - 1.95 kg  brambory
+    - 0.33 kg  cibule
+    - 0.78 kg  mouka hladká
+    - 3.0 g  pepř mletý
+    - 1.41 l  mléko
+    - 0.2 kg  polévkové koření
+    - 1.5 kg  párek jemný
+    - 0.1 kg  paprika mletá
+    - 1.08 kg  zelenina polévková mražená
+  porci: '65'
+  tags: []
+gothaj s kaší rar:
+  ingredients:
+    _general: []
+    decko:
+    - 0.7 kg  hořčice
+    - 0.7 kg  kečup rajský
+    - 2.09 kg  okurka sterilovaná
+    - 0.94 l  olej stolní
+    - 11.20 kg  salám gothaj
+    - 0.56 kg  rajčata
+    - 3.39 kg  bramborová kaše instantní
+    - 0.32 kg  máslo
+    pubos:
+    - 0.7 kg  hořčice
+    - 0.7 kg  kečup rajský
+    - 2.09 kg  okurka sterilovaná
+    - 0.94 l  olej stolní
+    - 11.20 kg  salám gothaj
+    - 0.56 kg  rajčata
+    - 3.39 kg  bramborová kaše instantní
+    - 0.32 kg  máslo
+    dospelak:
+    - 0.7 kg  hořčice
+    - 0.7 kg  kečup rajský
+    - 2.09 kg  okurka sterilovaná
+    - 0.94 l  olej stolní
+    - 11.20 kg  salám gothaj
+    - 0.56 kg  rajčata
+    - 3.39 kg  bramborová kaše instantní
+    - 0.32 kg  máslo
+  porci: '66'
+  tags: []
+gulášová polévka s mletým masem rar:
+  ingredients:
+    _general: []
+    decko:
+    - 3.13 kg  brambory
+    - 1.22 kg  cibule
+    - 0.12 kg  česnek
+    - 1.22 g  kmín drcený
+    - 6.1 g  majoránka
+    - 1.23 kg  párek jemný
+    - 1.22 kg  mouka hladká
+    - 183.0 g  paprika mletá
+    - 0.24 kg  sůl
+    - 0.32 kg  tuk na smažení
+    - 0.56 kg  zelenina polévková mražená
+    pubos:
+    - 3.13 kg  brambory
+    - 1.22 kg  cibule
+    - 0.12 kg  česnek
+    - 1.22 g  kmín drcený
+    - 6.1 g  majoránka
+    - 1.23 kg  párek jemný
+    - 1.22 kg  mouka hladká
+    - 183.0 g  paprika mletá
+    - 0.24 kg  sůl
+    - 0.32 kg  tuk na smažení
+    - 0.56 kg  zelenina polévková mražená
+    dospelak:
+    - 3.13 kg  brambory
+    - 1.22 kg  cibule
+    - 0.12 kg  česnek
+    - 1.22 g  kmín drcený
+    - 6.1 g  majoránka
+    - 1.23 kg  párek jemný
+    - 1.22 kg  mouka hladká
+    - 183.0 g  paprika mletá
+    - 0.24 kg  sůl
+    - 0.32 kg  tuk na smažení
+    - 0.56 kg  zelenina polévková mražená
+  porci: '61'
+  tags: []
+hamburger rar:
+  ingredients:
+    _general: []
+    decko:
+    - 10 ks  bulka hamburger 90g - 2270
+    - 0.1 kg  cibule
+    - 0.3 kg  hořčice
+    - 0.3 kg  kečup rajský
+    - 0.3 kg  majonéza bezvaječná
+    - 2 kg  mleté maso hovězí vakuované - 21528
+    - 0.03 kg  okurka sterilovaná
+    - 0.1 kg  rajčata
+    pubos:
+    - 10 ks  bulka hamburger 90g - 2270
+    - 0.1 kg  cibule
+    - 0.3 kg  hořčice
+    - 0.3 kg  kečup rajský
+    - 0.3 kg  majonéza bezvaječná
+    - 2 kg  mleté maso hovězí vakuované - 21528
+    - 0.03 kg  okurka sterilovaná
+    - 0.1 kg  rajčata
+    dospelak:
+    - 10 ks  bulka hamburger 90g - 2270
+    - 0.1 kg  cibule
+    - 0.3 kg  hořčice
+    - 0.3 kg  kečup rajský
+    - 0.3 kg  majonéza bezvaječná
+    - 2 kg  mleté maso hovězí vakuované - 21528
+    - 0.03 kg  okurka sterilovaná
+    - 0.1 kg  rajčata
+  porci: '10'
+  tags: []
+chleba s medem rar:
+  ingredients:
+    _general: []
+    decko:
+    - 1.00 ks  chleba
+    - 0.35 kg  med
+    - 0.2 kg  margarín
+    pubos:
+    - 1.00 ks  chleba
+    - 0.35 kg  med
+    - 0.2 kg  margarín
+    dospelak:
+    - 1.00 ks  chleba
+    - 0.35 kg  med
+    - 0.2 kg  margarín
+  porci: '10'
+  tags: []
+chleba se salámem rar:
+  ingredients:
+    _general: []
+    decko:
+    - 1 ks  chleba
+    - 0.2 kg  margarín
+    - 0.8 kg  salám vysočina
+    pubos:
+    - 1 ks  chleba
+    - 0.2 kg  margarín
+    - 0.8 kg  salám vysočina
+    dospelak:
+    - 1 ks  chleba
+    - 0.2 kg  margarín
+    - 0.8 kg  salám vysočina
+  porci: '10'
+  tags: []
+chleba ve vajíčku rar:
+  ingredients:
+    _general: []
+    decko:
+    - 1.00 ks  chleba
+    - 10 ks  vejce
+    - 0.3 kg  okurka salátová
+    - 0.3 kg  rajčata
+    - 0.1 l  olej stolní
+    - 0.03 kg  sůl
+    - 3 g  pepř mletý
+    pubos:
+    - 1.00 ks  chleba
+    - 10 ks  vejce
+    - 0.3 kg  okurka salátová
+    - 0.3 kg  rajčata
+    - 0.1 l  olej stolní
+    - 0.03 kg  sůl
+    - 3 g  pepř mletý
+    dospelak:
+    - 1.00 ks  chleba
+    - 10 ks  vejce
+    - 0.3 kg  okurka salátová
+    - 0.3 kg  rajčata
+    - 0.1 l  olej stolní
+    - 0.03 kg  sůl
+    - 3 g  pepř mletý
+  porci: '10'
+  tags: []
+jablko rar:
+  ingredients:
+    _general: []
+    decko:
+    - 10 ks  jablko
+    pubos:
+    - 10 ks  jablko
+    dospelak:
+    - 10 ks  jablko
+  porci: '10'
+  tags: []
+kakao rar:
+  ingredients:
+    _general: []
+    decko:
+    - 0.67 kg  cukr krystal
+    - 0.08 kg  kakao
+    - 13.4 l  mléko
+    pubos:
+    - 0.67 kg  cukr krystal
+    - 0.08 kg  kakao
+    - 13.4 l  mléko
+    dospelak:
+    - 0.67 kg  cukr krystal
+    - 0.08 kg  kakao
+    - 13.4 l  mléko
+  porci: '65'
+  tags: []
+kuřecí vývar rar:
+  ingredients:
+    _general: []
+    decko:
+    - 0.8 kg  kuře očištěné
+    - 0.02 kg  sůl
+    - 2 g  nové koření
+    - 2 g  pepř celý
+    - 0.2 kg  zelenina polévková mražená
+    - 0.17 kg  nudle - polévkové
+    pubos:
+    - 0.8 kg  kuře očištěné
+    - 0.02 kg  sůl
+    - 2 g  nové koření
+    - 2 g  pepř celý
+    - 0.2 kg  zelenina polévková mražená
+    - 0.17 kg  nudle - polévkové
+    dospelak:
+    - 0.8 kg  kuře očištěné
+    - 0.02 kg  sůl
+    - 2 g  nové koření
+    - 2 g  pepř celý
+    - 0.2 kg  zelenina polévková mražená
+    - 0.17 kg  nudle - polévkové
+  porci: '10'
+  tags: []
+meloun rar:
+  ingredients:
+    _general: []
+    decko:
+    - 1 ks  meloun
+    pubos:
+    - 1 ks  meloun
+    dospelak:
+    - 1 ks  meloun
+  porci: '6'
+  tags: []
+míchaná vejce s chlebem rar:
+  ingredients:
+    _general: []
+    decko:
+    - 40.0 ks  vejce
+    - 0.10 kg  cibule
+    - 0.10 kg  slanina
+    - 1 ks  chleba
+    - 0.30 kg  okurka salátová
+    - 10.0 ks  rajčata na kusy
+    - 0.01 kg  sůl
+    pubos:
+    - 40.0 ks  vejce
+    - 0.10 kg  cibule
+    - 0.10 kg  slanina
+    - 1 ks  chleba
+    - 0.30 kg  okurka salátová
+    - 10.0 ks  rajčata na kusy
+    - 0.01 kg  sůl
+    dospelak:
+    - 40.0 ks  vejce
+    - 0.10 kg  cibule
+    - 0.10 kg  slanina
+    - 1 ks  chleba
+    - 0.30 kg  okurka salátová
+    - 10.0 ks  rajčata na kusy
+    - 0.01 kg  sůl
+  porci: '10'
+  tags: []
+musli s mlékem rar:
+  ingredients:
+    _general: []
+    decko:
+    - 8.22 l  mléko
+    - 4.40 kg  musli čokoládové
+    pubos:
+    - 8.22 l  mléko
+    - 4.40 kg  musli čokoládové
+    dospelak:
+    - 8.22 l  mléko
+    - 4.40 kg  musli čokoládové
+  porci: '65'
+  tags: []
+nán rar:
+  ingredients:
+    _general: []
+    decko:
+    - 0.03 kg  cukr krystal
+    - 0.325 l  mléko
+    - 0.575 kg  mouka hladká
+    - 0.1 l  olej
+    - 1.25 ks  prášek do pečiva
+    - 0.01 kg  sůl
+    pubos:
+    - 0.03 kg  cukr krystal
+    - 0.325 l  mléko
+    - 0.575 kg  mouka hladká
+    - 0.1 l  olej
+    - 1.25 ks  prášek do pečiva
+    - 0.01 kg  sůl
+    dospelak:
+    - 0.03 kg  cukr krystal
+    - 0.325 l  mléko
+    - 0.575 kg  mouka hladká
+    - 0.1 l  olej
+    - 1.25 ks  prášek do pečiva
+    - 0.01 kg  sůl
+  porci: '10'
+  tags: []
+nanukáč rar:
+  ingredients:
+    _general: []
+    decko:
+    - 2 ks  nanukový dort
+    pubos:
+    - 2 ks  nanukový dort
+    dospelak:
+    - 2 ks  nanukový dort
+  porci: '10'
+  tags: []
+noky rar:
+  ingredients:
+    _general: []
+    decko:
+    - 2 kg  bramborové noky
+    - 0.012 kg  sůl
+    pubos:
+    - 2 kg  bramborové noky
+    - 0.012 kg  sůl
+    dospelak:
+    - 2 kg  bramborové noky
+    - 0.012 kg  sůl
+  porci: '10'
+  tags: []
+okurka rar:
+  ingredients:
+    _general: []
+    decko:
+    - 3 kg  okurka salátová
+    - 10 ks  graham rohlík 2045
+    pubos:
+    - 3 kg  okurka salátová
+    - 10 ks  graham rohlík 2045
+    dospelak:
+    - 3 kg  okurka salátová
+    - 10 ks  graham rohlík 2045
+  porci: '10'
+  tags: []
+okurkový salát rar:
+  ingredients:
+    _general: []
+    decko:
+    - 0.21 kg  cukr krystal
+    - 0.14 l  ocet
+    - 4.84 kg  okurka salátová
+    - 3.64 g  pepř mletý
+    - 0.14 kg  sůl
+    pubos:
+    - 0.21 kg  cukr krystal
+    - 0.14 l  ocet
+    - 4.84 kg  okurka salátová
+    - 3.64 g  pepř mletý
+    - 0.14 kg  sůl
+    dospelak:
+    - 0.21 kg  cukr krystal
+    - 0.14 l  ocet
+    - 4.84 kg  okurka salátová
+    - 3.64 g  pepř mletý
+    - 0.14 kg  sůl
+  porci: '61'
+  tags: []
+oplatka rar:
+  ingredients:
+    _general: []
+    decko:
+    - 1.0 ks  oplatka
+    pubos:
+    - 1.0 ks  oplatka
+    dospelak:
+    - 1.0 ks  oplatka
+  porci: '1'
+  tags: []
+ovocné knedlíky rar:
+  ingredients:
+    _general: []
+    decko:
+    - 0.1 kg  cukr krystal
+    - 1.67 kg  cukr moučka
+    - 8.52 ks  droždí instantní
+    - 3.35 kg  jahody mražené
+    - 1.00 kg  máslo
+    - 3.03 l  mléko
+    - 6.69 kg  mouka hrubá
+    - 18.1 g  skořice mletá
+    - 0.1 kg  sůl
+    - 0.61 kg  šlehačka rostlinná spray
+    - 1.19 kg  tvaroh měkký
+    - 6.69 ks  vejce
+    pubos:
+    - 0.1 kg  cukr krystal
+    - 1.67 kg  cukr moučka
+    - 8.52 ks  droždí instantní
+    - 3.35 kg  jahody mražené
+    - 1.00 kg  máslo
+    - 3.03 l  mléko
+    - 6.69 kg  mouka hrubá
+    - 18.1 g  skořice mletá
+    - 0.1 kg  sůl
+    - 0.61 kg  šlehačka rostlinná spray
+    - 1.19 kg  tvaroh měkký
+    - 6.69 ks  vejce
+    dospelak:
+    - 0.1 kg  cukr krystal
+    - 1.67 kg  cukr moučka
+    - 8.52 ks  droždí instantní
+    - 3.35 kg  jahody mražené
+    - 1.00 kg  máslo
+    - 3.03 l  mléko
+    - 6.69 kg  mouka hrubá
+    - 18.1 g  skořice mletá
+    - 0.1 kg  sůl
+    - 0.61 kg  šlehačka rostlinná spray
+    - 1.19 kg  tvaroh měkký
+    - 6.69 ks  vejce
+  porci: '61'
+  tags: []
+palačinky rar:
+  ingredients:
+    _general: []
+    decko:
+    - 0.7 kg  džem jahodový
+    - 1 l  mléko
+    - 0.5 kg  mouka hladká
+    - 5 ks  vejce
+    pubos:
+    - 0.7 kg  džem jahodový
+    - 1 l  mléko
+    - 0.5 kg  mouka hladká
+    - 5 ks  vejce
+    dospelak:
+    - 0.7 kg  džem jahodový
+    - 1 l  mléko
+    - 0.5 kg  mouka hladká
+    - 5 ks  vejce
+  porci: '10'
+  tags: []
+párek a chleba rar:
+  ingredients:
+    _general: []
+    decko:
+    - 1 ks  chleba
+    - 0.84 kg  párek jemný
+    - 0.3 kg  kečup rajský
+    - 0.3 kg  hořčice
+    pubos:
+    - 1 ks  chleba
+    - 0.84 kg  párek jemný
+    - 0.3 kg  kečup rajský
+    - 0.3 kg  hořčice
+    dospelak:
+    - 1 ks  chleba
+    - 0.84 kg  párek jemný
+    - 0.3 kg  kečup rajský
+    - 0.3 kg  hořčice
+  porci: '10'
+  tags: []
+párek v rohlíku rar:
+  ingredients:
+    _general: []
+    decko:
+    - 0.84 kg  párek jemný
+    - 20.0 ks  rohlík
+    - 0.3 kg  kečup rajský
+    - 0.3 kg  hořčice
+    pubos:
+    - 0.84 kg  párek jemný
+    - 20.0 ks  rohlík
+    - 0.3 kg  kečup rajský
+    - 0.3 kg  hořčice
+    dospelak:
+    - 0.84 kg  párek jemný
+    - 20.0 ks  rohlík
+    - 0.3 kg  kečup rajský
+    - 0.3 kg  hořčice
+  porci: '10'
+  tags: []
+perník, jablko rar:
+  ingredients:
+    _general: []
+    decko:
+    - 65.0 ks  jablko
+    - 65.0 ks  perník
+    pubos:
+    - 65.0 ks  jablko
+    - 65.0 ks  perník
+    dospelak:
+    - 65.0 ks  jablko
+    - 65.0 ks  perník
+  porci: '65'
+  tags: []
+pizza rohlík, rajče rar:
+  ingredients:
+    _general: []
+    decko:
+    - 65.0 ks  pizza rohlík 3792
+    - 65.0 ks  rajčata na kusy
+    pubos:
+    - 65.0 ks  pizza rohlík 3792
+    - 65.0 ks  rajčata na kusy
+    dospelak:
+    - 65.0 ks  pizza rohlík 3792
+    - 65.0 ks  rajčata na kusy
+  porci: '65'
+  tags: []
+pomeranč, celozrnný rohlík-lněné zlato rar:
+  ingredients:
+    _general: []
+    decko:
+    - 10 ks  pomeranč
+    - 10 ks  celozrnný rohlík-lněné zlato
+    pubos:
+    - 10 ks  pomeranč
+    - 10 ks  celozrnný rohlík-lněné zlato
+    dospelak:
+    - 10 ks  pomeranč
+    - 10 ks  celozrnný rohlík-lněné zlato
+  porci: '10'
+  tags: []
+přesnídávka rar:
+  ingredients:
+    _general: []
+    decko:
+    - 1.0 ks  přesnídávka
+    pubos:
+    - 1.0 ks  přesnídávka
+    dospelak:
+    - 1.0 ks  přesnídávka
+  porci: '1'
+  tags: []
+těstoviny rar:
+  ingredients:
+    _general: []
+    decko:
+    - 1 kg  těstoviny
+    - 0.05 kg  sůl
+    - 0.03 kg  máslo
+    pubos:
+    - 1 kg  těstoviny
+    - 0.05 kg  sůl
+    - 0.03 kg  máslo
+    dospelak:
+    - 1 kg  těstoviny
+    - 0.05 kg  sůl
+    - 0.03 kg  máslo
+  porci: '10'
+  tags: []
+thajská směs rar:
+  ingredients:
+    _general: []
+    decko:
+    - 0.08 kg  česnek
+    - 0.40 kg  cibule
+    - 0.44 kg  cizrna sterilovaná
+    - 0.44 kg  kukuřice sterilovaná
+    - 0.65 kg  cukr krupice
+    - 65.0 g  kari
+    - 6.5 kg  kuřecí prsa vykostěná
+    - 1.3 kg  mrkev syrová
+    - 0.65 l  ocet
+    - 50 g  paprika mletá
+    - 0.65 kg  pórek
+    - 0.65 l  sojová omáčka
+    - 0.65 kg  solamyl
+    - 20 g  zázvor koření
+    - 1.95 kg  zelí čínské
+    - 0.65 kg  žampiony
+    pubos:
+    - 0.08 kg  česnek
+    - 0.40 kg  cibule
+    - 0.44 kg  cizrna sterilovaná
+    - 0.44 kg  kukuřice sterilovaná
+    - 0.65 kg  cukr krupice
+    - 65.0 g  kari
+    - 6.5 kg  kuřecí prsa vykostěná
+    - 1.3 kg  mrkev syrová
+    - 0.65 l  ocet
+    - 50 g  paprika mletá
+    - 0.65 kg  pórek
+    - 0.65 l  sojová omáčka
+    - 0.65 kg  solamyl
+    - 20 g  zázvor koření
+    - 1.95 kg  zelí čínské
+    - 0.65 kg  žampiony
+    dospelak:
+    - 0.08 kg  česnek
+    - 0.40 kg  cibule
+    - 0.44 kg  cizrna sterilovaná
+    - 0.44 kg  kukuřice sterilovaná
+    - 0.65 kg  cukr krupice
+    - 65.0 g  kari
+    - 6.5 kg  kuřecí prsa vykostěná
+    - 1.3 kg  mrkev syrová
+    - 0.65 l  ocet
+    - 50 g  paprika mletá
+    - 0.65 kg  pórek
+    - 0.65 l  sojová omáčka
+    - 0.65 kg  solamyl
+    - 20 g  zázvor koření
+    - 1.95 kg  zelí čínské
+    - 0.65 kg  žampiony
+  porci: '65'
+  tags: []
+rajče, rohlík rar:
+  ingredients:
+    _general: []
+    decko:
+    - 10 ks  rajčata na kusy
+    - 10 ks  graham rohlík 2045
+    pubos:
+    - 10 ks  rajčata na kusy
+    - 10 ks  graham rohlík 2045
+    dospelak:
+    - 10 ks  rajčata na kusy
+    - 10 ks  graham rohlík 2045
+  porci: '10'
+  tags: []
+rohlík, jogurt ds rar:
+  ingredients:
+    _general: []
+    decko:
+    - 10.0 ks  jogurt ovocný
+    - 10.0 ks  rohlík
+    pubos:
+    - 10.0 ks  jogurt ovocný
+    - 10.0 ks  rohlík
+    dospelak:
+    - 10.0 ks  jogurt ovocný
+    - 10.0 ks  rohlík
+  porci: '10'
+  tags: []
+rohlík, termix rar:
+  ingredients:
+    _general: []
+    decko:
+    - 65.0 ks  rohlík
+    - 65.0 ks  termix
+    pubos:
+    - 65.0 ks  rohlík
+    - 65.0 ks  termix
+    dospelak:
+    - 65.0 ks  rohlík
+    - 65.0 ks  termix
+  porci: '65'
+  tags: []
+ryba s bešamelem rar:
+  ingredients:
+    _general: []
+    decko:
+    - 0.05 kg  mouka hladká
+    - 0.04 kg  mouka hladká
+    - 0.6 l  mléko
+    - 0.015 kg  máslo
+    - 0.1 l  olej stolní
+    - 0.01 kg  sůl
+    - 0.6 kg  rybí filet mražený
+    - 0.5 ks  citron
+    - 1 g  bazalka
+    pubos:
+    - 0.05 kg  mouka hladká
+    - 0.04 kg  mouka hladká
+    - 0.6 l  mléko
+    - 0.015 kg  máslo
+    - 0.1 l  olej stolní
+    - 0.01 kg  sůl
+    - 0.6 kg  rybí filet mražený
+    - 0.5 ks  citron
+    - 1 g  bazalka
+    dospelak:
+    - 0.05 kg  mouka hladká
+    - 0.04 kg  mouka hladká
+    - 0.6 l  mléko
+    - 0.015 kg  máslo
+    - 0.1 l  olej stolní
+    - 0.01 kg  sůl
+    - 0.6 kg  rybí filet mražený
+    - 0.5 ks  citron
+    - 1 g  bazalka
+  porci: '4'
+  tags: []
+rýže rar:
+  ingredients:
+    _general: []
+    decko:
+    - 0.8 kg  rýže parboiled
+    - 0.01 kg  sůl
+    pubos:
+    - 0.8 kg  rýže parboiled
+    - 0.01 kg  sůl
+    dospelak:
+    - 0.8 kg  rýže parboiled
+    - 0.01 kg  sůl
+  porci: '10'
+  tags: []
+ředkev, vícezrnný uzel rar:
+  ingredients:
+    _general: []
+    decko:
+    - 10.0 ks  vícezrnný uzel plus
+    - 1.5 kg  ředkev bílá
+    pubos:
+    - 10.0 ks  vícezrnný uzel plus
+    - 1.5 kg  ředkev bílá
+    dospelak:
+    - 10.0 ks  vícezrnný uzel plus
+    - 1.5 kg  ředkev bílá
+  porci: '10'
+  tags: []
+řízek kuřecí rar:
+  ingredients:
+    _general: []
+    decko:
+    - 0.65 kg  mouka hladká
+    - 1.46 l  olej stolní
+    - 1.37 kg  strouhanka
+    - 0.14 kg  sůl
+    - 15.48 ks  vejce
+    - 6.99 kg  kuřecí stehenní steak 51014
+    pubos:
+    - 0.65 kg  mouka hladká
+    - 1.46 l  olej stolní
+    - 1.37 kg  strouhanka
+    - 0.14 kg  sůl
+    - 15.48 ks  vejce
+    - 6.99 kg  kuřecí stehenní steak 51014
+    dospelak:
+    - 0.65 kg  mouka hladká
+    - 1.46 l  olej stolní
+    - 1.37 kg  strouhanka
+    - 0.14 kg  sůl
+    - 15.48 ks  vejce
+    - 6.99 kg  kuřecí stehenní steak 51014
+  porci: '61'
+  tags: []
+sekaná v housce rar:
+  ingredients:
+    _general: []
+    decko:
+    - 97.5 ks  bulka hamburger 90g - 2270
+    - 0.41 kg  cibule
+    - 1.3 kg  hořčice
+    - 2 kg  kečup rajský
+    - 2 kg  majonéza bezvaječná
+    - 2.00 kg  okurka salátová
+    - 0.30 kg  okurka sterilovaná
+    - 2.00 kg  rajčata
+    - 4.34 kg  sekaná kupovaná
+    - 0.42 kg  zelí bílé hlávkové
+    pubos:
+    - 97.5 ks  bulka hamburger 90g - 2270
+    - 0.41 kg  cibule
+    - 1.3 kg  hořčice
+    - 2 kg  kečup rajský
+    - 2 kg  majonéza bezvaječná
+    - 2.00 kg  okurka salátová
+    - 0.30 kg  okurka sterilovaná
+    - 2.00 kg  rajčata
+    - 4.34 kg  sekaná kupovaná
+    - 0.42 kg  zelí bílé hlávkové
+    dospelak:
+    - 97.5 ks  bulka hamburger 90g - 2270
+    - 0.41 kg  cibule
+    - 1.3 kg  hořčice
+    - 2 kg  kečup rajský
+    - 2 kg  majonéza bezvaječná
+    - 2.00 kg  okurka salátová
+    - 0.30 kg  okurka sterilovaná
+    - 2.00 kg  rajčata
+    - 4.34 kg  sekaná kupovaná
+    - 0.42 kg  zelí bílé hlávkové
+  porci: '65'
+  tags: []
+sýrová omáčka s kuřecím rar:
+  ingredients:
+    _general: []
+    decko:
+    - 1.35 kg  kuřecí stehenní steak 51014
+    - 0.45 kg  cibule
+    - 0.25 kg  slanina
+    - 0.06 kg  česnek
+    - 0.4 l  smetana na vaření
+    - 0.75 kg  sýr cihla
+    pubos:
+    - 1.35 kg  kuřecí stehenní steak 51014
+    - 0.45 kg  cibule
+    - 0.25 kg  slanina
+    - 0.06 kg  česnek
+    - 0.4 l  smetana na vaření
+    - 0.75 kg  sýr cihla
+    dospelak:
+    - 1.35 kg  kuřecí stehenní steak 51014
+    - 0.45 kg  cibule
+    - 0.25 kg  slanina
+    - 0.06 kg  česnek
+    - 0.4 l  smetana na vaření
+    - 0.75 kg  sýr cihla
+  porci: '10'
+  tags: []
+švédský stůl rar:
+  ingredients:
+    _general: []
+    decko:
+    - 2 l  džus pomeranč
+    - 150 g  caro
+    - 1 ks  cola
+    - 0.1 kg  cukr krystal
+    - 0.05 kg  džem jahodový
+    - 0.05 kg  džem meruňkový
+    - 10 ks  houska ražená 2279
+    - 1 ks  chleba
+    - 1.5 l  mléko
+    - 1 ks  okurka salátová na kusy
+    - 0.2 kg  okurka sterilovaná
+    - 0.08 kg  paprika červená
+    - 3.5 ks  pomeranč
+    - 0.25 kg  rajčata
+    - 10 ks  rohlík selský 2047
+    - 0.3 kg  margarín
+    - 0.10 kg  salám šunkový
+    - 0.10 kg  salám turista
+    - 0.15 kg  sýr blaťácké zlato
+    - 0.2 kg  sýr cihla
+    - 0.2 kg  špekáčky vázané
+    - 0.5 ks  vánočka
+    - 3 ks  vejce
+    - 0.02 kg  zelí čínské
+    pubos:
+    - 2 l  džus pomeranč
+    - 150 g  caro
+    - 1 ks  cola
+    - 0.1 kg  cukr krystal
+    - 0.05 kg  džem jahodový
+    - 0.05 kg  džem meruňkový
+    - 10 ks  houska ražená 2279
+    - 1 ks  chleba
+    - 1.5 l  mléko
+    - 1 ks  okurka salátová na kusy
+    - 0.2 kg  okurka sterilovaná
+    - 0.08 kg  paprika červená
+    - 3.5 ks  pomeranč
+    - 0.25 kg  rajčata
+    - 10 ks  rohlík selský 2047
+    - 0.3 kg  margarín
+    - 0.10 kg  salám šunkový
+    - 0.10 kg  salám turista
+    - 0.15 kg  sýr blaťácké zlato
+    - 0.2 kg  sýr cihla
+    - 0.2 kg  špekáčky vázané
+    - 0.5 ks  vánočka
+    - 3 ks  vejce
+    - 0.02 kg  zelí čínské
+    dospelak:
+    - 2 l  džus pomeranč
+    - 150 g  caro
+    - 1 ks  cola
+    - 0.1 kg  cukr krystal
+    - 0.05 kg  džem jahodový
+    - 0.05 kg  džem meruňkový
+    - 10 ks  houska ražená 2279
+    - 1 ks  chleba
+    - 1.5 l  mléko
+    - 1 ks  okurka salátová na kusy
+    - 0.2 kg  okurka sterilovaná
+    - 0.08 kg  paprika červená
+    - 3.5 ks  pomeranč
+    - 0.25 kg  rajčata
+    - 10 ks  rohlík selský 2047
+    - 0.3 kg  margarín
+    - 0.10 kg  salám šunkový
+    - 0.10 kg  salám turista
+    - 0.15 kg  sýr blaťácké zlato
+    - 0.2 kg  sýr cihla
+    - 0.2 kg  špekáčky vázané
+    - 0.5 ks  vánočka
+    - 3 ks  vejce
+    - 0.02 kg  zelí čínské
+  porci: '10'
+  tags: []
+těstovinový salát s kuřecím masem rar:
+  ingredients:
+    _general: []
+    decko:
+    - 12.2 g  bazalka
+    - 0.48 kg  kukuřice sterilovaná
+    - 2.96 kg  kuřecí prsa vykostěná
+    - 0.67 kg  majonéza bezvaječná
+    - 1 kg  jogurt bílý na kila
+    - 28.0 g  tzatziki koření
+    - 3.01 kg  okurka salátová
+    - 6.3 g  pepř mletý
+    - 28.1 ks  rajčata na kusy
+    - 0.12 kg  sůl
+    - 61 ks  rohlík selský 2047
+    - 3.03 kg  vrtulky
+    pubos:
+    - 12.2 g  bazalka
+    - 0.48 kg  kukuřice sterilovaná
+    - 2.96 kg  kuřecí prsa vykostěná
+    - 0.67 kg  majonéza bezvaječná
+    - 1 kg  jogurt bílý na kila
+    - 28.0 g  tzatziki koření
+    - 3.01 kg  okurka salátová
+    - 6.3 g  pepř mletý
+    - 28.1 ks  rajčata na kusy
+    - 0.12 kg  sůl
+    - 61 ks  rohlík selský 2047
+    - 3.03 kg  vrtulky
+    dospelak:
+    - 12.2 g  bazalka
+    - 0.48 kg  kukuřice sterilovaná
+    - 2.96 kg  kuřecí prsa vykostěná
+    - 0.67 kg  majonéza bezvaječná
+    - 1 kg  jogurt bílý na kila
+    - 28.0 g  tzatziki koření
+    - 3.01 kg  okurka salátová
+    - 6.3 g  pepř mletý
+    - 28.1 ks  rajčata na kusy
+    - 0.12 kg  sůl
+    - 61 ks  rohlík selský 2047
+    - 3.03 kg  vrtulky
+  porci: '61'
+  tags: []
+uzená polévka s kroupami rar:
+  ingredients:
+    _general: []
+    decko:
+    - 0.98 kg  kroupy
+    - 0.75 kg  uzená kýta
+    - 1.3 g  pepř mletý
+    - 0.06 kg  sůl
+    - 0.13 kg  polévkové koření
+    - 1.94 kg  zelenina polévková mražená
+    pubos:
+    - 0.98 kg  kroupy
+    - 0.75 kg  uzená kýta
+    - 1.3 g  pepř mletý
+    - 0.06 kg  sůl
+    - 0.13 kg  polévkové koření
+    - 1.94 kg  zelenina polévková mražená
+    dospelak:
+    - 0.98 kg  kroupy
+    - 0.75 kg  uzená kýta
+    - 1.3 g  pepř mletý
+    - 0.06 kg  sůl
+    - 0.13 kg  polévkové koření
+    - 1.94 kg  zelenina polévková mražená
+  porci: '65'
+  tags: []
+vaječná pomazánka rar:
+  ingredients:
+    _general: []
+    decko:
+    - 0.07 kg  hořčice
+    - 2 ks  houska ražená 2279
+    - 0.21 kg  majonéza bezvaječná
+    - 0.1 kg  okurka sterilovaná
+    - 0.2 g  pepř mletý
+    - 0.2 kg  pórek
+    - 0.2 kg  rajčata
+    - 0.2 kg  salám šunkový
+    - 0.01 kg  sůl
+    - 15 ks  vejce
+    pubos:
+    - 0.07 kg  hořčice
+    - 2 ks  houska ražená 2279
+    - 0.21 kg  majonéza bezvaječná
+    - 0.1 kg  okurka sterilovaná
+    - 0.2 g  pepř mletý
+    - 0.2 kg  pórek
+    - 0.2 kg  rajčata
+    - 0.2 kg  salám šunkový
+    - 0.01 kg  sůl
+    - 15 ks  vejce
+    dospelak:
+    - 0.07 kg  hořčice
+    - 2 ks  houska ražená 2279
+    - 0.21 kg  majonéza bezvaječná
+    - 0.1 kg  okurka sterilovaná
+    - 0.2 g  pepř mletý
+    - 0.2 kg  pórek
+    - 0.2 kg  rajčata
+    - 0.2 kg  salám šunkový
+    - 0.01 kg  sůl
+    - 15 ks  vejce
+  porci: '10'
+  tags: []
+vánočka, máslo, džem, nutela rar:
+  ingredients:
+    _general: []
+    decko:
+    - 0.1 kg  čokoládová pomazánka (nutella)
+    - 0.1 kg  džem jahodový
+    - 0.1 kg  džem meruňkový
+    - 0.2 kg  margarín
+    - 2.1 ks  vánočka
+    pubos:
+    - 0.1 kg  čokoládová pomazánka (nutella)
+    - 0.1 kg  džem jahodový
+    - 0.1 kg  džem meruňkový
+    - 0.2 kg  margarín
+    - 2.1 ks  vánočka
+    dospelak:
+    - 0.1 kg  čokoládová pomazánka (nutella)
+    - 0.1 kg  džem jahodový
+    - 0.1 kg  džem meruňkový
+    - 0.2 kg  margarín
+    - 2.1 ks  vánočka
+  porci: '10'
+  tags: []
+vepřový guláš rar:
+  ingredients:
+    _general: []
+    decko:
+    - 0.3 kg  cibule
+    - 0.005 kg  česnek
+    - 2 g  kmín drcený
+    - 1 g  majoránka
+    - 0.1 kg  mouka hladká
+    - 30 g  paprika mletá
+    - 0.2 kg  paprika zeleninová
+    - 0.02 kg  sůl
+    - 0.14 l  olej stolní
+    - 1.3 kg  vepřová plec
+    pubos:
+    - 0.3 kg  cibule
+    - 0.005 kg  česnek
+    - 2 g  kmín drcený
+    - 1 g  majoránka
+    - 0.1 kg  mouka hladká
+    - 30 g  paprika mletá
+    - 0.2 kg  paprika zeleninová
+    - 0.02 kg  sůl
+    - 0.14 l  olej stolní
+    - 1.3 kg  vepřová plec
+    dospelak:
+    - 0.3 kg  cibule
+    - 0.005 kg  česnek
+    - 2 g  kmín drcený
+    - 1 g  majoránka
+    - 0.1 kg  mouka hladká
+    - 30 g  paprika mletá
+    - 0.2 kg  paprika zeleninová
+    - 0.02 kg  sůl
+    - 0.14 l  olej stolní
+    - 1.3 kg  vepřová plec
+  porci: '10'
+  tags: []
+wrap s kuřecím rar:
+  ingredients:
+    _general: []
+    decko:
+    - 1 kg  tortilla 5803
+    - 1.5 kg  kuřecí prsa vykostěná
+    - 0.6 kg  paprika červená
+    - 1.3 kg  rajčata
+    - 0.6 kg  okurka salátová
+    - 0.8 kg  majonéza bezvaječná
+    - 1 g  pepř mletý
+    - 0.03 kg  sůl
+    - 10 g  bazalka
+    - 0.3 kg  kukuřice sterilovaná
+    - 0.8 kg  zakysaná smetana
+    pubos:
+    - 1 kg  tortilla 5803
+    - 1.5 kg  kuřecí prsa vykostěná
+    - 0.6 kg  paprika červená
+    - 1.3 kg  rajčata
+    - 0.6 kg  okurka salátová
+    - 0.8 kg  majonéza bezvaječná
+    - 1 g  pepř mletý
+    - 0.03 kg  sůl
+    - 10 g  bazalka
+    - 0.3 kg  kukuřice sterilovaná
+    - 0.8 kg  zakysaná smetana
+    dospelak:
+    - 1 kg  tortilla 5803
+    - 1.5 kg  kuřecí prsa vykostěná
+    - 0.6 kg  paprika červená
+    - 1.3 kg  rajčata
+    - 0.6 kg  okurka salátová
+    - 0.8 kg  majonéza bezvaječná
+    - 1 g  pepř mletý
+    - 0.03 kg  sůl
+    - 10 g  bazalka
+    - 0.3 kg  kukuřice sterilovaná
+    - 0.8 kg  zakysaná smetana
+  porci: '10'
+  tags: []
+wrap snídaňový rar:
+  ingredients:
+    _general: []
+    decko:
+    - 1 kg  tortilla 5803
+    - 1.3 kg  rajčata
+    - 0.6 kg  okurka salátová
+    - 1 g  pepř mletý
+    - 0.03 kg  sůl
+    - 10 g  bazalka
+    - 0.8 kg  šunka
+    - 0.8 kg  sýr cihla
+    - 1 kg  smetanový sýr
+    pubos:
+    - 1 kg  tortilla 5803
+    - 1.3 kg  rajčata
+    - 0.6 kg  okurka salátová
+    - 1 g  pepř mletý
+    - 0.03 kg  sůl
+    - 10 g  bazalka
+    - 0.8 kg  šunka
+    - 0.8 kg  sýr cihla
+    - 1 kg  smetanový sýr
+    dospelak:
+    - 1 kg  tortilla 5803
+    - 1.3 kg  rajčata
+    - 0.6 kg  okurka salátová
+    - 1 g  pepř mletý
+    - 0.03 kg  sůl
+    - 10 g  bazalka
+    - 0.8 kg  šunka
+    - 0.8 kg  sýr cihla
+    - 1 kg  smetanový sýr
+  porci: '10'
+  tags: []
