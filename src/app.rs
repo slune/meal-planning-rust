@@ -26,6 +26,7 @@ pub fn App() -> impl IntoView {
                         <a href="/" class="btn btn-primary">"Go Home"</a>
                     </div>
                 }>
+                    <Route path=path!("login") view=LoginPage/>
                     <Route path=path!("") view=HomePage/>
                     <Route path=path!("camps") view=CampsPage/>
                     <Route path=path!("recipes") view=RecipesPage/>

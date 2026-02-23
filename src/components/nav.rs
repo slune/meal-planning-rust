@@ -1,10 +1,21 @@
 use leptos::prelude::*;
-use leptos_router::hooks::use_location;
+use leptos_router::hooks::{use_location, use_navigate};
+
+use crate::server_functions::auth::logout;
 
 #[component]
 pub fn NavBar() -> impl IntoView {
     let location = use_location();
     let pathname = move || location.pathname.get();
+    let navigate = use_navigate();
+
+    let logout_action = Action::new(|_: &()| async { logout().await });
+
+    Effect::new(move |_| {
+        if logout_action.value().get().is_some() {
+            navigate("/login", Default::default());
+        }
+    });
 
     // Helper to check if path matches
     let is_active = move |path: &str| {
@@ -84,6 +95,13 @@ pub fn NavBar() -> impl IntoView {
                             <span class="mr-2">"📊"</span>
                             "Reports"
                         </a>
+                        <button
+                            class="px-5 py-3 rounded-xl hover:bg-white/10 backdrop-blur-sm transition-all duration-300 font-semibold text-white"
+                            on:click=move |_| { logout_action.dispatch(()); }
+                        >
+                            <span class="mr-2">"🔒"</span>
+                            "Logout"
+                        </button>
                     </div>
                 </div>
             </div>

@@ -11,4 +11,9 @@ services:
       - DATABASE_URL=sqlite:///app/data/meal_planning.db
       - AUTH_PASSWORD=${AUTH_PASSWORD:-admin123}
       - RUST_LOG=${RUST_LOG:-info}
+      # Uncomment and set these to enable HTTPS:
+      # - CERT_FILE=/certs/cert.pem
+      # - KEY_FILE=/certs/key.pem
+    # volumes:
+    #   - ./certs:/certs:ro
     restart: unless-stopped

@@ -4,9 +4,11 @@
 #[tokio::main]
 async fn main() {
     use ai_meal_planning::*;
+    use axum_server::tls_rustls::RustlsConfig;
     use leptos::prelude::*;
     use leptos_axum::{LeptosRoutes, generate_route_list};
     use tower_http::services::ServeDir;
+    use tower_sessions::{MemoryStore, SessionManagerLayer, cookie::SameSite};
     use tracing_subscriber::{layer::SubscriberExt, util::SubscriberInitExt};
 
     // Initialize tracing
@@ -35,6 +37,14 @@ async fn main() {
         pool: pool.clone(),
     };
 
+    // Set up session layer
+    let cert_file = std::env::var("CERT_FILE").ok();
+    let is_https = cert_file.is_some();
+    let session_store = MemoryStore::default();
+    let session_layer = SessionManagerLayer::new(session_store)
+        .with_secure(is_https)
+        .with_same_site(SameSite::Strict);
+
     // Build our application with routes
     let app = axum::Router::<AppState>::new()
         .leptos_routes_with_context(
@@ -55,16 +65,32 @@ async fn main() {
             |opts| view! { <Shell options=opts/> },
         ))
         .layer(axum::Extension(pool))
+        .layer(axum::middleware::from_fn(auth::require_auth))
+        .layer(session_layer)
         .nest_service("/pkg", ServeDir::new("./target/site/pkg"))
         .nest_service("/style", ServeDir::new("./style"))
         .with_state(app_state);
 
-    tracing::info!("Listening on http://{}", &addr);
-
-    let listener = tokio::net::TcpListener::bind(&addr).await.unwrap();
-    axum::serve(listener, app.into_make_service())
-        .await
-        .unwrap();
+    let key_file = std::env::var("KEY_FILE").ok();
+    match (cert_file, key_file) {
+        (Some(cert), Some(key)) => {
+            tracing::info!("Starting HTTPS server on https://{}", &addr);
+            let config = RustlsConfig::from_pem_file(cert, key)
+                .await
+                .expect("Failed to load TLS certificate/key");
+            axum_server::bind_rustls(addr, config)
+                .serve(app.into_make_service())
+                .await
+                .unwrap();
+        }
+        _ => {
+            tracing::info!("Listening on http://{}", &addr);
+            let listener = tokio::net::TcpListener::bind(&addr).await.unwrap();
+            axum::serve(listener, app.into_make_service())
+                .await
+                .unwrap();
+        }
+    }
 }
 
 #[cfg(not(feature = "ssr"))]
