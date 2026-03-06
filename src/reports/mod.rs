@@ -64,6 +64,7 @@ pub async fn generate_daily_report(
     for (ingredient_id, total) in ingredient_totals.iter_mut() {
         #[derive(sqlx::FromRow)]
         struct IngredientCategory {
+            #[allow(dead_code)]
             category_id: i64,
             name: String,
             sort_order: i32,
@@ -243,6 +244,7 @@ pub async fn generate_camp_report(
     for (ingredient_id, total) in ingredient_totals.iter_mut() {
         #[derive(sqlx::FromRow)]
         struct IngredientCategory {
+            #[allow(dead_code)]
             category_id: i64,
             name: String,
             sort_order: i32,

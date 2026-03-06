@@ -13,23 +13,6 @@ enum ReportType {
     AttendanceSummary,
 }
 
-impl ReportType {
-    fn as_str(&self) -> &'static str {
-        match self {
-            ReportType::ShoppingList => "shopping_list",
-            ReportType::MealSchedule => "meal_schedule",
-            ReportType::AttendanceSummary => "attendance_summary",
-        }
-    }
-
-    fn display(&self) -> &'static str {
-        match self {
-            ReportType::ShoppingList => "Shopping List",
-            ReportType::MealSchedule => "Meal Schedule",
-            ReportType::AttendanceSummary => "Attendance Summary",
-        }
-    }
-}
 
 #[component]
 pub fn ReportGenerator() -> impl IntoView {

@@ -1,22 +1,21 @@
 use crate::models::PlannedMealWithDetails;
 use leptos::prelude::*;
-use leptos::server_fn::error::NoCustomError;
 
 #[server(GetPlannedMealsForDate, "/api")]
 pub async fn get_planned_meals_for_date(
     camp_id: i64,
     date: String,
-) -> Result<Vec<PlannedMealWithDetails>, ServerFnError> {
+) -> Result<Vec<PlannedMealWithDetails>, ServerFnError<String>> {
     use crate::api::meal_plans;
     use chrono::NaiveDate;
     let pool = expect_context::<sqlx::SqlitePool>();
 
     let parsed_date = NaiveDate::parse_from_str(&date, "%Y-%m-%d")
-        .map_err(|e| ServerFnError::<NoCustomError>::ServerError(e.to_string()))?;
+        .map_err(|e| ServerFnError::<String>::ServerError(e.to_string()))?;
 
     meal_plans::get_planned_meals_for_date(&pool, camp_id, parsed_date)
         .await
-        .map_err(|e| ServerFnError::<NoCustomError>::ServerError(e.to_string()))
+        .map_err(|e| ServerFnError::<String>::ServerError(e.to_string()))
 }
 
 #[server(CreatePlannedMealFn, "/api")]
@@ -28,17 +27,17 @@ pub async fn create_planned_meal(
     children: Option<i32>,
     teens: Option<i32>,
     adults: Option<i32>,
-) -> Result<PlannedMealWithDetails, ServerFnError> {
+) -> Result<PlannedMealWithDetails, ServerFnError<String>> {
     use crate::api::meal_plans;
     use crate::models::{CreateAttendance, CreatePlannedMeal, MealType};
     use chrono::NaiveDate;
     let pool = expect_context::<sqlx::SqlitePool>();
 
     let parsed_date = NaiveDate::parse_from_str(&date, "%Y-%m-%d")
-        .map_err(|e| ServerFnError::<NoCustomError>::ServerError(e.to_string()))?;
+        .map_err(|e| ServerFnError::<String>::ServerError(e.to_string()))?;
 
     let parsed_meal_type = MealType::from_str(&meal_type).ok_or_else(|| {
-        ServerFnError::<NoCustomError>::ServerError("Invalid meal type".to_string())
+        ServerFnError::<String>::ServerError("Invalid meal type".to_string())
     })?;
 
     let attendance = if let (Some(c), Some(t), Some(a)) = (children, teens, adults) {
@@ -61,7 +60,7 @@ pub async fn create_planned_meal(
 
     meal_plans::create_planned_meal(&pool, new_meal)
         .await
-        .map_err(|e| ServerFnError::<NoCustomError>::ServerError(e.to_string()))
+        .map_err(|e| ServerFnError::<String>::ServerError(e.to_string()))
 }
 
 #[server(UpdatePlannedMealFn, "/api")]
@@ -97,13 +96,13 @@ pub async fn update_planned_meal(
 }
 
 #[server(DeletePlannedMeal, "/api")]
-pub async fn delete_planned_meal(id: i64) -> Result<(), ServerFnError> {
+pub async fn delete_planned_meal(id: i64) -> Result<(), ServerFnError<String>> {
     use crate::api::meal_plans;
     let pool = expect_context::<sqlx::SqlitePool>();
 
     meal_plans::delete_planned_meal(&pool, id)
         .await
-        .map_err(|e| ServerFnError::ServerError(e.to_string()))
+        .map_err(|e| ServerFnError::<String>::ServerError(e.to_string()))
 }
 
 #[server(GetPlannedMealsForCamp, "/api")]

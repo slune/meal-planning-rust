@@ -1,8 +1,7 @@
 use leptos::prelude::*;
-use leptos::server_fn::error::NoCustomError;
 
 #[server(Login, "/api")]
-pub async fn login(password: String) -> Result<bool, ServerFnError> {
+pub async fn login(password: String) -> Result<bool, ServerFnError<String>> {
     use tower_sessions::Session;
 
     let expected =
@@ -12,27 +11,27 @@ pub async fn login(password: String) -> Result<bool, ServerFnError> {
     if matched {
         let session = leptos_axum::extract::<Session>()
             .await
-            .map_err(|e| ServerFnError::<NoCustomError>::ServerError(e.to_string()))?;
+            .map_err(|e| ServerFnError::<String>::ServerError(e.to_string()))?;
         session
             .insert("authenticated", true)
             .await
-            .map_err(|e| ServerFnError::<NoCustomError>::ServerError(e.to_string()))?;
+            .map_err(|e| ServerFnError::<String>::ServerError(e.to_string()))?;
     }
 
     Ok(matched)
 }
 
 #[server(Logout, "/api")]
-pub async fn logout() -> Result<(), ServerFnError> {
+pub async fn logout() -> Result<(), ServerFnError<String>> {
     use tower_sessions::Session;
 
     let session = leptos_axum::extract::<Session>()
         .await
-        .map_err(|e| ServerFnError::<NoCustomError>::ServerError(e.to_string()))?;
+        .map_err(|e| ServerFnError::<String>::ServerError(e.to_string()))?;
     session
         .flush()
         .await
-        .map_err(|e| ServerFnError::<NoCustomError>::ServerError(e.to_string()))?;
+        .map_err(|e| ServerFnError::<String>::ServerError(e.to_string()))?;
 
     Ok(())
 }

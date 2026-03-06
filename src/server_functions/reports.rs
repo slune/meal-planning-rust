@@ -1,5 +1,6 @@
 use leptos::prelude::*;
 use crate::models::{ShoppingListItem, MealScheduleItem, AttendanceSummary};
+#[cfg(feature = "ssr")]
 use chrono::NaiveDate;
 
 #[server(GenerateShoppingList, "/api")]

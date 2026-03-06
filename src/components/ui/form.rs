@@ -197,6 +197,7 @@ pub fn Select(
         <select
             id=id
             class=format!("form-input {}", class)
+            prop:value=move || value.get()
             on:change=move |ev| on_change.with_value(|f| f(event_target_value(&ev)))
             required=required
             disabled=disabled
