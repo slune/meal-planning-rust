@@ -162,7 +162,7 @@ where
                         {if filtered.is_empty() {
                             view! {
                                 <div class="px-4 py-3 text-slate-500 text-sm text-center">
-                                    "🔍 No results found"
+                                    "No results found"
                                 </div>
                             }.into_any()
                         } else {

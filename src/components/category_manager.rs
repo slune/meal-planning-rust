@@ -1,4 +1,4 @@
-use crate::components::{ConfirmModal, toast_error, toast_success};
+use crate::components::{ConfirmModal, icon, toast_error, toast_success};
 use crate::models::Category;
 use crate::server_functions::categories::{
     create_category, delete_category, get_categories, update_category,
@@ -134,33 +134,42 @@ pub fn CategoryManager() -> impl IntoView {
 
     view! {
         <div class="space-y-6">
-            <div class="flex justify-between items-center">
-                <h3 class="text-2xl font-bold text-gradient flex items-center gap-2">
-                    <span class="text-3xl">"📁"</span>
-                    "Categories"
-                </h3>
+            <div class="page-header">
+                <div class="page-heading">
+                    <span class="icon-badge icon-badge-violet" aria-hidden="true">{icon("category")}</span>
+                    <div>
+                        <p class="page-kicker">"Catalog"</p>
+                        <h3 class="page-title">"Categories"</h3>
+                        <p class="page-subtitle">"Group ingredients into shopping and kitchen prep sections."</p>
+                        <div class="mt-3">
+                            <span class="status-chip status-chip-violet">{move || format!("{} categories", categories.get().len())}</span>
+                        </div>
+                    </div>
+                </div>
                 <button
                     type="button"
                     class="btn btn-primary"
                     on:click=start_add
                     disabled=move || loading.get()
                 >
-                    <span class="mr-1">"+"</span>
-                    " Add Category"
+                    {icon("plus")}
+                    "Add category"
                 </button>
             </div>
 
             {move || error.get().map(|err| view! {
                 <div class="alert-error">
-                    <span class="font-semibold mr-2">"⚠️ Error:"</span>
+                    <span class="font-semibold mr-2">"Error:"</span>
                     {err}
                 </div>
             })}
 
             {move || show_form.get().then(|| view! {
-                <div class="card border-2 border-blue-200">
-                    <h3 class="text-2xl font-bold mb-6 text-gradient flex items-center gap-2">
-                        <span>{move || if editing_id.get().is_some() { "✏️" } else { "✨" }}</span>
+                <div class="card panel-accent panel-accent-violet">
+                    <h3 class="section-title mb-6 flex items-center gap-2">
+                        <span class="inline-icon text-violet-700" aria-hidden="true">
+                            {move || if editing_id.get().is_some() { icon("edit") } else { icon("plus") }}
+                        </span>
                         {move || if editing_id.get().is_some() { "Edit Category" } else { "New Category" }}
                     </h3>
                     <form on:submit=handle_submit class="space-y-4">
@@ -208,23 +217,23 @@ pub fn CategoryManager() -> impl IntoView {
                 }.into_any()
             } else if categories.get().is_empty() {
                 view! {
-                    <div class="card text-center py-16 bg-gradient-to-br from-slate-50 to-blue-50 border-2 border-dashed border-slate-300">
-                        <div class="text-7xl mb-6">"📁"</div>
-                        <h3 class="text-2xl font-bold text-slate-800 mb-3">"No categories yet"</h3>
-                        <p class="text-lg text-slate-600 mb-8">"Get started by creating your first category"</p>
+                    <div class="empty-state">
+                        <span class="icon-badge icon-badge-violet mx-auto mb-4" aria-hidden="true">{icon("category")}</span>
+                        <h3 class="text-xl font-semibold text-slate-950 mb-2">"No categories yet"</h3>
+                        <p class="text-sm text-slate-600">"Create categories before building a larger ingredient list."</p>
                     </div>
                 }.into_any()
             } else {
                 view! {
-                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                         <For
                             each=move || categories.get()
                             key=|cat| cat.id
                             let:category
                         >
-                            <div class="card group">
+                            <div class="record-card record-card-violet">
                                 <div class="flex items-start justify-between mb-3">
-                                    <div class="text-3xl group-hover:scale-110 transition-transform duration-200">"📁"</div>
+                                    <span class="icon-badge icon-badge-violet" aria-hidden="true">{icon("category")}</span>
                                     <span class="badge badge-secondary text-xs">"Sort: " {category.sort_order}</span>
                                 </div>
                                 <h3 class="text-xl font-bold text-slate-800 mb-4">{category.name.clone()}</h3>
@@ -237,7 +246,8 @@ pub fn CategoryManager() -> impl IntoView {
                                         }
                                         disabled=move || loading.get()
                                     >
-                                        "✏️ Edit"
+                                        {icon("edit")}
+                                        "Edit"
                                     </button>
                                     <button
                                         class="btn btn-danger text-sm"
@@ -247,7 +257,8 @@ pub fn CategoryManager() -> impl IntoView {
                                         }
                                         disabled=move || loading.get()
                                     >
-                                        "🗑️"
+                                        {icon("trash")}
+                                        "Delete"
                                     </button>
                                 </div>
                             </div>

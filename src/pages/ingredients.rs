@@ -1,4 +1,4 @@
-use crate::components::{CategoryManager, IngredientManager};
+use crate::components::{CategoryManager, IngredientManager, icon};
 use leptos::prelude::*;
 
 #[component]
@@ -7,28 +7,28 @@ pub fn IngredientsPage() -> impl IntoView {
 
     view! {
         <div class="space-y-6">
-            <div class="card p-0 overflow-hidden">
-                <div class="flex gap-1 bg-slate-50 p-2">
+            <div class="border-b border-slate-200">
+                <div class="flex gap-6">
                     <button
                         class=move || if active_tab.get() == "ingredients" {
-                            "flex-1 px-6 py-3 bg-white rounded-lg shadow-md border-2 border-blue-500 font-bold text-blue-700 transition-all duration-200"
+                            "tab-active"
                         } else {
-                            "flex-1 px-6 py-3 text-slate-600 hover:bg-white/50 rounded-lg hover:shadow transition-all duration-200"
+                            "tab-inactive"
                         }
                         on:click=move |_| set_active_tab.set("ingredients")
                     >
-                        <span class="mr-2">"🥕"</span>
+                        <span class="inline-icon mr-2" aria-hidden="true">{icon("ingredients")}</span>
                         "Ingredients"
                     </button>
                     <button
                         class=move || if active_tab.get() == "categories" {
-                            "flex-1 px-6 py-3 bg-white rounded-lg shadow-md border-2 border-blue-500 font-bold text-blue-700 transition-all duration-200"
+                            "tab-active"
                         } else {
-                            "flex-1 px-6 py-3 text-slate-600 hover:bg-white/50 rounded-lg hover:shadow transition-all duration-200"
+                            "tab-inactive"
                         }
                         on:click=move |_| set_active_tab.set("categories")
                     >
-                        <span class="mr-2">"📁"</span>
+                        <span class="inline-icon mr-2" aria-hidden="true">{icon("category")}</span>
                         "Categories"
                     </button>
                 </div>

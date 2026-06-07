@@ -5,8 +5,8 @@ use leptos_router::{
     path,
 };
 
-use crate::components::ToastProvider;
 use crate::components::nav::NavBar;
+use crate::components::{ToastProvider, icon};
 use crate::pages::*;
 
 #[component]
@@ -17,12 +17,12 @@ pub fn App() -> impl IntoView {
         <ToastProvider>
             <Router>
                 <NavBar/>
-                <main class="container mx-auto px-8 py-8 mb-20">
+                <main class="container mx-auto px-4 py-6 md:px-6 lg:px-8 mb-16">
                 <Routes fallback=|| view! {
-                    <div class="card text-center py-16">
-                        <div class="text-8xl mb-6">"🔍"</div>
-                        <p class="text-3xl font-bold text-slate-800 mb-4">"Page not found"</p>
-                        <p class="text-xl text-slate-600 mb-8">"The page you're looking for doesn't exist."</p>
+                    <div class="empty-state">
+                        <span class="icon-badge icon-badge-sky mx-auto mb-4" aria-hidden="true">{icon("search")}</span>
+                        <p class="text-2xl font-semibold text-slate-950 mb-2">"Page not found"</p>
+                        <p class="text-sm text-slate-600 mb-6">"The page you're looking for doesn't exist."</p>
                         <a href="/" class="btn btn-primary">"Go Home"</a>
                     </div>
                 }>

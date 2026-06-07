@@ -13,6 +13,8 @@ warn() { echo -e "${YELLOW}[WARN]${NC} $1"; }
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 PROJECT_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
 
+[[ -f "$PROJECT_ROOT/.env" ]] && set -a && source "$PROJECT_ROOT/.env" && set +a
+
 info "Building release binary locally..."
 cd "$PROJECT_ROOT"
 cargo leptos build --release
@@ -72,7 +74,16 @@ CERTS
 
 info "Installing/updating systemd service..."
 VM_USER=$(gcloud compute ssh "$VM_NAME" --zone="$ZONE" -- "echo \$USER" 2>/dev/null | tr -d '\r')
-AUTH_PASSWORD_VALUE="${AUTH_PASSWORD:-admin123}"
+if [[ -z "${AUTH_PASSWORD:-}" ]]; then
+    read -rsp "AUTH_PASSWORD: " AUTH_PASSWORD_VALUE
+    echo
+    if [[ -z "$AUTH_PASSWORD_VALUE" ]]; then
+        warn "AUTH_PASSWORD is required."
+        exit 1
+    fi
+else
+    AUTH_PASSWORD_VALUE="$AUTH_PASSWORD"
+fi
 
 gcloud compute ssh "$VM_NAME" --zone="$ZONE" -- bash <<SERVICE
 sudo tee /etc/systemd/system/meal-planning.service > /dev/null <<EOF

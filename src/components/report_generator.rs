@@ -1,4 +1,4 @@
-use crate::components::{LoadingSpinner, SearchableSelect, toast_error, toast_success};
+use crate::components::{LoadingSpinner, SearchableSelect, icon, toast_error, toast_success};
 use crate::models::{
     AttendanceSummary, Camp, DailyIngredientItem, MealScheduleItem, MealType, RecipeIngredientItem,
     ShoppingListItem,
@@ -245,13 +245,27 @@ pub fn ReportGenerator() -> impl IntoView {
 
     view! {
         <div class="space-y-6">
-            <div class="flex items-center justify-between">
-                <h2 class="text-3xl font-bold text-slate-800">"Reports"</h2>
+            <div class="page-header">
+                <div class="page-heading">
+                    <span class="icon-badge icon-badge-violet" aria-hidden="true">{icon("reports")}</span>
+                    <div>
+                        <p class="page-kicker">"Export"</p>
+                        <h2 class="page-title">"Reports"</h2>
+                        <p class="page-subtitle">"Generate shopping, schedule, attendance, and ingredient reports, then export clean PDFs."</p>
+                        <div class="mt-3 flex flex-wrap gap-2">
+                            <span class="status-chip status-chip-violet">"PDF ready"</span>
+                            <span class="status-chip status-chip-sky">"Paged tables"</span>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             // Report Configuration Card
-            <div class="card no-print">
-                <h3 class="text-xl font-bold text-slate-800 mb-6">"Generate Report"</h3>
+            <div class="card panel-accent panel-accent-violet no-print">
+                <h3 class="section-title mb-6 flex items-center gap-2">
+                    <span class="inline-icon text-violet-700" aria-hidden="true">{icon("reports")}</span>
+                    "Generate Report"
+                </h3>
 
                 <div class="space-y-6">
                     // Camp Selector
@@ -298,7 +312,7 @@ pub fn ReportGenerator() -> impl IntoView {
                         when=move || report_type.get() == ReportType::ShoppingList
                         fallback=|| ()
                     >
-                        <div class="grid grid-cols-2 gap-4">
+                        <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
                             <div>
                                 <label class="form-label">"Start Date" <span class="text-red-500">"*"</span></label>
                                 <input
@@ -329,12 +343,13 @@ pub fn ReportGenerator() -> impl IntoView {
                     </Show>
 
                     // Generate Button
-                    <div class="flex gap-3">
+                    <div class="flex flex-wrap gap-3">
                         <button
                             class="btn btn-primary"
                             on:click=handle_generate
                             disabled=move || is_loading.get() || selected_camp_id.get() == 0
                         >
+                            {icon("reports")}
                             {move || if is_loading.get() { "Generating..." } else { "Generate Report" }}
                         </button>
 
@@ -347,6 +362,7 @@ pub fn ReportGenerator() -> impl IntoView {
                                 on:click=handle_pdf
                                 disabled=move || is_pdf_loading.get()
                             >
+                                {icon("pdf")}
                                 {move || if is_pdf_loading.get() { "Generating PDF..." } else { "Generate PDF" }}
                             </button>
                             {move || pdf_download.get().map(|(href, filename)| view! {
@@ -355,6 +371,7 @@ pub fn ReportGenerator() -> impl IntoView {
                                     href=href
                                     download=filename
                                 >
+                                    {icon("pdf")}
                                     "Download PDF"
                                 </a>
                             })}
@@ -371,7 +388,7 @@ pub fn ReportGenerator() -> impl IntoView {
                 when=move || report_generated.get() && !is_loading.get()
                 fallback=|| ()
             >
-                <div class="card print-section">
+                <div class="card print-section report-preview">
                     {move || match report_type.get() {
                         ReportType::ShoppingList => view! {
                             <ShoppingListReport

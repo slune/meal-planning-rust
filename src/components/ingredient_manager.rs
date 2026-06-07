@@ -1,4 +1,4 @@
-use crate::components::{ConfirmModal, SearchableSelect, toast_error, toast_success};
+use crate::components::{ConfirmModal, SearchableSelect, icon, toast_error, toast_success};
 use crate::models::{Category, Ingredient};
 use crate::server_functions::categories::get_categories;
 use crate::server_functions::ingredients::{
@@ -176,11 +176,18 @@ pub fn IngredientManager() -> impl IntoView {
 
     view! {
         <div class="space-y-4">
-            <div class="flex justify-between items-center">
-                <h3 class="text-2xl font-bold text-gradient flex items-center gap-2">
-                    <span class="text-3xl">"🥕"</span>
-                    "Ingredients"
-                </h3>
+            <div class="page-header">
+                <div class="page-heading">
+                    <span class="icon-badge icon-badge-emerald" aria-hidden="true">{icon("ingredients")}</span>
+                    <div>
+                        <p class="page-kicker">"Catalog"</p>
+                        <h3 class="page-title">"Ingredients"</h3>
+                        <p class="page-subtitle">"Maintain the ingredient units used by recipes and shopping reports."</p>
+                        <div class="mt-3">
+                            <span class="status-chip status-chip-emerald">{move || format!("{} ingredients", ingredients.get().len())}</span>
+                        </div>
+                    </div>
+                </div>
                 <button
                     type="button"
                     class="btn btn-primary"
@@ -191,27 +198,26 @@ pub fn IngredientManager() -> impl IntoView {
                     }
                     disabled=move || loading.get()
                 >
-                    <span class="mr-1">"+"</span>
-                    " Add Ingredient"
+                    {icon("plus")}
+                    "Add ingredient"
                 </button>
             </div>
 
             {move || error.get().map(|err| view! {
                 <div class="alert-error">
-                    <span class="font-semibold mr-2">"⚠️ Error:"</span>
+                    <span class="font-semibold mr-2">"Error:"</span>
                     {err}
                 </div>
             })}
 
             {move || show_form.get().then(|| view! {
-                <div class="card border-2 border-blue-200">
-                    <h4 class="text-lg font-bold mb-3 text-gradient flex items-center gap-2">
-                        <span>"✨"</span>
+                <div class="card panel-accent panel-accent-emerald">
+                    <h4 class="section-title mb-4 flex items-center gap-2">
+                        <span class="inline-icon text-emerald-700" aria-hidden="true">{icon("plus")}</span>
                         "New Ingredient"
                     </h4>
                     <form on:submit=handle_submit>
-                        <div class="grid gap-3 items-end"
-                             style="grid-template-columns: minmax(0,3fr) minmax(0,2fr) 7rem 7rem auto">
+                        <div class="grid grid-cols-1 gap-3 items-end lg:grid-cols-[minmax(0,3fr)_minmax(0,2fr)_7rem_7rem_auto]">
                             <div>
                                 <label class="form-label text-xs">"Name *"</label>
                                 <input
@@ -256,7 +262,8 @@ pub fn IngredientManager() -> impl IntoView {
                                 />
                             </div>
                             <div class="flex gap-2">
-                                <button type="submit" class="btn btn-primary text-sm" disabled=move || loading.get()>
+                            <button type="submit" class="btn btn-primary text-sm" disabled=move || loading.get()>
+                                    {icon("plus")}
                                     {move || if loading.get() { "Saving..." } else { "Save" }}
                                 </button>
                                 <button type="button" class="btn btn-secondary text-sm" on:click=cancel_form disabled=move || loading.get()>
@@ -277,18 +284,18 @@ pub fn IngredientManager() -> impl IntoView {
                 }.into_any()
             } else if ingredients.get().is_empty() {
                 view! {
-                    <div class="card text-center py-16 bg-gradient-to-br from-slate-50 to-blue-50 border-2 border-dashed border-slate-300">
-                        <div class="text-7xl mb-6">"🥕"</div>
-                        <h3 class="text-2xl font-bold text-slate-800 mb-3">"No ingredients yet"</h3>
-                        <p class="text-lg text-slate-600 mb-8">"Get started by creating your first ingredient"</p>
+                    <div class="empty-state">
+                        <span class="icon-badge icon-badge-emerald mx-auto mb-4" aria-hidden="true">{icon("ingredients")}</span>
+                        <h3 class="text-xl font-semibold text-slate-950 mb-2">"No ingredients yet"</h3>
+                        <p class="text-sm text-slate-600">"Add ingredients with units before building recipes."</p>
                     </div>
                 }.into_any()
             } else {
                 view! {
-                    <div class="card p-0 overflow-hidden">
+                    <div class="card p-0 overflow-x-auto">
                         // Search bar
                         <div class="px-4 py-2.5 border-b border-slate-200 flex items-center gap-3 bg-slate-50">
-                            <span class="text-base">"🔍"</span>
+                            <span class="inline-icon text-emerald-700" aria-hidden="true">{icon("search")}</span>
                             <input
                                 type="text"
                                 class="form-input flex-1 text-sm py-1.5"
@@ -299,7 +306,7 @@ pub fn IngredientManager() -> impl IntoView {
                         </div>
                         // Header row
                         <div class="grid gap-3 px-4 py-2 text-xs font-semibold text-slate-500 uppercase tracking-wide border-b border-slate-200"
-                             style="grid-template-columns: minmax(0,3fr) minmax(0,2fr) 6rem 6rem 5rem">
+                             style="grid-template-columns: minmax(0,3fr) minmax(0,2fr) 6rem 6rem 6rem">
                             <span>"Name"</span>
                             <span>"Category"</span>
                             <span>"Primary Unit"</span>
@@ -324,8 +331,8 @@ pub fn IngredientManager() -> impl IntoView {
                                         view! {
                                             {move || if editing_id.get() == Some(id) {
                                                 view! {
-                                                    <div class="grid gap-3 px-4 py-2 items-center border-b border-slate-100 bg-blue-50/60"
-                                                         style="grid-template-columns: minmax(0,3fr) minmax(0,2fr) 6rem 6rem 5rem">
+                                                    <div class="grid gap-3 px-4 py-2 items-center border-b border-slate-100 bg-sky-50/60"
+                                                         style="grid-template-columns: minmax(0,3fr) minmax(0,2fr) 6rem 6rem 6rem">
                                                         <input type="text" class="form-input text-sm"
                                                             prop:value=move || edit_name.get()
                                                             on:input=move |ev| set_edit_name.set(event_target_value(&ev))
@@ -370,14 +377,14 @@ pub fn IngredientManager() -> impl IntoView {
                                                 let secondary_c = secondary_s.clone();
                                                 view! {
                                                     <div class="grid gap-3 px-4 py-2.5 items-center border-b border-slate-100 hover:bg-slate-50 transition-colors"
-                                                         style="grid-template-columns: minmax(0,3fr) minmax(0,2fr) 6rem 6rem 5rem">
+                                                         style="grid-template-columns: minmax(0,3fr) minmax(0,2fr) 6rem 6rem 6rem">
                                                         <span class="font-medium text-slate-800 text-sm truncate">{name_s.clone()}</span>
                                                         <span class="text-sm text-slate-600 truncate">{cat_label}</span>
-                                                        <span class="text-xs font-medium text-blue-700 bg-blue-100 px-2 py-0.5 rounded-full w-fit">{primary_s.clone()}</span>
+                                                        <span class="w-fit rounded-full bg-emerald-50 px-2 py-0.5 text-xs font-medium text-emerald-800">{primary_s.clone()}</span>
                                                         <span class="text-sm text-slate-500">{secondary_disp.clone()}</span>
                                                         <div class="flex gap-1">
                                                             <button type="button"
-                                                                class="text-slate-400 hover:text-blue-600 hover:bg-blue-50 rounded-lg p-1.5 transition-colors"
+                                                                class="inline-flex items-center gap-1 rounded px-2 py-1 text-xs font-semibold text-slate-500 hover:bg-slate-100 hover:text-slate-900"
                                                                 title="Edit"
                                                                 on:click=move |_| {
                                                                     set_edit_name.set(name_c.clone());
@@ -388,13 +395,19 @@ pub fn IngredientManager() -> impl IntoView {
                                                                     set_show_form.set(false);
                                                                 }
                                                                 disabled=move || loading.get()
-                                                            >"✏️"</button>
+                                                            >
+                                                                {icon("edit")}
+                                                                "Edit"
+                                                            </button>
                                                             <button type="button"
-                                                                class="text-slate-400 hover:text-red-600 hover:bg-red-50 rounded-lg p-1.5 transition-colors"
+                                                                class="inline-flex items-center gap-1 rounded px-2 py-1 text-xs font-semibold text-rose-600 hover:bg-rose-50 hover:text-rose-700"
                                                                 title="Delete"
                                                                 on:click=move |_| handle_delete_click(id)
                                                                 disabled=move || loading.get()
-                                                            >"🗑️"</button>
+                                                            >
+                                                                {icon("trash")}
+                                                                "Del"
+                                                            </button>
                                                         </div>
                                                     </div>
                                                 }.into_any()

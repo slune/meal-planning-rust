@@ -1,6 +1,9 @@
-use crate::components::{ConfirmModal, toast_error, toast_success};
+use crate::components::{ConfirmModal, icon, toast_error, toast_success};
 use crate::models::Camp;
-use crate::server_functions::camps::{create_camp, delete_camp, get_camps, update_camp};
+use crate::server_functions::camps::{
+    create_camp, delete_camp, duplicate_camp, get_camps, update_camp,
+};
+use chrono::NaiveDate;
 use leptos::ev::SubmitEvent;
 use leptos::prelude::*;
 use leptos::task::spawn_local;
@@ -18,6 +21,10 @@ pub fn CampManager() -> impl IntoView {
 
     // Edit state
     let (editing_camp_id, set_editing_camp_id) = signal(None::<i64>);
+    let (copying_camp, set_copying_camp) = signal(false);
+    let (copy_source_camp_id, set_copy_source_camp_id) = signal(None::<i64>);
+    let (copy_source_name, set_copy_source_name) = signal(String::new());
+    let (copy_source_day_count, set_copy_source_day_count) = signal(None::<i64>);
 
     // Modal state
     let (show_delete_modal, set_show_delete_modal) = signal(false);
@@ -54,6 +61,10 @@ pub fn CampManager() -> impl IntoView {
     let cancel_form = move |_| {
         set_show_form.set(false);
         set_editing_camp_id.set(None);
+        set_copying_camp.set(false);
+        set_copy_source_camp_id.set(None);
+        set_copy_source_name.set(String::new());
+        set_copy_source_day_count.set(None);
         set_error.set(None);
     };
 
@@ -67,6 +78,10 @@ pub fn CampManager() -> impl IntoView {
         set_default_adults.set(String::from("0"));
         set_notes.set(String::new());
         set_error.set(None);
+        set_copying_camp.set(false);
+        set_copy_source_camp_id.set(None);
+        set_copy_source_name.set(String::new());
+        set_copy_source_day_count.set(None);
     };
 
     let handle_submit = move |ev: SubmitEvent| {
@@ -79,6 +94,10 @@ pub fn CampManager() -> impl IntoView {
         let default_teens_val = default_teens.get();
         let default_adults_val = default_adults.get();
         let notes_val = notes.get();
+        let is_copying = copying_camp.get();
+        let source_camp_id = copy_source_camp_id.get();
+        let source_name = copy_source_name.get();
+        let source_day_count = copy_source_day_count.get();
 
         if name_val.is_empty() || start_date_val.is_empty() || end_date_val.is_empty() {
             toast_error("Please fill in all required fields");
@@ -113,6 +132,38 @@ pub fn CampManager() -> impl IntoView {
         if start_date_val > end_date_val {
             toast_error("End date must be on or after start date");
             return;
+        }
+
+        if is_copying {
+            if name_val.trim() == source_name.trim() {
+                toast_error("Copied camp must use a different name");
+                return;
+            }
+
+            let Ok(start) = NaiveDate::parse_from_str(&start_date_val, "%Y-%m-%d") else {
+                toast_error("Invalid start date");
+                return;
+            };
+            let Ok(end) = NaiveDate::parse_from_str(&end_date_val, "%Y-%m-%d") else {
+                toast_error("Invalid end date");
+                return;
+            };
+
+            if let Some(source_days) = source_day_count {
+                let target_days = (end - start).num_days() + 1;
+                if target_days != source_days {
+                    toast_error(format!(
+                        "Copied camp must stay the same length: {} days",
+                        source_days
+                    ));
+                    return;
+                }
+            }
+
+            if source_camp_id.is_none() {
+                toast_error("Missing source camp for copy");
+                return;
+            }
         }
 
         // Validate counts are non-negative
@@ -153,6 +204,19 @@ pub fn CampManager() -> impl IntoView {
                 )
                 .await
                 .map(|_| ())
+            } else if is_copying {
+                duplicate_camp(
+                    source_camp_id.unwrap_or_default(),
+                    name_val,
+                    start_date_val,
+                    end_date_val,
+                    children_count,
+                    teens_count,
+                    adults_count,
+                    notes_opt,
+                )
+                .await
+                .map(|_| ())
             } else {
                 create_camp(
                     name_val,
@@ -171,12 +235,18 @@ pub fn CampManager() -> impl IntoView {
                 Ok(_) => {
                     let msg = if editing_id.is_some() {
                         "Camp updated successfully!"
+                    } else if is_copying {
+                        "Camp copied successfully!"
                     } else {
                         "Camp created successfully!"
                     };
                     toast_success(msg);
                     reset_form();
                     set_editing_camp_id.set(None);
+                    set_copying_camp.set(false);
+                    set_copy_source_camp_id.set(None);
+                    set_copy_source_name.set(String::new());
+                    set_copy_source_day_count.set(None);
                     set_show_form.set(false);
                     load_data();
                 }
@@ -198,6 +268,27 @@ pub fn CampManager() -> impl IntoView {
     let handle_edit_click = move |camp: Camp| {
         set_editing_camp_id.set(Some(camp.id));
         set_name.set(camp.name);
+        set_start_date.set(camp.start_date.format("%Y-%m-%d").to_string());
+        set_end_date.set(camp.end_date.format("%Y-%m-%d").to_string());
+        set_default_children.set(camp.default_children.to_string());
+        set_default_teens.set(camp.default_teens.to_string());
+        set_default_adults.set(camp.default_adults.to_string());
+        set_notes.set(camp.notes.unwrap_or_default());
+        set_show_form.set(true);
+        set_copying_camp.set(false);
+        set_copy_source_camp_id.set(None);
+        set_copy_source_name.set(String::new());
+        set_copy_source_day_count.set(None);
+        set_error.set(None);
+    };
+
+    let handle_copy_click = move |camp: Camp| {
+        set_editing_camp_id.set(None);
+        set_copying_camp.set(true);
+        set_copy_source_camp_id.set(Some(camp.id));
+        set_copy_source_name.set(camp.name.clone());
+        set_copy_source_day_count.set(Some((camp.end_date - camp.start_date).num_days() + 1));
+        set_name.set(format!("Copy of {}", camp.name));
         set_start_date.set(camp.start_date.format("%Y-%m-%d").to_string());
         set_end_date.set(camp.end_date.format("%Y-%m-%d").to_string());
         set_default_children.set(camp.default_children.to_string());
@@ -243,11 +334,18 @@ pub fn CampManager() -> impl IntoView {
 
     view! {
         <div class="space-y-6">
-            <div class="flex justify-between items-center">
-                <h2 class="text-3xl font-bold text-gradient flex items-center gap-3">
-                    <span class="text-4xl">"🏕️"</span>
-                    "Camps"
-                </h2>
+            <div class="page-header">
+                <div class="page-heading">
+                    <span class="icon-badge icon-badge-sky" aria-hidden="true">{icon("camp")}</span>
+                    <div>
+                        <p class="page-kicker">"Setup"</p>
+                        <h2 class="page-title">"Camps"</h2>
+                        <p class="page-subtitle">"Create camp date ranges and default attendance counts for planning."</p>
+                        <div class="mt-3">
+                            <span class="status-chip status-chip-sky">{move || format!("{} camps", camps.get().len())}</span>
+                        </div>
+                    </div>
+                </div>
                 <button
                     type="button"
                     class="btn btn-primary"
@@ -259,28 +357,47 @@ pub fn CampManager() -> impl IntoView {
                         set_default_teens.set(String::from("0"));
                         set_default_adults.set(String::from("0"));
                         set_notes.set(String::new());
+                        set_editing_camp_id.set(None);
+                        set_copying_camp.set(false);
+                        set_copy_source_camp_id.set(None);
+                        set_copy_source_name.set(String::new());
+                        set_copy_source_day_count.set(None);
                         set_show_form.set(true);
                         set_error.set(None);
                     }
                     disabled=move || loading.get()
                 >
-                    <span class="mr-1">"+"</span>
-                    " Add Camp"
+                    {icon("plus")}
+                    "Add camp"
                 </button>
             </div>
 
             {move || error.get().map(|err| view! {
                 <div class="alert-error">
-                    <span class="font-semibold mr-2">"⚠️ Error:"</span>
+                    <span class="font-semibold mr-2">"Error:"</span>
                     {err}
                 </div>
             })}
 
             {move || show_form.get().then(|| view! {
-                <div class="card border-2 border-blue-200">
-                    <h3 class="text-2xl font-bold mb-6 text-gradient flex items-center gap-2">
-                        <span>{move || if editing_camp_id.get().is_some() { "✏️" } else { "✨" }}</span>
-                        {move || if editing_camp_id.get().is_some() { "Edit Camp" } else { "New Camp" }}
+                <div class="card panel-accent panel-accent-sky">
+                    <h3 class="section-title mb-6 flex items-center gap-2">
+                        <span class="inline-icon text-sky-700" aria-hidden="true">
+                            {move || if editing_camp_id.get().is_some() {
+                                icon("edit")
+                            } else if copying_camp.get() {
+                                icon("copy")
+                            } else {
+                                icon("plus")
+                            }}
+                        </span>
+                        {move || if editing_camp_id.get().is_some() {
+                            "Edit Camp"
+                        } else if copying_camp.get() {
+                            "Copy Camp"
+                        } else {
+                            "New Camp"
+                        }}
                     </h3>
                     <form on:submit=handle_submit class="space-y-4">
                         <div>
@@ -374,7 +491,17 @@ pub fn CampManager() -> impl IntoView {
                         </div>
                         <div class="flex gap-2">
                             <button type="submit" class="btn btn-primary" disabled=move || loading.get()>
-                                {move || if loading.get() { "Saving..." } else if editing_camp_id.get().is_some() { "Update" } else { "Save" }}
+                                {move || {
+                                    if loading.get() {
+                                        "Saving..."
+                                    } else if editing_camp_id.get().is_some() {
+                                        "Update"
+                                    } else if copying_camp.get() {
+                                        "Create copy"
+                                    } else {
+                                        "Save"
+                                    }
+                                }}
                             </button>
                             <button type="button" class="btn btn-secondary" on:click=cancel_form disabled=move || loading.get()>
                                 "Cancel"
@@ -393,46 +520,56 @@ pub fn CampManager() -> impl IntoView {
                 }.into_any()
             } else if camps.get().is_empty() {
                 view! {
-                    <div class="card text-center py-16 bg-gradient-to-br from-slate-50 to-blue-50 border-2 border-dashed border-slate-300">
-                        <div class="text-7xl mb-6">"🏕️"</div>
-                        <h3 class="text-2xl font-bold text-slate-800 mb-3">"No camps yet"</h3>
-                        <p class="text-lg text-slate-600 mb-8">"Get started by creating your first camp"</p>
+                    <div class="empty-state">
+                        <span class="icon-badge icon-badge-sky mx-auto mb-4" aria-hidden="true">{icon("camp")}</span>
+                        <h3 class="text-xl font-semibold text-slate-950 mb-2">"No camps yet"</h3>
+                        <p class="text-sm text-slate-600">"Create the first camp to unlock meal planning and reports."</p>
                     </div>
                 }.into_any()
             } else {
                 view! {
-                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                         <For
                             each=move || camps.get()
                             key=|camp| camp.id
                             let:camp
                         >
-                            <div class="card group">
-                                <div class="flex items-start justify-between mb-3">
-                                    <div class="text-4xl group-hover:scale-110 transition-transform duration-200">"🏕️"</div>
+                            <div class="record-card record-card-sky">
+                                {
+                                    let day_count = (camp.end_date - camp.start_date).num_days() + 1;
+                                    view! {
+                                <div class="mb-4 flex items-start justify-between gap-3">
+                                    <div>
+                                        <h3 class="text-xl font-bold text-slate-800 mb-1">{camp.name.clone()}</h3>
+                                        <div class="flex items-center gap-2 text-sm text-slate-600">
+                                            <span class="inline-icon text-sky-700" aria-hidden="true">{icon("calendar")}</span>
+                                            <span>{format!("{} to {}", camp.start_date, camp.end_date)}</span>
+                                        </div>
+                                    </div>
+                                    <span class="status-chip status-chip-sky">{format!("{} days", day_count)}</span>
                                 </div>
-                                <h3 class="text-xl font-bold text-slate-800 mb-2">{camp.name.clone()}</h3>
-                                <div class="flex items-center gap-2 text-sm text-slate-600 mb-3">
-                                    <span>"📅"</span>
-                                    <span>{format!("{} to {}", camp.start_date, camp.end_date)}</span>
-                                </div>
+                                    }
+                                }
                                 <div class="flex gap-2 flex-wrap mb-3">
                                     <span class="badge badge-primary">
-                                        "👶 " {camp.default_children} " children"
+                                        <span class="inline-icon mr-1" aria-hidden="true">{icon("child")}</span>
+                                        {camp.default_children} " children"
                                     </span>
                                     <span class="badge badge-primary">
-                                        "🧒 " {camp.default_teens} " teens"
+                                        <span class="inline-icon mr-1" aria-hidden="true">{icon("teen")}</span>
+                                        {camp.default_teens} " teens"
                                     </span>
                                     <span class="badge badge-primary">
-                                        "👨 " {camp.default_adults} " adults"
+                                        <span class="inline-icon mr-1" aria-hidden="true">{icon("adult")}</span>
+                                        {camp.default_adults} " adults"
                                     </span>
                                 </div>
                                 {camp.notes.clone().map(|n| view! {
                                     <p class="text-sm text-slate-600 mb-4 italic bg-slate-50 p-2 rounded">{n}</p>
                                 })}
-                                <div class="mt-auto flex gap-2">
+                                <div class="mt-auto grid grid-cols-2 gap-2">
                                     <button
-                                        class="btn btn-primary text-sm flex-1"
+                                        class="btn btn-primary col-span-2 text-sm"
                                         on:click={
                                             let id = camp.id;
                                             move |_| {
@@ -443,7 +580,8 @@ pub fn CampManager() -> impl IntoView {
                                         }
                                         disabled=move || loading.get()
                                     >
-                                        "📅 Plan Meals"
+                                        {icon("planner")}
+                                        "Plan meals"
                                     </button>
                                     <button
                                         class="btn btn-secondary text-sm"
@@ -454,10 +592,23 @@ pub fn CampManager() -> impl IntoView {
                                         disabled=move || loading.get()
                                         aria-label="Edit camp"
                                     >
-                                        "✏️"
+                                        {icon("edit")}
+                                        "Edit"
                                     </button>
                                     <button
-                                        class="btn btn-danger text-sm"
+                                        class="btn btn-secondary text-sm"
+                                        on:click={
+                                            let camp = camp.clone();
+                                            move |_| handle_copy_click(camp.clone())
+                                        }
+                                        disabled=move || loading.get()
+                                        aria-label="Copy camp"
+                                    >
+                                        {icon("copy")}
+                                        "Copy"
+                                    </button>
+                                    <button
+                                        class="btn btn-danger col-span-2 text-sm"
                                         on:click={
                                             let id = camp.id;
                                             move |_| handle_delete_click(id)
@@ -465,7 +616,8 @@ pub fn CampManager() -> impl IntoView {
                                         disabled=move || loading.get()
                                         aria-label="Delete camp"
                                     >
-                                        "🗑️"
+                                        {icon("trash")}
+                                        "Delete"
                                     </button>
                                 </div>
                             </div>

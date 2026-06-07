@@ -23,7 +23,7 @@ impl ToastVariant {
             ToastVariant::Success => "✓",
             ToastVariant::Error => "✕",
             ToastVariant::Info => "ℹ",
-            ToastVariant::Warning => "⚠",
+            ToastVariant::Warning => "!",
         }
     }
 

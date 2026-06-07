@@ -1,7 +1,16 @@
 use leptos::prelude::*;
 use leptos_router::hooks::{use_location, use_navigate};
 
+use crate::components::icon;
 use crate::server_functions::auth::logout;
+
+fn nav_link_class(active: bool) -> &'static str {
+    if active {
+        "inline-flex items-center gap-2 rounded-md bg-slate-900 px-3 py-2 text-sm font-semibold text-white no-underline"
+    } else {
+        "inline-flex items-center gap-2 rounded-md px-3 py-2 text-sm font-semibold text-slate-600 no-underline hover:bg-slate-100 hover:text-slate-950"
+    }
+}
 
 #[component]
 pub fn NavBar() -> impl IntoView {
@@ -24,82 +33,62 @@ pub fn NavBar() -> impl IntoView {
     };
 
     view! {
-        <nav class="bg-gradient-to-r from-indigo-600 via-indigo-700 to-purple-700 text-white shadow-2xl mb-12">
-            <div class="container mx-auto">
-                <div class="flex items-center justify-between">
-                    <div class="flex flex-col py-4">
-                        <a href="/" class="text-2xl font-bold hover:underline transition-all duration-200 flex items-center gap-3 no-underline text-white">
-                            <span class="text-3xl">"🏕️"</span>
-                            <span>"Boy Scout Meal Planner"</span>
+        <nav class="mb-6 border-b border-slate-200 bg-white">
+            <div class="container mx-auto px-4 py-3 md:px-6 lg:px-8">
+                <div class="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
+                    <div>
+                        <a href="/" class="inline-flex items-center gap-3 text-lg font-semibold tracking-normal text-slate-950 no-underline hover:text-sky-800">
+                            <span class="app-mark" aria-hidden="true">
+                                {icon("kitchen")}
+                            </span>
+                            "Boy Scout Meal Planner"
                         </a>
-                        <span class="text-xs text-blue-100 ml-12">"Build: 2026-01-19 01:15:00 UTC - v1.0.0-WORKING!"</span>
                     </div>
-                    <div class="flex gap-1" role="navigation" aria-label="Main navigation">
+                    <div class="flex flex-wrap gap-1" role="navigation" aria-label="Main navigation">
                         <a
                             href="/camps"
-                            class=move || if is_active("/camps") {
-                                "px-5 py-3 rounded-xl bg-white/20 backdrop-blur-sm transition-all duration-300 font-semibold text-white no-underline shadow-lg"
-                            } else {
-                                "px-5 py-3 rounded-xl hover:bg-white/10 backdrop-blur-sm transition-all duration-300 font-semibold text-white no-underline hover:shadow-md"
-                            }
+                            class=move || nav_link_class(is_active("/camps"))
                             aria-current=move || if is_active("/camps") { Some("page") } else { None }
                         >
-                            <span class="mr-2">"🏕️"</span>
+                            <span class="nav-icon" aria-hidden="true">{icon("camp")}</span>
                             "Camps"
                         </a>
                         <a
                             href="/planner"
-                            class=move || if is_active("/planner") {
-                                "px-5 py-3 rounded-xl bg-white/20 backdrop-blur-sm transition-all duration-300 font-semibold text-white no-underline shadow-lg"
-                            } else {
-                                "px-5 py-3 rounded-xl hover:bg-white/10 backdrop-blur-sm transition-all duration-300 font-semibold text-white no-underline hover:shadow-md"
-                            }
+                            class=move || nav_link_class(is_active("/planner"))
                             aria-current=move || if is_active("/planner") { Some("page") } else { None }
                         >
-                            <span class="mr-2">"📅"</span>
+                            <span class="nav-icon" aria-hidden="true">{icon("planner")}</span>
                             "Planner"
                         </a>
                         <a
                             href="/recipes"
-                            class=move || if is_active("/recipes") {
-                                "px-5 py-3 rounded-xl bg-white/20 backdrop-blur-sm transition-all duration-300 font-semibold text-white no-underline"
-                            } else {
-                                "px-5 py-3 rounded-xl hover:bg-white/10 backdrop-blur-sm transition-all duration-300 font-semibold text-white no-underline"
-                            }
+                            class=move || nav_link_class(is_active("/recipes"))
                             aria-current=move || if is_active("/recipes") { Some("page") } else { None }
                         >
-                            <span class="mr-2">"🍳"</span>
+                            <span class="nav-icon" aria-hidden="true">{icon("recipes")}</span>
                             "Recipes"
                         </a>
                         <a
                             href="/ingredients"
-                            class=move || if is_active("/ingredients") {
-                                "px-5 py-3 rounded-xl bg-white/20 backdrop-blur-sm transition-all duration-300 font-semibold text-white no-underline"
-                            } else {
-                                "px-5 py-3 rounded-xl hover:bg-white/10 backdrop-blur-sm transition-all duration-300 font-semibold text-white no-underline"
-                            }
+                            class=move || nav_link_class(is_active("/ingredients"))
                             aria-current=move || if is_active("/ingredients") { Some("page") } else { None }
                         >
-                            <span class="mr-2">"🥕"</span>
+                            <span class="nav-icon" aria-hidden="true">{icon("ingredients")}</span>
                             "Ingredients"
                         </a>
                         <a
                             href="/reports"
-                            class=move || if is_active("/reports") {
-                                "px-5 py-3 rounded-xl bg-white/20 backdrop-blur-sm transition-all duration-300 font-semibold text-white no-underline"
-                            } else {
-                                "px-5 py-3 rounded-xl hover:bg-white/10 backdrop-blur-sm transition-all duration-300 font-semibold text-white no-underline"
-                            }
+                            class=move || nav_link_class(is_active("/reports"))
                             aria-current=move || if is_active("/reports") { Some("page") } else { None }
                         >
-                            <span class="mr-2">"📊"</span>
+                            <span class="nav-icon" aria-hidden="true">{icon("reports")}</span>
                             "Reports"
                         </a>
                         <button
-                            class="px-5 py-3 rounded-xl hover:bg-white/10 backdrop-blur-sm transition-all duration-300 font-semibold text-white"
+                            class="rounded-md px-3 py-2 text-sm font-semibold text-slate-500 hover:bg-slate-100 hover:text-slate-950"
                             on:click=move |_| { logout_action.dispatch(()); }
                         >
-                            <span class="mr-2">"🔒"</span>
                             "Logout"
                         </button>
                     </div>

@@ -1,4 +1,4 @@
-use crate::components::{ConfirmModal, SearchableSelect, toast_error, toast_success};
+use crate::components::{ConfirmModal, SearchableSelect, icon, toast_error, toast_success};
 use crate::models::{Camp, MealType, PlannedMealWithDetails, Recipe};
 use crate::server_functions::camps::{get_camp, get_camps};
 use crate::server_functions::meal_plans::{
@@ -415,7 +415,7 @@ pub fn MealPlanner() -> impl IntoView {
     view! {
         <div class="space-y-6">
             // Camp Selector
-            <div class="card">
+            <div class="card panel-accent panel-accent-rose p-4">
                 <SearchableSelect
                     options=camps.into()
                     selected_value=Signal::derive(move || camp_id.get())
@@ -435,18 +435,28 @@ pub fn MealPlanner() -> impl IntoView {
                 />
             </div>
 
-            <div class="flex justify-between items-center flex-wrap gap-4">
-                <div>
-                    <h2 class="text-2xl font-bold">"Meal Planner"</h2>
-                    {move || camp.get().map(|c| view! {
-                        <p class="text-slate-600 mt-1">
-                            {c.name.clone()} " ("
-                            {c.start_date.format("%Y-%m-%d").to_string()}
-                            " to "
-                            {c.end_date.format("%Y-%m-%d").to_string()}
-                            ")"
-                        </p>
-                    })}
+            <div class="page-header">
+                <div class="page-heading">
+                    <span class="icon-badge icon-badge-rose" aria-hidden="true">{icon("planner")}</span>
+                    <div>
+                        <p class="page-kicker">"Schedule"</p>
+                        <h2 class="page-title">"Meal Planner"</h2>
+                        {move || camp.get().map(|c| view! {
+                            <p class="page-subtitle">
+                                {c.name.clone()} " ("
+                                {c.start_date.format("%Y-%m-%d").to_string()}
+                                " to "
+                                {c.end_date.format("%Y-%m-%d").to_string()}
+                                ")"
+                            </p>
+                        })}
+                        <div class="mt-3">
+                            {move || camp.get().map(|c| {
+                                let days = (c.end_date - c.start_date).num_days() + 1;
+                                view! { <span class="status-chip status-chip-rose">{format!("{} camp days", days)}</span> }
+                            })}
+                        </div>
+                    </div>
                 </div>
                 <button
                     type="button"
@@ -457,37 +467,40 @@ pub fn MealPlanner() -> impl IntoView {
                     }
                     disabled=move || loading.get() || camp_id.get() == 0
                 >
-                    "+ Add Meal"
+                    {icon("plus")}
+                    "Add meal"
                 </button>
             </div>
 
             // View Mode Selector
-            <div class="card">
+            <div class="card p-4">
                 <div class="flex items-center gap-2 flex-wrap">
                     <span class="text-sm font-medium text-slate-700">"View:"</span>
                     <div class="flex gap-2">
                         <button
                             type="button"
                             class=move || if view_mode.get() == ViewMode::SingleDay {
-                                "px-4 py-2 rounded-lg font-medium bg-indigo-600 text-white shadow-md"
+                                "inline-flex items-center gap-2 rounded-md bg-slate-900 px-4 py-2 text-sm font-semibold text-white"
                             } else {
-                                "px-4 py-2 rounded-lg font-medium bg-slate-200 text-slate-700 hover:bg-slate-300"
+                                "inline-flex items-center gap-2 rounded-md bg-slate-100 px-4 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-200"
                             }
                             on:click=move |_| set_view_mode.set(ViewMode::SingleDay)
                             disabled=move || loading.get() || camp_id.get() == 0
                         >
+                            {icon("calendar")}
                             "Single Day"
                         </button>
                         <button
                             type="button"
                             class=move || if view_mode.get() == ViewMode::AllDays {
-                                "px-4 py-2 rounded-lg font-medium bg-indigo-600 text-white shadow-md"
+                                "inline-flex items-center gap-2 rounded-md bg-slate-900 px-4 py-2 text-sm font-semibold text-white"
                             } else {
-                                "px-4 py-2 rounded-lg font-medium bg-slate-200 text-slate-700 hover:bg-slate-300"
+                                "inline-flex items-center gap-2 rounded-md bg-slate-100 px-4 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-200"
                             }
                             on:click=move |_| set_view_mode.set(ViewMode::AllDays)
                             disabled=move || loading.get() || camp_id.get() == 0
                         >
+                            {icon("planner")}
                             "All Days"
                         </button>
                     </div>
@@ -498,17 +511,18 @@ pub fn MealPlanner() -> impl IntoView {
             {move || if view_mode.get() == ViewMode::SingleDay {
                 Some(view! {
                     <div class="card">
-                        <div class="flex items-center justify-between gap-4">
+                        <div class="flex flex-col items-stretch justify-between gap-4 md:flex-row md:items-center">
                             <button
                                 type="button"
                                 class="btn btn-secondary"
                                 on:click=go_to_previous_day
                                 disabled=move || !can_go_previous() || loading.get()
                             >
-                                "← Previous Day"
+                                {icon("calendar")}
+                                "Previous day"
                             </button>
 
-                            <div class="flex flex-col items-center gap-2">
+                            <div class="flex flex-col items-center gap-2 md:min-w-64">
                                 <input
                                     type="date"
                                     class="form-input text-center"
@@ -518,7 +532,7 @@ pub fn MealPlanner() -> impl IntoView {
                                     prop:max=move || camp.get().map(|c| c.end_date.format("%Y-%m-%d").to_string())
                                 />
                                 {move || get_camp_day_info().map(|info| view! {
-                                    <span class="text-sm text-blue-600 font-medium">{info}</span>
+                                    <span class="text-sm font-medium text-slate-600">{info}</span>
                                 })}
                             </div>
 
@@ -528,7 +542,8 @@ pub fn MealPlanner() -> impl IntoView {
                                 on:click=go_to_next_day
                                 disabled=move || !can_go_next() || loading.get()
                             >
-                                "Next Day →"
+                                {icon("calendar")}
+                                "Next day"
                             </button>
                         </div>
                     </div>
@@ -541,10 +556,10 @@ pub fn MealPlanner() -> impl IntoView {
             {move || if camp_id.get() == 0 {
                 let nav = nav_for_empty_state.clone();
                 Some(view! {
-                    <div class="card text-center py-16 bg-gradient-to-br from-slate-50 to-blue-50 border-2 border-dashed border-slate-300">
-                        <div class="text-7xl mb-6">"📅"</div>
-                        <h3 class="text-2xl font-bold text-slate-800 mb-3">"No Camp Selected"</h3>
-                        <p class="text-lg text-slate-600 mb-8">
+                    <div class="empty-state">
+                        <span class="icon-badge icon-badge-rose mx-auto mb-4" aria-hidden="true">{icon("planner")}</span>
+                        <h3 class="text-xl font-semibold text-slate-950 mb-2">"No camp selected"</h3>
+                        <p class="text-sm text-slate-600 mb-6">
                             "Please select a camp to start planning meals"
                         </p>
                         <button
@@ -560,15 +575,18 @@ pub fn MealPlanner() -> impl IntoView {
             }}
 
             {move || error.get().map(|err| view! {
-                <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded">
+                <div class="alert-error">
                     {err}
                 </div>
             })}
 
             {move || show_form.get().then(|| {
                 view! {
-                <div class="card">
-                    <h3 class="text-xl font-semibold mb-4">
+                <div class="card panel-accent panel-accent-rose">
+                    <h3 class="section-title mb-4 flex items-center gap-2">
+                        <span class="inline-icon text-rose-700" aria-hidden="true">
+                            {move || if editing_meal_id.get().is_some() { icon("edit") } else { icon("plus") }}
+                        </span>
                         {move || if editing_meal_id.get().is_some() {
                             "Edit Meal"
                         } else {
@@ -665,6 +683,7 @@ pub fn MealPlanner() -> impl IntoView {
                                 class="btn btn-primary"
                                 disabled=move || loading.get()
                             >
+                                {icon("planner")}
                                 {move || if loading.get() {
                                     "Saving..."
                                 } else if editing_meal_id.get().is_some() {
@@ -683,12 +702,18 @@ pub fn MealPlanner() -> impl IntoView {
             })}
 
             {move || if loading.get() && !show_form.get() {
-                view! { <div class="text-center py-8">"Loading..."</div> }.into_any()
+                view! {
+                    <div class="card text-center py-8">
+                        <div class="spinner mx-auto mb-3"></div>
+                        <p class="text-sm text-slate-600">"Loading meals..."</p>
+                    </div>
+                }.into_any()
             } else if view_mode.get() == ViewMode::SingleDay {
                 // Single day view
                 if planned_meals.get().is_empty() {
                     view! {
                         <div class="card text-center text-slate-600">
+                            <span class="icon-badge icon-badge-rose mx-auto mb-4" aria-hidden="true">{icon("planner")}</span>
                             "No meals planned for this date. Click 'Add Meal' to plan one."
                         </div>
                     }.into_any()
@@ -700,17 +725,18 @@ pub fn MealPlanner() -> impl IntoView {
                                 key=|meal| meal.planned_meal.id
                                 let:meal
                             >
-                                <div class="card">
+                                <div class="record-card record-card-rose">
                                     <div class="flex justify-between items-start gap-4">
                                         <div class="flex-1 min-w-0">
                                             <div class="flex items-center gap-2">
-                                                <span class="text-sm font-semibold text-blue-600">
+                                                <span class="status-chip status-chip-rose">
                                                     {format_meal_type(&meal.planned_meal.meal_type)}
                                                 </span>
                                             </div>
                                             <h3 class="text-lg font-semibold mt-1">{meal.recipe_name.clone()}</h3>
                                             {meal.attendance.clone().map(|att| view! {
-                                                <p class="text-sm text-slate-500 mt-2">
+                                                <p class="mt-2 flex flex-wrap items-center gap-2 text-sm text-slate-500">
+                                                    <span class="inline-icon text-rose-700" aria-hidden="true">{icon("users")}</span>
                                                     "Attendance: "
                                                     {att.children} " children, "
                                                     {att.teens} " teens, "
@@ -727,7 +753,8 @@ pub fn MealPlanner() -> impl IntoView {
                                                 }
                                                 disabled=move || loading.get()
                                             >
-                                                "✏️ Edit"
+                                                {icon("edit")}
+                                                "Edit"
                                             </button>
                                             <button
                                                 class="btn btn-danger text-sm whitespace-nowrap"
@@ -737,7 +764,8 @@ pub fn MealPlanner() -> impl IntoView {
                                                 }
                                                 disabled=move || loading.get()
                                             >
-                                                "🗑️ Delete"
+                                                {icon("trash")}
+                                                "Delete"
                                             </button>
                                         </div>
                                     </div>
@@ -752,6 +780,7 @@ pub fn MealPlanner() -> impl IntoView {
                 if meals_map.is_empty() {
                     view! {
                         <div class="card text-center text-slate-600">
+                            <span class="icon-badge icon-badge-rose mx-auto mb-4" aria-hidden="true">{icon("planner")}</span>
                             "No meals planned yet. Select 'Single Day' view to add meals."
                         </div>
                     }.into_any()
@@ -790,12 +819,15 @@ pub fn MealPlanner() -> impl IntoView {
                                     };
 
                                     view! {
-                                        <div class="card border-2 border-indigo-200">
+                                        <div class="card panel-accent panel-accent-rose">
                                             <div class="flex justify-between items-center mb-4">
                                                 <div>
-                                                    <h3 class="text-xl font-bold text-indigo-700">{date_str}</h3>
+                                                    <h3 class="flex items-center gap-2 text-xl font-semibold text-slate-950">
+                                                        <span class="inline-icon text-rose-700" aria-hidden="true">{icon("calendar")}</span>
+                                                        {date_str}
+                                                    </h3>
                                                     {day_info.map(|info| view! {
-                                                        <span class="text-sm text-indigo-600 font-medium">{info}</span>
+                                                        <span class="text-sm font-medium text-slate-500">{info}</span>
                                                     })}
                                                 </div>
                                             </div>
@@ -815,7 +847,7 @@ pub fn MealPlanner() -> impl IntoView {
                                                                 <div class="flex justify-between items-start gap-3">
                                                                     <div class="flex-1 min-w-0">
                                                                         <div class="flex items-center gap-2">
-                                                                            <span class="text-sm font-semibold text-blue-600">
+                                                                            <span class="status-chip status-chip-rose">
                                                                                 {format_meal_type(&meal.planned_meal.meal_type)}
                                                                             </span>
                                                                         </div>
@@ -842,7 +874,8 @@ pub fn MealPlanner() -> impl IntoView {
                                                                             }
                                                                             disabled=move || loading.get()
                                                                         >
-                                                                            "✏️ Edit"
+                                                                            {icon("edit")}
+                                                                            "Edit"
                                                                         </button>
                                                                         <button
                                                                             class="btn btn-danger text-xs px-3 py-1 whitespace-nowrap"
@@ -852,7 +885,8 @@ pub fn MealPlanner() -> impl IntoView {
                                                                             }
                                                                             disabled=move || loading.get()
                                                                         >
-                                                                            "🗑️ Delete"
+                                                                            {icon("trash")}
+                                                                            "Delete"
                                                                         </button>
                                                                     </div>
                                                                 </div>

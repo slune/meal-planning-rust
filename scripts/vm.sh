@@ -14,6 +14,9 @@ NC='\033[0m'
 info() { echo -e "${GREEN}[INFO]${NC} $1"; }
 warn() { echo -e "${YELLOW}[WARN]${NC} $1"; }
 
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+[[ -f "$SCRIPT_DIR/../.env" ]] && set -a && source "$SCRIPT_DIR/../.env" && set +a
+
 PROJECT_ID=$(gcloud projects list --filter="name='meal-planning'" --format="value(projectId)" 2>/dev/null | head -1)
 if [[ -z "$PROJECT_ID" ]]; then
     warn "Could not find GCP project 'meal-planning'."

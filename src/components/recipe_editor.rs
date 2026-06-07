@@ -1,4 +1,4 @@
-use crate::components::{ConfirmModal, SearchableSelect, toast_error, toast_success};
+use crate::components::{ConfirmModal, SearchableSelect, icon, toast_error, toast_success};
 use crate::models::{CreateRecipeIngredient, Ingredient, Recipe};
 use crate::server_functions::ingredients::get_ingredients;
 use crate::server_functions::recipes::{
@@ -277,11 +277,18 @@ pub fn RecipeEditor() -> impl IntoView {
 
     view! {
         <div class="space-y-6">
-            <div class="flex justify-between items-center">
-                <h2 class="text-3xl font-bold text-gradient flex items-center gap-3">
-                    <span class="text-4xl">"🍳"</span>
-                    "Recipes"
-                </h2>
+            <div class="page-header">
+                <div class="page-heading">
+                    <span class="icon-badge icon-badge-amber" aria-hidden="true">{icon("recipes")}</span>
+                    <div>
+                        <p class="page-kicker">"Library"</p>
+                        <h2 class="page-title">"Recipes"</h2>
+                        <p class="page-subtitle">"Maintain recipe servings, preparation notes, ingredients, and attendance multipliers."</p>
+                        <div class="mt-3">
+                            <span class="status-chip status-chip-amber">{move || format!("{} recipes", recipes.get().len())}</span>
+                        </div>
+                    </div>
+                </div>
                 <button
                     type="button"
                     class="btn btn-primary"
@@ -291,23 +298,23 @@ pub fn RecipeEditor() -> impl IntoView {
                     }
                     disabled=move || loading.get()
                 >
-                    <span class="mr-1">"+"</span>
-                    " Add Recipe"
+                    {icon("plus")}
+                    "Add recipe"
                 </button>
             </div>
 
             {move || error.get().map(|err| view! {
                 <div class="alert-error">
-                    <span class="font-semibold mr-2">"⚠️ Error:"</span>
+                    <span class="font-semibold mr-2">"Error:"</span>
                     {err}
                 </div>
             })}
 
             // Search bar
             {move || (!show_form.get() && !recipes.get().is_empty()).then(|| view! {
-                <div class="card bg-gradient-to-r from-indigo-50 to-purple-50 border-indigo-200">
+                <div class="card p-4">
                     <div class="flex items-center gap-3">
-                        <span class="text-2xl">"🔍"</span>
+                        <span class="inline-icon text-amber-700" aria-hidden="true">{icon("search")}</span>
                         <input
                             type="text"
                             class="form-input flex-1"
@@ -320,9 +327,11 @@ pub fn RecipeEditor() -> impl IntoView {
             })}
 
             {move || show_form.get().then(|| view! {
-                <div class="card border-2 border-blue-200">
-                    <h3 class="text-2xl font-bold mb-6 text-gradient flex items-center gap-2">
-                        <span>{move || if editing_recipe_id.get().is_some() { "✏️" } else { "✨" }}</span>
+                <div class="card panel-accent panel-accent-amber">
+                    <h3 class="section-title mb-6 flex items-center gap-2">
+                        <span class="inline-icon text-amber-700" aria-hidden="true">
+                            {move || if editing_recipe_id.get().is_some() { icon("edit") } else { icon("plus") }}
+                        </span>
                         {move || if editing_recipe_id.get().is_some() { "Edit Recipe" } else { "New Recipe" }}
                     </h3>
                     <form on:submit=handle_submit class="space-y-4">
@@ -365,7 +374,7 @@ pub fn RecipeEditor() -> impl IntoView {
                         <div class="border-t-2 border-slate-200 pt-6">
                             <div class="flex justify-between items-center mb-4">
                                 <h4 class="text-lg font-bold text-slate-800 flex items-center gap-2">
-                                    <span>"🥕"</span>
+                                    <span class="inline-icon text-emerald-700" aria-hidden="true">{icon("ingredients")}</span>
                                     "Ingredients"
                                     <span class="text-red-500">"*"</span>
                                 </h4>
@@ -374,13 +383,14 @@ pub fn RecipeEditor() -> impl IntoView {
                                     class="btn btn-secondary text-sm"
                                     on:click=add_ingredient
                                 >
-                                    <span class="mr-1">"+"</span>
-                                    " Add Ingredient"
+                                    {icon("plus")}
+                                    "Add ingredient"
                                 </button>
                             </div>
 
+                            <div class="overflow-x-auto">
                             {move || (!recipe_ingredients.get().is_empty()).then(|| view! {
-                                <div class="grid gap-2 px-2 mb-1 text-xs font-semibold text-slate-500 uppercase tracking-wide"
+                                <div class="grid min-w-[42rem] gap-2 px-2 mb-1 text-xs font-semibold text-slate-500 uppercase tracking-wide"
                                      style="grid-template-columns: minmax(0,3fr) 5rem 4.5rem 4rem 4rem 4rem 2rem">
                                     <span>"Ingredient"</span>
                                     <span>"Qty"</span>
@@ -396,7 +406,7 @@ pub fn RecipeEditor() -> impl IntoView {
                                     recipe_ingredients.get().into_iter().enumerate().map(|(idx, ing)| {
                                         let ingredients_clone = ingredients;
                                         view! {
-                                            <div class="grid gap-2 items-center bg-slate-50 rounded-lg px-2 py-1.5"
+                                            <div class="grid min-w-[42rem] gap-2 items-center bg-slate-50 rounded-md px-2 py-1.5"
                                                  style="grid-template-columns: minmax(0,3fr) 5rem 4.5rem 4rem 4rem 4rem 2rem">
                                                 <SearchableSelect
                                                     options=ingredients.into()
@@ -503,10 +513,12 @@ pub fn RecipeEditor() -> impl IntoView {
                                     }).collect_view()
                                 }}
                             </div>
+                            </div>
                         </div>
 
                         <div class="flex gap-2">
                             <button type="submit" class="btn btn-primary" disabled=move || loading.get()>
+                                {icon("recipes")}
                                 {move || {
                                     if loading.get() {
                                         "Saving..."
@@ -534,15 +546,15 @@ pub fn RecipeEditor() -> impl IntoView {
                 }.into_any()
             } else if recipes.get().is_empty() {
                 view! {
-                    <div class="card text-center py-16 bg-gradient-to-br from-slate-50 to-blue-50 border-2 border-dashed border-slate-300">
-                        <div class="text-7xl mb-6">"🍽️"</div>
-                        <h3 class="text-2xl font-bold text-slate-800 mb-3">"No recipes yet"</h3>
-                        <p class="text-lg text-slate-600 mb-8">"Get started by creating your first recipe"</p>
+                    <div class="empty-state">
+                        <span class="icon-badge icon-badge-amber mx-auto mb-4" aria-hidden="true">{icon("recipes")}</span>
+                        <h3 class="text-xl font-semibold text-slate-950 mb-2">"No recipes yet"</h3>
+                        <p class="text-sm text-slate-600">"Create recipes after ingredients are available."</p>
                     </div>
                 }.into_any()
             } else {
                 view! {
-                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                         <For
                             each=move || {
                                 let query = search_query.get().to_lowercase();
@@ -554,9 +566,9 @@ pub fn RecipeEditor() -> impl IntoView {
                             key=|recipe| recipe.id
                             let:recipe
                         >
-                            <div class="card group">
+                            <div class="record-card record-card-amber">
                                 <div class="flex items-start justify-between mb-3">
-                                    <div class="text-3xl group-hover:scale-110 transition-transform duration-200">"🍽️"</div>
+                                    <span class="icon-badge icon-badge-amber" aria-hidden="true">{icon("recipes")}</span>
                                     <span class="badge badge-primary">{recipe.base_servings} " servings"</span>
                                 </div>
                                 <h3 class="text-xl font-bold text-slate-800 mb-4">{recipe.name.clone()}</h3>
@@ -569,7 +581,8 @@ pub fn RecipeEditor() -> impl IntoView {
                                         }
                                         disabled=move || loading.get()
                                     >
-                                        "✏️ Edit"
+                                        {icon("edit")}
+                                        "Edit"
                                     </button>
                                     <button
                                         class="btn btn-danger text-sm"
@@ -579,7 +592,8 @@ pub fn RecipeEditor() -> impl IntoView {
                                         }
                                         disabled=move || loading.get()
                                     >
-                                        "🗑️"
+                                        {icon("trash")}
+                                        "Delete"
                                     </button>
                                 </div>
                             </div>

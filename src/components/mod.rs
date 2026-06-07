@@ -1,5 +1,6 @@
 pub mod camp_manager;
 pub mod category_manager;
+pub mod icons;
 pub mod ingredient_manager;
 pub mod meal_planner;
 pub mod nav;
@@ -10,6 +11,7 @@ pub mod ui;
 
 pub use camp_manager::*;
 pub use category_manager::*;
+pub use icons::*;
 pub use ingredient_manager::*;
 pub use meal_planner::*;
 pub use nav::*;
