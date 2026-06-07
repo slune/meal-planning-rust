@@ -5,7 +5,7 @@ pub async fn get_categories(pool: &SqlitePool) -> Result<Vec<Category>, sqlx::Er
     sqlx::query_as::<_, Category>(
         "SELECT id, name, sort_order, created_at, updated_at 
          FROM categories 
-         ORDER BY sort_order, name"
+         ORDER BY sort_order, name",
     )
     .fetch_all(pool)
     .await
@@ -15,7 +15,7 @@ pub async fn get_category(pool: &SqlitePool, id: i64) -> Result<Category, sqlx::
     sqlx::query_as::<_, Category>(
         "SELECT id, name, sort_order, created_at, updated_at 
          FROM categories 
-         WHERE id = ?"
+         WHERE id = ?",
     )
     .bind(id)
     .fetch_one(pool)
@@ -28,7 +28,7 @@ pub async fn create_category(
 ) -> Result<Category, sqlx::Error> {
     let result = sqlx::query(
         "INSERT INTO categories (name, sort_order) 
-         VALUES (?, ?)"
+         VALUES (?, ?)",
     )
     .bind(&category.name)
     .bind(category.sort_order)
@@ -48,7 +48,7 @@ pub async fn update_category(
     sqlx::query(
         "UPDATE categories 
          SET name = ?, sort_order = ?, updated_at = CURRENT_TIMESTAMP 
-         WHERE id = ?"
+         WHERE id = ?",
     )
     .bind(category.name.unwrap_or(existing.name))
     .bind(category.sort_order.unwrap_or(existing.sort_order))
@@ -61,17 +61,16 @@ pub async fn update_category(
 
 pub async fn delete_category(pool: &SqlitePool, id: i64) -> Result<(), sqlx::Error> {
     // Check if any ingredients are using this category
-    let count: (i64,) = sqlx::query_as(
-        "SELECT COUNT(*) FROM ingredients WHERE category_id = ?"
-    )
-    .bind(id)
-    .fetch_one(pool)
-    .await?;
+    let count: (i64,) = sqlx::query_as("SELECT COUNT(*) FROM ingredients WHERE category_id = ?")
+        .bind(id)
+        .fetch_one(pool)
+        .await?;
 
     if count.0 > 0 {
-        return Err(sqlx::Error::Protocol(
-            format!("Cannot delete category: {} ingredient(s) are still using this category. Please reassign or delete those ingredients first.", count.0)
-        ));
+        return Err(sqlx::Error::Protocol(format!(
+            "Cannot delete category: {} ingredient(s) are still using this category. Please reassign or delete those ingredients first.",
+            count.0
+        )));
     }
 
     sqlx::query("DELETE FROM categories WHERE id = ?")

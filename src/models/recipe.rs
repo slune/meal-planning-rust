@@ -1,5 +1,5 @@
-use serde::{Deserialize, Serialize};
 use chrono::{DateTime, Utc};
+use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq)]
 #[cfg_attr(feature = "ssr", derive(sqlx::FromRow))]
@@ -68,7 +68,7 @@ pub struct CreateRecipeIngredient {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct UpdateRecipe {
     pub name: Option<String>,
-    pub instructions: Option<String>,
+    pub instructions: Option<Option<String>>,
     pub base_servings: Option<i32>,
     pub ingredients: Option<Vec<CreateRecipeIngredient>>,
 }

@@ -1,4 +1,14 @@
--- Remove UNIQUE(meal_plan_id, meal_type) constraint to allow multiple meals of the same type per day
+-- Remove UNIQUE(meal_plan_id, meal_type) constraint to allow multiple meals of the same type per day.
+--
+-- SQLite cannot drop a table constraint in place, so this rebuilds the table.
+-- Foreign keys must be disabled for the rebuild; otherwise DROP TABLE planned_meals
+-- cascades into meal_attendance and deletes all attendance overrides.
+PRAGMA foreign_keys = OFF;
+
+BEGIN TRANSACTION;
+
+DROP TABLE IF EXISTS planned_meals_new;
+
 CREATE TABLE planned_meals_new (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     meal_plan_id INTEGER NOT NULL,
@@ -17,3 +27,7 @@ ALTER TABLE planned_meals_new RENAME TO planned_meals;
 
 CREATE INDEX IF NOT EXISTS idx_planned_meals_plan ON planned_meals(meal_plan_id);
 CREATE INDEX IF NOT EXISTS idx_planned_meals_recipe ON planned_meals(recipe_id);
+
+COMMIT;
+
+PRAGMA foreign_keys = ON;

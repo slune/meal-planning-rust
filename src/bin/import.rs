@@ -108,7 +108,9 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         };
 
         ingredient_lookup.insert((*key).clone(), id);
-        ingredient_lookup.entry(ing.name.to_lowercase()).or_insert(id);
+        ingredient_lookup
+            .entry(ing.name.to_lowercase())
+            .or_insert(id);
     }
 
     // ----- Import recipes -----
@@ -206,7 +208,12 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
             let teen_per = entry.pubos_qty / porci + entry.general_qty / porci;
 
             let (base_quantity, child_mult, teen_mult, adult_mult) = if adult_per > 0.0 {
-                (adult_per, child_per / adult_per, teen_per / adult_per, 1.0f64)
+                (
+                    adult_per,
+                    child_per / adult_per,
+                    teen_per / adult_per,
+                    1.0f64,
+                )
             } else if child_per > 0.0 {
                 let teen_m = teen_per / child_per;
                 (child_per, 1.0f64, teen_m, 0.0f64)

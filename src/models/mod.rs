@@ -1,18 +1,19 @@
+pub mod camp;
 pub mod category;
 pub mod ingredient;
-pub mod recipe;
-pub mod camp;
 pub mod meal_plan;
+pub mod recipe;
 pub mod reports;
 
+pub use camp::*;
 pub use category::*;
 pub use ingredient::*;
-pub use recipe::*;
-pub use camp::*;
 pub use meal_plan::*;
+pub use recipe::*;
 pub use reports::*;
 
 use serde::{Deserialize, Serialize};
+use std::str::FromStr;
 
 #[derive(Debug, Clone, Copy, Serialize, Deserialize, PartialEq, Eq)]
 #[serde(rename_all = "snake_case")]
@@ -35,17 +36,6 @@ impl MealType {
         }
     }
 
-    pub fn from_str(s: &str) -> Option<Self> {
-        match s {
-            "breakfast" => Some(MealType::Breakfast),
-            "morning_snack" => Some(MealType::MorningSnack),
-            "lunch" => Some(MealType::Lunch),
-            "afternoon_snack" => Some(MealType::AfternoonSnack),
-            "dinner" => Some(MealType::Dinner),
-            _ => None,
-        }
-    }
-
     pub fn sort_order(&self) -> u8 {
         match self {
             MealType::Breakfast => 1,
@@ -53,6 +43,21 @@ impl MealType {
             MealType::Lunch => 3,
             MealType::AfternoonSnack => 4,
             MealType::Dinner => 5,
+        }
+    }
+}
+
+impl FromStr for MealType {
+    type Err = ();
+
+    fn from_str(s: &str) -> Result<Self, Self::Err> {
+        match s {
+            "breakfast" => Ok(MealType::Breakfast),
+            "morning_snack" => Ok(MealType::MorningSnack),
+            "lunch" => Ok(MealType::Lunch),
+            "afternoon_snack" => Ok(MealType::AfternoonSnack),
+            "dinner" => Ok(MealType::Dinner),
+            _ => Err(()),
         }
     }
 }

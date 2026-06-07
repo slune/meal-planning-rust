@@ -26,7 +26,7 @@ async fn main() {
     tracing::info!("Database initialized successfully");
 
     // Setting get_configuration(Some("Cargo.toml")) means we'll be reading from Cargo.toml
-    let conf = leptos::prelude::get_configuration(Some("Cargo.toml")).unwrap();
+    let conf = leptos::prelude::get_configuration(None).unwrap();
     let leptos_options = conf.leptos_options;
     let addr = leptos_options.site_addr;
     let routes = generate_route_list(App);

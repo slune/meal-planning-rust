@@ -1,5 +1,5 @@
-use serde::{Deserialize, Serialize};
 use chrono::{DateTime, NaiveDate, Utc};
+use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq)]
 #[cfg_attr(feature = "ssr", derive(sqlx::FromRow))]
@@ -37,5 +37,5 @@ pub struct UpdateCamp {
     pub default_children: Option<i32>,
     pub default_teens: Option<i32>,
     pub default_adults: Option<i32>,
-    pub notes: Option<String>,
+    pub notes: Option<Option<String>>,
 }

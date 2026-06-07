@@ -5,8 +5,8 @@ use leptos_router::{
     path,
 };
 
-use crate::components::nav::NavBar;
 use crate::components::ToastProvider;
+use crate::components::nav::NavBar;
 use crate::pages::*;
 
 #[component]

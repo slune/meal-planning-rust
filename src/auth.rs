@@ -18,10 +18,7 @@ pub async fn require_auth(session: Session, request: Request, next: Next) -> Res
         return next.run(request).await;
     }
 
-    let authenticated = session
-        .get::<bool>("authenticated")
-        .await
-        .unwrap_or(None);
+    let authenticated = session.get::<bool>("authenticated").await.unwrap_or(None);
 
     if authenticated == Some(true) {
         next.run(request).await

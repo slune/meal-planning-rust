@@ -1,5 +1,5 @@
-use leptos::prelude::*;
 use leptos::ev::MouseEvent;
+use leptos::prelude::*;
 
 #[derive(Clone, Copy, Debug, PartialEq)]
 pub enum ButtonVariant {
@@ -76,14 +76,7 @@ pub fn Button(
         }
     };
 
-    let button_classes = move || {
-        format!(
-            "btn {} {} {}",
-            variant.class(),
-            size.class(),
-            class
-        )
-    };
+    let button_classes = move || format!("btn {} {} {}", variant.class(), size.class(), class);
 
     view! {
         <button

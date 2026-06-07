@@ -1,7 +1,9 @@
+use crate::components::{ConfirmModal, SearchableSelect, toast_error, toast_success};
 use crate::models::{CreateRecipeIngredient, Ingredient, Recipe};
 use crate::server_functions::ingredients::get_ingredients;
-use crate::server_functions::recipes::{create_recipe, delete_recipe, get_recipes, get_recipe_with_ingredients, update_recipe};
-use crate::components::{SearchableSelect, ConfirmModal, toast_success, toast_error};
+use crate::server_functions::recipes::{
+    create_recipe, delete_recipe, get_recipe_with_ingredients, get_recipes, update_recipe,
+};
 use leptos::ev::SubmitEvent;
 use leptos::prelude::*;
 use leptos::task::spawn_local;
@@ -134,24 +136,17 @@ pub fn RecipeEditor() -> impl IntoView {
                 return;
             }
 
-            // Validate multipliers if they exist
-            if let Some(mult) = ingredient.child_multiplier {
-                if mult < 0.0 {
-                    toast_error("Multipliers cannot be negative");
-                    return;
-                }
-            }
-            if let Some(mult) = ingredient.teen_multiplier {
-                if mult < 0.0 {
-                    toast_error("Multipliers cannot be negative");
-                    return;
-                }
-            }
-            if let Some(mult) = ingredient.adult_multiplier {
-                if mult < 0.0 {
-                    toast_error("Multipliers cannot be negative");
-                    return;
-                }
+            if [
+                ingredient.child_multiplier,
+                ingredient.teen_multiplier,
+                ingredient.adult_multiplier,
+            ]
+            .into_iter()
+            .flatten()
+            .any(|mult| mult < 0.0)
+            {
+                toast_error("Multipliers cannot be negative");
+                return;
             }
         }
 
@@ -225,9 +220,10 @@ pub fn RecipeEditor() -> impl IntoView {
             match get_recipe_with_ingredients(id).await {
                 Ok(recipe_data) => {
                     set_name.set(recipe_data.recipe.name.clone());
-                    set_instructions.set(recipe_data.recipe.instructions.clone().unwrap_or_default());
+                    set_instructions
+                        .set(recipe_data.recipe.instructions.clone().unwrap_or_default());
                     set_base_servings.set(recipe_data.recipe.base_servings);
-                    
+
                     let form_ingredients = recipe_data
                         .ingredients
                         .into_iter()
@@ -241,7 +237,7 @@ pub fn RecipeEditor() -> impl IntoView {
                             notes: ing.recipe_ingredient.notes,
                         })
                         .collect();
-                    
+
                     set_recipe_ingredients.set(form_ingredients);
                     set_editing_recipe_id.set(Some(id));
                     set_show_form.set(true);
@@ -268,8 +264,8 @@ pub fn RecipeEditor() -> impl IntoView {
                 Ok(_) => {
                     toast_success("Recipe deleted successfully!");
                     load_data();
-                },
-                Err(e) => toast_error(&format!("Failed to delete: {}", e)),
+                }
+                Err(e) => toast_error(format!("Failed to delete: {}", e)),
             }
             set_loading.set(false);
         });
@@ -398,7 +394,7 @@ pub fn RecipeEditor() -> impl IntoView {
                             <div class="space-y-1">
                                 {move || {
                                     recipe_ingredients.get().into_iter().enumerate().map(|(idx, ing)| {
-                                        let ingredients_clone = ingredients.clone();
+                                        let ingredients_clone = ingredients;
                                         view! {
                                             <div class="grid gap-2 items-center bg-slate-50 rounded-lg px-2 py-1.5"
                                                  style="grid-template-columns: minmax(0,3fr) 5rem 4.5rem 4rem 4rem 4rem 2rem">

@@ -1,7 +1,10 @@
-use leptos::prelude::*;
-use crate::models::{ShoppingListItem, MealScheduleItem, AttendanceSummary};
+use crate::models::{
+    AttendanceSummary, DailyIngredientItem, MealScheduleItem, RecipeIngredientItem,
+    ShoppingListItem,
+};
 #[cfg(feature = "ssr")]
 use chrono::NaiveDate;
+use leptos::prelude::*;
 
 #[server(GenerateShoppingList, "/api")]
 pub async fn generate_shopping_list(
@@ -46,6 +49,65 @@ pub async fn generate_attendance_summary(
     let pool = expect_context::<sqlx::SqlitePool>();
 
     reports::generate_attendance_summary(&pool, camp_id)
+        .await
+        .map_err(|e| ServerFnError::<String>::ServerError(e.to_string()))
+}
+
+#[server(GenerateDailyIngredients, "/api")]
+pub async fn generate_daily_ingredients(
+    camp_id: i64,
+) -> Result<Vec<DailyIngredientItem>, ServerFnError<String>> {
+    use crate::api::reports;
+
+    let pool = expect_context::<sqlx::SqlitePool>();
+
+    reports::generate_daily_ingredients(&pool, camp_id)
+        .await
+        .map_err(|e| ServerFnError::<String>::ServerError(e.to_string()))
+}
+
+#[server(GenerateIngredientsByRecipe, "/api")]
+pub async fn generate_ingredients_by_recipe(
+    camp_id: i64,
+) -> Result<Vec<RecipeIngredientItem>, ServerFnError<String>> {
+    use crate::api::reports;
+
+    let pool = expect_context::<sqlx::SqlitePool>();
+
+    reports::generate_ingredients_by_recipe(&pool, camp_id)
+        .await
+        .map_err(|e| ServerFnError::<String>::ServerError(e.to_string()))
+}
+
+#[server(GenerateReportPdf, "/api")]
+pub async fn generate_report_pdf(
+    camp_id: i64,
+    report_type: String,
+    start_date: Option<String>,
+    end_date: Option<String>,
+) -> Result<Vec<u8>, ServerFnError<String>> {
+    use crate::reports::{ReportPdfKind, generate_report_pdf as build_report_pdf};
+
+    let pool = expect_context::<sqlx::SqlitePool>();
+    let kind = ReportPdfKind::try_from(report_type.as_str())
+        .map_err(|e| ServerFnError::<String>::ServerError(e.to_string()))?;
+
+    let start = match start_date {
+        Some(date) => Some(
+            NaiveDate::parse_from_str(&date, "%Y-%m-%d")
+                .map_err(|e| ServerFnError::<String>::ServerError(e.to_string()))?,
+        ),
+        None => None,
+    };
+    let end = match end_date {
+        Some(date) => Some(
+            NaiveDate::parse_from_str(&date, "%Y-%m-%d")
+                .map_err(|e| ServerFnError::<String>::ServerError(e.to_string()))?,
+        ),
+        None => None,
+    };
+
+    build_report_pdf(&pool, camp_id, kind, start, end)
         .await
         .map_err(|e| ServerFnError::<String>::ServerError(e.to_string()))
 }

@@ -36,9 +36,9 @@ pub async fn create_planned_meal(
     let parsed_date = NaiveDate::parse_from_str(&date, "%Y-%m-%d")
         .map_err(|e| ServerFnError::<String>::ServerError(e.to_string()))?;
 
-    let parsed_meal_type = MealType::from_str(&meal_type).ok_or_else(|| {
-        ServerFnError::<String>::ServerError("Invalid meal type".to_string())
-    })?;
+    let parsed_meal_type = meal_type
+        .parse::<MealType>()
+        .map_err(|_| ServerFnError::<String>::ServerError("Invalid meal type".to_string()))?;
 
     let attendance = if let (Some(c), Some(t), Some(a)) = (children, teens, adults) {
         Some(CreateAttendance {
@@ -115,7 +115,8 @@ pub async fn get_planned_meals_for_camp(
     meal_plans::get_planned_meals_for_camp(&pool, camp_id)
         .await
         .map(|meals| {
-            meals.into_iter()
+            meals
+                .into_iter()
                 .map(|(date, meals)| (date.format("%Y-%m-%d").to_string(), meals))
                 .collect()
         })

@@ -22,9 +22,7 @@ pub fn FormField(
     /// Input element
     children: Children,
 ) -> impl IntoView {
-    let field_id = id.unwrap_or_else(|| {
-        label.to_lowercase().replace(" ", "-")
-    });
+    let field_id = id.unwrap_or_else(|| label.to_lowercase().replace(" ", "-"));
     let error_id = format!("{}-error", field_id);
     let help_id = format!("{}-help", field_id);
 
@@ -229,9 +227,7 @@ pub fn Checkbox(
     class: String,
 ) -> impl IntoView {
     let on_change = StoredValue::new(on_change);
-    let checkbox_id = id.unwrap_or_else(|| {
-        label.to_lowercase().replace(" ", "-")
-    });
+    let checkbox_id = id.unwrap_or_else(|| label.to_lowercase().replace(" ", "-"));
 
     view! {
         <div class=format!("flex items-center gap-2 {}", class)>
@@ -269,15 +265,26 @@ pub fn validate_email(email: &str) -> Result<(), String> {
 
 pub fn validate_min_length(value: &str, min: usize, field_name: &str) -> Result<(), String> {
     if value.len() < min {
-        Err(format!("{} must be at least {} characters", field_name, min))
+        Err(format!(
+            "{} must be at least {} characters",
+            field_name, min
+        ))
     } else {
         Ok(())
     }
 }
 
-pub fn validate_number_range(value: i32, min: i32, max: i32, field_name: &str) -> Result<(), String> {
+pub fn validate_number_range(
+    value: i32,
+    min: i32,
+    max: i32,
+    field_name: &str,
+) -> Result<(), String> {
     if value < min || value > max {
-        Err(format!("{} must be between {} and {}", field_name, min, max))
+        Err(format!(
+            "{} must be between {} and {}",
+            field_name, min, max
+        ))
     } else {
         Ok(())
     }

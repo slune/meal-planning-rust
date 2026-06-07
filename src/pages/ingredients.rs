@@ -1,5 +1,5 @@
+use crate::components::{CategoryManager, IngredientManager};
 use leptos::prelude::*;
-use crate::components::{IngredientManager, CategoryManager};
 
 #[component]
 pub fn IngredientsPage() -> impl IntoView {

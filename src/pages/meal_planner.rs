@@ -1,5 +1,5 @@
-use leptos::prelude::*;
 use crate::components::MealPlanner as MealPlannerComponent;
+use leptos::prelude::*;
 
 #[component]
 pub fn MealPlannerPage() -> impl IntoView {

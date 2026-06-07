@@ -1,10 +1,12 @@
-use crate::models::{Ingredient, Category};
-use crate::server_functions::ingredients::{get_ingredients, create_ingredient, update_ingredient, delete_ingredient};
+use crate::components::{ConfirmModal, SearchableSelect, toast_error, toast_success};
+use crate::models::{Category, Ingredient};
 use crate::server_functions::categories::get_categories;
-use crate::components::{SearchableSelect, ConfirmModal, toast_success, toast_error};
+use crate::server_functions::ingredients::{
+    create_ingredient, delete_ingredient, get_ingredients, update_ingredient,
+};
+use leptos::ev::SubmitEvent;
 use leptos::prelude::*;
 use leptos::task::spawn_local;
-use leptos::ev::SubmitEvent;
 
 #[component]
 pub fn IngredientManager() -> impl IntoView {
@@ -46,13 +48,13 @@ pub fn IngredientManager() -> impl IntoView {
 
             match get_categories().await {
                 Ok(data) => {
-                    if category_id.get() == 0 {
-                        if let Some(first) = data.first() {
-                            set_category_id.set(first.id);
-                        }
+                    if category_id.get() == 0
+                        && let Some(first) = data.first()
+                    {
+                        set_category_id.set(first.id);
                     }
                     set_categories.set(data);
-                },
+                }
                 Err(e) => set_error.set(Some(format!("Failed to load categories: {}", e))),
             }
 
@@ -96,7 +98,11 @@ pub fn IngredientManager() -> impl IntoView {
             set_loading.set(true);
             set_error.set(None);
 
-            let secondary = if secondary_unit_val.is_empty() { None } else { Some(secondary_unit_val) };
+            let secondary = if secondary_unit_val.is_empty() {
+                None
+            } else {
+                Some(secondary_unit_val)
+            };
 
             match create_ingredient(name_val, category_id_val, primary_unit_val, secondary).await {
                 Ok(_) => {
@@ -104,8 +110,8 @@ pub fn IngredientManager() -> impl IntoView {
                     reset_form();
                     set_show_form.set(false);
                     load_data();
-                },
-                Err(e) => toast_error(&format!("Failed to create ingredient: {}", e)),
+                }
+                Err(e) => toast_error(format!("Failed to create ingredient: {}", e)),
             }
 
             set_loading.set(false);
@@ -125,14 +131,18 @@ pub fn IngredientManager() -> impl IntoView {
 
         spawn_local(async move {
             set_loading.set(true);
-            let secondary = if secondary_val.is_empty() { None } else { Some(secondary_val) };
+            let secondary = if secondary_val.is_empty() {
+                None
+            } else {
+                Some(secondary_val)
+            };
             match update_ingredient(id, name_val, cat_val, primary_val, secondary).await {
                 Ok(_) => {
                     toast_success("Ingredient updated!");
                     set_editing_id.set(None);
                     load_data();
-                },
-                Err(e) => toast_error(&format!("Failed to update: {}", e)),
+                }
+                Err(e) => toast_error(format!("Failed to update: {}", e)),
             }
             set_loading.set(false);
         });
@@ -153,8 +163,8 @@ pub fn IngredientManager() -> impl IntoView {
                 Ok(_) => {
                     toast_success("Ingredient deleted successfully!");
                     load_data();
-                },
-                Err(e) => toast_error(&format!("Failed to delete: {}", e)),
+                }
+                Err(e) => toast_error(format!("Failed to delete: {}", e)),
             }
             set_loading.set(false);
         });

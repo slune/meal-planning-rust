@@ -41,6 +41,12 @@ pub async fn create_camp(
     let end = NaiveDate::parse_from_str(&end_date, "%Y-%m-%d")
         .map_err(|e| ServerFnError::<String>::ServerError(e.to_string()))?;
 
+    if end < start {
+        return Err(ServerFnError::ServerError(
+            "End date must be on or after start date".to_string(),
+        ));
+    }
+
     let new_camp = CreateCamp {
         name,
         start_date: start,
@@ -52,6 +58,49 @@ pub async fn create_camp(
     };
 
     camps::create_camp(&pool, new_camp)
+        .await
+        .map_err(|e| ServerFnError::<String>::ServerError(e.to_string()))
+}
+
+#[allow(clippy::too_many_arguments)]
+#[server(UpdateCampFn, "/api")]
+pub async fn update_camp(
+    id: i64,
+    name: String,
+    start_date: String,
+    end_date: String,
+    default_children: i32,
+    default_teens: i32,
+    default_adults: i32,
+    notes: Option<String>,
+) -> Result<Camp, ServerFnError<String>> {
+    use crate::api::camps;
+    use crate::models::UpdateCamp;
+    use chrono::NaiveDate;
+    let pool = expect_context::<sqlx::SqlitePool>();
+
+    let start = NaiveDate::parse_from_str(&start_date, "%Y-%m-%d")
+        .map_err(|e| ServerFnError::<String>::ServerError(e.to_string()))?;
+    let end = NaiveDate::parse_from_str(&end_date, "%Y-%m-%d")
+        .map_err(|e| ServerFnError::<String>::ServerError(e.to_string()))?;
+
+    if end < start {
+        return Err(ServerFnError::ServerError(
+            "End date must be on or after start date".to_string(),
+        ));
+    }
+
+    let update = UpdateCamp {
+        name: Some(name),
+        start_date: Some(start),
+        end_date: Some(end),
+        default_children: Some(default_children),
+        default_teens: Some(default_teens),
+        default_adults: Some(default_adults),
+        notes: Some(notes),
+    };
+
+    camps::update_camp(&pool, id, update)
         .await
         .map_err(|e| ServerFnError::<String>::ServerError(e.to_string()))
 }

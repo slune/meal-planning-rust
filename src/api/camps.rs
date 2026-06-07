@@ -22,31 +22,28 @@ pub async fn get_camp(pool: &SqlitePool, id: i64) -> Result<Camp, sqlx::Error> {
     .await
 }
 
-pub async fn create_camp(
-    pool: &SqlitePool,
-    camp: CreateCamp,
-) -> Result<Camp, sqlx::Error> {
+pub async fn create_camp(pool: &SqlitePool, camp: CreateCamp) -> Result<Camp, sqlx::Error> {
     // Validate date range
-    if camp.start_date >= camp.end_date {
+    if camp.start_date > camp.end_date {
         return Err(sqlx::Error::Decode(
-            "End date must be after start date".into()
+            "End date must be after start date".into(),
         ));
     }
 
     // Validate counts are non-negative
     if camp.default_children < 0 {
         return Err(sqlx::Error::Decode(
-            "Number of children cannot be negative".into()
+            "Number of children cannot be negative".into(),
         ));
     }
     if camp.default_teens < 0 {
         return Err(sqlx::Error::Decode(
-            "Number of teens cannot be negative".into()
+            "Number of teens cannot be negative".into(),
         ));
     }
     if camp.default_adults < 0 {
         return Err(sqlx::Error::Decode(
-            "Number of adults cannot be negative".into()
+            "Number of adults cannot be negative".into(),
         ));
     }
 
@@ -82,26 +79,26 @@ pub async fn update_camp(
     let final_adults = camp.default_adults.unwrap_or(existing.default_adults);
 
     // Validate date range
-    if final_start_date >= final_end_date {
+    if final_start_date > final_end_date {
         return Err(sqlx::Error::Decode(
-            "End date must be after start date".into()
+            "End date must be after start date".into(),
         ));
     }
 
     // Validate counts are non-negative
     if final_children < 0 {
         return Err(sqlx::Error::Decode(
-            "Number of children cannot be negative".into()
+            "Number of children cannot be negative".into(),
         ));
     }
     if final_teens < 0 {
         return Err(sqlx::Error::Decode(
-            "Number of teens cannot be negative".into()
+            "Number of teens cannot be negative".into(),
         ));
     }
     if final_adults < 0 {
         return Err(sqlx::Error::Decode(
-            "Number of adults cannot be negative".into()
+            "Number of adults cannot be negative".into(),
         ));
     }
 
@@ -109,7 +106,7 @@ pub async fn update_camp(
         "UPDATE camps
          SET name = ?, start_date = ?, end_date = ?, default_children = ?,
              default_teens = ?, default_adults = ?, notes = ?, updated_at = CURRENT_TIMESTAMP
-         WHERE id = ?"
+         WHERE id = ?",
     )
     .bind(camp.name.unwrap_or(existing.name))
     .bind(final_start_date)
@@ -117,7 +114,7 @@ pub async fn update_camp(
     .bind(final_children)
     .bind(final_teens)
     .bind(final_adults)
-    .bind(camp.notes.or(existing.notes))
+    .bind(camp.notes.unwrap_or(existing.notes))
     .bind(id)
     .execute(pool)
     .await?;

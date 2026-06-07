@@ -1,5 +1,5 @@
-use serde::{Deserialize, Serialize};
 use chrono::{DateTime, Utc};
+use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq)]
 #[cfg_attr(feature = "ssr", derive(sqlx::FromRow))]
@@ -28,5 +28,5 @@ pub struct UpdateIngredient {
     pub name: Option<String>,
     pub category_id: Option<i64>,
     pub primary_unit: Option<String>,
-    pub secondary_unit: Option<String>,
+    pub secondary_unit: Option<Option<String>>,
 }

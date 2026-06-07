@@ -1,5 +1,5 @@
 # Build stage
-FROM rust:1.75-slim as builder
+FROM rust:1.85-slim AS builder
 
 # Install build dependencies
 RUN apt-get update && apt-get install -y \
@@ -16,7 +16,7 @@ RUN cargo install cargo-leptos
 WORKDIR /app
 
 # Copy manifests
-COPY Cargo.toml ./
+COPY Cargo.toml Cargo.lock ./
 
 # Create dummy source to cache dependencies
 RUN mkdir src && \
@@ -44,7 +44,7 @@ RUN apt-get update && apt-get install -y \
 WORKDIR /app
 
 # Copy the built binary and assets
-COPY --from=builder /app/target/release/server /app/
+COPY --from=builder /app/target/x86_64-unknown-linux-gnu/release/ai_meal_planning /app/
 COPY --from=builder /app/target/site /app/site
 COPY --from=builder /app/locales /app/locales
 
@@ -62,4 +62,4 @@ ENV DATABASE_URL=sqlite:///app/data/meal_planning.db
 ENV RUST_LOG=info
 
 # Run the application
-CMD ["./server"]
+CMD ["./ai_meal_planning"]

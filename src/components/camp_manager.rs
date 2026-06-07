@@ -1,20 +1,23 @@
+use crate::components::{ConfirmModal, toast_error, toast_success};
 use crate::models::Camp;
-use crate::server_functions::camps::{get_camps, create_camp, delete_camp};
-use crate::components::{ConfirmModal, toast_success, toast_error};
+use crate::server_functions::camps::{create_camp, delete_camp, get_camps, update_camp};
+use leptos::ev::SubmitEvent;
 use leptos::prelude::*;
 use leptos::task::spawn_local;
-use leptos::ev::SubmitEvent;
 use leptos_router::hooks::use_navigate;
 
 #[component]
 pub fn CampManager() -> impl IntoView {
     let navigate = use_navigate();
     let nav_stored = StoredValue::new(navigate);
-    
+
     let (camps, set_camps) = signal(Vec::<Camp>::new());
     let (show_form, set_show_form) = signal(false);
     let (error, set_error) = signal(None::<String>);
     let (loading, set_loading) = signal(false);
+
+    // Edit state
+    let (editing_camp_id, set_editing_camp_id) = signal(None::<i64>);
 
     // Modal state
     let (show_delete_modal, set_show_delete_modal) = signal(false);
@@ -34,12 +37,12 @@ pub fn CampManager() -> impl IntoView {
         spawn_local(async move {
             set_loading.set(true);
             set_error.set(None);
-            
+
             match get_camps().await {
                 Ok(data) => set_camps.set(data),
                 Err(e) => set_error.set(Some(format!("Failed to load camps: {}", e))),
             }
-            
+
             set_loading.set(false);
         });
     };
@@ -50,6 +53,7 @@ pub fn CampManager() -> impl IntoView {
 
     let cancel_form = move |_| {
         set_show_form.set(false);
+        set_editing_camp_id.set(None);
         set_error.set(None);
     };
 
@@ -67,7 +71,7 @@ pub fn CampManager() -> impl IntoView {
 
     let handle_submit = move |ev: SubmitEvent| {
         ev.prevent_default();
-        
+
         let name_val = name.get();
         let start_date_val = start_date.get();
         let end_date_val = end_date.get();
@@ -75,7 +79,7 @@ pub fn CampManager() -> impl IntoView {
         let default_teens_val = default_teens.get();
         let default_adults_val = default_adults.get();
         let notes_val = notes.get();
-        
+
         if name_val.is_empty() || start_date_val.is_empty() || end_date_val.is_empty() {
             toast_error("Please fill in all required fields");
             return;
@@ -106,8 +110,8 @@ pub fn CampManager() -> impl IntoView {
         };
 
         // Validate date range
-        if start_date_val >= end_date_val {
-            toast_error("End date must be after start date");
+        if start_date_val > end_date_val {
+            toast_error("End date must be on or after start date");
             return;
         }
 
@@ -125,32 +129,83 @@ pub fn CampManager() -> impl IntoView {
             return;
         }
 
+        let editing_id = editing_camp_id.get();
         spawn_local(async move {
             set_loading.set(true);
             set_error.set(None);
-            
-            let notes_opt = if notes_val.is_empty() { None } else { Some(notes_val) };
-            
-            match create_camp(
-                name_val,
-                start_date_val,
-                end_date_val,
-                children_count,
-                teens_count,
-                adults_count,
-                notes_opt,
-            ).await {
+
+            let notes_opt = if notes_val.is_empty() {
+                None
+            } else {
+                Some(notes_val)
+            };
+
+            let result = if let Some(id) = editing_id {
+                update_camp(
+                    id,
+                    name_val,
+                    start_date_val,
+                    end_date_val,
+                    children_count,
+                    teens_count,
+                    adults_count,
+                    notes_opt,
+                )
+                .await
+                .map(|_| ())
+            } else {
+                create_camp(
+                    name_val,
+                    start_date_val,
+                    end_date_val,
+                    children_count,
+                    teens_count,
+                    adults_count,
+                    notes_opt,
+                )
+                .await
+                .map(|_| ())
+            };
+
+            match result {
                 Ok(_) => {
-                    toast_success("Camp created successfully!");
+                    let msg = if editing_id.is_some() {
+                        "Camp updated successfully!"
+                    } else {
+                        "Camp created successfully!"
+                    };
+                    toast_success(msg);
                     reset_form();
+                    set_editing_camp_id.set(None);
                     set_show_form.set(false);
                     load_data();
-                },
-                Err(e) => toast_error(&format!("Failed to create camp: {}", e)),
+                }
+                Err(e) => {
+                    let action = if editing_id.is_some() {
+                        "update"
+                    } else {
+                        "create"
+                    };
+                    toast_error(format!("Failed to {} camp: {}", action, e));
+                }
             }
-            
+
             set_loading.set(false);
         });
+    };
+
+    // Populate form for editing
+    let handle_edit_click = move |camp: Camp| {
+        set_editing_camp_id.set(Some(camp.id));
+        set_name.set(camp.name);
+        set_start_date.set(camp.start_date.format("%Y-%m-%d").to_string());
+        set_end_date.set(camp.end_date.format("%Y-%m-%d").to_string());
+        set_default_children.set(camp.default_children.to_string());
+        set_default_teens.set(camp.default_teens.to_string());
+        set_default_adults.set(camp.default_adults.to_string());
+        set_notes.set(camp.notes.unwrap_or_default());
+        set_show_form.set(true);
+        set_error.set(None);
     };
 
     // Trigger delete modal
@@ -172,10 +227,10 @@ pub fn CampManager() -> impl IntoView {
                 Ok(_) => {
                     toast_success("Camp deleted successfully!");
                     load_data();
-                },
+                }
                 Err(e) => {
-                    toast_error(&format!("Failed to delete camp: {}", e));
-                },
+                    toast_error(format!("Failed to delete camp: {}", e));
+                }
             }
 
             set_loading.set(false);
@@ -224,8 +279,8 @@ pub fn CampManager() -> impl IntoView {
             {move || show_form.get().then(|| view! {
                 <div class="card border-2 border-blue-200">
                     <h3 class="text-2xl font-bold mb-6 text-gradient flex items-center gap-2">
-                        <span>"✨"</span>
-                        "New Camp"
+                        <span>{move || if editing_camp_id.get().is_some() { "✏️" } else { "✨" }}</span>
+                        {move || if editing_camp_id.get().is_some() { "Edit Camp" } else { "New Camp" }}
                     </h3>
                     <form on:submit=handle_submit class="space-y-4">
                         <div>
@@ -319,7 +374,7 @@ pub fn CampManager() -> impl IntoView {
                         </div>
                         <div class="flex gap-2">
                             <button type="submit" class="btn btn-primary" disabled=move || loading.get()>
-                                {move || if loading.get() { "Saving..." } else { "Save" }}
+                                {move || if loading.get() { "Saving..." } else if editing_camp_id.get().is_some() { "Update" } else { "Save" }}
                             </button>
                             <button type="button" class="btn btn-secondary" on:click=cancel_form disabled=move || loading.get()>
                                 "Cancel"
@@ -337,12 +392,12 @@ pub fn CampManager() -> impl IntoView {
                     </div>
                 }.into_any()
             } else if camps.get().is_empty() {
-                view! { 
+                view! {
                     <div class="card text-center py-16 bg-gradient-to-br from-slate-50 to-blue-50 border-2 border-dashed border-slate-300">
                         <div class="text-7xl mb-6">"🏕️"</div>
                         <h3 class="text-2xl font-bold text-slate-800 mb-3">"No camps yet"</h3>
                         <p class="text-lg text-slate-600 mb-8">"Get started by creating your first camp"</p>
-                    </div> 
+                    </div>
                 }.into_any()
             } else {
                 view! {
@@ -389,6 +444,17 @@ pub fn CampManager() -> impl IntoView {
                                         disabled=move || loading.get()
                                     >
                                         "📅 Plan Meals"
+                                    </button>
+                                    <button
+                                        class="btn btn-secondary text-sm"
+                                        on:click={
+                                            let camp = camp.clone();
+                                            move |_| handle_edit_click(camp.clone())
+                                        }
+                                        disabled=move || loading.get()
+                                        aria-label="Edit camp"
+                                    >
+                                        "✏️"
                                     </button>
                                     <button
                                         class="btn btn-danger text-sm"

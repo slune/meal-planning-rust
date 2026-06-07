@@ -1,8 +1,8 @@
+use crate::components::{ConfirmModal, toast_error, toast_success};
 use crate::models::Category;
 use crate::server_functions::categories::{
     create_category, delete_category, get_categories, update_category,
 };
-use crate::components::{ConfirmModal, toast_success, toast_error};
 use leptos::ev::SubmitEvent;
 use leptos::prelude::*;
 use leptos::task::spawn_local;
@@ -99,7 +99,7 @@ pub fn CategoryManager() -> impl IntoView {
                     set_show_form.set(false);
                     load_data();
                 }
-                Err(e) => toast_error(&format!("Failed to save category: {}", e)),
+                Err(e) => toast_error(format!("Failed to save category: {}", e)),
             }
 
             set_loading.set(false);
@@ -121,8 +121,8 @@ pub fn CategoryManager() -> impl IntoView {
                 Ok(_) => {
                     toast_success("Category deleted successfully!");
                     load_data();
-                },
-                Err(e) => toast_error(&format!("Failed to delete: {}", e)),
+                }
+                Err(e) => toast_error(format!("Failed to delete: {}", e)),
             }
             set_loading.set(false);
         });

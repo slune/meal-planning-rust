@@ -1,5 +1,5 @@
-use leptos::prelude::*;
 use crate::components::RecipeEditor;
+use leptos::prelude::*;
 
 #[component]
 pub fn RecipesPage() -> impl IntoView {

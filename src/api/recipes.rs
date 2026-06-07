@@ -1,11 +1,14 @@
-use crate::models::{Recipe, RecipeIngredientDetail, RecipeWithIngredients, CreateRecipe, UpdateRecipe};
+use crate::models::{
+    CreateRecipe, CreateRecipeIngredient, Recipe, RecipeIngredientDetail, RecipeWithIngredients,
+    UpdateRecipe,
+};
 use sqlx::SqlitePool;
 
 pub async fn get_recipes(pool: &SqlitePool) -> Result<Vec<Recipe>, sqlx::Error> {
     sqlx::query_as::<_, Recipe>(
         "SELECT id, name, instructions, base_servings, created_at, updated_at 
          FROM recipes 
-         ORDER BY name"
+         ORDER BY name",
     )
     .fetch_all(pool)
     .await
@@ -15,7 +18,7 @@ pub async fn get_recipe(pool: &SqlitePool, id: i64) -> Result<Recipe, sqlx::Erro
     sqlx::query_as::<_, Recipe>(
         "SELECT id, name, instructions, base_servings, created_at, updated_at 
          FROM recipes 
-         WHERE id = ?"
+         WHERE id = ?",
     )
     .bind(id)
     .fetch_one(pool)
@@ -47,7 +50,7 @@ async fn get_recipe_ingredients_with_details(
          FROM recipe_ingredients ri
          JOIN ingredients i ON ri.ingredient_id = i.id
          WHERE ri.recipe_id = ?
-         ORDER BY ri.id"
+         ORDER BY ri.id",
     )
     .bind(recipe_id)
     .fetch_all(pool)
@@ -61,49 +64,25 @@ pub async fn create_recipe(
     // Validate base servings is positive
     if recipe.base_servings <= 0 {
         return Err(sqlx::Error::Decode(
-            "Base servings must be greater than 0".into()
+            "Base servings must be greater than 0".into(),
         ));
     }
 
     // Validate ingredient quantities and multipliers
     for ingredient in &recipe.ingredients {
-        if ingredient.base_quantity <= 0.0 {
-            return Err(sqlx::Error::Decode(
-                "All ingredient quantities must be greater than 0".into()
-            ));
-        }
-
-        if let Some(mult) = ingredient.child_multiplier {
-            if mult < 0.0 {
-                return Err(sqlx::Error::Decode(
-                    "Multipliers cannot be negative".into()
-                ));
-            }
-        }
-        if let Some(mult) = ingredient.teen_multiplier {
-            if mult < 0.0 {
-                return Err(sqlx::Error::Decode(
-                    "Multipliers cannot be negative".into()
-                ));
-            }
-        }
-        if let Some(mult) = ingredient.adult_multiplier {
-            if mult < 0.0 {
-                return Err(sqlx::Error::Decode(
-                    "Multipliers cannot be negative".into()
-                ));
-            }
-        }
+        validate_recipe_ingredient(ingredient)?;
     }
+
+    let mut tx = pool.begin().await?;
 
     let result = sqlx::query(
         "INSERT INTO recipes (name, instructions, base_servings) 
-         VALUES (?, ?, ?)"
+         VALUES (?, ?, ?)",
     )
     .bind(&recipe.name)
     .bind(&recipe.instructions)
     .bind(recipe.base_servings)
-    .execute(pool)
+    .execute(&mut *tx)
     .await?;
 
     let recipe_id = result.last_insert_rowid();
@@ -123,9 +102,11 @@ pub async fn create_recipe(
         .bind(ingredient.teen_multiplier.unwrap_or(0.75))
         .bind(ingredient.adult_multiplier.unwrap_or(1.0))
         .bind(&ingredient.notes)
-        .execute(pool)
+        .execute(&mut *tx)
         .await?;
     }
+
+    tx.commit().await?;
 
     get_recipe_with_ingredients(pool, recipe_id).await
 }
@@ -141,54 +122,30 @@ pub async fn update_recipe(
     let final_base_servings = recipe.base_servings.unwrap_or(existing.base_servings);
     if final_base_servings <= 0 {
         return Err(sqlx::Error::Decode(
-            "Base servings must be greater than 0".into()
+            "Base servings must be greater than 0".into(),
         ));
     }
 
     // Validate ingredients if provided
     if let Some(ref ingredients) = recipe.ingredients {
         for ingredient in ingredients {
-            if ingredient.base_quantity <= 0.0 {
-                return Err(sqlx::Error::Decode(
-                    "All ingredient quantities must be greater than 0".into()
-                ));
-            }
-
-            if let Some(mult) = ingredient.child_multiplier {
-                if mult < 0.0 {
-                    return Err(sqlx::Error::Decode(
-                        "Multipliers cannot be negative".into()
-                    ));
-                }
-            }
-            if let Some(mult) = ingredient.teen_multiplier {
-                if mult < 0.0 {
-                    return Err(sqlx::Error::Decode(
-                        "Multipliers cannot be negative".into()
-                    ));
-                }
-            }
-            if let Some(mult) = ingredient.adult_multiplier {
-                if mult < 0.0 {
-                    return Err(sqlx::Error::Decode(
-                        "Multipliers cannot be negative".into()
-                    ));
-                }
-            }
+            validate_recipe_ingredient(ingredient)?;
         }
     }
+
+    let mut tx = pool.begin().await?;
 
     sqlx::query(
         "UPDATE recipes
          SET name = ?, instructions = ?,
              base_servings = ?, updated_at = CURRENT_TIMESTAMP
-         WHERE id = ?"
+         WHERE id = ?",
     )
     .bind(recipe.name.unwrap_or(existing.name))
-    .bind(recipe.instructions.or(existing.instructions))
+    .bind(recipe.instructions.unwrap_or(existing.instructions))
     .bind(final_base_servings)
     .bind(id)
-    .execute(pool)
+    .execute(&mut *tx)
     .await?;
 
     // Update ingredients if provided
@@ -196,7 +153,7 @@ pub async fn update_recipe(
         // Delete existing ingredients
         sqlx::query("DELETE FROM recipe_ingredients WHERE recipe_id = ?")
             .bind(id)
-            .execute(pool)
+            .execute(&mut *tx)
             .await?;
 
         // Insert new ingredients
@@ -214,10 +171,12 @@ pub async fn update_recipe(
             .bind(ingredient.teen_multiplier.unwrap_or(0.75))
             .bind(ingredient.adult_multiplier.unwrap_or(1.0))
             .bind(&ingredient.notes)
-            .execute(pool)
+            .execute(&mut *tx)
             .await?;
         }
     }
+
+    tx.commit().await?;
 
     get_recipe_with_ingredients(pool, id).await
 }
@@ -227,6 +186,23 @@ pub async fn delete_recipe(pool: &SqlitePool, id: i64) -> Result<(), sqlx::Error
         .bind(id)
         .execute(pool)
         .await?;
+
+    Ok(())
+}
+
+fn validate_recipe_ingredient(ingredient: &CreateRecipeIngredient) -> Result<(), sqlx::Error> {
+    if ingredient.base_quantity <= 0.0 {
+        return Err(sqlx::Error::Decode(
+            "All ingredient quantities must be greater than 0".into(),
+        ));
+    }
+
+    if ingredient.child_multiplier.is_some_and(|mult| mult < 0.0)
+        || ingredient.teen_multiplier.is_some_and(|mult| mult < 0.0)
+        || ingredient.adult_multiplier.is_some_and(|mult| mult < 0.0)
+    {
+        return Err(sqlx::Error::Decode("Multipliers cannot be negative".into()));
+    }
 
     Ok(())
 }

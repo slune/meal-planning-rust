@@ -40,7 +40,7 @@ where
             .get()
             .iter()
             .find(|opt| get_id(opt).parse::<i64>().unwrap_or(0) == sel_val)
-            .map(|opt| get_display(opt))
+            .map(get_display)
             .unwrap_or_default()
     });
 

@@ -4,8 +4,7 @@ use leptos::prelude::*;
 pub async fn login(password: String) -> Result<bool, ServerFnError<String>> {
     use tower_sessions::Session;
 
-    let expected =
-        std::env::var("AUTH_PASSWORD").unwrap_or_else(|_| "admin123".to_string());
+    let expected = std::env::var("AUTH_PASSWORD").unwrap_or_else(|_| "admin123".to_string());
     let matched = password == expected;
 
     if matched {

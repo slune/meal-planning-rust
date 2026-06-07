@@ -84,19 +84,35 @@ impl ToastContext {
     }
 
     pub fn success(&self, message: impl Into<String>) {
-        self.show_toast(message.into(), ToastVariant::Success, Some(Duration::from_secs(4)));
+        self.show_toast(
+            message.into(),
+            ToastVariant::Success,
+            Some(Duration::from_secs(4)),
+        );
     }
 
     pub fn error(&self, message: impl Into<String>) {
-        self.show_toast(message.into(), ToastVariant::Error, Some(Duration::from_secs(6)));
+        self.show_toast(
+            message.into(),
+            ToastVariant::Error,
+            Some(Duration::from_secs(6)),
+        );
     }
 
     pub fn info(&self, message: impl Into<String>) {
-        self.show_toast(message.into(), ToastVariant::Info, Some(Duration::from_secs(4)));
+        self.show_toast(
+            message.into(),
+            ToastVariant::Info,
+            Some(Duration::from_secs(4)),
+        );
     }
 
     pub fn warning(&self, message: impl Into<String>) {
-        self.show_toast(message.into(), ToastVariant::Warning, Some(Duration::from_secs(5)));
+        self.show_toast(
+            message.into(),
+            ToastVariant::Warning,
+            Some(Duration::from_secs(5)),
+        );
     }
 
     pub fn dismiss(&self, id: usize) {
@@ -105,6 +121,12 @@ impl ToastContext {
 
     pub fn dismiss_all(&self) {
         self.toasts.update(|toasts| toasts.clear());
+    }
+}
+
+impl Default for ToastContext {
+    fn default() -> Self {
+        Self::new()
     }
 }
 

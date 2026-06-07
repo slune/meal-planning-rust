@@ -1,5 +1,5 @@
+use leptos::ev::{KeyboardEvent, MouseEvent};
 use leptos::prelude::*;
-use leptos::ev::{MouseEvent, KeyboardEvent};
 
 #[component]
 pub fn ConfirmModal(

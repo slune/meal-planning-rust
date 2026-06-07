@@ -1,11 +1,11 @@
-use crate::models::{Ingredient, CreateIngredient, UpdateIngredient};
+use crate::models::{CreateIngredient, Ingredient, UpdateIngredient};
 use sqlx::SqlitePool;
 
 pub async fn get_ingredients(pool: &SqlitePool) -> Result<Vec<Ingredient>, sqlx::Error> {
     sqlx::query_as::<_, Ingredient>(
         "SELECT id, name, category_id, primary_unit, secondary_unit, created_at, updated_at 
          FROM ingredients 
-         ORDER BY name"
+         ORDER BY name",
     )
     .fetch_all(pool)
     .await
@@ -19,7 +19,7 @@ pub async fn get_ingredients_by_category(
         "SELECT id, name, category_id, primary_unit, secondary_unit, created_at, updated_at 
          FROM ingredients 
          WHERE category_id = ?
-         ORDER BY name"
+         ORDER BY name",
     )
     .bind(category_id)
     .fetch_all(pool)
@@ -30,7 +30,7 @@ pub async fn get_ingredient(pool: &SqlitePool, id: i64) -> Result<Ingredient, sq
     sqlx::query_as::<_, Ingredient>(
         "SELECT id, name, category_id, primary_unit, secondary_unit, created_at, updated_at 
          FROM ingredients 
-         WHERE id = ?"
+         WHERE id = ?",
     )
     .bind(id)
     .fetch_one(pool)
@@ -43,7 +43,7 @@ pub async fn create_ingredient(
 ) -> Result<Ingredient, sqlx::Error> {
     let result = sqlx::query(
         "INSERT INTO ingredients (name, category_id, primary_unit, secondary_unit) 
-         VALUES (?, ?, ?, ?)"
+         VALUES (?, ?, ?, ?)",
     )
     .bind(&ingredient.name)
     .bind(ingredient.category_id)
@@ -66,12 +66,12 @@ pub async fn update_ingredient(
         "UPDATE ingredients 
          SET name = ?, category_id = ?, primary_unit = ?, 
              secondary_unit = ?, updated_at = CURRENT_TIMESTAMP 
-         WHERE id = ?"
+         WHERE id = ?",
     )
     .bind(ingredient.name.unwrap_or(existing.name))
     .bind(ingredient.category_id.unwrap_or(existing.category_id))
     .bind(ingredient.primary_unit.unwrap_or(existing.primary_unit))
-    .bind(ingredient.secondary_unit.or(existing.secondary_unit))
+    .bind(ingredient.secondary_unit.unwrap_or(existing.secondary_unit))
     .bind(id)
     .execute(pool)
     .await?;

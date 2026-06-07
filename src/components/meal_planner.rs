@@ -1,13 +1,16 @@
-use crate::models::{Recipe, PlannedMealWithDetails, MealType, Camp};
-use crate::server_functions::meal_plans::{get_planned_meals_for_date, get_planned_meals_for_camp, create_planned_meal, update_planned_meal, delete_planned_meal};
-use crate::server_functions::recipes::get_recipes;
+use crate::components::{ConfirmModal, SearchableSelect, toast_error, toast_success};
+use crate::models::{Camp, MealType, PlannedMealWithDetails, Recipe};
 use crate::server_functions::camps::{get_camp, get_camps};
-use crate::components::{SearchableSelect, ConfirmModal, toast_success, toast_error};
+use crate::server_functions::meal_plans::{
+    create_planned_meal, delete_planned_meal, get_planned_meals_for_camp,
+    get_planned_meals_for_date, update_planned_meal,
+};
+use crate::server_functions::recipes::get_recipes;
+use chrono::{Duration, NaiveDate};
+use leptos::ev::SubmitEvent;
 use leptos::prelude::*;
 use leptos::task::spawn_local;
-use leptos_router::hooks::{use_params_map, use_navigate};
-use leptos::ev::SubmitEvent;
-use chrono::{NaiveDate, Duration};
+use leptos_router::hooks::{use_navigate, use_params_map};
 use std::collections::HashMap;
 
 #[derive(Debug, Clone, Copy, PartialEq)]
@@ -30,7 +33,8 @@ pub fn MealPlanner() -> impl IntoView {
     let navigate = use_navigate();
 
     let (planned_meals, set_planned_meals) = signal(Vec::<PlannedMealWithDetails>::new());
-    let (multi_day_meals, set_multi_day_meals) = signal(HashMap::<String, Vec<PlannedMealWithDetails>>::new());
+    let (multi_day_meals, set_multi_day_meals) =
+        signal(HashMap::<String, Vec<PlannedMealWithDetails>>::new());
     let (recipes, set_recipes) = signal(Vec::<Recipe>::new());
     let (camps, set_camps) = signal(Vec::<Camp>::new());
     let (camp, set_camp) = signal(None::<Camp>);
@@ -60,7 +64,7 @@ pub fn MealPlanner() -> impl IntoView {
                 Ok(data) => set_camps.set(data),
                 Err(e) => set_error.set(Some(format!("Failed to load camps: {}", e))),
             }
-            
+
             // Load recipes
             match get_recipes().await {
                 Ok(data) => {
@@ -68,7 +72,7 @@ pub fn MealPlanner() -> impl IntoView {
                     if let Some(first) = data.first() {
                         set_recipe_id.set(first.id);
                     }
-                },
+                }
                 Err(e) => set_error.set(Some(format!("Failed to load recipes: {}", e))),
             }
         });
@@ -77,7 +81,7 @@ pub fn MealPlanner() -> impl IntoView {
     // Load camp when camp_id changes
     Effect::new(move |_| {
         let current_camp_id = camp_id.get();
-        
+
         spawn_local(async move {
             // Load camp if camp_id is valid
             if current_camp_id > 0 {
@@ -85,11 +89,19 @@ pub fn MealPlanner() -> impl IntoView {
                     Ok(camp_data) => {
                         // Set selected date to camp start date if it's not set or outside camp range
                         let current_selected = selected_date.get_untracked();
-                        if current_selected.is_empty() {
-                            set_selected_date.set(camp_data.start_date.format("%Y-%m-%d").to_string());
+                        let should_reset_date = current_selected.is_empty()
+                            || NaiveDate::parse_from_str(&current_selected, "%Y-%m-%d")
+                                .map(|date| {
+                                    date < camp_data.start_date || date > camp_data.end_date
+                                })
+                                .unwrap_or(true);
+
+                        if should_reset_date {
+                            set_selected_date
+                                .set(camp_data.start_date.format("%Y-%m-%d").to_string());
                         }
                         set_camp.set(Some(camp_data));
-                    },
+                    }
                     Err(e) => set_error.set(Some(format!("Failed to load camp: {}", e))),
                 }
             } else {
@@ -122,31 +134,33 @@ pub fn MealPlanner() -> impl IntoView {
                     match get_planned_meals_for_date(current_camp_id, current_date).await {
                         Ok(mut data) => {
                             data.sort_by_key(|m| {
-                                MealType::from_str(&m.planned_meal.meal_type)
+                                m.planned_meal
+                                    .meal_type
+                                    .parse::<MealType>()
                                     .map(|mt| mt.sort_order())
                                     .unwrap_or(99)
                             });
                             set_planned_meals.set(data);
-                        },
+                        }
                         Err(e) => set_error.set(Some(format!("Failed to load meals: {}", e))),
                     }
-                },
-                ViewMode::AllDays => {
-                    match get_planned_meals_for_camp(current_camp_id).await {
-                        Ok(data) => {
-                            let mut map = HashMap::new();
-                            for (date, mut meals) in data {
-                                meals.sort_by_key(|m| {
-                                    MealType::from_str(&m.planned_meal.meal_type)
-                                        .map(|mt| mt.sort_order())
-                                        .unwrap_or(99)
-                                });
-                                map.insert(date, meals);
-                            }
-                            set_multi_day_meals.set(map);
-                        },
-                        Err(e) => set_error.set(Some(format!("Failed to load meals: {}", e))),
+                }
+                ViewMode::AllDays => match get_planned_meals_for_camp(current_camp_id).await {
+                    Ok(data) => {
+                        let mut map = HashMap::new();
+                        for (date, mut meals) in data {
+                            meals.sort_by_key(|m| {
+                                m.planned_meal
+                                    .meal_type
+                                    .parse::<MealType>()
+                                    .map(|mt| mt.sort_order())
+                                    .unwrap_or(99)
+                            });
+                            map.insert(date, meals);
+                        }
+                        set_multi_day_meals.set(map);
                     }
+                    Err(e) => set_error.set(Some(format!("Failed to load meals: {}", e))),
                 },
             }
 
@@ -155,6 +169,7 @@ pub fn MealPlanner() -> impl IntoView {
     };
 
     Effect::new(move |_| {
+        let _ = camp_id.get();
         let _ = selected_date.get();
         let _ = view_mode.get();
         load_meals();
@@ -218,21 +233,13 @@ pub fn MealPlanner() -> impl IntoView {
             set_loading.set(true);
             set_error.set(None);
 
-            let attendance = if children_val > 0 || teens_val > 0 || adults_val > 0 {
-                (Some(children_val), Some(teens_val), Some(adults_val))
-            } else {
-                (None, None, None)
-            };
+            let attendance = (Some(children_val), Some(teens_val), Some(adults_val));
 
             let result: Result<(), _> = if let Some(id) = editing_id {
                 // Update existing meal
-                update_planned_meal(
-                    id,
-                    recipe_id_val,
-                    attendance.0,
-                    attendance.1,
-                    attendance.2,
-                ).await.map_err(|e| e.to_string())
+                update_planned_meal(id, recipe_id_val, attendance.0, attendance.1, attendance.2)
+                    .await
+                    .map_err(|e| e.to_string())
             } else {
                 // Create new meal
                 let meal_type_str = meal_type_val.as_str().to_string();
@@ -244,7 +251,10 @@ pub fn MealPlanner() -> impl IntoView {
                     attendance.0,
                     attendance.1,
                     attendance.2,
-                ).await.map(|_| ()).map_err(|e| e.to_string())
+                )
+                .await
+                .map(|_| ())
+                .map_err(|e| e.to_string())
             };
 
             match result {
@@ -257,10 +267,10 @@ pub fn MealPlanner() -> impl IntoView {
                     reset_form();
                     set_show_form.set(false);
                     load_meals();
-                },
+                }
                 Err(error_msg) => {
-                    toast_error(&format!("Failed to save meal: {}", error_msg));
-                },
+                    toast_error(format!("Failed to save meal: {}", error_msg));
+                }
             }
 
             set_loading.set(false);
@@ -272,7 +282,7 @@ pub fn MealPlanner() -> impl IntoView {
         set_editing_meal_id.set(Some(meal.planned_meal.id));
         set_recipe_id.set(meal.planned_meal.recipe_id);
 
-        if let Some(mt) = MealType::from_str(&meal.planned_meal.meal_type) {
+        if let Ok(mt) = meal.planned_meal.meal_type.parse::<MealType>() {
             set_meal_type.set(mt);
         }
 
@@ -308,8 +318,8 @@ pub fn MealPlanner() -> impl IntoView {
                 Ok(_) => {
                     toast_success("Meal deleted successfully!");
                     load_meals();
-                },
-                Err(e) => toast_error(&format!("Failed to delete meal: {}", e)),
+                }
+                Err(e) => toast_error(format!("Failed to delete meal: {}", e)),
             }
 
             set_loading.set(false);
@@ -333,30 +343,30 @@ pub fn MealPlanner() -> impl IntoView {
 
     let go_to_previous_day = move |_| {
         let current_date = selected_date.get();
-        if let Ok(date) = NaiveDate::parse_from_str(&current_date, "%Y-%m-%d") {
-            if let Some(prev) = date.checked_sub_signed(Duration::days(1)) {
-                if let Some(c) = camp.get() {
-                    if prev >= c.start_date {
-                        set_selected_date.set(prev.format("%Y-%m-%d").to_string());
-                    }
-                } else {
+        if let Ok(date) = NaiveDate::parse_from_str(&current_date, "%Y-%m-%d")
+            && let Some(prev) = date.checked_sub_signed(Duration::days(1))
+        {
+            if let Some(c) = camp.get() {
+                if prev >= c.start_date {
                     set_selected_date.set(prev.format("%Y-%m-%d").to_string());
                 }
+            } else {
+                set_selected_date.set(prev.format("%Y-%m-%d").to_string());
             }
         }
     };
 
     let go_to_next_day = move |_| {
         let current_date = selected_date.get();
-        if let Ok(date) = NaiveDate::parse_from_str(&current_date, "%Y-%m-%d") {
-            if let Some(next) = date.checked_add_signed(Duration::days(1)) {
-                if let Some(c) = camp.get() {
-                    if next <= c.end_date {
-                        set_selected_date.set(next.format("%Y-%m-%d").to_string());
-                    }
-                } else {
+        if let Ok(date) = NaiveDate::parse_from_str(&current_date, "%Y-%m-%d")
+            && let Some(next) = date.checked_add_signed(Duration::days(1))
+        {
+            if let Some(c) = camp.get() {
+                if next <= c.end_date {
                     set_selected_date.set(next.format("%Y-%m-%d").to_string());
                 }
+            } else {
+                set_selected_date.set(next.format("%Y-%m-%d").to_string());
             }
         }
     };
@@ -364,11 +374,16 @@ pub fn MealPlanner() -> impl IntoView {
     let get_camp_day_info = move || -> Option<String> {
         if let Some(c) = camp.get() {
             let current_date = selected_date.get();
-            if let Ok(date) = NaiveDate::parse_from_str(&current_date, "%Y-%m-%d") {
-                if date >= c.start_date && date <= c.end_date {
-                    let day_num = (date - c.start_date).num_days() + 1;
-                    return Some(format!("Day {} of {}", day_num, (c.end_date - c.start_date).num_days() + 1));
-                }
+            if let Ok(date) = NaiveDate::parse_from_str(&current_date, "%Y-%m-%d")
+                && date >= c.start_date
+                && date <= c.end_date
+            {
+                let day_num = (date - c.start_date).num_days() + 1;
+                return Some(format!(
+                    "Day {} of {}",
+                    day_num,
+                    (c.end_date - c.start_date).num_days() + 1
+                ));
             }
         }
         None
@@ -569,7 +584,7 @@ pub fn MealPlanner() -> impl IntoView {
                                     class="form-input"
                                     prop:value=move || meal_type.get().as_str()
                                     on:change=move |ev| {
-                                        if let Some(mt) = MealType::from_str(&event_target_value(&ev)) {
+                                        if let Ok(mt) = event_target_value(&ev).parse::<MealType>() {
                                             set_meal_type.set(mt);
                                         }
                                     }
@@ -595,9 +610,9 @@ pub fn MealPlanner() -> impl IntoView {
                                 />
                             </div>
                         </div>
-                        
+
                         <div class="border-t pt-4">
-                            <h4 class="font-semibold mb-3">"Attendance (optional)"</h4>
+                            <h4 class="font-semibold mb-3">"Attendance"</h4>
                             <div class="grid grid-cols-3 gap-4">
                                 <div>
                                     <label class="form-label">"Children"</label>
