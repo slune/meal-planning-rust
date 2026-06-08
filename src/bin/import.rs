@@ -135,14 +135,15 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
             continue;
         }
 
-        let result = sqlx::query("INSERT INTO recipes (name, base_servings) VALUES (?, 1)")
+        let portions = recipe.porci.parse::<i32>().unwrap_or(1).max(1);
+
+        let result = sqlx::query("INSERT INTO recipes (name, portions) VALUES (?, ?)")
             .bind(*recipe_name)
+            .bind(portions)
             .execute(&pool)
             .await?;
         let recipe_id = result.last_insert_rowid();
         recipes_imported += 1;
-
-        let porci = recipe.porci.parse::<f64>().unwrap_or(1.0).max(1.0);
 
         // Build per-ingredient entry map across all groups
         let mut entries: HashMap<String, IngredientEntry> = HashMap::new();
@@ -202,23 +203,22 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
                 new_id
             };
 
-            // Compute per-person quantities (totals / porci)
-            let adult_per = entry.dospelak_qty / porci + entry.general_qty / porci;
-            let child_per = entry.decko_qty / porci + entry.general_qty / porci;
-            let teen_per = entry.pubos_qty / porci + entry.general_qty / porci;
+            let adult_qty = entry.dospelak_qty + entry.general_qty;
+            let child_qty = entry.decko_qty + entry.general_qty;
+            let teen_qty = entry.pubos_qty + entry.general_qty;
 
-            let (base_quantity, child_mult, teen_mult, adult_mult) = if adult_per > 0.0 {
+            let (base_quantity, child_mult, teen_mult, adult_mult) = if adult_qty > 0.0 {
                 (
-                    adult_per,
-                    child_per / adult_per,
-                    teen_per / adult_per,
+                    adult_qty,
+                    child_qty / adult_qty,
+                    teen_qty / adult_qty,
                     1.0f64,
                 )
-            } else if child_per > 0.0 {
-                let teen_m = teen_per / child_per;
-                (child_per, 1.0f64, teen_m, 0.0f64)
-            } else if teen_per > 0.0 {
-                (teen_per, 0.0f64, 1.0f64, 0.0f64)
+            } else if child_qty > 0.0 {
+                let teen_m = teen_qty / child_qty;
+                (child_qty, 1.0f64, teen_m, 0.0f64)
+            } else if teen_qty > 0.0 {
+                (teen_qty, 0.0f64, 1.0f64, 0.0f64)
             } else {
                 continue; // zero quantity everywhere — skip
             };

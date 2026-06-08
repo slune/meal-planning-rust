@@ -1,17 +1,20 @@
 use crate::components::{ConfirmModal, icon, toast_error, toast_success};
-use crate::models::Category;
+use crate::models::{Category, CategoryUsage};
 use crate::server_functions::categories::{
-    create_category, delete_category, get_categories, update_category,
+    create_category, delete_category, get_categories, get_category_usage, update_category,
 };
 use leptos::ev::SubmitEvent;
 use leptos::prelude::*;
 use leptos::task::spawn_local;
+use leptos_router::components::A;
 
 #[component]
 pub fn CategoryManager() -> impl IntoView {
     let (categories, set_categories) = signal(Vec::<Category>::new());
+    let (category_usage, set_category_usage) = signal(Vec::<CategoryUsage>::new());
     let (show_form, set_show_form) = signal(false);
     let (editing_id, set_editing_id) = signal(None::<i64>);
+    let (expanded_usage_id, set_expanded_usage_id) = signal(None::<i64>);
     let (error, set_error) = signal(None::<String>);
     let (loading, set_loading) = signal(false);
 
@@ -34,6 +37,11 @@ pub fn CategoryManager() -> impl IntoView {
                 Err(e) => set_error.set(Some(format!("Failed to load categories: {}", e))),
             }
 
+            match get_category_usage().await {
+                Ok(data) => set_category_usage.set(data),
+                Err(e) => set_error.set(Some(format!("Failed to load category usage: {}", e))),
+            }
+
             set_loading.set(false);
         });
     };
@@ -51,6 +59,7 @@ pub fn CategoryManager() -> impl IntoView {
 
     let start_add = move |_| {
         reset_form();
+        set_expanded_usage_id.set(None);
         set_show_form.set(true);
     };
 
@@ -58,12 +67,30 @@ pub fn CategoryManager() -> impl IntoView {
         set_name.set(category.name);
         set_sort_order.set(category.sort_order);
         set_editing_id.set(Some(category.id));
+        set_expanded_usage_id.set(None);
         set_show_form.set(true);
     };
 
     let cancel_form = move |_| {
         set_show_form.set(false);
         set_error.set(None);
+    };
+
+    let usage_ingredients_for = move |category_id: i64| {
+        category_usage
+            .get()
+            .into_iter()
+            .find(|usage| usage.category_id == category_id)
+            .map(|usage| usage.ingredients)
+            .unwrap_or_default()
+    };
+
+    let toggle_usage = move |category_id: i64| {
+        if expanded_usage_id.get() == Some(category_id) {
+            set_expanded_usage_id.set(None);
+        } else {
+            set_expanded_usage_id.set(Some(category_id));
+        }
     };
 
     let handle_submit = move |ev: SubmitEvent| {
@@ -120,6 +147,9 @@ pub fn CategoryManager() -> impl IntoView {
             match delete_category(id).await {
                 Ok(_) => {
                     toast_success("Category deleted successfully!");
+                    if expanded_usage_id.get() == Some(id) {
+                        set_expanded_usage_id.set(None);
+                    }
                     load_data();
                 }
                 Err(e) => toast_error(format!("Failed to delete: {}", e)),
@@ -231,37 +261,76 @@ pub fn CategoryManager() -> impl IntoView {
                             key=|cat| cat.id
                             let:category
                         >
-                            <div class="record-card record-card-violet">
-                                <div class="flex items-start justify-between mb-3">
-                                    <span class="icon-badge icon-badge-violet" aria-hidden="true">{icon("category")}</span>
-                                    <span class="badge badge-secondary text-xs">"Sort: " {category.sort_order}</span>
-                                </div>
-                                <h3 class="text-xl font-bold text-slate-800 mb-4">{category.name.clone()}</h3>
-                                <div class="mt-auto flex gap-2">
-                                    <button
-                                        class="btn btn-secondary text-sm flex-1"
-                                        on:click={
-                                            let cat = category.clone();
-                                            move |_| start_edit(cat.clone())
-                                        }
-                                        disabled=move || loading.get()
-                                    >
-                                        {icon("edit")}
-                                        "Edit"
-                                    </button>
-                                    <button
-                                        class="btn btn-danger text-sm"
-                                        on:click={
-                                            let id = category.id;
-                                            move |_| handle_delete_click(id)
-                                        }
-                                        disabled=move || loading.get()
-                                    >
-                                        {icon("trash")}
-                                        "Delete"
-                                    </button>
-                                </div>
-                            </div>
+                            {{
+                                let category_id = category.id;
+                                let category_for_edit = category.clone();
+                                view! {
+                                    <div class="record-card record-card-violet">
+                                        <div class="flex items-start justify-between mb-3">
+                                            <span class="icon-badge icon-badge-violet" aria-hidden="true">{icon("category")}</span>
+                                            <div class="flex flex-col items-end gap-2">
+                                                <span class="badge badge-secondary text-xs">"Sort: " {category.sort_order}</span>
+                                                {move || {
+                                                    let count = usage_ingredients_for(category_id).len();
+                                                    if count == 0 {
+                                                        view! { <span class="text-xs font-semibold text-slate-400">"0 ingredients"</span> }.into_any()
+                                                    } else {
+                                                        view! {
+                                                            <button
+                                                                type="button"
+                                                                class="btn btn-secondary text-xs py-1 px-2"
+                                                                on:click=move |_| toggle_usage(category_id)
+                                                            >
+                                                                {format!("{} ingredients", count)}
+                                                            </button>
+                                                        }.into_any()
+                                                    }
+                                                }}
+                                            </div>
+                                        </div>
+                                        <h3 class="text-xl font-bold text-slate-800 mb-4">{category.name.clone()}</h3>
+                                        {move || (expanded_usage_id.get() == Some(category_id)).then(|| {
+                                            let ingredients = usage_ingredients_for(category_id);
+                                            view! {
+                                                <div class="mb-4 space-y-2 rounded-md border border-slate-200 bg-slate-50 p-3">
+                                                    <p class="text-xs font-semibold uppercase tracking-wide text-slate-500">"Ingredients"</p>
+                                                    <div class="flex flex-wrap gap-2">
+                                                        {ingredients.into_iter().map(|ingredient| view! {
+                                                            <A
+                                                                href=format!("/ingredients?ingredient_id={}", ingredient.id)
+                                                                attr:class="status-chip status-chip-violet text-violet-700 no-underline"
+                                                            >
+                                                                {ingredient.name}
+                                                            </A>
+                                                        }).collect_view()}
+                                                    </div>
+                                                </div>
+                                            }
+                                        })}
+                                        <div class="mt-auto flex gap-2">
+                                            <button
+                                                class="btn btn-secondary text-sm flex-1"
+                                                on:click={
+                                                    let cat = category_for_edit.clone();
+                                                    move |_| start_edit(cat.clone())
+                                                }
+                                                disabled=move || loading.get()
+                                            >
+                                                {icon("edit")}
+                                                "Edit"
+                                            </button>
+                                            <button
+                                                class="btn btn-danger text-sm"
+                                                on:click=move |_| handle_delete_click(category_id)
+                                                disabled=move || loading.get()
+                                            >
+                                                {icon("trash")}
+                                                "Delete"
+                                            </button>
+                                        </div>
+                                    </div>
+                                }
+                            }}
                         </For>
                     </div>
                 }.into_any()

@@ -7,7 +7,7 @@ pub struct Recipe {
     pub id: i64,
     pub name: String,
     pub instructions: Option<String>,
-    pub base_servings: i32,
+    pub portions: i32,
     #[cfg_attr(feature = "ssr", sqlx(default))]
     pub created_at: Option<DateTime<Utc>>,
     #[cfg_attr(feature = "ssr", sqlx(default))]
@@ -50,7 +50,7 @@ pub struct RecipeIngredientDetail {
 pub struct CreateRecipe {
     pub name: String,
     pub instructions: Option<String>,
-    pub base_servings: i32,
+    pub portions: i32,
     pub ingredients: Vec<CreateRecipeIngredient>,
 }
 
@@ -69,6 +69,6 @@ pub struct CreateRecipeIngredient {
 pub struct UpdateRecipe {
     pub name: Option<String>,
     pub instructions: Option<Option<String>>,
-    pub base_servings: Option<i32>,
+    pub portions: Option<i32>,
     pub ingredients: Option<Vec<CreateRecipeIngredient>>,
 }

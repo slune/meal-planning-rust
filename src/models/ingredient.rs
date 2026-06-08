@@ -30,3 +30,24 @@ pub struct UpdateIngredient {
     pub primary_unit: Option<String>,
     pub secondary_unit: Option<Option<String>>,
 }
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq)]
+pub struct IngredientRecipeUsage {
+    pub id: i64,
+    pub name: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq)]
+pub struct IngredientUsage {
+    pub ingredient_id: i64,
+    pub recipes: Vec<IngredientRecipeUsage>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct MergeIngredientsResult {
+    pub ingredient: Ingredient,
+    pub merged_ingredient_count: usize,
+    pub updated_recipe_rows: u64,
+    pub combined_recipe_rows: u64,
+    pub deleted_ingredient_count: u64,
+}

@@ -54,7 +54,7 @@ pub async fn generate_daily_report(
                 + (adults as f64 * adult_mult);
 
             let quantity = recipe_ing.recipe_ingredient.base_quantity * total_multiplier
-                / recipe.recipe.base_servings as f64;
+                / recipe.recipe.portions as f64;
 
             let entry = ingredient_totals
                 .entry(recipe_ing.recipe_ingredient.ingredient_id)
@@ -182,7 +182,7 @@ pub async fn generate_camp_report(
                     + (adults as f64 * adult_mult);
 
                 let quantity = recipe_ing.recipe_ingredient.base_quantity * total_multiplier
-                    / recipe.recipe.base_servings as f64;
+                    / recipe.recipe.portions as f64;
 
                 let entry = ingredient_totals
                     .entry(recipe_ing.recipe_ingredient.ingredient_id)

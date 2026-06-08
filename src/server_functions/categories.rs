@@ -1,4 +1,4 @@
-use crate::models::Category;
+use crate::models::{Category, CategoryUsage};
 use leptos::prelude::*;
 
 #[server(GetCategories, "/api")]
@@ -7,6 +7,16 @@ pub async fn get_categories() -> Result<Vec<Category>, ServerFnError> {
     let pool = expect_context::<sqlx::SqlitePool>();
 
     categories::get_categories(&pool)
+        .await
+        .map_err(|e| ServerFnError::ServerError(e.to_string()))
+}
+
+#[server(GetCategoryUsage, "/api")]
+pub async fn get_category_usage() -> Result<Vec<CategoryUsage>, ServerFnError> {
+    use crate::api::categories;
+    let pool = expect_context::<sqlx::SqlitePool>();
+
+    categories::get_category_usage(&pool)
         .await
         .map_err(|e| ServerFnError::ServerError(e.to_string()))
 }

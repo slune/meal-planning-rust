@@ -1,10 +1,10 @@
 //! Pure ingredient-quantity math, shared by every report and unit-tested.
 //!
-//! All reports scale a recipe's base ingredient quantities by how many
-//! base-servings the attending people represent. Keeping the formula here (and
+//! All reports scale a recipe's ingredient quantities by how many recipe
+//! portions the attending people represent. Keeping the formula here (and
 //! out of SQL) means it has a single source of truth that we can test directly.
 
-/// Canonical default per-group serving multipliers.
+/// Canonical default per-group portion multipliers.
 ///
 /// These match the DB schema defaults in `migrations/003_create_recipes.sql`
 /// and are used when a recipe ingredient leaves a multiplier unset (NULL).
@@ -30,10 +30,10 @@ impl Attendance {
     }
 }
 
-/// Number of base-recipe servings a meal's attendance represents, given the
+/// Number of recipe portions a meal's attendance represents, given the
 /// recipe ingredient's per-group multipliers (an unset multiplier falls back to
 /// the canonical default).
-pub fn serving_multiplier(
+pub fn portion_multiplier(
     attendance: Attendance,
     child_multiplier: Option<f64>,
     teen_multiplier: Option<f64>,
@@ -51,29 +51,29 @@ pub fn serving_multiplier(
 /// Quantity of a single ingredient required for one meal:
 ///
 /// ```text
-/// base_quantity * serving_multiplier(attendance, multipliers) / base_servings
+/// base_quantity * portion_multiplier(attendance, multipliers) / portions
 /// ```
 ///
-/// Returns `0.0` when `base_servings <= 0`, guarding against divide-by-zero.
+/// Returns `0.0` when `portions <= 0`, guarding against divide-by-zero.
 pub fn ingredient_quantity(
     base_quantity: f64,
-    base_servings: i32,
+    portions: i32,
     attendance: Attendance,
     child_multiplier: Option<f64>,
     teen_multiplier: Option<f64>,
     adult_multiplier: Option<f64>,
 ) -> f64 {
-    if base_servings <= 0 {
+    if portions <= 0 {
         return 0.0;
     }
     base_quantity
-        * serving_multiplier(
+        * portion_multiplier(
             attendance,
             child_multiplier,
             teen_multiplier,
             adult_multiplier,
         )
-        / base_servings as f64
+        / portions as f64
 }
 
 /// Sum attendance across distinct meals.
@@ -105,32 +105,32 @@ mod tests {
     }
 
     #[test]
-    fn serving_multiplier_uses_explicit_multipliers() {
+    fn portion_multiplier_uses_explicit_multipliers() {
         // 2 children * 0.4 + 3 teens * 0.6 + 4 adults * 1.0 = 0.8 + 1.8 + 4.0
-        let m = serving_multiplier(Attendance::new(2, 3, 4), Some(0.4), Some(0.6), Some(1.0));
+        let m = portion_multiplier(Attendance::new(2, 3, 4), Some(0.4), Some(0.6), Some(1.0));
         approx(m, 6.6);
     }
 
     #[test]
-    fn serving_multiplier_falls_back_to_canonical_defaults() {
+    fn portion_multiplier_falls_back_to_canonical_defaults() {
         // None => 0.5 / 0.75 / 1.0
         // 4 children * 0.5 + 4 teens * 0.75 + 2 adults * 1.0 = 2.0 + 3.0 + 2.0
-        let m = serving_multiplier(Attendance::new(4, 4, 2), None, None, None);
+        let m = portion_multiplier(Attendance::new(4, 4, 2), None, None, None);
         approx(m, 7.0);
     }
 
     #[test]
-    fn serving_multiplier_default_is_not_one_for_children_and_teens() {
+    fn portion_multiplier_default_is_not_one_for_children_and_teens() {
         // Regression guard against the old SQL bug that defaulted every group to
         // 1.0. A single child with an unset multiplier must weigh 0.5, not 1.0.
-        let m = serving_multiplier(Attendance::new(1, 0, 0), None, None, None);
+        let m = portion_multiplier(Attendance::new(1, 0, 0), None, None, None);
         approx(m, DEFAULT_CHILD_MULTIPLIER);
         assert_ne!(m, 1.0);
     }
 
     #[test]
-    fn ingredient_quantity_scales_base_quantity_by_servings() {
-        // base 1000 g for 10 servings; attendance represents 5 adult-servings
+    fn ingredient_quantity_scales_base_quantity_by_portions() {
+        // 1000 g for 10 portions; attendance represents 5 adult portions
         // => 1000 * 5 / 10 = 500
         let q = ingredient_quantity(
             1000.0,
@@ -145,21 +145,21 @@ mod tests {
 
     #[test]
     fn ingredient_quantity_with_default_multipliers() {
-        // 200 g base for 4 servings, 2 children + 2 adults with default mults.
-        // serving_mult = 2*0.5 + 0*0.75 + 2*1.0 = 3.0
+        // 200 g for 4 portions, 2 children + 2 adults with default mults.
+        // portion_mult = 2*0.5 + 0*0.75 + 2*1.0 = 3.0
         // quantity = 200 * 3.0 / 4 = 150
         let q = ingredient_quantity(200.0, 4, Attendance::new(2, 0, 2), None, None, None);
         approx(q, 150.0);
     }
 
     #[test]
-    fn ingredient_quantity_zero_base_servings_returns_zero() {
+    fn ingredient_quantity_zero_portions_returns_zero() {
         let q = ingredient_quantity(500.0, 0, Attendance::new(1, 1, 1), None, None, None);
         approx(q, 0.0);
     }
 
     #[test]
-    fn ingredient_quantity_negative_base_servings_returns_zero() {
+    fn ingredient_quantity_negative_portions_returns_zero() {
         let q = ingredient_quantity(500.0, -3, Attendance::new(1, 1, 1), None, None, None);
         approx(q, 0.0);
     }

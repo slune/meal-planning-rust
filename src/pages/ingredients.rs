@@ -1,9 +1,17 @@
 use crate::components::{CategoryManager, IngredientManager, icon};
 use leptos::prelude::*;
+use leptos_router::hooks::use_query_map;
 
 #[component]
 pub fn IngredientsPage() -> impl IntoView {
     let (active_tab, set_active_tab) = signal("ingredients");
+    let query_map = use_query_map();
+
+    Effect::new(move |_| {
+        if query_map.with(|params| params.get_str("ingredient_id").is_some()) {
+            set_active_tab.set("ingredients");
+        }
+    });
 
     view! {
         <div class="space-y-6">

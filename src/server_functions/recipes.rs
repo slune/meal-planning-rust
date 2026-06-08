@@ -25,7 +25,7 @@ pub async fn get_recipe_with_ingredients(id: i64) -> Result<RecipeWithIngredient
 pub async fn create_recipe(
     name: String,
     instructions: Option<String>,
-    base_servings: i32,
+    portions: i32,
     ingredients: Vec<CreateRecipeIngredient>,
 ) -> Result<RecipeWithIngredients, ServerFnError> {
     use crate::api::recipes;
@@ -35,7 +35,7 @@ pub async fn create_recipe(
     let new_recipe = CreateRecipe {
         name,
         instructions,
-        base_servings,
+        portions,
         ingredients,
     };
 
@@ -49,7 +49,7 @@ pub async fn update_recipe(
     id: i64,
     name: String,
     instructions: Option<String>,
-    base_servings: i32,
+    portions: i32,
     ingredients: Vec<CreateRecipeIngredient>,
 ) -> Result<RecipeWithIngredients, ServerFnError> {
     use crate::api::recipes;
@@ -59,7 +59,7 @@ pub async fn update_recipe(
     let update_recipe = UpdateRecipe {
         name: Some(name),
         instructions: Some(instructions),
-        base_servings: Some(base_servings),
+        portions: Some(portions),
         ingredients: Some(ingredients),
     };
 

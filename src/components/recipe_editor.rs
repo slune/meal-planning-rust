@@ -7,6 +7,7 @@ use crate::server_functions::recipes::{
 use leptos::ev::SubmitEvent;
 use leptos::prelude::*;
 use leptos::task::spawn_local;
+use leptos_router::hooks::query_signal;
 
 #[derive(Clone, Debug)]
 struct RecipeIngredientForm {
@@ -35,11 +36,13 @@ pub fn RecipeEditor() -> impl IntoView {
     // Form fields
     let (name, set_name) = signal(String::new());
     let (instructions, set_instructions) = signal(String::new());
-    let (base_servings, set_base_servings) = signal(4);
+    let (portions, set_portions) = signal(10);
     let (recipe_ingredients, set_recipe_ingredients) = signal(Vec::<RecipeIngredientForm>::new());
 
     // Search
     let (search_query, set_search_query) = signal(String::new());
+    let (recipe_id_query, set_recipe_id_query) = query_signal::<i64>("recipe_id");
+    let (opened_query_recipe_id, set_opened_query_recipe_id) = signal(None::<i64>);
 
     // Load data on mount
     let load_data = move || {
@@ -68,9 +71,10 @@ pub fn RecipeEditor() -> impl IntoView {
     let reset_form = move || {
         set_name.set(String::new());
         set_instructions.set(String::new());
-        set_base_servings.set(4);
+        set_portions.set(10);
         set_recipe_ingredients.set(Vec::new());
         set_editing_recipe_id.set(None);
+        set_recipe_id_query.set(None);
         set_error.set(None);
     };
 
@@ -109,7 +113,7 @@ pub fn RecipeEditor() -> impl IntoView {
 
         let name_val = name.get();
         let instructions_val = instructions.get();
-        let base_servings_val = base_servings.get();
+        let portions_val = portions.get();
         let recipe_ingredients_val = recipe_ingredients.get();
         let editing_id = editing_recipe_id.get();
 
@@ -123,9 +127,9 @@ pub fn RecipeEditor() -> impl IntoView {
             return;
         }
 
-        // Validate base servings is positive
-        if base_servings_val <= 0 {
-            toast_error("Base servings must be greater than 0");
+        // Validate portions is positive
+        if portions_val <= 0 {
+            toast_error("Portions must be greater than 0");
             return;
         }
 
@@ -178,7 +182,7 @@ pub fn RecipeEditor() -> impl IntoView {
                     id,
                     name_val,
                     instructions_opt,
-                    base_servings_val,
+                    portions_val,
                     ingredients_to_create,
                 )
                 .await
@@ -187,7 +191,7 @@ pub fn RecipeEditor() -> impl IntoView {
                 create_recipe(
                     name_val,
                     instructions_opt,
-                    base_servings_val,
+                    portions_val,
                     ingredients_to_create,
                 )
                 .await
@@ -222,7 +226,7 @@ pub fn RecipeEditor() -> impl IntoView {
                     set_name.set(recipe_data.recipe.name.clone());
                     set_instructions
                         .set(recipe_data.recipe.instructions.clone().unwrap_or_default());
-                    set_base_servings.set(recipe_data.recipe.base_servings);
+                    set_portions.set(recipe_data.recipe.portions);
 
                     let form_ingredients = recipe_data
                         .ingredients
@@ -248,6 +252,16 @@ pub fn RecipeEditor() -> impl IntoView {
             set_loading.set(false);
         });
     };
+
+    Effect::new(move |_| {
+        if let Some(recipe_id) = recipe_id_query.get()
+            && opened_query_recipe_id.get_untracked() != Some(recipe_id)
+        {
+            set_opened_query_recipe_id.set(Some(recipe_id));
+            set_search_query.set(String::new());
+            handle_edit(recipe_id);
+        }
+    });
 
     let handle_delete_click = move |id: i64| {
         set_delete_id.set(id);
@@ -283,7 +297,7 @@ pub fn RecipeEditor() -> impl IntoView {
                     <div>
                         <p class="page-kicker">"Library"</p>
                         <h2 class="page-title">"Recipes"</h2>
-                        <p class="page-subtitle">"Maintain recipe servings, preparation notes, ingredients, and attendance multipliers."</p>
+                        <p class="page-subtitle">"Maintain recipe portions, preparation notes, ingredients, and attendance multipliers."</p>
                         <div class="mt-3">
                             <span class="status-chip status-chip-amber">{move || format!("{} recipes", recipes.get().len())}</span>
                         </div>
@@ -347,14 +361,14 @@ pub fn RecipeEditor() -> impl IntoView {
                         </div>
 
                         <div>
-                            <label class="form-label">"Base Servings"</label>
+                            <label class="form-label">"Portions"</label>
                             <input
                                 type="number"
                                 class="form-input"
-                                prop:value=move || base_servings.get()
+                                prop:value=move || portions.get()
                                 on:input=move |ev| {
                                     if let Ok(val) = event_target_value(&ev).parse::<i32>() {
-                                        set_base_servings.set(val);
+                                        set_portions.set(val);
                                     }
                                 }
                                 min="1"
@@ -427,7 +441,7 @@ pub fn RecipeEditor() -> impl IntoView {
                                                 />
                                                 <input
                                                     type="number"
-                                                    step="0.01"
+                                                    step="any"
                                                     class="form-input text-sm"
                                                     prop:value=ing.base_quantity.to_string()
                                                     on:input=move |ev| {
@@ -569,7 +583,7 @@ pub fn RecipeEditor() -> impl IntoView {
                             <div class="record-card record-card-amber">
                                 <div class="flex items-start justify-between mb-3">
                                     <span class="icon-badge icon-badge-amber" aria-hidden="true">{icon("recipes")}</span>
-                                    <span class="badge badge-primary">{recipe.base_servings} " servings"</span>
+                                    <span class="badge badge-primary">{recipe.portions} " portions"</span>
                                 </div>
                                 <h3 class="text-xl font-bold text-slate-800 mb-4">{recipe.name.clone()}</h3>
                                 <div class="mt-auto flex gap-2">

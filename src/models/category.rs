@@ -24,3 +24,15 @@ pub struct UpdateCategory {
     pub name: Option<String>,
     pub sort_order: Option<i32>,
 }
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq)]
+pub struct CategoryIngredientUsage {
+    pub id: i64,
+    pub name: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq)]
+pub struct CategoryUsage {
+    pub category_id: i64,
+    pub ingredients: Vec<CategoryIngredientUsage>,
+}

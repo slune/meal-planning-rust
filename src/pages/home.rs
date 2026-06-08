@@ -67,7 +67,7 @@ pub fn HomePage() -> impl IntoView {
                     <IconBadge name="recipes" tone="amber"/>
                     <p class="page-kicker mt-4">"Library"</p>
                     <h2 class="section-title mt-2">"Recipes"</h2>
-                    <p class="mt-2 text-sm text-slate-600">"Base servings, instructions, and scaling rules."</p>
+                    <p class="mt-2 text-sm text-slate-600">"Portions, instructions, and scaling rules."</p>
                 </a>
 
                 <a href="/planner" class="home-action home-action-rose">
@@ -98,7 +98,7 @@ pub fn HomePage() -> impl IntoView {
                         </li>
                         <li class="rounded-md border-l-4 border-amber-500 bg-amber-50/60 p-3">
                             <span class="font-semibold text-slate-950">"2. Recipes"</span>
-                            <p class="mt-1 text-sm">"Add base servings and per-person multipliers."</p>
+                            <p class="mt-1 text-sm">"Add portions and per-group multipliers."</p>
                         </li>
                         <li class="rounded-md border-l-4 border-sky-500 bg-sky-50/60 p-3">
                             <span class="font-semibold text-slate-950">"3. Camps"</span>

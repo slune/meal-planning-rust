@@ -1,4 +1,4 @@
-use crate::models::Ingredient;
+use crate::models::{Ingredient, IngredientUsage, MergeIngredientsResult};
 use leptos::prelude::*;
 
 #[server(GetIngredients, "/api")]
@@ -7,6 +7,16 @@ pub async fn get_ingredients() -> Result<Vec<Ingredient>, ServerFnError> {
     let pool = expect_context::<sqlx::SqlitePool>();
 
     ingredients::get_ingredients(&pool)
+        .await
+        .map_err(|e| ServerFnError::ServerError(e.to_string()))
+}
+
+#[server(GetIngredientUsage, "/api")]
+pub async fn get_ingredient_usage() -> Result<Vec<IngredientUsage>, ServerFnError> {
+    use crate::api::ingredients;
+    let pool = expect_context::<sqlx::SqlitePool>();
+
+    ingredients::get_ingredient_usage(&pool)
         .await
         .map_err(|e| ServerFnError::ServerError(e.to_string()))
 }
@@ -78,4 +88,29 @@ pub async fn delete_ingredient(id: i64) -> Result<(), ServerFnError> {
     ingredients::delete_ingredient(&pool, id)
         .await
         .map_err(|e| ServerFnError::ServerError(e.to_string()))
+}
+
+#[server(MergeIngredientsFn, "/api")]
+pub async fn merge_ingredients(
+    target_id: i64,
+    ingredient_ids: Vec<i64>,
+    name: String,
+    category_id: i64,
+    primary_unit: String,
+    secondary_unit: Option<String>,
+) -> Result<MergeIngredientsResult, ServerFnError> {
+    use crate::api::ingredients;
+    let pool = expect_context::<sqlx::SqlitePool>();
+
+    ingredients::merge_ingredients(
+        &pool,
+        target_id,
+        ingredient_ids,
+        name,
+        category_id,
+        primary_unit,
+        secondary_unit,
+    )
+    .await
+    .map_err(|e| ServerFnError::ServerError(e.to_string()))
 }

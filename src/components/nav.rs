@@ -6,9 +6,9 @@ use crate::server_functions::auth::logout;
 
 fn nav_link_class(active: bool) -> &'static str {
     if active {
-        "inline-flex items-center gap-2 rounded-md bg-slate-900 px-3 py-2 text-sm font-semibold text-white no-underline"
+        "inline-flex items-center gap-2 rounded-md border border-sky-200 bg-sky-50 px-3 py-2 text-sm font-semibold text-sky-800 no-underline"
     } else {
-        "inline-flex items-center gap-2 rounded-md px-3 py-2 text-sm font-semibold text-slate-600 no-underline hover:bg-slate-100 hover:text-slate-950"
+        "inline-flex items-center gap-2 rounded-md border border-transparent px-3 py-2 text-sm font-semibold text-slate-600 no-underline hover:bg-slate-100 hover:text-slate-950"
     }
 }
 

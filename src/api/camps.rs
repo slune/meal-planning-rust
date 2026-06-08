@@ -304,6 +304,7 @@ mod tests {
             include_str!("../../migrations/004_create_camps.sql"),
             include_str!("../../migrations/005_create_meal_plans.sql"),
             include_str!("../../migrations/006_remove_planned_meals_unique.sql"),
+            include_str!("../../migrations/007_rename_base_servings_to_portions.sql"),
         ] {
             sqlx::query(migration).execute(&pool).await.unwrap();
         }
@@ -328,7 +329,7 @@ mod tests {
     }
 
     async fn insert_recipe(pool: &SqlitePool, name: &str) -> i64 {
-        sqlx::query("INSERT INTO recipes (name, base_servings) VALUES (?, 4)")
+        sqlx::query("INSERT INTO recipes (name, portions) VALUES (?, 4)")
             .bind(name)
             .execute(pool)
             .await

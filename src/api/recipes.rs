@@ -6,7 +6,7 @@ use sqlx::SqlitePool;
 
 pub async fn get_recipes(pool: &SqlitePool) -> Result<Vec<Recipe>, sqlx::Error> {
     sqlx::query_as::<_, Recipe>(
-        "SELECT id, name, instructions, base_servings, created_at, updated_at 
+        "SELECT id, name, instructions, portions, created_at, updated_at
          FROM recipes 
          ORDER BY name",
     )
@@ -16,7 +16,7 @@ pub async fn get_recipes(pool: &SqlitePool) -> Result<Vec<Recipe>, sqlx::Error> 
 
 pub async fn get_recipe(pool: &SqlitePool, id: i64) -> Result<Recipe, sqlx::Error> {
     sqlx::query_as::<_, Recipe>(
-        "SELECT id, name, instructions, base_servings, created_at, updated_at 
+        "SELECT id, name, instructions, portions, created_at, updated_at
          FROM recipes 
          WHERE id = ?",
     )
@@ -61,10 +61,10 @@ pub async fn create_recipe(
     pool: &SqlitePool,
     recipe: CreateRecipe,
 ) -> Result<RecipeWithIngredients, sqlx::Error> {
-    // Validate base servings is positive
-    if recipe.base_servings <= 0 {
+    // Validate portions is positive
+    if recipe.portions <= 0 {
         return Err(sqlx::Error::Decode(
-            "Base servings must be greater than 0".into(),
+            "Portions must be greater than 0".into(),
         ));
     }
 
@@ -76,12 +76,12 @@ pub async fn create_recipe(
     let mut tx = pool.begin().await?;
 
     let result = sqlx::query(
-        "INSERT INTO recipes (name, instructions, base_servings) 
+        "INSERT INTO recipes (name, instructions, portions)
          VALUES (?, ?, ?)",
     )
     .bind(&recipe.name)
     .bind(&recipe.instructions)
-    .bind(recipe.base_servings)
+    .bind(recipe.portions)
     .execute(&mut *tx)
     .await?;
 
@@ -118,11 +118,11 @@ pub async fn update_recipe(
 ) -> Result<RecipeWithIngredients, sqlx::Error> {
     let existing = get_recipe(pool, id).await?;
 
-    // Validate base servings if provided
-    let final_base_servings = recipe.base_servings.unwrap_or(existing.base_servings);
-    if final_base_servings <= 0 {
+    // Validate portions if provided
+    let final_portions = recipe.portions.unwrap_or(existing.portions);
+    if final_portions <= 0 {
         return Err(sqlx::Error::Decode(
-            "Base servings must be greater than 0".into(),
+            "Portions must be greater than 0".into(),
         ));
     }
 
@@ -138,12 +138,12 @@ pub async fn update_recipe(
     sqlx::query(
         "UPDATE recipes
          SET name = ?, instructions = ?,
-             base_servings = ?, updated_at = CURRENT_TIMESTAMP
+             portions = ?, updated_at = CURRENT_TIMESTAMP
          WHERE id = ?",
     )
     .bind(recipe.name.unwrap_or(existing.name))
     .bind(recipe.instructions.unwrap_or(existing.instructions))
-    .bind(final_base_servings)
+    .bind(final_portions)
     .bind(id)
     .execute(&mut *tx)
     .await?;

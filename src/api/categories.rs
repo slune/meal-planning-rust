@@ -1,5 +1,15 @@
-use crate::models::{Category, CreateCategory, UpdateCategory};
+use crate::models::{
+    Category, CategoryIngredientUsage, CategoryUsage, CreateCategory, UpdateCategory,
+};
 use sqlx::SqlitePool;
+use std::collections::BTreeMap;
+
+#[derive(sqlx::FromRow)]
+struct CategoryUsageRow {
+    category_id: i64,
+    ingredient_id: i64,
+    ingredient_name: String,
+}
 
 pub async fn get_categories(pool: &SqlitePool) -> Result<Vec<Category>, sqlx::Error> {
     sqlx::query_as::<_, Category>(
@@ -9,6 +19,38 @@ pub async fn get_categories(pool: &SqlitePool) -> Result<Vec<Category>, sqlx::Er
     )
     .fetch_all(pool)
     .await
+}
+
+pub async fn get_category_usage(pool: &SqlitePool) -> Result<Vec<CategoryUsage>, sqlx::Error> {
+    let rows = sqlx::query_as::<_, CategoryUsageRow>(
+        "SELECT
+            category_id,
+            id as ingredient_id,
+            name as ingredient_name
+         FROM ingredients
+         ORDER BY category_id, name",
+    )
+    .fetch_all(pool)
+    .await?;
+
+    let mut usage_by_category = BTreeMap::<i64, Vec<CategoryIngredientUsage>>::new();
+    for row in rows {
+        usage_by_category
+            .entry(row.category_id)
+            .or_default()
+            .push(CategoryIngredientUsage {
+                id: row.ingredient_id,
+                name: row.ingredient_name,
+            });
+    }
+
+    Ok(usage_by_category
+        .into_iter()
+        .map(|(category_id, ingredients)| CategoryUsage {
+            category_id,
+            ingredients,
+        })
+        .collect())
 }
 
 pub async fn get_category(pool: &SqlitePool, id: i64) -> Result<Category, sqlx::Error> {
@@ -79,4 +121,69 @@ pub async fn delete_category(pool: &SqlitePool, id: i64) -> Result<(), sqlx::Err
         .await?;
 
     Ok(())
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use sqlx::sqlite::SqlitePoolOptions;
+
+    async fn setup_pool() -> SqlitePool {
+        let pool = SqlitePoolOptions::new()
+            .max_connections(1)
+            .connect("sqlite::memory:")
+            .await
+            .unwrap();
+
+        for migration in [
+            include_str!("../../migrations/001_create_categories.sql"),
+            include_str!("../../migrations/002_create_ingredients.sql"),
+        ] {
+            sqlx::query(migration).execute(&pool).await.unwrap();
+        }
+
+        pool
+    }
+
+    #[tokio::test]
+    async fn get_category_usage_returns_ingredients_by_category() {
+        let pool = setup_pool().await;
+
+        sqlx::query(
+            "INSERT INTO ingredients (name, category_id, primary_unit) VALUES (?, 1, 'kg')",
+        )
+        .bind("Brambory")
+        .execute(&pool)
+        .await
+        .unwrap();
+        sqlx::query(
+            "INSERT INTO ingredients (name, category_id, primary_unit) VALUES (?, 1, 'kg')",
+        )
+        .bind("Cibule")
+        .execute(&pool)
+        .await
+        .unwrap();
+        sqlx::query(
+            "INSERT INTO ingredients (name, category_id, primary_unit) VALUES (?, 2, 'ks')",
+        )
+        .bind("Jablko")
+        .execute(&pool)
+        .await
+        .unwrap();
+
+        let usage = get_category_usage(&pool).await.unwrap();
+
+        assert_eq!(usage.len(), 2);
+        assert_eq!(usage[0].category_id, 1);
+        assert_eq!(
+            usage[0]
+                .ingredients
+                .iter()
+                .map(|ingredient| ingredient.name.as_str())
+                .collect::<Vec<_>>(),
+            vec!["Brambory", "Cibule"]
+        );
+        assert_eq!(usage[1].category_id, 2);
+        assert_eq!(usage[1].ingredients[0].name, "Jablko");
+    }
 }

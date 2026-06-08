@@ -112,7 +112,7 @@ Environment variables:
 ### Recipe Management
 
 - Create recipes with multiple ingredients
-- Set base serving sizes
+- Set recipe portions
 - Define portion multipliers for children, teens, and adults
 - Support for multiple units per ingredient (kg, g, pieces, etc.)
 
