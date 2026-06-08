@@ -4,7 +4,7 @@ use crate::models::{
     ShoppingListItem,
 };
 use chrono::NaiveDate;
-use sqlx::{Row, SqlitePool};
+use sqlx::{AssertSqlSafe, Row, SqlitePool};
 use std::collections::HashMap;
 
 /// One recipe-ingredient as it appears at a single planned meal, with the
@@ -83,7 +83,7 @@ async fn fetch_meal_ingredients(
         sql.push_str(" AND mp.date >= ? AND mp.date <= ?");
     }
 
-    let mut query = sqlx::query(&sql).bind(camp_id);
+    let mut query = sqlx::query(AssertSqlSafe(sql)).bind(camp_id);
     if let Some((start, end)) = date_range {
         query = query.bind(start).bind(end);
     }

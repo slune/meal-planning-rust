@@ -2,7 +2,6 @@ use chrono::NaiveDate;
 use printpdf::*;
 use sqlx::SqlitePool;
 use std::collections::HashMap;
-use std::io::BufWriter;
 
 use crate::api::camps::get_camp;
 use crate::api::meal_plans::get_planned_meals_for_date;
@@ -97,52 +96,17 @@ pub async fn generate_daily_report(
         total.sort_order = ingredient.sort_order;
     }
 
-    // Generate PDF
-    let (doc, page1, layer1) = PdfDocument::new(
-        if language == "cz" {
-            "Denní přehled surovin"
-        } else {
-            "Daily Ingredient Report"
-        },
-        Mm(210.0),
-        Mm(297.0),
-        "Layer 1",
-    );
-
-    let font = doc.add_builtin_font(BuiltinFont::Helvetica)?;
-    let font_bold = doc.add_builtin_font(BuiltinFont::HelveticaBold)?;
-    let current_layer = doc.get_page(page1).get_layer(layer1);
-
-    let mut y_pos = 280.0;
-
-    // Title
-    current_layer.use_text(
-        if language == "cz" {
-            format!("Denní přehled surovin - {}", date.format("%d.%m.%Y"))
-        } else {
-            format!("Daily Ingredient Report - {}", date.format("%Y-%m-%d"))
-        },
-        16.0,
-        Mm(20.0),
-        Mm(y_pos),
-        &font_bold,
-    );
-
-    y_pos -= 10.0;
-
-    current_layer.use_text(
-        if language == "cz" {
-            format!("Tábor: {}", camp.name)
-        } else {
-            format!("Camp: {}", camp.name)
-        },
-        12.0,
-        Mm(20.0),
-        Mm(y_pos),
-        &font,
-    );
-
-    y_pos -= 15.0;
+    let title = if language == "cz" {
+        format!("Denní přehled surovin - {}", date.format("%d.%m.%Y"))
+    } else {
+        format!("Daily Ingredient Report - {}", date.format("%Y-%m-%d"))
+    };
+    let subtitle = if language == "cz" {
+        format!("Tábor: {}", camp.name)
+    } else {
+        format!("Camp: {}", camp.name)
+    };
+    let mut pdf = PdfReport::new(&title, &subtitle)?;
 
     // Group by category
     let mut sorted_totals: Vec<_> = ingredient_totals.into_iter().collect();
@@ -155,35 +119,18 @@ pub async fn generate_daily_report(
 
         if category_name != &current_category {
             current_category = category_name.clone();
-            y_pos -= 5.0;
-
-            if y_pos < 20.0 {
-                // Start new page
-                y_pos = 280.0;
-            }
-
-            current_layer.use_text(&current_category, 14.0, Mm(20.0), Mm(y_pos), &font_bold);
-            y_pos -= 8.0;
+            pdf.section(&current_category);
         }
 
         let ingredient_name = &total.name;
 
         for (unit, quantity) in total.quantities {
             let line = format!("  {} {:.2} {}", ingredient_name, quantity, unit);
-            current_layer.use_text(&line, 10.0, Mm(25.0), Mm(y_pos), &font);
-            y_pos -= 6.0;
-
-            if y_pos < 20.0 {
-                y_pos = 280.0;
-            }
+            pdf.line(&line, 25.0, 10.0, false);
         }
     }
 
-    let mut buffer = BufWriter::new(Vec::new());
-    doc.save(&mut buffer)?;
-    let bytes = buffer.into_inner()?;
-
-    Ok(bytes)
+    pdf.finish()
 }
 
 pub async fn generate_camp_report(
@@ -278,72 +225,27 @@ pub async fn generate_camp_report(
         total.sort_order = ingredient.sort_order;
     }
 
-    // Generate PDF
-    let (doc, page1, layer1) = PdfDocument::new(
-        if language == "cz" {
-            "Nákupní seznam"
-        } else {
-            "Shopping List"
-        },
-        Mm(210.0),
-        Mm(297.0),
-        "Layer 1",
-    );
-
-    let font = doc.add_builtin_font(BuiltinFont::Helvetica)?;
-    let font_bold = doc.add_builtin_font(BuiltinFont::HelveticaBold)?;
-    let current_layer = doc.get_page(page1).get_layer(layer1);
-
-    let mut y_pos = 280.0;
-
-    // Title
-    current_layer.use_text(
-        if language == "cz" {
-            "Nákupní seznam pro celý tábor"
-        } else {
-            "Shopping List for Entire Camp"
-        },
-        16.0,
-        Mm(20.0),
-        Mm(y_pos),
-        &font_bold,
-    );
-
-    y_pos -= 10.0;
-
-    current_layer.use_text(
-        if language == "cz" {
-            format!("Tábor: {}", camp.name)
-        } else {
-            format!("Camp: {}", camp.name)
-        },
-        12.0,
-        Mm(20.0),
-        Mm(y_pos),
-        &font,
-    );
-
-    current_layer.use_text(
-        if language == "cz" {
-            format!(
-                "Od {} do {}",
-                camp.start_date.format("%d.%m.%Y"),
-                camp.end_date.format("%d.%m.%Y")
-            )
-        } else {
-            format!(
-                "From {} to {}",
-                camp.start_date.format("%Y-%m-%d"),
-                camp.end_date.format("%Y-%m-%d")
-            )
-        },
-        12.0,
-        Mm(20.0),
-        Mm(y_pos - 6.0),
-        &font,
-    );
-
-    y_pos -= 20.0;
+    let title = if language == "cz" {
+        "Nákupní seznam pro celý tábor"
+    } else {
+        "Shopping List for Entire Camp"
+    };
+    let subtitle = if language == "cz" {
+        format!(
+            "Tábor: {} | Od {} do {}",
+            camp.name,
+            camp.start_date.format("%d.%m.%Y"),
+            camp.end_date.format("%d.%m.%Y")
+        )
+    } else {
+        format!(
+            "Camp: {} | From {} to {}",
+            camp.name,
+            camp.start_date.format("%Y-%m-%d"),
+            camp.end_date.format("%Y-%m-%d")
+        )
+    };
+    let mut pdf = PdfReport::new(title, &subtitle)?;
 
     // Group by category
     let mut sorted_totals: Vec<_> = ingredient_totals.into_iter().collect();
@@ -356,34 +258,18 @@ pub async fn generate_camp_report(
 
         if category_name != &current_category {
             current_category = category_name.clone();
-            y_pos -= 5.0;
-
-            if y_pos < 20.0 {
-                y_pos = 280.0;
-            }
-
-            current_layer.use_text(&current_category, 14.0, Mm(20.0), Mm(y_pos), &font_bold);
-            y_pos -= 8.0;
+            pdf.section(&current_category);
         }
 
         let ingredient_name = &total.name;
 
         for (unit, quantity) in total.quantities {
             let line = format!("  {} {:.2} {}", ingredient_name, quantity, unit);
-            current_layer.use_text(&line, 10.0, Mm(25.0), Mm(y_pos), &font);
-            y_pos -= 6.0;
-
-            if y_pos < 20.0 {
-                y_pos = 280.0;
-            }
+            pdf.line(&line, 25.0, 10.0, false);
         }
     }
 
-    let mut buffer = BufWriter::new(Vec::new());
-    doc.save(&mut buffer)?;
-    let bytes = buffer.into_inner()?;
-
-    Ok(bytes)
+    pdf.finish()
 }
 
 #[derive(Clone, Copy, Debug)]
@@ -486,10 +372,8 @@ struct PdfColumn {
 }
 
 struct PdfReport {
-    doc: PdfDocumentReference,
-    layer: PdfLayerReference,
-    font: IndirectFontRef,
-    bold: IndirectFontRef,
+    doc: PdfDocument,
+    ops: Vec<Op>,
     title: String,
     subtitle: String,
     page_number: usize,
@@ -506,16 +390,9 @@ impl PdfReport {
     const ROW_H: f32 = 6.2;
 
     fn new(title: &str, subtitle: &str) -> Result<Self, Box<dyn std::error::Error>> {
-        let (doc, page, layer) =
-            PdfDocument::new(title, Mm(Self::PAGE_W), Mm(Self::PAGE_H), "Layer 1");
-        let font = doc.add_builtin_font(BuiltinFont::Helvetica)?;
-        let bold = doc.add_builtin_font(BuiltinFont::HelveticaBold)?;
-        let layer = doc.get_page(page).get_layer(layer);
         let mut pdf = Self {
-            doc,
-            layer,
-            font,
-            bold,
+            doc: PdfDocument::new(title),
+            ops: Vec::new(),
             title: title.to_string(),
             subtitle: subtitle.to_string(),
             page_number: 1,
@@ -525,34 +402,36 @@ impl PdfReport {
         Ok(pdf)
     }
 
-    fn finish(self) -> Result<Vec<u8>, Box<dyn std::error::Error>> {
-        let mut buffer = BufWriter::new(Vec::new());
-        self.doc.save(&mut buffer)?;
-        Ok(buffer.into_inner()?)
+    fn finish(mut self) -> Result<Vec<u8>, Box<dyn std::error::Error>> {
+        self.push_page();
+        let mut warnings = Vec::new();
+        Ok(self.doc.save(&PdfSaveOptions::default(), &mut warnings))
     }
 
     fn draw_page_header(&mut self) {
+        let title = self.title.clone();
+        let subtitle = self.subtitle.clone();
+        let page = format!("Page {}", self.page_number);
+
         self.y = Self::HEADER_TOP_Y;
-        self.text(&self.title, Self::MARGIN_X, self.y, 16.0, true);
-        self.text(
-            &format!("Page {}", self.page_number),
-            178.0,
-            self.y,
-            9.0,
-            false,
-        );
+        self.text(&title, Self::MARGIN_X, self.y, 16.0, true);
+        self.text(&page, 178.0, self.y, 9.0, false);
         self.y -= 8.0;
-        self.text(&self.subtitle, Self::MARGIN_X, self.y, 9.5, false);
+        self.text(&subtitle, Self::MARGIN_X, self.y, 9.5, false);
         self.y = Self::CONTENT_TOP_Y;
     }
 
     fn new_page(&mut self) {
-        let (page, layer) = self
-            .doc
-            .add_page(Mm(Self::PAGE_W), Mm(Self::PAGE_H), "Layer");
-        self.layer = self.doc.get_page(page).get_layer(layer);
+        self.push_page();
         self.page_number += 1;
         self.draw_page_header();
+    }
+
+    fn push_page(&mut self) {
+        let ops = std::mem::take(&mut self.ops);
+        self.doc
+            .pages
+            .push(PdfPage::new(Mm(Self::PAGE_W), Mm(Self::PAGE_H), ops));
     }
 
     fn ensure_space(&mut self, height: f32) -> bool {
@@ -575,6 +454,12 @@ impl PdfReport {
         self.ensure_space(10.0);
         self.text(text.as_ref(), Self::MARGIN_X + 2.0, self.y, 10.5, true);
         self.y -= 6.5;
+    }
+
+    fn line(&mut self, text: impl AsRef<str>, x: f32, size: f32, bold: bool) {
+        self.ensure_space(Self::ROW_H);
+        self.text(text.as_ref(), x, self.y, size, bold);
+        self.y -= Self::ROW_H;
     }
 
     fn table_header(&mut self, columns: &[PdfColumn]) {
@@ -602,9 +487,27 @@ impl PdfReport {
         self.y -= Self::ROW_H;
     }
 
-    fn text(&self, text: &str, x: f32, y: f32, size: f32, bold: bool) {
-        let font = if bold { &self.bold } else { &self.font };
-        self.layer.use_text(text, size, Mm(x), Mm(y), font);
+    fn text(&mut self, text: &str, x: f32, y: f32, size: f32, bold: bool) {
+        let font = if bold {
+            BuiltinFont::HelveticaBold
+        } else {
+            BuiltinFont::Helvetica
+        };
+        self.ops.extend([
+            Op::StartTextSection,
+            Op::SetTextCursor {
+                pos: Point::new(Mm(x), Mm(y)),
+            },
+            Op::SetFont {
+                font: PdfFontHandle::Builtin(font),
+                size: Pt(size),
+            },
+            Op::SetLineHeight { lh: Pt(size) },
+            Op::ShowText {
+                items: vec![TextItem::Text(text.to_string())],
+            },
+            Op::EndTextSection,
+        ]);
     }
 }
 
