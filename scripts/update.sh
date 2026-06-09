@@ -49,9 +49,16 @@ gcloud compute scp --recurse \
     "$PROJECT_ROOT/target/site" \
     "$VM_NAME":~/meal-planning/target/ \
     --zone="$ZONE" --quiet
+
+RUNTIME_DIRS=(
+    "$PROJECT_ROOT/locales"
+    "$PROJECT_ROOT/style"
+    "$PROJECT_ROOT/migrations"
+)
+[[ -d "$PROJECT_ROOT/assets" ]] && RUNTIME_DIRS+=("$PROJECT_ROOT/assets")
+
 gcloud compute scp --recurse \
-    "$PROJECT_ROOT/locales" \
-    "$PROJECT_ROOT/style" \
+    "${RUNTIME_DIRS[@]}" \
     "$VM_NAME":~/meal-planning/ \
     --zone="$ZONE" --quiet
 
