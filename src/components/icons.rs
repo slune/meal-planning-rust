@@ -58,6 +58,20 @@ pub fn icon(name: &str) -> AnyView {
             </svg>
         }
         .into_any(),
+        "settings" => view! {
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="3"/>
+                <path d="M12 3v3"/>
+                <path d="M12 18v3"/>
+                <path d="M3 12h3"/>
+                <path d="M18 12h3"/>
+                <path d="m5.6 5.6 2.1 2.1"/>
+                <path d="m16.3 16.3 2.1 2.1"/>
+                <path d="m18.4 5.6-2.1 2.1"/>
+                <path d="m7.7 16.3-2.1 2.1"/>
+            </svg>
+        }
+        .into_any(),
         "category" => view! {
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M4 6h7l2 2h7v10a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2z"/>

@@ -8,9 +8,12 @@ use crate::api::meal_plans::get_planned_meals_for_date;
 use crate::api::recipes::get_recipe_with_ingredients;
 use crate::api::reports as report_data;
 use crate::models::{
-    AttendanceSummary, Camp, DailyIngredientItem, MealScheduleItem, MealType, RecipeIngredientItem,
+    AttendanceSummary, Camp, DailyIngredientItem, MealScheduleItem, RecipeIngredientItem,
     ShoppingListItem,
 };
+
+static PDF_FONT_REGULAR: &[u8] = include_bytes!("../../assets/fonts/LiberationSans-Regular.ttf");
+static PDF_FONT_BOLD: &[u8] = include_bytes!("../../assets/fonts/LiberationSans-Bold.ttf");
 
 #[derive(Debug)]
 struct IngredientTotal {
@@ -374,6 +377,8 @@ struct PdfColumn {
 struct PdfReport {
     doc: PdfDocument,
     ops: Vec<Op>,
+    regular_font_id: FontId,
+    bold_font_id: FontId,
     title: String,
     subtitle: String,
     page_number: usize,
@@ -390,9 +395,20 @@ impl PdfReport {
     const ROW_H: f32 = 6.2;
 
     fn new(title: &str, subtitle: &str) -> Result<Self, Box<dyn std::error::Error>> {
+        let mut doc = PdfDocument::new(title);
+        let mut font_warnings = Vec::new();
+        let regular_font = ParsedFont::from_bytes(PDF_FONT_REGULAR, 0, &mut font_warnings)
+            .ok_or("Failed to parse regular PDF font")?;
+        let bold_font = ParsedFont::from_bytes(PDF_FONT_BOLD, 0, &mut font_warnings)
+            .ok_or("Failed to parse bold PDF font")?;
+        let regular_font_id = doc.add_font(&regular_font);
+        let bold_font_id = doc.add_font(&bold_font);
+
         let mut pdf = Self {
-            doc: PdfDocument::new(title),
+            doc,
             ops: Vec::new(),
+            regular_font_id,
+            bold_font_id,
             title: title.to_string(),
             subtitle: subtitle.to_string(),
             page_number: 1,
@@ -489,9 +505,9 @@ impl PdfReport {
 
     fn text(&mut self, text: &str, x: f32, y: f32, size: f32, bold: bool) {
         let font = if bold {
-            BuiltinFont::HelveticaBold
+            self.bold_font_id.clone()
         } else {
-            BuiltinFont::Helvetica
+            self.regular_font_id.clone()
         };
         self.ops.extend([
             Op::StartTextSection,
@@ -499,7 +515,7 @@ impl PdfReport {
                 pos: Point::new(Mm(x), Mm(y)),
             },
             Op::SetFont {
-                font: PdfFontHandle::Builtin(font),
+                font: PdfFontHandle::External(font),
                 size: Pt(size),
             },
             Op::SetLineHeight { lh: Pt(size) },
@@ -524,17 +540,7 @@ fn fit_text(text: &str, max_chars: usize) -> String {
 }
 
 fn meal_type_label(meal_type: &str) -> String {
-    meal_type
-        .parse::<MealType>()
-        .map(|meal_type| match meal_type {
-            MealType::Breakfast => "Breakfast",
-            MealType::MorningSnack => "Morning Snack",
-            MealType::Lunch => "Lunch",
-            MealType::AfternoonSnack => "Afternoon Snack",
-            MealType::Dinner => "Dinner",
-        })
-        .unwrap_or(meal_type)
-        .to_string()
+    meal_type.to_string()
 }
 
 fn render_shopping_list_pdf(pdf: &mut PdfReport, items: Vec<ShoppingListItem>) {
@@ -783,5 +789,23 @@ fn render_ingredients_by_recipe_pdf(pdf: &mut PdfReport, items: Vec<RecipeIngred
                 item.unit,
             ],
         );
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn pdf_report_embeds_unicode_font_for_czech_text() {
+        let mut pdf =
+            PdfReport::new("Denní přehled surovin", "Tábor: Příliš žluťoučký kůň").unwrap();
+
+        pdf.line("Řeřicha 1.00 lžíce", 25.0, 10.0, false);
+        let bytes = pdf.finish().unwrap();
+        let content = String::from_utf8_lossy(&bytes);
+
+        assert!(bytes.len() > 1_000);
+        assert!(content.contains("/ToUnicode"));
     }
 }

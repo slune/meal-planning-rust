@@ -85,6 +85,14 @@ pub fn NavBar() -> impl IntoView {
                             <span class="nav-icon" aria-hidden="true">{icon("reports")}</span>
                             "Reports"
                         </a>
+                        <a
+                            href="/settings"
+                            class=move || nav_link_class(is_active("/settings"))
+                            aria-current=move || if is_active("/settings") { Some("page") } else { None }
+                        >
+                            <span class="nav-icon" aria-hidden="true">{icon("settings")}</span>
+                            "Settings"
+                        </a>
                         <button
                             class="rounded-md px-3 py-2 text-sm font-semibold text-slate-500 hover:bg-slate-100 hover:text-slate-950"
                             on:click=move |_| { logout_action.dispatch(()); }

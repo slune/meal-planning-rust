@@ -1,5 +1,52 @@
-use crate::models::PlannedMealWithDetails;
+use crate::models::{MealType, PlannedMealWithDetails};
 use leptos::prelude::*;
+
+#[server(GetMealTypes, "/api")]
+pub async fn get_meal_types() -> Result<Vec<MealType>, ServerFnError<String>> {
+    use crate::api::meal_plans;
+    let pool = expect_context::<sqlx::SqlitePool>();
+
+    meal_plans::get_meal_types(&pool)
+        .await
+        .map_err(|e| ServerFnError::<String>::ServerError(e.to_string()))
+}
+
+#[server(CreateMealTypeFn, "/api")]
+pub async fn create_meal_type(
+    name: String,
+    sort_order: Option<i32>,
+) -> Result<MealType, ServerFnError<String>> {
+    use crate::api::meal_plans;
+    let pool = expect_context::<sqlx::SqlitePool>();
+
+    meal_plans::create_meal_type(&pool, name, sort_order)
+        .await
+        .map_err(|e| ServerFnError::<String>::ServerError(e.to_string()))
+}
+
+#[server(UpdateMealTypeFn, "/api")]
+pub async fn update_meal_type(
+    id: i64,
+    name: String,
+    sort_order: i32,
+) -> Result<MealType, ServerFnError<String>> {
+    use crate::api::meal_plans;
+    let pool = expect_context::<sqlx::SqlitePool>();
+
+    meal_plans::update_meal_type(&pool, id, name, sort_order)
+        .await
+        .map_err(|e| ServerFnError::<String>::ServerError(e.to_string()))
+}
+
+#[server(DeleteMealTypeFn, "/api")]
+pub async fn delete_meal_type(id: i64) -> Result<(), ServerFnError<String>> {
+    use crate::api::meal_plans;
+    let pool = expect_context::<sqlx::SqlitePool>();
+
+    meal_plans::delete_meal_type(&pool, id)
+        .await
+        .map_err(|e| ServerFnError::<String>::ServerError(e.to_string()))
+}
 
 #[server(GetPlannedMealsForDate, "/api")]
 pub async fn get_planned_meals_for_date(
@@ -29,16 +76,12 @@ pub async fn create_planned_meal(
     adults: Option<i32>,
 ) -> Result<PlannedMealWithDetails, ServerFnError<String>> {
     use crate::api::meal_plans;
-    use crate::models::{CreateAttendance, CreatePlannedMeal, MealType};
+    use crate::models::{CreateAttendance, CreatePlannedMeal};
     use chrono::NaiveDate;
     let pool = expect_context::<sqlx::SqlitePool>();
 
     let parsed_date = NaiveDate::parse_from_str(&date, "%Y-%m-%d")
         .map_err(|e| ServerFnError::<String>::ServerError(e.to_string()))?;
-
-    let parsed_meal_type = meal_type
-        .parse::<MealType>()
-        .map_err(|_| ServerFnError::<String>::ServerError("Invalid meal type".to_string()))?;
 
     let attendance = if let (Some(c), Some(t), Some(a)) = (children, teens, adults) {
         Some(CreateAttendance {
@@ -53,7 +96,7 @@ pub async fn create_planned_meal(
     let new_meal = CreatePlannedMeal {
         camp_id,
         date: parsed_date,
-        meal_type: parsed_meal_type,
+        meal_type,
         recipe_id,
         attendance,
     };
@@ -66,6 +109,7 @@ pub async fn create_planned_meal(
 #[server(UpdatePlannedMealFn, "/api")]
 pub async fn update_planned_meal(
     id: i64,
+    meal_type: String,
     recipe_id: i64,
     children: Option<i32>,
     teens: Option<i32>,
@@ -86,6 +130,7 @@ pub async fn update_planned_meal(
     };
 
     let update = UpdatePlannedMeal {
+        meal_type: Some(meal_type),
         recipe_id: Some(recipe_id),
         attendance,
     };

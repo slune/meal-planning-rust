@@ -82,6 +82,10 @@ async fn run_migrations(pool: &SqlitePool) -> Result<(), sqlx::Error> {
             "007_rename_base_servings_to_portions",
             include_str!("../migrations/007_rename_base_servings_to_portions.sql"),
         ),
+        (
+            "009_create_meal_types",
+            include_str!("../migrations/009_create_meal_types.sql"),
+        ),
     ];
 
     for (name, sql) in migrations {

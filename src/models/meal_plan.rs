@@ -1,6 +1,18 @@
-use super::MealType;
 use chrono::{DateTime, NaiveDate, Utc};
 use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq)]
+#[cfg_attr(feature = "ssr", derive(sqlx::FromRow))]
+pub struct MealType {
+    pub id: i64,
+    pub key: String,
+    pub name: String,
+    pub sort_order: i32,
+    #[cfg_attr(feature = "ssr", sqlx(default))]
+    pub created_at: Option<DateTime<Utc>>,
+    #[cfg_attr(feature = "ssr", sqlx(default))]
+    pub updated_at: Option<DateTime<Utc>>,
+}
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[cfg_attr(feature = "ssr", derive(sqlx::FromRow))]
@@ -51,7 +63,7 @@ pub struct PlannedMealWithDetails {
 pub struct CreatePlannedMeal {
     pub camp_id: i64,
     pub date: NaiveDate,
-    pub meal_type: MealType,
+    pub meal_type: String,
     pub recipe_id: i64,
     pub attendance: Option<CreateAttendance>,
 }
@@ -65,6 +77,7 @@ pub struct CreateAttendance {
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct UpdatePlannedMeal {
+    pub meal_type: Option<String>,
     pub recipe_id: Option<i64>,
     pub attendance: Option<CreateAttendance>,
 }

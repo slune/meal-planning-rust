@@ -1,6 +1,6 @@
 use crate::components::{LoadingSpinner, SearchableSelect, icon, toast_error, toast_success};
 use crate::models::{
-    AttendanceSummary, Camp, DailyIngredientItem, MealScheduleItem, MealType, RecipeIngredientItem,
+    AttendanceSummary, Camp, DailyIngredientItem, MealScheduleItem, RecipeIngredientItem,
     ShoppingListItem,
 };
 use crate::server_functions::{
@@ -521,16 +521,10 @@ fn MealScheduleReport(camp: Option<Camp>, items: Vec<MealScheduleItem>) -> impl 
                 </thead>
                 <tbody>
                     {items.into_iter().map(|item| {
-                        let meal_type_display = item
-                            .meal_type
-                            .parse::<MealType>()
-                            .map(|mt| format_meal_type(&mt))
-                            .unwrap_or(item.meal_type.clone());
-
                         view! {
                             <tr class="border-t border-slate-200">
                                 <td class="p-3">{item.date.format("%Y-%m-%d").to_string()}</td>
-                                <td class="p-3">{meal_type_display}</td>
+                                <td class="p-3">{item.meal_type}</td>
                                 <td class="p-3">{item.recipe_name}</td>
                                 <td class="text-right p-3">{item.children}</td>
                                 <td class="text-right p-3">{item.teens}</td>
@@ -566,16 +560,10 @@ fn AttendanceSummaryReport(camp: Option<Camp>, items: Vec<AttendanceSummary>) ->
                 </thead>
                 <tbody>
                     {items.into_iter().map(|item| {
-                        let meal_type_display = item
-                            .meal_type
-                            .parse::<MealType>()
-                            .map(|mt| format_meal_type(&mt))
-                            .unwrap_or(item.meal_type.clone());
-
                         view! {
                             <tr class="border-t border-slate-200">
                                 <td class="p-3">{item.date.format("%Y-%m-%d").to_string()}</td>
-                                <td class="p-3">{meal_type_display}</td>
+                                <td class="p-3">{item.meal_type}</td>
                                 <td class="text-right p-3">{item.children}</td>
                                 <td class="text-right p-3">{item.teens}</td>
                                 <td class="text-right p-3">{item.adults}</td>
@@ -587,18 +575,6 @@ fn AttendanceSummaryReport(camp: Option<Camp>, items: Vec<AttendanceSummary>) ->
             </table>
         </div>
     }
-}
-
-// Helper function to format meal type
-fn format_meal_type(meal_type: &MealType) -> String {
-    match meal_type {
-        MealType::Breakfast => "Breakfast",
-        MealType::MorningSnack => "Morning Snack",
-        MealType::Lunch => "Lunch",
-        MealType::AfternoonSnack => "Afternoon Snack",
-        MealType::Dinner => "Dinner",
-    }
-    .to_string()
 }
 
 /// Collapse a pre-sorted slice into consecutive groups keyed by `key`.
@@ -708,14 +684,10 @@ fn IngredientsByRecipeReport(
                             </span>
                         </h3>
                         {by_meal.into_iter().map(|(meal_type, meal_items): (String, Vec<RecipeIngredientItem>)| {
-                            let meal_display = meal_type
-                                .parse::<MealType>()
-                                .map(|mt| format_meal_type(&mt))
-                                .unwrap_or(meal_type.clone());
                             let by_recipe = group_consecutive(meal_items, |it| it.recipe_name.clone());
                             view! {
                                 <div class="mb-4">
-                                    <h4 class="text-lg font-semibold text-slate-700 mb-2">{meal_display}</h4>
+                                    <h4 class="text-lg font-semibold text-slate-700 mb-2">{meal_type}</h4>
                                     {by_recipe.into_iter().map(|(recipe, recipe_items): (String, Vec<RecipeIngredientItem>)| {
                                         view! {
                                             <div class="mb-3 ml-2">

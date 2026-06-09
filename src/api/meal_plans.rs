@@ -1,9 +1,9 @@
 use crate::models::{
-    CreateAttendance, CreatePlannedMeal, MealAttendance, MealPlan, PlannedMeal,
+    CreateAttendance, CreatePlannedMeal, MealAttendance, MealPlan, MealType, PlannedMeal,
     PlannedMealWithDetails, UpdatePlannedMeal,
 };
 use chrono::NaiveDate;
-use sqlx::{Sqlite, SqlitePool};
+use sqlx::{Row, Sqlite, SqlitePool};
 
 pub async fn get_meal_plan(
     pool: &SqlitePool,
@@ -41,13 +41,192 @@ async fn get_or_create_meal_plan(
         .ok_or(sqlx::Error::RowNotFound)
 }
 
+pub async fn get_meal_types(pool: &SqlitePool) -> Result<Vec<MealType>, sqlx::Error> {
+    sqlx::query_as::<_, MealType>(
+        "SELECT id, key, name, sort_order, created_at, updated_at
+         FROM meal_types
+         ORDER BY sort_order, name",
+    )
+    .fetch_all(pool)
+    .await
+}
+
+pub async fn create_meal_type(
+    pool: &SqlitePool,
+    name: String,
+    sort_order: Option<i32>,
+) -> Result<MealType, sqlx::Error> {
+    validate_meal_type_name(&name)?;
+    let key = meal_type_key(&name);
+
+    let key_exists: bool =
+        sqlx::query_scalar("SELECT EXISTS(SELECT 1 FROM meal_types WHERE key = ?)")
+            .bind(&key)
+            .fetch_one(pool)
+            .await?;
+
+    if key_exists {
+        return Err(validation_error("Meal type already exists"));
+    }
+
+    let final_sort_order = match sort_order {
+        Some(value) => {
+            validate_meal_type_sort_order(value)?;
+            value
+        }
+        None => {
+            let max_order: Option<i32> =
+                sqlx::query_scalar("SELECT MAX(sort_order) FROM meal_types")
+                    .fetch_one(pool)
+                    .await?;
+            max_order.unwrap_or(0) + 1
+        }
+    };
+
+    let result = sqlx::query(
+        "INSERT INTO meal_types (key, name, sort_order)
+         VALUES (?, ?, ?)",
+    )
+    .bind(&key)
+    .bind(name.trim())
+    .bind(final_sort_order)
+    .execute(pool)
+    .await?;
+
+    get_meal_type(pool, result.last_insert_rowid()).await
+}
+
+pub async fn update_meal_type(
+    pool: &SqlitePool,
+    id: i64,
+    name: String,
+    sort_order: i32,
+) -> Result<MealType, sqlx::Error> {
+    validate_meal_type_name(&name)?;
+    validate_meal_type_sort_order(sort_order)?;
+
+    sqlx::query(
+        "UPDATE meal_types
+         SET name = ?, sort_order = ?, updated_at = CURRENT_TIMESTAMP
+         WHERE id = ?",
+    )
+    .bind(name.trim())
+    .bind(sort_order)
+    .bind(id)
+    .execute(pool)
+    .await?;
+
+    get_meal_type(pool, id).await
+}
+
+pub async fn delete_meal_type(pool: &SqlitePool, id: i64) -> Result<(), sqlx::Error> {
+    let meal_type = get_meal_type(pool, id).await?;
+
+    let total_types: i64 = sqlx::query_scalar("SELECT COUNT(*) FROM meal_types")
+        .fetch_one(pool)
+        .await?;
+    if total_types <= 1 {
+        return Err(validation_error("At least one meal type is required"));
+    }
+
+    let usage_count: i64 =
+        sqlx::query_scalar("SELECT COUNT(*) FROM planned_meals WHERE meal_type = ?")
+            .bind(&meal_type.key)
+            .fetch_one(pool)
+            .await?;
+    if usage_count > 0 {
+        return Err(validation_error(
+            "Cannot delete a meal type that is used by planned meals",
+        ));
+    }
+
+    sqlx::query("DELETE FROM meal_types WHERE id = ?")
+        .bind(id)
+        .execute(pool)
+        .await?;
+
+    Ok(())
+}
+
+async fn get_meal_type(pool: &SqlitePool, id: i64) -> Result<MealType, sqlx::Error> {
+    sqlx::query_as::<_, MealType>(
+        "SELECT id, key, name, sort_order, created_at, updated_at
+         FROM meal_types
+         WHERE id = ?",
+    )
+    .bind(id)
+    .fetch_one(pool)
+    .await
+}
+
+async fn validate_meal_type_exists(pool: &SqlitePool, key: &str) -> Result<(), sqlx::Error> {
+    let exists: bool = sqlx::query_scalar("SELECT EXISTS(SELECT 1 FROM meal_types WHERE key = ?)")
+        .bind(key)
+        .fetch_one(pool)
+        .await?;
+
+    if !exists {
+        return Err(validation_error("Invalid meal type"));
+    }
+
+    Ok(())
+}
+
+fn validate_meal_type_name(name: &str) -> Result<(), sqlx::Error> {
+    let trimmed = name.trim();
+    if trimmed.is_empty() {
+        return Err(validation_error("Meal type name is required"));
+    }
+    if trimmed.chars().count() > 80 {
+        return Err(validation_error(
+            "Meal type name must be 80 characters or less",
+        ));
+    }
+    if meal_type_key(trimmed).is_empty() {
+        return Err(validation_error(
+            "Meal type name must include at least one letter or number",
+        ));
+    }
+    Ok(())
+}
+
+fn validate_meal_type_sort_order(sort_order: i32) -> Result<(), sqlx::Error> {
+    if sort_order <= 0 {
+        return Err(validation_error("Meal type order must be greater than 0"));
+    }
+    Ok(())
+}
+
+fn validation_error(message: &str) -> sqlx::Error {
+    sqlx::Error::Decode(message.to_string().into())
+}
+
+fn meal_type_key(name: &str) -> String {
+    let mut key = String::new();
+    let mut last_was_separator = true;
+
+    for ch in name.trim().chars().flat_map(char::to_lowercase) {
+        if ch.is_alphanumeric() {
+            key.push(ch);
+            last_was_separator = false;
+        } else if !last_was_separator {
+            key.push('_');
+            last_was_separator = true;
+        }
+    }
+
+    while key.ends_with('_') {
+        key.pop();
+    }
+
+    key
+}
+
 pub async fn get_planned_meals_for_date(
     pool: &SqlitePool,
     camp_id: i64,
     date: NaiveDate,
 ) -> Result<Vec<PlannedMealWithDetails>, sqlx::Error> {
-    use sqlx::Row;
-
     let rows = sqlx::query(
         "SELECT 
             pm.id, pm.meal_plan_id, pm.recipe_id, pm.meal_type, pm.created_at,
@@ -58,16 +237,14 @@ pub async fn get_planned_meals_for_date(
          FROM meal_plans mp
          JOIN planned_meals pm ON mp.id = pm.meal_plan_id
          JOIN recipes r ON pm.recipe_id = r.id
+         LEFT JOIN meal_types mt ON mt.key = pm.meal_type
          LEFT JOIN meal_attendance ma ON pm.id = ma.planned_meal_id
          WHERE mp.camp_id = ? AND mp.date = ?
          ORDER BY 
-            CASE pm.meal_type
-                WHEN 'breakfast' THEN 1
-                WHEN 'morning_snack' THEN 2
-                WHEN 'lunch' THEN 3
-                WHEN 'afternoon_snack' THEN 4
-                WHEN 'dinner' THEN 5
-            END",
+            COALESCE(mt.sort_order, 999),
+            mt.name,
+            pm.meal_type,
+            pm.id",
     )
     .bind(camp_id)
     .bind(date)
@@ -136,6 +313,7 @@ pub async fn create_planned_meal(
     meal: CreatePlannedMeal,
 ) -> Result<PlannedMealWithDetails, sqlx::Error> {
     validate_meal_date(pool, meal.camp_id, meal.date).await?;
+    validate_meal_type_exists(pool, &meal.meal_type).await?;
     if let Some(attendance) = meal.attendance.as_ref() {
         validate_attendance(attendance)?;
     }
@@ -149,7 +327,7 @@ pub async fn create_planned_meal(
     )
     .bind(meal_plan.id)
     .bind(meal.recipe_id)
-    .bind(meal.meal_type.as_str())
+    .bind(&meal.meal_type)
     .execute(&mut *tx)
     .await?;
     let planned_meal_id = result.last_insert_rowid();
@@ -174,11 +352,23 @@ pub async fn update_planned_meal(
     id: i64,
     update: UpdatePlannedMeal,
 ) -> Result<(), sqlx::Error> {
+    if let Some(meal_type) = update.meal_type.as_ref() {
+        validate_meal_type_exists(pool, meal_type).await?;
+    }
+
     if let Some(attendance) = update.attendance.as_ref() {
         validate_attendance(attendance)?;
     }
 
     let mut tx = pool.begin().await?;
+
+    if let Some(meal_type) = update.meal_type {
+        sqlx::query("UPDATE planned_meals SET meal_type = ? WHERE id = ?")
+            .bind(meal_type)
+            .bind(id)
+            .execute(&mut *tx)
+            .await?;
+    }
 
     if let Some(recipe_id) = update.recipe_id {
         sqlx::query("UPDATE planned_meals SET recipe_id = ? WHERE id = ?")

@@ -34,6 +34,7 @@ pub fn App() -> impl IntoView {
                     <Route path=path!("planner") view=MealPlannerPage/>
                     <Route path=path!("planner/:camp_id") view=MealPlannerPage/>
                     <Route path=path!("reports") view=ReportsPage/>
+                    <Route path=path!("settings") view=SettingsPage/>
                 </Routes>
             </main>
             </Router>

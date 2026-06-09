@@ -2,7 +2,7 @@ use crate::components::{ConfirmModal, SearchableSelect, icon, toast_error, toast
 use crate::models::{Camp, MealType, PlannedMealWithDetails, Recipe};
 use crate::server_functions::camps::{get_camp, get_camps};
 use crate::server_functions::meal_plans::{
-    create_planned_meal, delete_planned_meal, get_planned_meals_for_camp,
+    create_planned_meal, delete_planned_meal, get_meal_types, get_planned_meals_for_camp,
     get_planned_meals_for_date, update_planned_meal,
 };
 use crate::server_functions::recipes::get_recipes;
@@ -17,6 +17,36 @@ use std::collections::HashMap;
 enum ViewMode {
     SingleDay,
     AllDays,
+}
+
+fn meal_type_sort_order(meal_types: &[MealType], key: &str) -> i32 {
+    meal_types
+        .iter()
+        .find(|meal_type| meal_type.key == key)
+        .map(|meal_type| meal_type.sort_order)
+        .unwrap_or(999)
+}
+
+fn meal_type_label(meal_types: &[MealType], key: &str) -> String {
+    meal_types
+        .iter()
+        .find(|meal_type| meal_type.key == key)
+        .map(|meal_type| meal_type.name.clone())
+        .unwrap_or_else(|| prettify_meal_type_key(key))
+}
+
+fn prettify_meal_type_key(key: &str) -> String {
+    key.split('_')
+        .filter(|part| !part.is_empty())
+        .map(|part| {
+            let mut chars = part.chars();
+            match chars.next() {
+                Some(first) => first.to_uppercase().chain(chars).collect::<String>(),
+                None => String::new(),
+            }
+        })
+        .collect::<Vec<_>>()
+        .join(" ")
 }
 
 #[component]
@@ -36,6 +66,7 @@ pub fn MealPlanner() -> impl IntoView {
     let (multi_day_meals, set_multi_day_meals) =
         signal(HashMap::<String, Vec<PlannedMealWithDetails>>::new());
     let (recipes, set_recipes) = signal(Vec::<Recipe>::new());
+    let (meal_types, set_meal_types) = signal(Vec::<MealType>::new());
     let (camps, set_camps) = signal(Vec::<Camp>::new());
     let (camp, set_camp) = signal(None::<Camp>);
     let (show_form, set_show_form) = signal(false);
@@ -46,7 +77,7 @@ pub fn MealPlanner() -> impl IntoView {
 
     // Form fields
     let (editing_meal_id, set_editing_meal_id) = signal(None::<i64>);
-    let (meal_type, set_meal_type) = signal(MealType::Breakfast);
+    let (meal_type, set_meal_type) = signal(String::new());
     let (recipe_id, set_recipe_id) = signal(0i64);
     let (children, set_children) = signal(0);
     let (teens, set_teens) = signal(0);
@@ -55,6 +86,22 @@ pub fn MealPlanner() -> impl IntoView {
     // Modal state
     let (show_delete_modal, set_show_delete_modal) = signal(false);
     let (delete_id, set_delete_id) = signal(0i64);
+
+    let load_meal_types = move || {
+        spawn_local(async move {
+            match get_meal_types().await {
+                Ok(data) => {
+                    if meal_type.get_untracked().is_empty()
+                        && let Some(first) = data.first()
+                    {
+                        set_meal_type.set(first.key.clone());
+                    }
+                    set_meal_types.set(data);
+                }
+                Err(e) => set_error.set(Some(format!("Failed to load meal types: {}", e))),
+            }
+        });
+    };
 
     // Load camps, recipes on mount
     Effect::new(move |_| {
@@ -76,6 +123,8 @@ pub fn MealPlanner() -> impl IntoView {
                 Err(e) => set_error.set(Some(format!("Failed to load recipes: {}", e))),
             }
         });
+
+        load_meal_types();
     });
 
     // Load camp when camp_id changes
@@ -133,12 +182,9 @@ pub fn MealPlanner() -> impl IntoView {
                 ViewMode::SingleDay => {
                     match get_planned_meals_for_date(current_camp_id, current_date).await {
                         Ok(mut data) => {
+                            let current_meal_types = meal_types.get_untracked();
                             data.sort_by_key(|m| {
-                                m.planned_meal
-                                    .meal_type
-                                    .parse::<MealType>()
-                                    .map(|mt| mt.sort_order())
-                                    .unwrap_or(99)
+                                meal_type_sort_order(&current_meal_types, &m.planned_meal.meal_type)
                             });
                             set_planned_meals.set(data);
                         }
@@ -149,12 +195,9 @@ pub fn MealPlanner() -> impl IntoView {
                     Ok(data) => {
                         let mut map = HashMap::new();
                         for (date, mut meals) in data {
+                            let current_meal_types = meal_types.get_untracked();
                             meals.sort_by_key(|m| {
-                                m.planned_meal
-                                    .meal_type
-                                    .parse::<MealType>()
-                                    .map(|mt| mt.sort_order())
-                                    .unwrap_or(99)
+                                meal_type_sort_order(&current_meal_types, &m.planned_meal.meal_type)
                             });
                             map.insert(date, meals);
                         }
@@ -177,7 +220,13 @@ pub fn MealPlanner() -> impl IntoView {
 
     let reset_form = move || {
         set_editing_meal_id.set(None);
-        set_meal_type.set(MealType::Breakfast);
+        set_meal_type.set(
+            meal_types
+                .get()
+                .first()
+                .map(|meal_type| meal_type.key.clone())
+                .unwrap_or_default(),
+        );
         if let Some(first) = recipes.get().first() {
             set_recipe_id.set(first.id);
         }
@@ -215,6 +264,11 @@ pub fn MealPlanner() -> impl IntoView {
             return;
         }
 
+        if meal_type_val.is_empty() {
+            toast_error("Please select a meal type");
+            return;
+        }
+
         // Validate attendance counts are non-negative
         if children_val < 0 {
             toast_error("Number of children cannot be negative");
@@ -237,16 +291,22 @@ pub fn MealPlanner() -> impl IntoView {
 
             let result: Result<(), _> = if let Some(id) = editing_id {
                 // Update existing meal
-                update_planned_meal(id, recipe_id_val, attendance.0, attendance.1, attendance.2)
-                    .await
-                    .map_err(|e| e.to_string())
+                update_planned_meal(
+                    id,
+                    meal_type_val,
+                    recipe_id_val,
+                    attendance.0,
+                    attendance.1,
+                    attendance.2,
+                )
+                .await
+                .map_err(|e| e.to_string())
             } else {
                 // Create new meal
-                let meal_type_str = meal_type_val.as_str().to_string();
                 create_planned_meal(
                     current_camp_id,
                     date_val,
-                    meal_type_str,
+                    meal_type_val,
                     recipe_id_val,
                     attendance.0,
                     attendance.1,
@@ -281,10 +341,7 @@ pub fn MealPlanner() -> impl IntoView {
     let handle_edit_click = move |meal: PlannedMealWithDetails| {
         set_editing_meal_id.set(Some(meal.planned_meal.id));
         set_recipe_id.set(meal.planned_meal.recipe_id);
-
-        if let Ok(mt) = meal.planned_meal.meal_type.parse::<MealType>() {
-            set_meal_type.set(mt);
-        }
+        set_meal_type.set(meal.planned_meal.meal_type);
 
         if let Some(att) = meal.attendance {
             set_children.set(att.children);
@@ -330,16 +387,8 @@ pub fn MealPlanner() -> impl IntoView {
         set_show_delete_modal.set(false);
     };
 
-    let format_meal_type = |meal_type_str: &str| -> &'static str {
-        match meal_type_str {
-            "breakfast" => "Breakfast",
-            "morning_snack" => "Morning Snack",
-            "lunch" => "Lunch",
-            "afternoon_snack" => "Afternoon Snack",
-            "dinner" => "Dinner",
-            _ => "Unknown",
-        }
-    };
+    let format_meal_type =
+        move |meal_type_key: &str| -> String { meal_type_label(&meal_types.get(), meal_type_key) };
 
     let go_to_previous_day = move |_| {
         let current_date = selected_date.get();
@@ -465,7 +514,7 @@ pub fn MealPlanner() -> impl IntoView {
                         reset_form();
                         set_show_form.set(true);
                     }
-                    disabled=move || loading.get() || camp_id.get() == 0
+                    disabled=move || loading.get() || camp_id.get() == 0 || meal_types.get().is_empty()
                 >
                     {icon("plus")}
                     "Add meal"
@@ -600,19 +649,27 @@ pub fn MealPlanner() -> impl IntoView {
                                 <label class="form-label">"Meal Type" <span class="text-red-500">"*"</span></label>
                                 <select
                                     class="form-input"
-                                    prop:value=move || meal_type.get().as_str()
-                                    on:change=move |ev| {
-                                        if let Ok(mt) = event_target_value(&ev).parse::<MealType>() {
-                                            set_meal_type.set(mt);
-                                        }
-                                    }
-                                    disabled=move || editing_meal_id.get().is_some()
+                                    prop:value=move || meal_type.get()
+                                    on:change=move |ev| set_meal_type.set(event_target_value(&ev))
+                                    disabled=move || meal_types.get().is_empty()
                                 >
-                                    <option value="breakfast">"Breakfast"</option>
-                                    <option value="morning_snack">"Morning Snack"</option>
-                                    <option value="lunch">"Lunch"</option>
-                                    <option value="afternoon_snack">"Afternoon Snack"</option>
-                                    <option value="dinner">"Dinner"</option>
+                                    {move || if meal_types.get().is_empty() {
+                                        view! {
+                                            <option value="">"No meal types"</option>
+                                        }.into_any()
+                                    } else {
+                                        view! {
+                                            <For
+                                                each=move || meal_types.get()
+                                                key=|meal_type_item| meal_type_item.id
+                                                let:meal_type_item
+                                            >
+                                                <option value=meal_type_item.key.clone()>
+                                                    {meal_type_item.name.clone()}
+                                                </option>
+                                            </For>
+                                        }.into_any()
+                                    }}
                                 </select>
                             </div>
                             <div>

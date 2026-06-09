@@ -12,12 +12,58 @@ use leptos_router::hooks::query_signal;
 #[derive(Clone, Debug)]
 struct RecipeIngredientForm {
     ingredient_id: i64,
-    base_quantity: f64,
+    base_quantity_input: String,
     unit: String,
-    child_multiplier: Option<f64>,
-    teen_multiplier: Option<f64>,
-    adult_multiplier: Option<f64>,
+    child_multiplier_input: String,
+    teen_multiplier_input: String,
+    adult_multiplier_input: String,
     notes: Option<String>,
+}
+
+fn decimal_input(value: f64) -> String {
+    value.to_string()
+}
+
+fn optional_decimal_input(value: Option<f64>) -> String {
+    value.map(decimal_input).unwrap_or_default()
+}
+
+fn parse_positive_decimal(value: &str, field: &str) -> Result<f64, String> {
+    let parsed = value
+        .trim()
+        .parse::<f64>()
+        .map_err(|_| format!("{field} must be a valid number"))?;
+
+    if !parsed.is_finite() {
+        return Err(format!("{field} must be a valid number"));
+    }
+
+    if parsed <= 0.0 {
+        return Err(format!("{field} must be greater than 0"));
+    }
+
+    Ok(parsed)
+}
+
+fn parse_optional_non_negative_decimal(value: &str, field: &str) -> Result<Option<f64>, String> {
+    let trimmed = value.trim();
+    if trimmed.is_empty() {
+        return Ok(None);
+    }
+
+    let parsed = trimmed
+        .parse::<f64>()
+        .map_err(|_| format!("{field} must be a valid number"))?;
+
+    if !parsed.is_finite() {
+        return Err(format!("{field} must be a valid number"));
+    }
+
+    if parsed < 0.0 {
+        return Err("Multipliers cannot be negative".to_string());
+    }
+
+    Ok(Some(parsed))
 }
 
 #[component]
@@ -26,6 +72,7 @@ pub fn RecipeEditor() -> impl IntoView {
     let (ingredients, set_ingredients) = signal(Vec::<Ingredient>::new());
     let (show_form, set_show_form) = signal(false);
     let (editing_recipe_id, set_editing_recipe_id) = signal(None::<i64>);
+    let (copying_recipe, set_copying_recipe) = signal(false);
     let (error, set_error) = signal(None::<String>);
     let (loading, set_loading) = signal(false);
 
@@ -74,6 +121,7 @@ pub fn RecipeEditor() -> impl IntoView {
         set_portions.set(10);
         set_recipe_ingredients.set(Vec::new());
         set_editing_recipe_id.set(None);
+        set_copying_recipe.set(false);
         set_recipe_id_query.set(None);
         set_error.set(None);
     };
@@ -81,6 +129,7 @@ pub fn RecipeEditor() -> impl IntoView {
     let cancel_form = move |_| {
         set_show_form.set(false);
         set_editing_recipe_id.set(None);
+        set_copying_recipe.set(false);
         set_error.set(None);
     };
 
@@ -89,11 +138,11 @@ pub fn RecipeEditor() -> impl IntoView {
         if let Some(first_ing) = ingredients.get().first() {
             current.push(RecipeIngredientForm {
                 ingredient_id: first_ing.id,
-                base_quantity: 1.0,
+                base_quantity_input: decimal_input(1.0),
                 unit: first_ing.primary_unit.clone(),
-                child_multiplier: Some(0.5),
-                teen_multiplier: Some(0.75),
-                adult_multiplier: Some(1.0),
+                child_multiplier_input: decimal_input(0.5),
+                teen_multiplier_input: decimal_input(0.75),
+                adult_multiplier_input: decimal_input(1.0),
                 notes: None,
             });
             set_recipe_ingredients.set(current);
@@ -116,6 +165,7 @@ pub fn RecipeEditor() -> impl IntoView {
         let portions_val = portions.get();
         let recipe_ingredients_val = recipe_ingredients.get();
         let editing_id = editing_recipe_id.get();
+        let is_copying = copying_recipe.get();
 
         if name_val.is_empty() {
             toast_error("Please fill in recipe name");
@@ -133,43 +183,64 @@ pub fn RecipeEditor() -> impl IntoView {
             return;
         }
 
-        // Validate ingredient quantities are positive
-        for ingredient in &recipe_ingredients_val {
-            if ingredient.base_quantity <= 0.0 {
-                toast_error("All ingredient quantities must be greater than 0");
-                return;
-            }
+        let mut ingredients_to_create = Vec::with_capacity(recipe_ingredients_val.len());
+        for ingredient in recipe_ingredients_val {
+            let base_quantity =
+                match parse_positive_decimal(&ingredient.base_quantity_input, "Quantity") {
+                    Ok(value) => value,
+                    Err(message) => {
+                        toast_error(message);
+                        return;
+                    }
+                };
 
-            if [
-                ingredient.child_multiplier,
-                ingredient.teen_multiplier,
-                ingredient.adult_multiplier,
-            ]
-            .into_iter()
-            .flatten()
-            .any(|mult| mult < 0.0)
-            {
-                toast_error("Multipliers cannot be negative");
-                return;
-            }
+            let child_multiplier = match parse_optional_non_negative_decimal(
+                &ingredient.child_multiplier_input,
+                "Child multiplier",
+            ) {
+                Ok(value) => value,
+                Err(message) => {
+                    toast_error(message);
+                    return;
+                }
+            };
+
+            let teen_multiplier = match parse_optional_non_negative_decimal(
+                &ingredient.teen_multiplier_input,
+                "Teen multiplier",
+            ) {
+                Ok(value) => value,
+                Err(message) => {
+                    toast_error(message);
+                    return;
+                }
+            };
+
+            let adult_multiplier = match parse_optional_non_negative_decimal(
+                &ingredient.adult_multiplier_input,
+                "Adult multiplier",
+            ) {
+                Ok(value) => value,
+                Err(message) => {
+                    toast_error(message);
+                    return;
+                }
+            };
+
+            ingredients_to_create.push(CreateRecipeIngredient {
+                ingredient_id: ingredient.ingredient_id,
+                base_quantity,
+                unit: ingredient.unit,
+                child_multiplier,
+                teen_multiplier,
+                adult_multiplier,
+                notes: ingredient.notes,
+            });
         }
 
         spawn_local(async move {
             set_loading.set(true);
             set_error.set(None);
-
-            let ingredients_to_create = recipe_ingredients_val
-                .into_iter()
-                .map(|ri| CreateRecipeIngredient {
-                    ingredient_id: ri.ingredient_id,
-                    base_quantity: ri.base_quantity,
-                    unit: ri.unit,
-                    child_multiplier: ri.child_multiplier,
-                    teen_multiplier: ri.teen_multiplier,
-                    adult_multiplier: ri.adult_multiplier,
-                    notes: ri.notes,
-                })
-                .collect();
 
             let instructions_opt = if instructions_val.is_empty() {
                 None
@@ -202,6 +273,8 @@ pub fn RecipeEditor() -> impl IntoView {
                 Ok(_) => {
                     if editing_id.is_some() {
                         toast_success("Recipe updated successfully!");
+                    } else if is_copying {
+                        toast_success("Recipe copied successfully!");
                     } else {
                         toast_success("Recipe created successfully!");
                     }
@@ -233,20 +306,72 @@ pub fn RecipeEditor() -> impl IntoView {
                         .into_iter()
                         .map(|ing| RecipeIngredientForm {
                             ingredient_id: ing.recipe_ingredient.ingredient_id,
-                            base_quantity: ing.recipe_ingredient.base_quantity,
+                            base_quantity_input: decimal_input(ing.recipe_ingredient.base_quantity),
                             unit: ing.recipe_ingredient.unit,
-                            child_multiplier: ing.recipe_ingredient.child_multiplier,
-                            teen_multiplier: ing.recipe_ingredient.teen_multiplier,
-                            adult_multiplier: ing.recipe_ingredient.adult_multiplier,
+                            child_multiplier_input: optional_decimal_input(
+                                ing.recipe_ingredient.child_multiplier,
+                            ),
+                            teen_multiplier_input: optional_decimal_input(
+                                ing.recipe_ingredient.teen_multiplier,
+                            ),
+                            adult_multiplier_input: optional_decimal_input(
+                                ing.recipe_ingredient.adult_multiplier,
+                            ),
                             notes: ing.recipe_ingredient.notes,
                         })
                         .collect();
 
                     set_recipe_ingredients.set(form_ingredients);
                     set_editing_recipe_id.set(Some(id));
+                    set_copying_recipe.set(false);
                     set_show_form.set(true);
                 }
                 Err(e) => set_error.set(Some(format!("Failed to load recipe: {}", e))),
+            }
+
+            set_loading.set(false);
+        });
+    };
+
+    let handle_copy = move |id: i64| {
+        spawn_local(async move {
+            set_loading.set(true);
+            set_error.set(None);
+
+            match get_recipe_with_ingredients(id).await {
+                Ok(recipe_data) => {
+                    set_name.set(format!("Copy of {}", recipe_data.recipe.name));
+                    set_instructions
+                        .set(recipe_data.recipe.instructions.clone().unwrap_or_default());
+                    set_portions.set(recipe_data.recipe.portions);
+
+                    let form_ingredients = recipe_data
+                        .ingredients
+                        .into_iter()
+                        .map(|ing| RecipeIngredientForm {
+                            ingredient_id: ing.recipe_ingredient.ingredient_id,
+                            base_quantity_input: decimal_input(ing.recipe_ingredient.base_quantity),
+                            unit: ing.recipe_ingredient.unit,
+                            child_multiplier_input: optional_decimal_input(
+                                ing.recipe_ingredient.child_multiplier,
+                            ),
+                            teen_multiplier_input: optional_decimal_input(
+                                ing.recipe_ingredient.teen_multiplier,
+                            ),
+                            adult_multiplier_input: optional_decimal_input(
+                                ing.recipe_ingredient.adult_multiplier,
+                            ),
+                            notes: ing.recipe_ingredient.notes,
+                        })
+                        .collect();
+
+                    set_recipe_ingredients.set(form_ingredients);
+                    set_editing_recipe_id.set(None);
+                    set_copying_recipe.set(true);
+                    set_recipe_id_query.set(None);
+                    set_show_form.set(true);
+                }
+                Err(e) => toast_error(format!("Failed to copy recipe: {}", e)),
             }
 
             set_loading.set(false);
@@ -344,9 +469,25 @@ pub fn RecipeEditor() -> impl IntoView {
                 <div class="card panel-accent panel-accent-amber">
                     <h3 class="section-title mb-6 flex items-center gap-2">
                         <span class="inline-icon text-amber-700" aria-hidden="true">
-                            {move || if editing_recipe_id.get().is_some() { icon("edit") } else { icon("plus") }}
+                            {move || {
+                                if editing_recipe_id.get().is_some() {
+                                    icon("edit")
+                                } else if copying_recipe.get() {
+                                    icon("copy")
+                                } else {
+                                    icon("plus")
+                                }
+                            }}
                         </span>
-                        {move || if editing_recipe_id.get().is_some() { "Edit Recipe" } else { "New Recipe" }}
+                        {move || {
+                            if editing_recipe_id.get().is_some() {
+                                "Edit Recipe"
+                            } else if copying_recipe.get() {
+                                "Copy Recipe"
+                            } else {
+                                "New Recipe"
+                            }
+                        }}
                     </h3>
                     <form on:submit=handle_submit class="space-y-4">
                         <div>
@@ -440,17 +581,16 @@ pub fn RecipeEditor() -> impl IntoView {
                                                     placeholder="Search ingredients..."
                                                 />
                                                 <input
-                                                    type="number"
-                                                    step="any"
+                                                    type="text"
+                                                    inputmode="decimal"
                                                     class="form-input text-sm"
-                                                    prop:value=ing.base_quantity.to_string()
+                                                    prop:value=ing.base_quantity_input.clone()
                                                     on:input=move |ev| {
-                                                        if let Ok(val) = event_target_value(&ev).parse::<f64>() {
-                                                            let mut current = recipe_ingredients.get();
-                                                            if let Some(item) = current.get_mut(idx) {
-                                                                item.base_quantity = val;
-                                                                set_recipe_ingredients.set(current);
-                                                            }
+                                                        let val = event_target_value(&ev);
+                                                        let mut current = recipe_ingredients.get();
+                                                        if let Some(item) = current.get_mut(idx) {
+                                                            item.base_quantity_input = val;
+                                                            set_recipe_ingredients.set(current);
                                                         }
                                                     }
                                                 />
@@ -468,49 +608,43 @@ pub fn RecipeEditor() -> impl IntoView {
                                                     }
                                                 />
                                                 <input
-                                                    type="number"
-                                                    step="0.01"
-                                                    min="0"
-                                                    max="2"
+                                                    type="text"
+                                                    inputmode="decimal"
                                                     class="form-input text-sm text-center"
-                                                    prop:value=ing.child_multiplier.map(|v| v.to_string()).unwrap_or_default()
+                                                    prop:value=ing.child_multiplier_input.clone()
                                                     on:input=move |ev| {
                                                         let val = event_target_value(&ev);
                                                         let mut current = recipe_ingredients.get();
                                                         if let Some(item) = current.get_mut(idx) {
-                                                            item.child_multiplier = val.parse().ok();
+                                                            item.child_multiplier_input = val;
                                                             set_recipe_ingredients.set(current);
                                                         }
                                                     }
                                                 />
                                                 <input
-                                                    type="number"
-                                                    step="0.01"
-                                                    min="0"
-                                                    max="2"
+                                                    type="text"
+                                                    inputmode="decimal"
                                                     class="form-input text-sm text-center"
-                                                    prop:value=ing.teen_multiplier.map(|v| v.to_string()).unwrap_or_default()
+                                                    prop:value=ing.teen_multiplier_input.clone()
                                                     on:input=move |ev| {
                                                         let val = event_target_value(&ev);
                                                         let mut current = recipe_ingredients.get();
                                                         if let Some(item) = current.get_mut(idx) {
-                                                            item.teen_multiplier = val.parse().ok();
+                                                            item.teen_multiplier_input = val;
                                                             set_recipe_ingredients.set(current);
                                                         }
                                                     }
                                                 />
                                                 <input
-                                                    type="number"
-                                                    step="0.01"
-                                                    min="0"
-                                                    max="2"
+                                                    type="text"
+                                                    inputmode="decimal"
                                                     class="form-input text-sm text-center"
-                                                    prop:value=ing.adult_multiplier.map(|v| v.to_string()).unwrap_or_default()
+                                                    prop:value=ing.adult_multiplier_input.clone()
                                                     on:input=move |ev| {
                                                         let val = event_target_value(&ev);
                                                         let mut current = recipe_ingredients.get();
                                                         if let Some(item) = current.get_mut(idx) {
-                                                            item.adult_multiplier = val.parse().ok();
+                                                            item.adult_multiplier_input = val;
                                                             set_recipe_ingredients.set(current);
                                                         }
                                                     }
@@ -538,6 +672,8 @@ pub fn RecipeEditor() -> impl IntoView {
                                         "Saving..."
                                     } else if editing_recipe_id.get().is_some() {
                                         "Update Recipe"
+                                    } else if copying_recipe.get() {
+                                        "Create copy"
                                     } else {
                                         "Save Recipe"
                                     }
@@ -586,9 +722,9 @@ pub fn RecipeEditor() -> impl IntoView {
                                     <span class="badge badge-primary">{recipe.portions} " portions"</span>
                                 </div>
                                 <h3 class="text-xl font-bold text-slate-800 mb-4">{recipe.name.clone()}</h3>
-                                <div class="mt-auto flex gap-2">
+                                <div class="mt-auto grid grid-cols-2 gap-2">
                                     <button
-                                        class="btn btn-secondary text-sm flex-1"
+                                        class="btn btn-secondary text-sm"
                                         on:click={
                                             let id = recipe.id;
                                             move |_| handle_edit(id)
@@ -599,7 +735,18 @@ pub fn RecipeEditor() -> impl IntoView {
                                         "Edit"
                                     </button>
                                     <button
-                                        class="btn btn-danger text-sm"
+                                        class="btn btn-secondary text-sm"
+                                        on:click={
+                                            let id = recipe.id;
+                                            move |_| handle_copy(id)
+                                        }
+                                        disabled=move || loading.get()
+                                    >
+                                        {icon("copy")}
+                                        "Copy"
+                                    </button>
+                                    <button
+                                        class="btn btn-danger col-span-2 text-sm"
                                         on:click={
                                             let id = recipe.id;
                                             move |_| handle_delete_click(id)

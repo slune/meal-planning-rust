@@ -1,6 +1,6 @@
 use crate::api::calc::{Attendance, ingredient_quantity, sum_distinct_meal_attendance};
 use crate::models::{
-    AttendanceSummary, DailyIngredientItem, MealScheduleItem, MealType, RecipeIngredientItem,
+    AttendanceSummary, DailyIngredientItem, MealScheduleItem, RecipeIngredientItem,
     ShoppingListItem,
 };
 use chrono::NaiveDate;
@@ -15,6 +15,7 @@ struct MealIngredientRow {
     date: NaiveDate,
     planned_meal_id: i64,
     meal_type: String,
+    meal_sort_order: i32,
     recipe_name: String,
     portions: i32,
     ingredient_id: i64,
@@ -54,7 +55,8 @@ async fn fetch_meal_ingredients(
         SELECT
             mp.date as date,
             pm.id as planned_meal_id,
-            pm.meal_type as meal_type,
+            COALESCE(mt.name, pm.meal_type) as meal_type,
+            COALESCE(mt.sort_order, 999) as meal_sort_order,
             r.name as recipe_name,
             r.portions as portions,
             i.id as ingredient_id,
@@ -75,6 +77,7 @@ async fn fetch_meal_ingredients(
         JOIN ingredients i ON ri.ingredient_id = i.id
         JOIN categories c ON i.category_id = c.id
         JOIN camps camp ON mp.camp_id = camp.id
+        LEFT JOIN meal_types mt ON mt.key = pm.meal_type
         LEFT JOIN meal_attendance ma ON pm.id = ma.planned_meal_id
         WHERE mp.camp_id = ?
         "#,
@@ -96,6 +99,7 @@ async fn fetch_meal_ingredients(
             date: row.get("date"),
             planned_meal_id: row.get("planned_meal_id"),
             meal_type: row.get("meal_type"),
+            meal_sort_order: row.get("meal_sort_order"),
             recipe_name: row.get("recipe_name"),
             portions: row.get("portions"),
             ingredient_id: row.get("ingredient_id"),
@@ -209,7 +213,7 @@ pub async fn generate_daily_ingredients(
 
 /// Ingredient amounts broken down by day → meal → recipe. One entry per recipe
 /// ingredient at each meal (no aggregation across recipes). Sorted by date,
-/// then meal order (breakfast → dinner), recipe, category, ingredient.
+/// then meal type order, recipe, category, ingredient.
 pub async fn generate_ingredients_by_recipe(
     pool: &SqlitePool,
     camp_id: i64,
@@ -217,46 +221,42 @@ pub async fn generate_ingredients_by_recipe(
     let rows = fetch_meal_ingredients(pool, camp_id, None).await?;
     let day_totals = daily_attendance(&rows);
 
-    let mut items: Vec<RecipeIngredientItem> = rows
+    let mut items: Vec<(RecipeIngredientItem, i32)> = rows
         .iter()
         .map(|row| {
             let day = day_totals
                 .get(&row.date)
                 .copied()
                 .unwrap_or(Attendance::new(0, 0, 0));
-            RecipeIngredientItem {
-                date: row.date,
-                day_children: day.children,
-                day_teens: day.teens,
-                day_adults: day.adults,
-                meal_type: row.meal_type.clone(),
-                recipe_name: row.recipe_name.clone(),
-                category_name: row.category_name.clone(),
-                ingredient_name: row.ingredient_name.clone(),
-                quantity: row.quantity(),
-                unit: row.unit.clone(),
-            }
+            (
+                RecipeIngredientItem {
+                    date: row.date,
+                    day_children: day.children,
+                    day_teens: day.teens,
+                    day_adults: day.adults,
+                    meal_type: row.meal_type.clone(),
+                    recipe_name: row.recipe_name.clone(),
+                    category_name: row.category_name.clone(),
+                    ingredient_name: row.ingredient_name.clone(),
+                    quantity: row.quantity(),
+                    unit: row.unit.clone(),
+                },
+                row.meal_sort_order,
+            )
         })
         .collect();
 
     items.sort_by(|a, b| {
-        a.date
-            .cmp(&b.date)
-            .then_with(|| meal_type_order(&a.meal_type).cmp(&meal_type_order(&b.meal_type)))
-            .then_with(|| a.recipe_name.cmp(&b.recipe_name))
-            .then_with(|| a.category_name.cmp(&b.category_name))
-            .then_with(|| a.ingredient_name.cmp(&b.ingredient_name))
+        a.0.date
+            .cmp(&b.0.date)
+            .then_with(|| a.1.cmp(&b.1))
+            .then_with(|| a.0.meal_type.cmp(&b.0.meal_type))
+            .then_with(|| a.0.recipe_name.cmp(&b.0.recipe_name))
+            .then_with(|| a.0.category_name.cmp(&b.0.category_name))
+            .then_with(|| a.0.ingredient_name.cmp(&b.0.ingredient_name))
     });
 
-    Ok(items)
-}
-
-/// Chronological meal ordering (breakfast first). Unknown meal types sort last.
-fn meal_type_order(meal_type: &str) -> u8 {
-    meal_type
-        .parse::<MealType>()
-        .map(|m| m.sort_order())
-        .unwrap_or(u8::MAX)
+    Ok(items.into_iter().map(|(item, _)| item).collect())
 }
 
 /// Generate meal schedule for a camp
@@ -268,7 +268,7 @@ pub async fn generate_meal_schedule(
         r#"
         SELECT
             mp.date,
-            pm.meal_type,
+            COALESCE(mt.name, pm.meal_type) as meal_type,
             r.name as recipe_name,
             COALESCE(ma.children, camp.default_children) as children,
             COALESCE(ma.teens, camp.default_teens) as teens,
@@ -277,18 +277,15 @@ pub async fn generate_meal_schedule(
         JOIN meal_plans mp ON pm.meal_plan_id = mp.id
         JOIN recipes r ON pm.recipe_id = r.id
         JOIN camps camp ON mp.camp_id = camp.id
+        LEFT JOIN meal_types mt ON mt.key = pm.meal_type
         LEFT JOIN meal_attendance ma ON pm.id = ma.planned_meal_id
         WHERE mp.camp_id = ?
         ORDER BY
             mp.date,
-            CASE pm.meal_type
-                WHEN 'breakfast' THEN 1
-                WHEN 'morning_snack' THEN 2
-                WHEN 'lunch' THEN 3
-                WHEN 'afternoon_snack' THEN 4
-                WHEN 'dinner' THEN 5
-                ELSE 99
-            END
+            COALESCE(mt.sort_order, 999),
+            mt.name,
+            pm.meal_type,
+            pm.id
         "#,
     )
     .bind(camp_id)
@@ -319,25 +316,22 @@ pub async fn generate_attendance_summary(
         r#"
         SELECT
             mp.date,
-            pm.meal_type,
+            COALESCE(mt.name, pm.meal_type) as meal_type,
             COALESCE(ma.children, camp.default_children) as children,
             COALESCE(ma.teens, camp.default_teens) as teens,
             COALESCE(ma.adults, camp.default_adults) as adults
         FROM planned_meals pm
         JOIN meal_plans mp ON pm.meal_plan_id = mp.id
         JOIN camps camp ON mp.camp_id = camp.id
+        LEFT JOIN meal_types mt ON mt.key = pm.meal_type
         LEFT JOIN meal_attendance ma ON pm.id = ma.planned_meal_id
         WHERE mp.camp_id = ?
         ORDER BY
             mp.date,
-            CASE pm.meal_type
-                WHEN 'breakfast' THEN 1
-                WHEN 'morning_snack' THEN 2
-                WHEN 'lunch' THEN 3
-                WHEN 'afternoon_snack' THEN 4
-                WHEN 'dinner' THEN 5
-                ELSE 99
-            END
+            COALESCE(mt.sort_order, 999),
+            mt.name,
+            pm.meal_type,
+            pm.id
         "#,
     )
     .bind(camp_id)
