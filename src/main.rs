@@ -4,6 +4,7 @@
 #[tokio::main]
 async fn main() {
     use ai_meal_planning::*;
+    use axum::routing::get;
     use axum_server::tls_rustls::RustlsConfig;
     use leptos::prelude::*;
     use leptos_axum::{LeptosRoutes, generate_route_list};
@@ -47,6 +48,10 @@ async fn main() {
 
     // Build our application with routes
     let app = axum::Router::<AppState>::new()
+        .route(
+            "/api/database/download",
+            get(api::database::download_database),
+        )
         .leptos_routes_with_context(
             &app_state,
             routes,

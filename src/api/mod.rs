@@ -1,6 +1,7 @@
 pub mod calc;
 pub mod camps;
 pub mod categories;
+pub mod database;
 pub mod ingredients;
 pub mod meal_plans;
 pub mod recipes;

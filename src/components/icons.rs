@@ -72,6 +72,22 @@ pub fn icon(name: &str) -> AnyView {
             </svg>
         }
         .into_any(),
+        "database" => view! {
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <ellipse cx="12" cy="5" rx="7" ry="3"/>
+                <path d="M5 5v6c0 1.7 3.1 3 7 3s7-1.3 7-3V5"/>
+                <path d="M5 11v6c0 1.7 3.1 3 7 3s7-1.3 7-3v-6"/>
+            </svg>
+        }
+        .into_any(),
+        "download" => view! {
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 3v12"/>
+                <path d="m7 10 5 5 5-5"/>
+                <path d="M5 21h14"/>
+            </svg>
+        }
+        .into_any(),
         "category" => view! {
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M4 6h7l2 2h7v10a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2z"/>
