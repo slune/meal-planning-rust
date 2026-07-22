@@ -1,7 +1,7 @@
 use crate::api::calc::{Attendance, ingredient_quantity, sum_distinct_meal_attendance};
 use crate::models::{
-    AttendanceSummary, DailyIngredientItem, MealScheduleItem, RecipeIngredientItem,
-    ShoppingListItem,
+    AttendanceSummary, DailyIngredientItem, IngredientDayUsageItem, MealScheduleItem,
+    RecipeIngredientItem, ShoppingListItem,
 };
 use chrono::NaiveDate;
 use sqlx::{AssertSqlSafe, Row, SqlitePool};
@@ -259,6 +259,53 @@ pub async fn generate_ingredients_by_recipe(
     Ok(items.into_iter().map(|(item, _)| item).collect())
 }
 
+/// Show every planned meal where a selected ingredient is used, grouped by day
+/// by the caller. This is an audit view over the inputs that make up a shopping
+/// list total for one ingredient.
+pub async fn generate_ingredient_usage_by_day(
+    pool: &SqlitePool,
+    camp_id: i64,
+    ingredient_id: i64,
+) -> Result<Vec<IngredientDayUsageItem>, sqlx::Error> {
+    let rows = fetch_meal_ingredients(pool, camp_id, None).await?;
+
+    let mut items: Vec<(IngredientDayUsageItem, i32)> = rows
+        .iter()
+        .filter(|row| row.ingredient_id == ingredient_id)
+        .map(|row| {
+            (
+                IngredientDayUsageItem {
+                    date: row.date,
+                    meal_type: row.meal_type.clone(),
+                    recipe_name: row.recipe_name.clone(),
+                    ingredient_name: row.ingredient_name.clone(),
+                    children: row.attendance.children,
+                    teens: row.attendance.teens,
+                    adults: row.attendance.adults,
+                    total_people: row.attendance.children
+                        + row.attendance.teens
+                        + row.attendance.adults,
+                    portions: row.portions,
+                    base_quantity: row.base_quantity,
+                    quantity: row.quantity(),
+                    unit: row.unit.clone(),
+                },
+                row.meal_sort_order,
+            )
+        })
+        .collect();
+
+    items.sort_by(|a, b| {
+        a.0.date
+            .cmp(&b.0.date)
+            .then_with(|| a.1.cmp(&b.1))
+            .then_with(|| a.0.meal_type.cmp(&b.0.meal_type))
+            .then_with(|| a.0.recipe_name.cmp(&b.0.recipe_name))
+    });
+
+    Ok(items.into_iter().map(|(item, _)| item).collect())
+}
+
 /// Generate meal schedule for a camp
 pub async fn generate_meal_schedule(
     pool: &SqlitePool,
@@ -357,4 +404,139 @@ pub async fn generate_attendance_summary(
         .collect();
 
     Ok(items)
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use chrono::NaiveDate;
+    use sqlx::sqlite::SqlitePoolOptions;
+
+    async fn setup_pool() -> SqlitePool {
+        let pool = SqlitePoolOptions::new()
+            .max_connections(1)
+            .connect("sqlite::memory:")
+            .await
+            .unwrap();
+
+        for migration in [
+            include_str!("../../migrations/001_create_categories.sql"),
+            include_str!("../../migrations/002_create_ingredients.sql"),
+            include_str!("../../migrations/003_create_recipes.sql"),
+            include_str!("../../migrations/004_create_camps.sql"),
+            include_str!("../../migrations/005_create_meal_plans.sql"),
+            include_str!("../../migrations/006_remove_planned_meals_unique.sql"),
+            include_str!("../../migrations/007_rename_base_servings_to_portions.sql"),
+            include_str!("../../migrations/009_create_meal_types.sql"),
+        ] {
+            sqlx::query(migration).execute(&pool).await.unwrap();
+        }
+
+        pool
+    }
+
+    fn date(value: &str) -> NaiveDate {
+        NaiveDate::parse_from_str(value, "%Y-%m-%d").unwrap()
+    }
+
+    #[tokio::test]
+    async fn generate_ingredient_usage_by_day_filters_selected_ingredient() {
+        let pool = setup_pool().await;
+
+        let camp_id = sqlx::query(
+            "INSERT INTO camps
+             (name, start_date, end_date, default_children, default_teens, default_adults)
+             VALUES ('Střediskový tábor 2026', '2026-07-18', '2026-08-01', 22, 24, 28)",
+        )
+        .execute(&pool)
+        .await
+        .unwrap()
+        .last_insert_rowid();
+
+        let bread_id = sqlx::query(
+            "INSERT INTO ingredients (name, category_id, primary_unit)
+             VALUES ('chleba na kusy', 5, 'ks')",
+        )
+        .execute(&pool)
+        .await
+        .unwrap()
+        .last_insert_rowid();
+
+        let milk_id = sqlx::query(
+            "INSERT INTO ingredients (name, category_id, primary_unit)
+             VALUES ('mléko', 4, 'l')",
+        )
+        .execute(&pool)
+        .await
+        .unwrap()
+        .last_insert_rowid();
+
+        let recipe_id = sqlx::query(
+            "INSERT INTO recipes (name, portions) VALUES ('chléb s tvrdým salámem', 61)",
+        )
+        .execute(&pool)
+        .await
+        .unwrap()
+        .last_insert_rowid();
+
+        for (ingredient_id, quantity, unit) in [(bread_id, 4.64, "ks"), (milk_id, 2.0, "l")] {
+            sqlx::query(
+                "INSERT INTO recipe_ingredients
+                 (recipe_id, ingredient_id, base_quantity, unit, child_multiplier, teen_multiplier, adult_multiplier)
+                 VALUES (?, ?, ?, ?, 1.0, 1.0, 1.0)",
+            )
+            .bind(recipe_id)
+            .bind(ingredient_id)
+            .bind(quantity)
+            .bind(unit)
+            .execute(&pool)
+            .await
+            .unwrap();
+        }
+
+        let meal_plan_id =
+            sqlx::query("INSERT INTO meal_plans (camp_id, date) VALUES (?, '2026-07-20')")
+                .bind(camp_id)
+                .execute(&pool)
+                .await
+                .unwrap()
+                .last_insert_rowid();
+
+        let planned_meal_id = sqlx::query(
+            "INSERT INTO planned_meals (meal_plan_id, recipe_id, meal_type)
+             VALUES (?, ?, 'breakfast')",
+        )
+        .bind(meal_plan_id)
+        .bind(recipe_id)
+        .execute(&pool)
+        .await
+        .unwrap()
+        .last_insert_rowid();
+
+        sqlx::query(
+            "INSERT INTO meal_attendance (planned_meal_id, children, teens, adults)
+             VALUES (?, 2, 45, 26)",
+        )
+        .bind(planned_meal_id)
+        .execute(&pool)
+        .await
+        .unwrap();
+
+        let items = generate_ingredient_usage_by_day(&pool, camp_id, bread_id)
+            .await
+            .unwrap();
+
+        assert_eq!(items.len(), 1);
+        let item = &items[0];
+        assert_eq!(item.date, date("2026-07-20"));
+        assert_eq!(item.meal_type, "Breakfast");
+        assert_eq!(item.recipe_name, "chléb s tvrdým salámem");
+        assert_eq!(item.ingredient_name, "chleba na kusy");
+        assert_eq!((item.children, item.teens, item.adults), (2, 45, 26));
+        assert_eq!(item.total_people, 73);
+        assert_eq!(item.portions, 61);
+        assert_eq!(item.base_quantity, 4.64);
+        assert_eq!(item.unit, "ks");
+        assert!((item.quantity - 5.5527868852459).abs() < 1e-9);
+    }
 }

@@ -8,8 +8,8 @@ use crate::api::meal_plans::get_planned_meals_for_date;
 use crate::api::recipes::get_recipe_with_ingredients;
 use crate::api::reports as report_data;
 use crate::models::{
-    AttendanceSummary, Camp, DailyIngredientItem, MealScheduleItem, RecipeIngredientItem,
-    ShoppingListItem,
+    AttendanceSummary, Camp, DailyIngredientItem, IngredientDayUsageItem, MealScheduleItem,
+    RecipeIngredientItem, ShoppingListItem,
 };
 
 static PDF_FONT_REGULAR: &[u8] = include_bytes!("../../assets/fonts/LiberationSans-Regular.ttf");
@@ -282,6 +282,7 @@ pub enum ReportPdfKind {
     AttendanceSummary,
     DailyIngredients,
     IngredientsByRecipe,
+    IngredientUsageByDay,
 }
 
 impl TryFrom<&str> for ReportPdfKind {
@@ -294,6 +295,7 @@ impl TryFrom<&str> for ReportPdfKind {
             "attendance_summary" => Ok(Self::AttendanceSummary),
             "daily_ingredients" => Ok(Self::DailyIngredients),
             "ingredients_by_recipe" => Ok(Self::IngredientsByRecipe),
+            "ingredient_usage_by_day" => Ok(Self::IngredientUsageByDay),
             _ => Err("Invalid report type"),
         }
     }
@@ -307,6 +309,7 @@ impl ReportPdfKind {
             Self::AttendanceSummary => "Attendance Summary",
             Self::DailyIngredients => "Ingredients Day by Day",
             Self::IngredientsByRecipe => "Ingredients Day by Day (per Recipe)",
+            Self::IngredientUsageByDay => "Selected Ingredient by Day",
         }
     }
 }
@@ -317,6 +320,7 @@ pub async fn generate_report_pdf(
     kind: ReportPdfKind,
     start_date: Option<NaiveDate>,
     end_date: Option<NaiveDate>,
+    ingredient_id: Option<i64>,
 ) -> Result<Vec<u8>, Box<dyn std::error::Error>> {
     let camp = get_camp(pool, camp_id).await?;
     let date_range = match (start_date, end_date) {
@@ -355,6 +359,15 @@ pub async fn generate_report_pdf(
             let items = report_data::generate_ingredients_by_recipe(pool, camp_id).await?;
             let mut pdf = PdfReport::new(kind.title(), &subtitle)?;
             render_ingredients_by_recipe_pdf(&mut pdf, items);
+            pdf.finish()
+        }
+        ReportPdfKind::IngredientUsageByDay => {
+            let ingredient_id =
+                ingredient_id.ok_or("Selected ingredient report requires an ingredient")?;
+            let items =
+                report_data::generate_ingredient_usage_by_day(pool, camp_id, ingredient_id).await?;
+            let mut pdf = PdfReport::new(kind.title(), &subtitle)?;
+            render_ingredient_usage_by_day_pdf(&mut pdf, items);
             pdf.finish()
         }
     }
@@ -785,6 +798,74 @@ fn render_ingredients_by_recipe_pdf(pdf: &mut PdfReport, items: Vec<RecipeIngred
             &[
                 item.category_name,
                 item.ingredient_name,
+                format!("{:.2}", item.quantity),
+                item.unit,
+            ],
+        );
+    }
+}
+
+fn render_ingredient_usage_by_day_pdf(pdf: &mut PdfReport, items: Vec<IngredientDayUsageItem>) {
+    let columns = [
+        PdfColumn {
+            title: "Meal",
+            x: 18.0,
+            width_chars: 10,
+        },
+        PdfColumn {
+            title: "Recipe",
+            x: 41.0,
+            width_chars: 30,
+        },
+        PdfColumn {
+            title: "C/T/A",
+            x: 106.0,
+            width_chars: 9,
+        },
+        PdfColumn {
+            title: "People",
+            x: 128.0,
+            width_chars: 6,
+        },
+        PdfColumn {
+            title: "Port.",
+            x: 144.0,
+            width_chars: 5,
+        },
+        PdfColumn {
+            title: "Base",
+            x: 158.0,
+            width_chars: 6,
+        },
+        PdfColumn {
+            title: "Qty",
+            x: 174.0,
+            width_chars: 8,
+        },
+        PdfColumn {
+            title: "Unit",
+            x: 194.0,
+            width_chars: 4,
+        },
+    ];
+
+    let mut current_date = None;
+    for item in items {
+        if current_date != Some(item.date) {
+            current_date = Some(item.date);
+            pdf.section(item.date.to_string());
+            pdf.table_header(&columns);
+        }
+
+        pdf.table_row(
+            &columns,
+            &[
+                meal_type_label(&item.meal_type),
+                item.recipe_name,
+                format!("{}/{}/{}", item.children, item.teens, item.adults),
+                item.total_people.to_string(),
+                item.portions.to_string(),
+                format!("{:.2}", item.base_quantity),
                 format!("{:.2}", item.quantity),
                 item.unit,
             ],

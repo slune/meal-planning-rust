@@ -63,3 +63,22 @@ pub struct RecipeIngredientItem {
     pub quantity: f64,
     pub unit: String,
 }
+
+/// One occurrence of a selected ingredient in the camp meal plan. Used by the
+/// "selected ingredient by day" report so planners can audit which recipes
+/// contribute to an ingredient total.
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct IngredientDayUsageItem {
+    pub date: NaiveDate,
+    pub meal_type: String,
+    pub recipe_name: String,
+    pub ingredient_name: String,
+    pub children: i32,
+    pub teens: i32,
+    pub adults: i32,
+    pub total_people: i32,
+    pub portions: i32,
+    pub base_quantity: f64,
+    pub quantity: f64,
+    pub unit: String,
+}

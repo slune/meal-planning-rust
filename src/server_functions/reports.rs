@@ -1,6 +1,6 @@
 use crate::models::{
-    AttendanceSummary, DailyIngredientItem, MealScheduleItem, RecipeIngredientItem,
-    ShoppingListItem,
+    AttendanceSummary, DailyIngredientItem, IngredientDayUsageItem, MealScheduleItem,
+    RecipeIngredientItem, ShoppingListItem,
 };
 #[cfg(feature = "ssr")]
 use chrono::NaiveDate;
@@ -79,12 +79,27 @@ pub async fn generate_ingredients_by_recipe(
         .map_err(|e| ServerFnError::<String>::ServerError(e.to_string()))
 }
 
+#[server(GenerateIngredientUsageByDay, "/api")]
+pub async fn generate_ingredient_usage_by_day(
+    camp_id: i64,
+    ingredient_id: i64,
+) -> Result<Vec<IngredientDayUsageItem>, ServerFnError<String>> {
+    use crate::api::reports;
+
+    let pool = expect_context::<sqlx::SqlitePool>();
+
+    reports::generate_ingredient_usage_by_day(&pool, camp_id, ingredient_id)
+        .await
+        .map_err(|e| ServerFnError::<String>::ServerError(e.to_string()))
+}
+
 #[server(GenerateReportPdf, "/api")]
 pub async fn generate_report_pdf(
     camp_id: i64,
     report_type: String,
     start_date: Option<String>,
     end_date: Option<String>,
+    ingredient_id: Option<i64>,
 ) -> Result<Vec<u8>, ServerFnError<String>> {
     use crate::reports::{ReportPdfKind, generate_report_pdf as build_report_pdf};
 
@@ -107,7 +122,7 @@ pub async fn generate_report_pdf(
         None => None,
     };
 
-    build_report_pdf(&pool, camp_id, kind, start, end)
+    build_report_pdf(&pool, camp_id, kind, start, end, ingredient_id)
         .await
         .map_err(|e| ServerFnError::<String>::ServerError(e.to_string()))
 }

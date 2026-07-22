@@ -1,11 +1,12 @@
 use crate::components::{LoadingSpinner, SearchableSelect, icon, toast_error, toast_success};
 use crate::models::{
-    AttendanceSummary, Camp, DailyIngredientItem, MealScheduleItem, RecipeIngredientItem,
-    ShoppingListItem,
+    AttendanceSummary, Camp, DailyIngredientItem, Ingredient, IngredientDayUsageItem,
+    MealScheduleItem, RecipeIngredientItem, ShoppingListItem,
 };
 use crate::server_functions::{
-    generate_attendance_summary, generate_daily_ingredients, generate_ingredients_by_recipe,
-    generate_meal_schedule, generate_report_pdf, generate_shopping_list, get_camp, get_camps,
+    generate_attendance_summary, generate_daily_ingredients, generate_ingredient_usage_by_day,
+    generate_ingredients_by_recipe, generate_meal_schedule, generate_report_pdf,
+    generate_shopping_list, get_camp, get_camps, get_ingredients,
 };
 use base64::{Engine as _, engine::general_purpose};
 use chrono::NaiveDate;
@@ -19,6 +20,7 @@ enum ReportType {
     AttendanceSummary,
     DailyIngredients,
     IngredientsByRecipe,
+    IngredientUsageByDay,
 }
 
 impl ReportType {
@@ -29,6 +31,7 @@ impl ReportType {
             Self::AttendanceSummary => "attendance_summary",
             Self::DailyIngredients => "daily_ingredients",
             Self::IngredientsByRecipe => "ingredients_by_recipe",
+            Self::IngredientUsageByDay => "ingredient_usage_by_day",
         }
     }
 
@@ -39,6 +42,7 @@ impl ReportType {
             Self::AttendanceSummary => "attendance-summary",
             Self::DailyIngredients => "ingredients-day-by-day",
             Self::IngredientsByRecipe => "ingredients-by-recipe",
+            Self::IngredientUsageByDay => "ingredient-usage-by-day",
         }
     }
 }
@@ -47,7 +51,9 @@ impl ReportType {
 pub fn ReportGenerator() -> impl IntoView {
     // State
     let (camps, set_camps) = signal(Vec::<Camp>::new());
+    let (ingredients, set_ingredients) = signal(Vec::<Ingredient>::new());
     let (selected_camp_id, set_selected_camp_id) = signal(0i64);
+    let (selected_ingredient_id, set_selected_ingredient_id) = signal(0i64);
     let (selected_camp, set_selected_camp) = signal(Option::<Camp>::None);
     let (report_type, set_report_type) = signal(ReportType::ShoppingList);
     let (start_date, set_start_date) = signal(String::new());
@@ -63,6 +69,8 @@ pub fn ReportGenerator() -> impl IntoView {
     let (daily_ingredients, set_daily_ingredients) = signal(Vec::<DailyIngredientItem>::new());
     let (ingredients_by_recipe, set_ingredients_by_recipe) =
         signal(Vec::<RecipeIngredientItem>::new());
+    let (ingredient_usage_by_day, set_ingredient_usage_by_day) =
+        signal(Vec::<IngredientDayUsageItem>::new());
     let (report_generated, set_report_generated) = signal(false);
 
     // Load camps on mount
@@ -78,6 +86,19 @@ pub fn ReportGenerator() -> impl IntoView {
     });
 
     load_camps.dispatch(());
+
+    let load_ingredients = Action::new(move |_: &()| async move {
+        match get_ingredients().await {
+            Ok(ingredients_list) => {
+                set_ingredients.set(ingredients_list);
+            }
+            Err(e) => {
+                toast_error(format!("Failed to load ingredients: {}", e));
+            }
+        }
+    });
+
+    load_ingredients.dispatch(());
 
     // Watch for camp selection changes
     Effect::new(move || {
@@ -113,11 +134,19 @@ pub fn ReportGenerator() -> impl IntoView {
             return;
         }
 
+        if report_type.get() == ReportType::IngredientUsageByDay
+            && selected_ingredient_id.get() == 0
+        {
+            toast_error("Please select an ingredient");
+            return;
+        }
+
         set_is_loading.set(true);
         set_report_generated.set(false);
         set_pdf_download.set(None);
 
         let camp_id = selected_camp_id.get();
+        let ingredient_id = selected_ingredient_id.get();
         let current_report_type = report_type.get();
         let start = start_date.get();
         let end = end_date.get();
@@ -190,6 +219,21 @@ pub fn ReportGenerator() -> impl IntoView {
                         }
                     }
                 }
+                ReportType::IngredientUsageByDay => {
+                    match generate_ingredient_usage_by_day(camp_id, ingredient_id).await {
+                        Ok(items) => {
+                            set_ingredient_usage_by_day.set(items);
+                            set_report_generated.set(true);
+                            toast_success("Selected ingredient report generated successfully!");
+                        }
+                        Err(e) => {
+                            toast_error(format!(
+                                "Failed to generate selected ingredient report: {}",
+                                e
+                            ));
+                        }
+                    }
+                }
             }
             set_is_loading.set(false);
         });
@@ -202,12 +246,18 @@ pub fn ReportGenerator() -> impl IntoView {
         }
 
         let camp_id = selected_camp_id.get();
+        let ingredient_id = selected_ingredient_id.get();
         let current_report_type = report_type.get();
         let start = start_date.get();
         let end = end_date.get();
 
         if current_report_type == ReportType::ShoppingList && (start.is_empty() || end.is_empty()) {
             toast_error("Please select start and end dates");
+            return;
+        }
+
+        if current_report_type == ReportType::IngredientUsageByDay && ingredient_id == 0 {
+            toast_error("Please select an ingredient");
             return;
         }
 
@@ -220,12 +270,18 @@ pub fn ReportGenerator() -> impl IntoView {
             } else {
                 (None, None)
             };
+            let ingredient_arg = if current_report_type == ReportType::IngredientUsageByDay {
+                Some(ingredient_id)
+            } else {
+                None
+            };
 
             match generate_report_pdf(
                 camp_id,
                 current_report_type.as_str().to_string(),
                 date_args.0,
                 date_args.1,
+                ingredient_arg,
             )
             .await
             {
@@ -292,6 +348,7 @@ pub fn ReportGenerator() -> impl IntoView {
                                     "attendance_summary" => ReportType::AttendanceSummary,
                                     "daily_ingredients" => ReportType::DailyIngredients,
                                     "ingredients_by_recipe" => ReportType::IngredientsByRecipe,
+                                    "ingredient_usage_by_day" => ReportType::IngredientUsageByDay,
                                     _ => ReportType::ShoppingList,
                                 };
                                 set_report_type.set(new_type);
@@ -304,6 +361,7 @@ pub fn ReportGenerator() -> impl IntoView {
                             <option value="attendance_summary">"Attendance Summary"</option>
                             <option value="daily_ingredients">"Ingredients Day by Day"</option>
                             <option value="ingredients_by_recipe">"Ingredients Day by Day (per Recipe)"</option>
+                            <option value="ingredient_usage_by_day">"Selected Ingredient by Day"</option>
                         </select>
                     </div>
 
@@ -339,6 +397,27 @@ pub fn ReportGenerator() -> impl IntoView {
                                     }
                                 />
                             </div>
+                        </div>
+                    </Show>
+
+                    <Show
+                        when=move || report_type.get() == ReportType::IngredientUsageByDay
+                        fallback=|| ()
+                    >
+                        <div>
+                            <label class="form-label">"Ingredient" <span class="text-red-500">"*"</span></label>
+                            <SearchableSelect
+                                options=ingredients.into()
+                                selected_value=selected_ingredient_id.into()
+                                on_change=move |id| {
+                                    set_selected_ingredient_id.set(id);
+                                    set_report_generated.set(false);
+                                    set_pdf_download.set(None);
+                                }
+                                get_id=|ingredient: &Ingredient| ingredient.id.to_string()
+                                get_display=|ingredient: &Ingredient| ingredient.name.clone()
+                                placeholder="Select an ingredient..."
+                            />
                         </div>
                     </Show>
 
@@ -422,6 +501,19 @@ pub fn ReportGenerator() -> impl IntoView {
                                 items=ingredients_by_recipe.get()
                             />
                         }.into_any(),
+                        ReportType::IngredientUsageByDay => {
+                            let selected_ingredient = ingredients
+                                .get()
+                                .into_iter()
+                                .find(|ingredient| ingredient.id == selected_ingredient_id.get());
+                            view! {
+                                <IngredientUsageByDayReport
+                                    camp=selected_camp.get()
+                                    ingredient=selected_ingredient
+                                    items=ingredient_usage_by_day.get()
+                                />
+                            }.into_any()
+                        },
                     }}
                 </div>
             </Show>
@@ -650,6 +742,88 @@ fn DailyIngredientsReport(camp: Option<Camp>, items: Vec<DailyIngredientItem>) -
                     </div>
                 }
             }).collect::<Vec<_>>()}
+        </div>
+    }
+}
+
+#[component]
+fn IngredientUsageByDayReport(
+    camp: Option<Camp>,
+    ingredient: Option<Ingredient>,
+    items: Vec<IngredientDayUsageItem>,
+) -> impl IntoView {
+    let camp_name = camp.as_ref().map(|c| c.name.clone()).unwrap_or_default();
+    let ingredient_name = ingredient
+        .as_ref()
+        .map(|i| i.name.clone())
+        .or_else(|| items.first().map(|i| i.ingredient_name.clone()))
+        .unwrap_or_default();
+
+    // Items arrive sorted by date, meal order, recipe.
+    let by_date = group_consecutive(items, |it| it.date);
+
+    view! {
+        <div>
+            <h2 class="text-2xl font-bold text-slate-800 mb-2">"Selected Ingredient by Day"</h2>
+            <p class="text-slate-600 mb-6">
+                {camp_name} " • " {ingredient_name}
+            </p>
+
+            {if by_date.is_empty() {
+                view! {
+                    <p class="text-slate-600">"No planned meals use this ingredient."</p>
+                }.into_any()
+            } else {
+                view! {
+                    <>
+                        {by_date.into_iter().map(|(date, day_items): (NaiveDate, Vec<IngredientDayUsageItem>)| {
+                            view! {
+                                <div class="mb-8 print-section">
+                                    <h3 class="text-xl font-bold text-slate-800 mb-4 border-b-2 border-slate-400 pb-2">
+                                        {date.format("%Y-%m-%d").to_string()}
+                                    </h3>
+                                    <div class="overflow-x-auto">
+                                        <table class="w-full min-w-[58rem]">
+                                            <thead>
+                                                <tr class="bg-slate-100">
+                                                    <th class="text-left p-3">"Meal"</th>
+                                                    <th class="text-left p-3">"Recipe"</th>
+                                                    <th class="text-right p-3">"Children"</th>
+                                                    <th class="text-right p-3">"Teens"</th>
+                                                    <th class="text-right p-3">"Adults"</th>
+                                                    <th class="text-right p-3">"People"</th>
+                                                    <th class="text-right p-3">"Portions"</th>
+                                                    <th class="text-right p-3">"Base"</th>
+                                                    <th class="text-right p-3">"Quantity"</th>
+                                                    <th class="text-left p-3">"Unit"</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {day_items.into_iter().map(|item| {
+                                                    view! {
+                                                        <tr class="border-t border-slate-200">
+                                                            <td class="p-3">{item.meal_type}</td>
+                                                            <td class="p-3">{item.recipe_name}</td>
+                                                            <td class="text-right p-3">{item.children}</td>
+                                                            <td class="text-right p-3">{item.teens}</td>
+                                                            <td class="text-right p-3">{item.adults}</td>
+                                                            <td class="text-right p-3 font-bold">{item.total_people}</td>
+                                                            <td class="text-right p-3">{item.portions}</td>
+                                                            <td class="text-right p-3">{format!("{:.2}", item.base_quantity)}</td>
+                                                            <td class="text-right p-3">{format!("{:.4}", item.quantity)}</td>
+                                                            <td class="p-3">{item.unit}</td>
+                                                        </tr>
+                                                    }
+                                                }).collect::<Vec<_>>()}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            }
+                        }).collect::<Vec<_>>()}
+                    </>
+                }.into_any()
+            }}
         </div>
     }
 }
