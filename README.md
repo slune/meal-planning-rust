@@ -69,12 +69,19 @@ VM it shares with [wheel](https://github.com/slune/wheel). The VM has no
 public IP: SSH goes through IAP, outbound traffic through Cloud NAT, and
 you reach the app through an SSH tunnel.
 
+Once, to create the project, VM and network and deploy the first time:
+
 ```bash
-scripts/gcp-setup.sh     # once: project, VM, network, first deploy
-scripts/update.sh        # every deploy after that
+scripts/gcp-setup.sh
+```
+
+After that:
+
+```bash
+scripts/update.sh        # deploy
 scripts/tunnel.sh        # then open https://localhost:3000 (Ctrl-C closes it)
 scripts/backup-db.sh     # copy the database to backups/
-scripts/vm.sh start|stop|destroy
+scripts/vm.sh start      # or: stop, destroy
 ```
 
 `vm.sh stop` and `destroy` also stop or delete wheel.

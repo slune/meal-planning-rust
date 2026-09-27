@@ -61,7 +61,7 @@ case "$ACTION" in
 
         echo ""
         warn "wheel runs on this VM too: its scheduled runs are skipped until the next start."
-        info "VM stopped. Only the boot disk remains billable."
+        info "VM stopped. The boot disk and Cloud NAT remain billable; destroy removes both."
         ;;
 
     destroy)
