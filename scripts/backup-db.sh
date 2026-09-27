@@ -1,9 +1,10 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-VM_NAME="meal-planning-vm"
-ZONE="us-east1-b"
-BACKUP_DIR="$(cd "$(dirname "$0")/.." && pwd)/backups"
+source "$(dirname "$0")/common.sh"
+resolve_project
+
+BACKUP_DIR="$PROJECT_ROOT/backups"
 TIMESTAMP=$(date +%Y%m%d_%H%M%S)
 BACKUP_FILE="meal_planning_${TIMESTAMP}.db"
 
@@ -12,11 +13,7 @@ mkdir -p "$BACKUP_DIR"
 echo "Backing up database from $VM_NAME..."
 
 # The DB is at ~/meal-planning/data/ on the VM.
-# SQLite in WAL mode is safe to copy while the app is running.
-gcloud compute scp \
-    "$VM_NAME":~/meal-planning/data/meal_planning.db \
-    "$BACKUP_DIR/$BACKUP_FILE" \
-    --zone="$ZONE" --quiet
+vm_scp "$VM_NAME":~/meal-planning/data/meal_planning.db "$BACKUP_DIR/$BACKUP_FILE"
 
 echo "Saved: backups/$BACKUP_FILE"
 

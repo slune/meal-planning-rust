@@ -62,6 +62,30 @@ docker build -t meal-planner .
 docker run -p 3000:3000 -v ./data:/app/data meal-planner
 ```
 
+### GCP Deployment
+
+The app runs on `homelab-vm` (zone `us-east1-b`, GCP project `homelab`), a
+VM it shares with [wheel](https://github.com/slune/wheel). The VM has no
+public IP: SSH goes through IAP, outbound traffic through Cloud NAT, and
+you reach the app through an SSH tunnel.
+
+Once, to create the project, VM and network and deploy the first time:
+
+```bash
+scripts/gcp-setup.sh
+```
+
+After that:
+
+```bash
+scripts/update.sh        # deploy
+scripts/tunnel.sh        # then open https://localhost:3000 (Ctrl-C closes it)
+scripts/backup-db.sh     # copy the database to backups/
+scripts/vm.sh start      # or: stop, destroy
+```
+
+`vm.sh stop` and `destroy` also stop or delete wheel.
+
 ## Project Structure
 
 ```
